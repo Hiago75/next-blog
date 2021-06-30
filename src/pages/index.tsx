@@ -11,7 +11,6 @@ export type HomeProps = {
 export default function Home({ posts }: HomeProps) {
   return (
     <>
-      <Header />
       <HomePage posts={posts}></HomePage>
     </>
   );

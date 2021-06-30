@@ -6,4 +6,7 @@ export const theme = {
   textColors: {
     primary: '#e1e1e6',
   },
+  gradients: {
+    primary: 'linear-gradient(270deg ,#0f0c14,#121214)',
+  },
 };

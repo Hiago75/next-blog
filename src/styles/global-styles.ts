@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { theme } from './theme';
 
 export const GlobalStyles = createGlobalStyle`
   *{
@@ -9,4 +10,8 @@ export const GlobalStyles = createGlobalStyle`
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 
+  body{
+    background: ${theme.gradients.primary};
+    color: ${theme.textColors.primary};
+  }
 `;

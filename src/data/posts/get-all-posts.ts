@@ -1,4 +1,4 @@
-import { POSTS_URL } from '../../config/app-config';
+import { POSTS_URL } from '../../config';
 import { PostData } from '../../domain/posts/post';
 import { fetchJson } from '../../utils/fetch-json';
 
