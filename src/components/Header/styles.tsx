@@ -1,22 +1,20 @@
-import styled from 'styled-components';
-import { theme } from '../../styles/theme';
-
-const { colors, textColors } = theme;
+import styled, { css } from 'styled-components';
 
 export const Container = styled.header`
-  background-color: ${colors.primary};
-  padding: 15px;
-  text-align: center;
-  border-bottom: 1px solid #29292e;
+  ${({ theme }) => css`
+    background-color: ${theme.colors.primary};
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid ${theme.colors.borders.darkGray};
 
-  a {
-    color: ${textColors.primary};
-    text-decoration: none;
-    font-size: 25px;
-    transition: opacity 200ms ease;
-  }
-
-  a:hover {
-    opacity: 0.8;
-  }
+    a {
+      color: ${theme.font.colors.primary};
+      text-decoration: none;
+      font-size: 25px;
+      transition: opacity 200ms ease;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  `}
 `;

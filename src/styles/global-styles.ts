@@ -11,7 +11,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body{
-    background: ${theme.gradients.primary};
-    color: ${theme.textColors.primary};
+    background: ${theme.colors.gradients.primary};
+    color: ${theme.font.colors.primary};
   }
 `;
