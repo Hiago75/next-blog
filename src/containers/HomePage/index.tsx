@@ -2,10 +2,7 @@ import { Container } from './style';
 
 import { PostData } from '../../domain/posts/post';
 
-import { Header } from '../../components/Header';
-import { MainContainer } from '../../components/MainContainer';
-import { PostCard } from '../../components/PostCard';
-import { Footer } from '../../components/Footer';
+import { Header, MainContainer, PostCard, Footer } from '../../components';
 
 export type HomePageProps = {
   posts: PostData[];
