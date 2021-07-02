@@ -1,7 +1,6 @@
 import { PostData } from '../../domain/posts/post';
-import { Header, MainContainer, Footer } from '../../components/';
+import { Header, MainContainer, Footer, Date, Comments } from '../../components/';
 import { Heading, PostCover, PostDetails, LineDivider, Content } from './style';
-import { Date } from '../../components/Date';
 import { BallDivider, Category } from '../../styles/global-styles';
 
 export type PostProps = {
@@ -32,6 +31,7 @@ export function Post({ post }: PostProps) {
         <PostCover src={post.cover.formats.large.url} />
 
         <Content dangerouslySetInnerHTML={{ __html: post.content }}></Content>
+        <Comments title={post.title} slug={post.slug} />
       </MainContainer>
       <Footer />
     </>
