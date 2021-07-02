@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { PostCoverFormat } from '../../domain/posts/post';
-import { Container, PostCardCover, PostCardHeading, Wrapper, Divider, Category } from './style';
+import { Container, PostCardCover, PostCardHeading, Wrapper } from './style';
+import { BallDivider, Category } from '../../styles/global-styles';
 
 type PostCardProps = {
   slug: string;
@@ -22,7 +23,7 @@ export function PostCard({ slug, title, cover, category, author }: PostCardProps
             <h2>{title}</h2>
             <div>
               <Category>{category}</Category>
-              <Divider />
+              <BallDivider />
               <p>{author}</p>
             </div>
           </PostCardHeading>

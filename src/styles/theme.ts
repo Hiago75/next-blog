@@ -15,6 +15,7 @@ export const theme = {
   font: {
     colors: {
       primary: '#e1e1e6',
+      secondary: '#adadad',
     },
     sizes: {
       small: '17px',

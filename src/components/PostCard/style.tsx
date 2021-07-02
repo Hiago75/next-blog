@@ -48,19 +48,3 @@ export const PostCardHeading = styled.div`
     }
   `}
 `;
-
-export const Category = styled.span`
-  background-color: ${({ theme }) => theme.colors.secondary};
-  padding: 3px 5px;
-  border-radius: 5px;
-  display: inline-block;
-`;
-
-export const Divider = styled.span`
-  width: 12px;
-  height: 12px;
-  background-color: ${({ theme }) => theme.colors.borders.darkGray};
-  border-radius: 50%;
-  margin: 0 8px;
-  display: inline-block;
-`;
