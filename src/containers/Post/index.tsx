@@ -1,6 +1,6 @@
 import { PostData } from '../../domain/posts/post';
 import { Header, MainContainer, Footer } from '../../components/';
-import { Heading, PostCover, PostDetails, LineDivider } from './style';
+import { Heading, PostCover, PostDetails, LineDivider, Content } from './style';
 import { Date } from '../../components/Date';
 import { BallDivider, Category } from '../../styles/global-styles';
 
@@ -31,7 +31,7 @@ export function Post({ post }: PostProps) {
         <LineDivider />
         <PostCover src={post.cover.formats.large.url} />
 
-        <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
+        <Content dangerouslySetInnerHTML={{ __html: post.content }}></Content>
       </MainContainer>
       <Footer />
     </>

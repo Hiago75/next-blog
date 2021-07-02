@@ -2,6 +2,7 @@ export const theme = {
   colors: {
     primary: '#121214',
     secondary: '#8257e5',
+    tertiary: '#030017',
 
     borders: {
       darkGray: '#29292e',
@@ -14,8 +15,8 @@ export const theme = {
 
   font: {
     colors: {
-      primary: '#e1e1e6',
-      secondary: '#adadad',
+      primary: '#dadadf',
+      secondary: '#e1e1e6',
     },
     sizes: {
       small: '17px',

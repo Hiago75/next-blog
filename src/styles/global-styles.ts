@@ -32,6 +32,6 @@ export const Category = styled.span`
   display: inline-block;
 
   a {
-    color: ${({ theme }) => theme.font.colors.primary};
+    color: ${({ theme }) => theme.font.colors.primary} !important;
   }
 `;
