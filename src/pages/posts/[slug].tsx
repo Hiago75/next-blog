@@ -1,20 +1,15 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { countAllPosts } from '../../data/posts/count-all-posts';
-import { getAllPosts } from '../../data/posts/get-all-posts';
-import { getPost } from '../../data/posts/get-post';
+
+import { countAllPosts, getAllPosts, getPost } from '../../data/posts';
 import { PostData } from '../../domain/posts/post';
+import { Post } from '../../containers/Post';
 
 export type DynamicPostProps = {
   post: PostData;
 };
 
 export default function DynamicPost({ post }: DynamicPostProps) {
-  return (
-    <>
-      <p>{post.title}</p>
-      <p dangerouslySetInnerHTML={{ __html: post.content }}></p>
-    </>
-  );
+  return <Post post={post} />;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
