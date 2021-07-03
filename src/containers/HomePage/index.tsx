@@ -1,8 +1,10 @@
-import { Container } from './style';
+import Head from 'next/head';
 
+import { Container } from './style';
 import { PostData } from '../../domain/posts/post';
 
 import { Header, MainContainer, PostCard, Footer } from '../../components';
+import { APP_NAME } from '../../config';
 
 export type HomePageProps = {
   posts: PostData[];
@@ -11,6 +13,10 @@ export type HomePageProps = {
 export function HomePage({ posts }: HomePageProps) {
   return (
     <>
+      <Head>
+        <title>{APP_NAME}</title>
+        <meta name="description" content="Just an simple test blog made with NextJS" />
+      </Head>
       <Header />
       <MainContainer>
         <Container>

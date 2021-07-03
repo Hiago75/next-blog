@@ -1,7 +1,9 @@
+import Head from 'next/head';
 import { PostData } from '../../domain/posts/post';
 import { Header, MainContainer, Footer, Date, Comments } from '../../components/';
 import { Heading, PostCover, PostDetails, LineDivider, Content } from './style';
 import { BallDivider, Category } from '../../styles/global-styles';
+import { APP_NAME } from '../../config';
 
 export type PostProps = {
   post: PostData;
@@ -10,6 +12,11 @@ export type PostProps = {
 export function Post({ post }: PostProps) {
   return (
     <>
+      <Head>
+        <title>
+          {post.title} - {APP_NAME}
+        </title>
+      </Head>
       <Header />
       <MainContainer>
         <Heading>{post.title}</Heading>
