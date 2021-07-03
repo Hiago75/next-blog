@@ -22,7 +22,11 @@ export function PostCard({ slug, title, cover, category, author }: PostCardProps
           <PostCardHeading>
             <h2>{title}</h2>
             <div>
-              <Category>{category}</Category>
+              <Category>
+                <Link href={`/categories/${category.toLowerCase()}`}>
+                  <a>{category}</a>
+                </Link>
+              </Category>
               <BallDivider />
               <p>{author}</p>
             </div>

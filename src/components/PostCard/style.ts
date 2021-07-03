@@ -6,6 +6,10 @@ export const Container = styled.div`
   flex: 1 0 33%;
   justify-content: center;
   margin: 35px 0;
+
+  a {
+    text-decoration: none;
+  }
 `;
 
 export const Wrapper = styled.div`

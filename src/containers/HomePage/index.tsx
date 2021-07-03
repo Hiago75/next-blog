@@ -8,6 +8,7 @@ import { APP_NAME } from '../../config';
 
 export type HomePageProps = {
   posts: PostData[];
+  category?: string;
 };
 
 export function HomePage({ posts }: HomePageProps) {

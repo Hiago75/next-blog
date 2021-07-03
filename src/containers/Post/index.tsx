@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { PostData } from '../../domain/posts/post';
 import { Header, MainContainer, Footer, Date, Comments } from '../../components/';
 import { Heading, PostCover, PostDetails, LineDivider, Content } from './style';
@@ -31,7 +32,9 @@ export function Post({ post }: PostProps) {
           </p>
           <BallDivider />
           <Category>
-            <a>{post.category.name}</a>
+            <Link href={`/categories/${post.category.name.toLowerCase()}`}>
+              <a>{post.category.name}</a>
+            </Link>
           </Category>
         </PostDetails>
         <LineDivider />
