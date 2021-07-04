@@ -11,11 +11,11 @@ export type HomePageProps = {
   category?: string;
 };
 
-export function HomePage({ posts }: HomePageProps) {
+export function HomePage({ posts, category }: HomePageProps) {
   return (
     <>
       <Head>
-        <title>{APP_NAME}</title>
+        <title>{category ? `${category} - ${APP_NAME}` : APP_NAME}</title>
         <meta name="description" content="Just an simple test blog made with NextJS" />
       </Head>
       <Header />
