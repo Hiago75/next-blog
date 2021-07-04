@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Container } from './styles';
 import { APP_NAME } from '../../config/';
 
-export function Header() {
+export const Header = () => {
   return (
     <Container>
       <Link href="/">
@@ -10,4 +10,4 @@ export function Header() {
       </Link>
     </Container>
   );
-}
+};
