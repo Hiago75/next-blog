@@ -44,7 +44,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   );
 
   const numberOfPosts = Number(await countAllPosts(categoryQuery));
-  console.log(numberOfPosts);
 
   const pagination: PaginationData = {
     nextPage,

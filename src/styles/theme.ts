@@ -17,6 +17,7 @@ export const theme = {
     colors: {
       primary: '#dadadf',
       secondary: '#e1e1e6',
+      tertiary: '#9e9e9e',
     },
     sizes: {
       small: '17px',
