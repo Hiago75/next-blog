@@ -3,15 +3,24 @@ import Head from 'next/head';
 import { Container } from './style';
 import { PostData } from '../../domain/posts/post';
 
-import { Header, MainContainer, PostCard, Footer } from '../../components';
+import {
+  Header,
+  MainContainer,
+  PostCard,
+  Footer,
+  Pagination,
+  AllPostsLink,
+} from '../../components';
 import { APP_NAME } from '../../config';
+import { PaginationData } from '../../domain/posts/pagination';
 
 export type HomePageProps = {
   posts: PostData[];
   category?: string;
+  pagination?: PaginationData;
 };
 
-export function HomePage({ posts, category }: HomePageProps) {
+export function HomePage({ posts, category, pagination }: HomePageProps) {
   return (
     <>
       <Head>
@@ -34,6 +43,8 @@ export function HomePage({ posts, category }: HomePageProps) {
             );
           })}
         </Container>
+        <Pagination {...pagination} />
+        <AllPostsLink pagination={pagination} />
       </MainContainer>
       <Footer />
     </>

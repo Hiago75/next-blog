@@ -32,7 +32,7 @@ export function Post({ post }: PostProps) {
           </p>
           <BallDivider />
           <Category>
-            <Link href={`/categories/${post.category.name.toLowerCase()}`}>
+            <Link href={`/posts/page/1/${post.category.name.toLowerCase()}`}>
               <a>{post.category.name}</a>
             </Link>
           </Category>

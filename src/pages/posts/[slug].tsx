@@ -9,6 +9,10 @@ export type DynamicPostProps = {
 };
 
 export default function DynamicPost({ post }: DynamicPostProps) {
+  if (!post?.title) {
+    //TODO - Create error page and use for every known error
+    return <div>Aqui tem que ter um erro</div>;
+  }
   return <Post post={post} />;
 }
 
@@ -26,8 +30,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const posts = await getPost(context.params.slug);
+  const post = posts.length > 0 ? posts[0] : {};
 
   return {
-    props: { post: posts[0] },
+    props: { post },
   };
 };

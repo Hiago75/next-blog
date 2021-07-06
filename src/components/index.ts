@@ -4,5 +4,7 @@ import { PostCard } from './PostCard';
 import { Footer } from './Footer';
 import { Date } from './Date';
 import { Comments } from './Comments';
+import { Pagination } from './Pagination';
+import { AllPostsLink } from './AllPostsLink';
 
-export { Header, MainContainer, PostCard, Footer, Date, Comments };
+export { Header, MainContainer, PostCard, Footer, Date, Comments, Pagination, AllPostsLink };
