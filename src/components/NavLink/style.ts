@@ -7,6 +7,7 @@ export const NavItem = styled.li`
     margin: 0 30px;
     display: flex;
     align-items: center;
+    cursor: pointer;
 
     a {
       color: ${theme.font.colors.tertiary};
