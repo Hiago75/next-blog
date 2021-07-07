@@ -15,24 +15,22 @@ export function PostCard({ slug, title, cover, category, author }: PostCardProps
   return (
     <Container>
       <Link href="/posts/[slug]" as={`/posts/${slug}`}>
-        <>
-          <Wrapper>
-            <PostCardCover>
-              <img src={cover.url} alt="" />
-            </PostCardCover>
-            <PostCardHeading>
-              <Category>
-                <Link as={`/posts/page/1/${category.toLowerCase()}`} href="/posts/page/[...param]">
-                  <a>{category}</a>
-                </Link>
-              </Category>
-              <h2>{title}</h2>
-              <div>
-                <p>Por {author}</p>
-              </div>
-            </PostCardHeading>
-          </Wrapper>
-        </>
+        <Wrapper>
+          <PostCardCover>
+            <img src={cover.url} alt="" />
+          </PostCardCover>
+          <PostCardHeading>
+            <Category>
+              <Link as={`/posts/page/1/${category.toLowerCase()}`} href="/posts/page/[...param]">
+                <a>{category}</a>
+              </Link>
+            </Category>
+            <h2>{title}</h2>
+            <div>
+              <p>Por {author}</p>
+            </div>
+          </PostCardHeading>
+        </Wrapper>
       </Link>
     </Container>
   );
