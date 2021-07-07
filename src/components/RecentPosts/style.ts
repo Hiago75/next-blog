@@ -19,9 +19,6 @@ export const TitleDivider = styled(LineDivider)`
   border-radius: 20px;
   background-color: ${({ theme }) => theme.colors.secondary};
   transition: max-width 300ms ease;
-  ${Container}:hover & {
-    max-width: 80%;
-  }
 `;
 
 export const Posts = styled.div`

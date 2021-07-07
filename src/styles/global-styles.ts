@@ -27,11 +27,12 @@ export const BallDivider = styled.span`
 
 export const Category = styled.span`
   background-color: ${({ theme }) => theme.colors.secondary};
-  padding: 3px 5px;
+  padding: 1px 4px;
   border-radius: 5px;
   display: inline-block;
 
   a {
     color: ${({ theme }) => theme.font.colors.primary} !important;
+    font-size: 15px;
   }
 `;

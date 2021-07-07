@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
-  flex: 1 0 33%;
+  flex: 1 0 50%;
   justify-content: center;
   margin: 35px 0;
 
@@ -16,41 +16,53 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  ${({ theme }) => css`
-    max-width: 350px;
-    padding: 35px;
-    transform: scale(0.9);
-    border-left: 1px solid ${theme.colors.borders.darkGray};
-    border-right: 1px solid ${theme.colors.borders.darkGray};
-    cursor: pointer;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 180px;
+  transform: scale(0.9);
+  transition: transform 350ms ease;
 
-    &:hover {
-      background-color: ${theme.colors.primary};
-    }
-  `}
+  &:hover {
+    transform: scale(1);
+  }
 `;
 
 export const PostCardCover = styled.div`
   img {
     max-width: 100%;
+    max-height: 300px;
   }
 `;
 
 export const PostCardHeading = styled.div`
   ${({ theme }) => css`
     width: 100%;
-    text-align: center;
-
+    padding: 0 25px;
     h2 {
       font-size: ${theme.font.sizes.medium};
       color: ${theme.font.colors.primary};
       margin: 10px 0;
+
+      &:after {
+        display: block;
+        border-bottom: solid 3px white;
+        transform: scaleX(0);
+        transition: transform 350ms ease-in-out;
+        content: '';
+        transform-origin: 0% 50%;
+      }
+
+      ${Wrapper}:hover &:after {
+        transform: scaleX(1);
+      }
     }
 
     div {
       p {
         display: inline-block;
         opacity: 0.5;
+        font-size: 13px;
       }
     }
   `}
