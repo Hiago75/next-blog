@@ -7,6 +7,7 @@ import { Comments } from './Comments';
 import { Pagination } from './Pagination';
 import { AllPostsLink } from './AllPostsLink';
 import { NavLink } from './NavLink';
+import { Heading } from './Heading';
 
 export {
   Header,
@@ -18,4 +19,5 @@ export {
   Pagination,
   AllPostsLink,
   NavLink,
+  Heading,
 };

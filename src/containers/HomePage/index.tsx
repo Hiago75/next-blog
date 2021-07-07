@@ -10,6 +10,7 @@ import {
   Footer,
   Pagination,
   AllPostsLink,
+  Heading,
 } from '../../components';
 import { APP_NAME } from '../../config';
 import { PaginationData } from '../../domain/posts/pagination';
@@ -29,6 +30,10 @@ export function HomePage({ posts, category, pagination }: HomePageProps) {
       </Head>
       <Header />
       <MainContainer>
+        <Heading>
+          <h1>Welcome to NextBlog</h1>
+          <p>A place to learn about the magic of programming</p>
+        </Heading>
         <Container>
           {posts.map((post) => {
             return (
