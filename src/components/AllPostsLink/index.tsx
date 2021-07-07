@@ -1,4 +1,8 @@
 import Link from 'next/link';
+
+import { Container } from './style';
+import { FiArrowRight } from 'react-icons/fi';
+
 import { PaginationData } from '../../domain/posts/pagination';
 
 export type AllPostsLinkProps = {
@@ -8,9 +12,13 @@ export type AllPostsLinkProps = {
 export function AllPostsLink({ pagination }: AllPostsLinkProps) {
   return (
     !pagination?.nextPage && (
-      <Link as="/posts/page/1" href="/posts/page/[...param]">
-        <a>Ver todos os posts</a>
-      </Link>
+      <Container>
+        <Link as="/posts/page/1" href="/posts/page/[...param]">
+          <a>
+            Ver mais <FiArrowRight />
+          </a>
+        </Link>
+      </Container>
     )
   );
 }

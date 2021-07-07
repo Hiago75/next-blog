@@ -8,6 +8,7 @@ import { Pagination } from './Pagination';
 import { AllPostsLink } from './AllPostsLink';
 import { NavLink } from './NavLink';
 import { Heading } from './Heading';
+import { RecentPosts } from './RecentPosts';
 
 export {
   Header,
@@ -20,4 +21,5 @@ export {
   AllPostsLink,
   NavLink,
   Heading,
+  RecentPosts,
 };

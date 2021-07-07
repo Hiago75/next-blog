@@ -1,6 +1,5 @@
 import Head from 'next/head';
 
-import { Container } from './style';
 import { PostData } from '../../domain/posts/post';
 
 import {
@@ -9,8 +8,8 @@ import {
   PostCard,
   Footer,
   Pagination,
-  AllPostsLink,
   Heading,
+  RecentPosts,
 } from '../../components';
 import { APP_NAME } from '../../config';
 import { PaginationData } from '../../domain/posts/pagination';
@@ -34,7 +33,7 @@ export function HomePage({ posts, category, pagination }: HomePageProps) {
           <h1>Welcome to NextBlog</h1>
           <p>A place to learn about the magic of programming</p>
         </Heading>
-        <Container>
+        <RecentPosts pagination={pagination}>
           {posts.map((post) => {
             return (
               <PostCard
@@ -47,9 +46,8 @@ export function HomePage({ posts, category, pagination }: HomePageProps) {
               />
             );
           })}
-        </Container>
+        </RecentPosts>
         <Pagination {...pagination} />
-        <AllPostsLink pagination={pagination} />
       </MainContainer>
       <Footer />
     </>
