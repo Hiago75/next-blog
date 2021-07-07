@@ -16,10 +16,10 @@ export const NavLink = ({ href, exact = false, children }: NavLinkProps) => {
   const className = isActive ? 'active' : '';
 
   return (
-    <NavItem className={className}>
-      <Link href={href}>
+    <Link href={href}>
+      <NavItem className={className}>
         <a>{children}</a>
-      </Link>
-    </NavItem>
+      </NavItem>
+    </Link>
   );
 };

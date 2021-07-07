@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { PostCoverFormat } from '../../domain/posts/post';
 import { Container, PostCardCover, PostCardHeading, Wrapper } from './style';
 import { Category } from '../../styles/global-styles';
-import { LineDivider } from '../../containers/Post/style';
 
 type PostCardProps = {
   slug: string;

@@ -1,16 +1,41 @@
 import styled from 'styled-components';
 
-//FIXME - Create Pagination styles
-
 export const Container = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  a {
-    font-size: 25px;
-  }
+  justify-content: center;
+  margin-bottom: 45px;
 `;
-export const PreviousLink = styled.button``;
-export const NextLink = styled.button`
-  margin-left: auto;
+
+export const Button = styled.button`
+  background-color: transparent;
+  border: 1px solid ${({ theme }) => theme.colors.secondary};
+  padding: 8px;
+  border-radius: 3px;
+  margin: 0 8px;
+  cursor: pointer;
+  transform: scale(0.9);
+  transition: transform 350ms ease;
+
+  a {
+    font-size: 17px;
+    text-decoration: none;
+    color: ${({ theme }) => theme.colors.secondary};
+  }
+
+  &:hover {
+    transform: scale(1);
+    a {
+      text-decoration: underline;
+    }
+  }
+
+  &.inactive {
+    border: 1px solid ${({ theme }) => theme.colors.borders.darkGray};
+    pointer-events: none;
+
+    a {
+      color: ${({ theme }) => theme.colors.borders.darkGray};
+    }
+  }
 `;

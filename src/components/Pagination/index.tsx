@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { PaginationData } from '../../domain/posts/pagination';
-import { Container, PreviousLink, NextLink } from './style';
+import { Container, Button } from './style';
 
 export type PaginationProps = PaginationData;
 
@@ -20,21 +20,17 @@ export function Pagination({
 
   return (
     <Container>
-      {hasPreviousPage && (
-        <PreviousLink>
-          <Link as={previousLink} href="/posts/page/[...param]">
-            <a>Previous</a>
-          </Link>
-        </PreviousLink>
-      )}
+      <Button className={hasPreviousPage ? '' : 'inactive'}>
+        <Link as={previousLink} href="/posts/page/[...param]">
+          <a>Posts mais recentes</a>
+        </Link>
+      </Button>
 
-      {hasNextPage && (
-        <NextLink>
-          <Link as={nextLink} href="/posts/page/[...param]">
-            <a>Next</a>
-          </Link>
-        </NextLink>
-      )}
+      <Button className={hasNextPage ? '' : 'inactive'}>
+        <Link as={nextLink} href="/posts/page/[...param]">
+          <a>Posts mais antigos</a>
+        </Link>
+      </Button>
     </Container>
   );
 }
