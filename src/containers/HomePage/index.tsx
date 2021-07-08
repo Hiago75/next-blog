@@ -13,6 +13,7 @@ import {
 } from '../../components';
 import { APP_NAME } from '../../config';
 import { PaginationData } from '../../domain/posts/pagination';
+import { Spotlight } from '../../components/Spotlight';
 
 export type HomePageProps = {
   posts: PostData[];
@@ -33,6 +34,7 @@ export function HomePage({ posts, category, pagination }: HomePageProps) {
           <h1>Welcome to NextBlog</h1>
           <p>A place to learn about the magic of programming</p>
         </Heading>
+        <Spotlight posts={posts} />
         <RecentPosts pagination={pagination}>
           {posts.map((post) => {
             return (

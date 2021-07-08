@@ -19,6 +19,10 @@ export const TitleDivider = styled(LineDivider)`
   border-radius: 20px;
   background-color: ${({ theme }) => theme.colors.secondary};
   transition: max-width 300ms ease;
+
+  ${Container}:hover & {
+    max-width: 80%;
+  }
 `;
 
 export const Posts = styled.div`
@@ -26,4 +30,5 @@ export const Posts = styled.div`
   flex-wrap: wrap;
   flex: 1 0 50%;
   justify-content: center;
+  margin: 40px 0;
 `;

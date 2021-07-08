@@ -18,19 +18,23 @@ export function Pagination({
   const hasNextPage = nextPage * postsPerPage < postsPerPage + numberOfPosts;
   const hasPreviousPage = previousPage >= 1;
 
-  return (
-    <Container>
-      <Button className={hasPreviousPage ? '' : 'inactive'}>
-        <Link as={previousLink} href="/posts/page/[...param]">
-          <a>Posts mais recentes</a>
-        </Link>
-      </Button>
+  if (hasPreviousPage || hasNextPage) {
+    return (
+      <Container>
+        <Button className={hasPreviousPage ? '' : 'inactive'}>
+          <Link as={previousLink} href="/posts/page/[...param]">
+            <a>Posts mais recentes</a>
+          </Link>
+        </Button>
 
-      <Button className={hasNextPage ? '' : 'inactive'}>
-        <Link as={nextLink} href="/posts/page/[...param]">
-          <a>Posts mais antigos</a>
-        </Link>
-      </Button>
-    </Container>
-  );
+        <Button className={hasNextPage ? '' : 'inactive'}>
+          <Link as={nextLink} href="/posts/page/[...param]">
+            <a>Posts mais antigos</a>
+          </Link>
+        </Button>
+      </Container>
+    );
+  } else {
+    return <></>;
+  }
 }

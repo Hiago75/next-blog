@@ -5,7 +5,7 @@ export const Container = styled.div`
   flex-wrap: wrap;
   flex: 1 0 50%;
   justify-content: center;
-  margin: 35px 0;
+  margin: 10px 0;
 
   a {
     text-decoration: none;
@@ -19,7 +19,7 @@ export const Wrapper = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
-  height: 180px;
+  height: 150px;
   transform: scale(0.9);
   transition: transform 350ms ease;
 
@@ -31,7 +31,7 @@ export const Wrapper = styled.div`
 export const PostCardCover = styled.div`
   img {
     max-width: 100%;
-    max-height: 300px;
+    max-height: 250px;
   }
 `;
 

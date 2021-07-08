@@ -9,7 +9,7 @@ export const theme = {
     },
 
     gradients: {
-      primary: 'linear-gradient(270deg ,#0f0c14,#121214)',
+      primary: 'linear-gradient(270deg ,#1c1529,#222226)',
     },
   },
 
