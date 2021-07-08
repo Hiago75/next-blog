@@ -2,7 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { countAllPosts, getAllPosts } from '../../data/posts';
 import { PostData } from '../../domain/posts/post';
-import { HomePage } from '../../containers/HomePage';
+import { Pagination } from '../../containers/PaginationPage';
 
 export type DynamicPostProps = {
   posts: PostData[];
@@ -10,7 +10,7 @@ export type DynamicPostProps = {
 };
 
 export default function DynamicCategory({ posts, category }: DynamicPostProps) {
-  return <HomePage category={category} posts={posts} />;
+  return <Pagination category={category} posts={posts} />;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {

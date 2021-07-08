@@ -3,7 +3,7 @@ import { useRouter } from 'next/dist/client/router';
 
 import { getAllPosts, countAllPosts } from '../../../data/posts/';
 import { PostData } from '../../../domain/posts/post';
-import { HomePage } from '../../../containers';
+import { PaginationPage } from '../../../containers';
 import { PaginationData } from '../../../domain/posts/pagination';
 
 export type PageProps = {
@@ -19,7 +19,9 @@ export default function Page({ posts, category, pagination }: PageProps) {
   if (router.isFallback) return <div>Carregando...</div>;
   if (!posts.length) return <div>Página não encontrada</div>;
 
-  return <HomePage posts={posts} category={category} pagination={pagination}></HomePage>;
+  return (
+    <PaginationPage posts={posts} category={category} pagination={pagination}></PaginationPage>
+  );
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {

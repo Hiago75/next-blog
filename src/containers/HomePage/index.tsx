@@ -49,7 +49,6 @@ export function HomePage({ posts, category, pagination }: HomePageProps) {
             );
           })}
         </RecentPosts>
-        <Pagination {...pagination} />
       </MainContainer>
       <Footer />
     </>

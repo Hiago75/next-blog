@@ -8,11 +8,11 @@ export const Container = styled.section`
 export const MainSpotlight = styled.div`
   width: 50%;
   cursor: pointer;
-  margin-right: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
   transition: transform 350ms ease;
+  margin: 0 10px;
 
   &:hover {
     transform: scale(1.1);
