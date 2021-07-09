@@ -10,6 +10,10 @@ export const GlobalStyles = createGlobalStyle`
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 
+  html, body{
+    height: 100%;
+  }
+
   body{
     background: ${theme.colors.gradients.primary};
     color: ${theme.font.colors.primary};
