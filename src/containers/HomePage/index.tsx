@@ -1,5 +1,7 @@
 import Head from 'next/head';
 
+import { CategoriesContainer } from './style';
+import { SiJavascript, SiTypescript, SiPython } from 'react-icons/si';
 import { PostData } from '../../domain/posts/post';
 
 import {
@@ -7,21 +9,19 @@ import {
   MainContainer,
   PostCard,
   Footer,
-  Pagination,
   Heading,
   RecentPosts,
+  Spotlight,
+  CategoryCta,
 } from '../../components';
 import { APP_NAME } from '../../config';
-import { PaginationData } from '../../domain/posts/pagination';
-import { Spotlight } from '../../components/Spotlight';
 
 export type HomePageProps = {
   posts: PostData[];
   category?: string;
-  pagination?: PaginationData;
 };
 
-export function HomePage({ posts, category, pagination }: HomePageProps) {
+export function HomePage({ posts, category }: HomePageProps) {
   return (
     <>
       <Head>
@@ -35,7 +35,27 @@ export function HomePage({ posts, category, pagination }: HomePageProps) {
           <p>A place to learn about the magic of programming</p>
         </Heading>
         <Spotlight posts={posts} />
-        <RecentPosts pagination={pagination}>
+        {/* TODO - Create dynamic categories ctas */}
+        <CategoriesContainer>
+          <CategoryCta
+            as="/posts/page/1/javascript"
+            href="/posts/page/[...param]"
+            title="JavaScript"
+          >
+            <SiJavascript size={32} />
+          </CategoryCta>
+          <CategoryCta
+            as="/posts/page/1/typescript"
+            href="/posts/page/[...param]"
+            title="TypeScript"
+          >
+            <SiTypescript size={32} />
+          </CategoryCta>
+          <CategoryCta as="/posts/page/1/python" href="/posts/page/[...param]" title="Python">
+            <SiPython size={32} />
+          </CategoryCta>
+        </CategoriesContainer>
+        <RecentPosts>
           {posts.map((post) => {
             return (
               <PostCard

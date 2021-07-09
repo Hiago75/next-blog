@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const Container = styled.section`
+export const CategoriesContainer = styled.section`
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  margin: 120px 0;
 `;

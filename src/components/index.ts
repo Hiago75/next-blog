@@ -5,10 +5,12 @@ import { Footer } from './Footer';
 import { Date } from './Date';
 import { Comments } from './Comments';
 import { Pagination } from './Pagination';
-import { AllPostsLink } from './AllPostsLink';
+import { CtaLink } from './CtaLink';
 import { NavLink } from './NavLink';
 import { Heading } from './Heading';
 import { RecentPosts } from './RecentPosts';
+import { Spotlight } from './Spotlight';
+import { CategoryCta } from './CategoryCta';
 
 export {
   Header,
@@ -18,8 +20,10 @@ export {
   Date,
   Comments,
   Pagination,
-  AllPostsLink,
+  CtaLink,
   NavLink,
   Heading,
   RecentPosts,
+  Spotlight,
+  CategoryCta,
 };

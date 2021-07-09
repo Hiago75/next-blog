@@ -1,13 +1,11 @@
-import { AllPostsLink } from '../';
-import { PaginationData } from '../../domain/posts/pagination';
+import { CtaLink } from '../';
 import { Container, Center, Title, TitleDivider, Posts } from './style';
 
 type RecentPostsProps = {
   children: React.ReactNode;
-  pagination?: PaginationData;
 };
 
-export const RecentPosts = ({ children, pagination }: RecentPostsProps) => {
+export const RecentPosts = ({ children }: RecentPostsProps) => {
   return (
     <Container>
       <Center>
@@ -18,7 +16,7 @@ export const RecentPosts = ({ children, pagination }: RecentPostsProps) => {
       </Center>
 
       <Posts>{children}</Posts>
-      <AllPostsLink pagination={pagination} />
+      <CtaLink as="/posts/page/1" href="/posts/page/[...param]" />
     </Container>
   );
 };
