@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.section`
   display: flex;
+  flex-wrap: wrap;
   margin: 50px 0;
 `;
 
@@ -20,6 +21,10 @@ export const MainSpotlight = styled.div`
 
   img {
     max-width: 100%;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
   }
 `;
 
@@ -57,4 +62,8 @@ export const Details = styled.div`
 
 export const SpotlightContent = styled.div`
   width: 50%;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 `;
