@@ -2,7 +2,11 @@ import styled from 'styled-components';
 
 export const CategoryCard = styled.div`
   text-align: center;
-  flex: 1 0 33%;
+  flex: 1 0 33.3%;
+
+  @media screen and (max-width: 420px) {
+    flex: 1 0 100%;
+  }
 `;
 
 export const Title = styled.h2`

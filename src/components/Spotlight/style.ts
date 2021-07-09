@@ -13,7 +13,7 @@ export const MainSpotlight = styled.div`
   flex-direction: column;
   justify-content: space-around;
   transition: transform 350ms ease;
-  margin: 0 10px;
+  padding: 0 10px;
 
   &:hover {
     transform: scale(1.1);

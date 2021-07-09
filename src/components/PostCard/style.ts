@@ -13,6 +13,10 @@ export const Container = styled.div`
       text-decoration: underline;
     }
   }
+
+  @media screen and (max-width: 768px) {
+    flex: 1 0 100%;
+  }
 `;
 
 export const Wrapper = styled.div`
