@@ -17,5 +17,11 @@ export const Container = styled.h2`
       color: ${theme.font.colors.secondary};
       font-weight: normal;
     }
+
+    @media screen and (max-width: 768px) {
+      p {
+        font-size: 45px;
+      }
+    }
   `}
 `;
