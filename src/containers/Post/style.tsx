@@ -12,6 +12,9 @@ export const Heading = styled.h2`
 export const PostCover = styled.img`
   max-width: 100%;
   margin-bottom: 20px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
 export const PostDetails = styled.div`
