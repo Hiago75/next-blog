@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { GiTreasureMap } from 'react-icons/gi';
 
 export const Container = styled.section`
   ${({ theme }) => css`
@@ -7,6 +8,7 @@ export const Container = styled.section`
     flex-wrap: wrap;
     align-items: center;
     height: 100%;
+    margin: 50px 0;
     color: ${theme.font.colors.primary};
 
     h1 {
@@ -44,8 +46,16 @@ export const Container = styled.section`
   `}
 `;
 
-export const Illustration = styled.div`
+export const IllustrationBox = styled.div`
   flex: 1 0 50%;
+`;
+
+export const Illustration = styled(GiTreasureMap)`
+  font-size: 30rem;
+
+  @media screen and (max-width: 625px) {
+    font-size: 12rem;
+  }
 `;
 
 export const Cta = styled.div`

@@ -1,16 +1,15 @@
 import Link from 'next/link';
 
-import { GiTreasureMap } from 'react-icons/gi';
-import { Container, Illustration, Cta } from './style';
+import { Container, Illustration, Cta, IllustrationBox } from './style';
 import { MainContainer } from '../../components';
 
 export const Error404 = () => {
   return (
     <MainContainer>
       <Container>
-        <Illustration>
-          <GiTreasureMap size={400} />
-        </Illustration>
+        <IllustrationBox>
+          <Illustration />
+        </IllustrationBox>
         <Cta>
           <h1>404...</h1>
           <h2>Oops! Parece que não tem nada aqui</h2>
