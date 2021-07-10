@@ -6,6 +6,7 @@ export const CategoryCard = styled.div`
 
   @media screen and (max-width: 420px) {
     flex: 1 0 100%;
+    margin: 20px 0;
   }
 `;
 

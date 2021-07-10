@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 50px;
 
   a {
     text-decoration: none;

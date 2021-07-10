@@ -24,7 +24,7 @@ export function Post({ post }: PostProps) {
         <LineDivider />
         <PostDetails>
           <h5>
-            Posted by <a href="#">{post.author.name}</a>
+            Postado por <a href="#">{post.author.name}</a>
           </h5>
 
           <p>

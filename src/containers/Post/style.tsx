@@ -92,6 +92,12 @@ export const Content = styled.article`
       line-height: 25px;
       background-color: ${theme.colors.tertiary};
       padding: 20px;
+
+      code {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        text-align: justify;
+      }
     }
   `}
 `;

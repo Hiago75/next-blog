@@ -31,8 +31,8 @@ export function HomePage({ posts, category }: HomePageProps) {
       <Header />
       <MainContainer>
         <Heading>
-          <h1>Welcome to NextBlog</h1>
-          <p>A place to learn about the magic of programming</p>
+          <h1>Bem vindo ao NextBlog</h1>
+          <p>Um lugar para aprender a magia da programação</p>
         </Heading>
         <Spotlight posts={posts} />
         {/* TODO - Create dynamic categories ctas */}

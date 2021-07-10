@@ -1,5 +1,5 @@
 import { Container } from './style';
 
 export function Footer() {
-  return <Container>Made with ❤ by Hiago</Container>;
+  return <Container>Feito com ❤ por Hiago</Container>;
 }
