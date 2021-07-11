@@ -11,6 +11,7 @@ import { Heading } from './Heading';
 import { RecentPosts } from './RecentPosts';
 import { Spotlight } from './Spotlight';
 import { CategoryCta } from './CategoryCta';
+import { Loading } from './Loading';
 
 export {
   Header,
@@ -26,4 +27,5 @@ export {
   RecentPosts,
   Spotlight,
   CategoryCta,
+  Loading,
 };

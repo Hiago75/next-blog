@@ -1,10 +1,12 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/dist/client/router';
 
+import Custom404 from '../../404';
 import { getAllPosts, countAllPosts } from '../../../data/posts/';
 import { PostData } from '../../../domain/posts/post';
 import { PaginationPage } from '../../../containers';
 import { PaginationData } from '../../../domain/posts/pagination';
+import { Loading } from '../../../components';
 
 export type PageProps = {
   posts: PostData[];
@@ -16,8 +18,8 @@ export default function Page({ posts, category, pagination }: PageProps) {
   const router = useRouter();
 
   //TODO - Create the Components for each one of those
-  if (router.isFallback) return <div>Carregando...</div>;
-  if (!posts.length) return <div>Página não encontrada</div>;
+  if (router.isFallback) return <Loading />;
+  if (!posts.length) return <Custom404 />;
 
   return (
     <PaginationPage posts={posts} category={category} pagination={pagination}></PaginationPage>

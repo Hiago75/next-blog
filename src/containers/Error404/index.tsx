@@ -1,7 +1,6 @@
 import Link from 'next/link';
 
 import { Container, Illustration, Cta, IllustrationBox } from './style';
-import { MainContainer } from '../../components';
 
 export const Error404 = () => {
   return (
