@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { useRouter } from 'next/dist/client/router';
+import { useRouter } from 'next/router';
 
 import Custom404 from '../../404';
 import { getAllPosts, countAllPosts } from '../../../data/posts/';

@@ -7,7 +7,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 100%;
-  padding: 0 4%;
+  padding: 0 10px;
 `;
 
 export const MainHeader = styled.header`

@@ -21,17 +21,17 @@ export function Pagination({
   if (hasPreviousPage || hasNextPage) {
     return (
       <Container>
-        <Button className={hasPreviousPage ? '' : 'inactive'}>
-          <Link as={previousLink} href="/posts/page/[...param]">
+        <Link as={previousLink} href="/posts/page/[...param]">
+          <Button className={hasPreviousPage ? '' : 'inactive'}>
             <a>Posts mais recentes</a>
-          </Link>
-        </Button>
+          </Button>
+        </Link>
 
-        <Button className={hasNextPage ? '' : 'inactive'}>
-          <Link as={nextLink} href="/posts/page/[...param]">
+        <Link as={nextLink} href="/posts/page/[...param]">
+          <Button className={hasNextPage ? '' : 'inactive'}>
             <a>Posts mais antigos</a>
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </Container>
     );
   } else {

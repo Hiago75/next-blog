@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 import { customRender } from '../../utils/custom-render';
-import { Header } from '..';
+import { Header } from '../';
 
 const element = screen.getByRole('banner');
 

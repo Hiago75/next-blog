@@ -9,15 +9,15 @@ import { PaginationData } from '../../domain/posts/pagination';
 
 export type PaginationProps = {
   posts: PostData[];
-  category: string;
+  category?: string;
   pagination: PaginationData;
 };
 
-export const PaginationPage = ({ posts, category, pagination }: PaginationProps) => {
+export const PaginationPage = ({ posts, pagination }: PaginationProps) => {
   return (
     <>
       <Head>
-        <title>{`${category} - ${APP_NAME}`}</title>
+        <title>{`${APP_NAME}`}</title>
         <meta name="description" content="Just an simple test blog made with NextJS" />
       </Head>
       <Container>

@@ -22,7 +22,7 @@ export const LoadingWheel = styled.div`
   width: 128px;
   border-radius: 50%;
   border: 10px solid ${({ theme }) => theme.colors.borders.darkGray};
-  border-top: 10px solid #fff;
-  border-bottom: 10px solid #fff;
+  border-top: 10px solid ${({ theme }) => theme.colors.secondary};
+  border-bottom: 10px solid ${({ theme }) => theme.colors.secondary};
   animation: ${rotate} 2s infinite linear;
 `;
