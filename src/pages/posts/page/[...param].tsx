@@ -17,7 +17,6 @@ export type PageProps = {
 export default function Page({ posts, category, pagination }: PageProps) {
   const router = useRouter();
 
-  //TODO - Create the Components for each one of those
   if (router.isFallback) return <Loading />;
   if (!posts.length) return <Custom404 />;
 
