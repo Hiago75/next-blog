@@ -3,16 +3,15 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { countAllPosts, getAllPosts, getPost } from '../../data/posts';
 import { PostData } from '../../domain/posts/post';
 import { Post } from '../../containers/Post';
+import Custom404 from '../404';
 
 export type DynamicPostProps = {
   post: PostData;
 };
 
 export default function DynamicPost({ post }: DynamicPostProps) {
-  if (!post?.title) {
-    //TODO - Create error page and use for every known error
-    return <div>Aqui tem que ter um erro</div>;
-  }
+  if (!post?.title) return <Custom404></Custom404>;
+
   return <Post post={post} />;
 }
 

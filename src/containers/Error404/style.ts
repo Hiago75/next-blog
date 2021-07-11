@@ -7,8 +7,8 @@ export const Container = styled.section`
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    height: 100%;
-    margin: 50px 0;
+    min-height: calc(100vh - 110px);
+
     color: ${theme.font.colors.primary};
 
     h1 {
@@ -32,6 +32,7 @@ export const Container = styled.section`
       border-radius: 10px;
       padding: 7px 30px;
       transition: transform 300ms ease;
+      cursor: pointer;
 
       a {
         color: ${theme.font.colors.primary};
@@ -42,6 +43,10 @@ export const Container = styled.section`
       &:hover {
         transform: scale(1.1);
       }
+    }
+
+    @media screen and (max-width: 768px) {
+      margin: 50px 0;
     }
   `}
 `;
