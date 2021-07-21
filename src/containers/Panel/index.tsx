@@ -1,15 +1,17 @@
 import Head from 'next/head';
-import { Container } from './style';
+import { Sidebar } from '../../components/Sidebar';
+import { Container, Content } from './style';
 
 export const Panel = () => {
   return (
-    <>
+    <Container>
       <Head>
         <title>NextBlog | Admin</title>
       </Head>
-      <Container>
+      <Sidebar />
+      <Content>
         <h2>Hello World</h2>
-      </Container>
-    </>
+      </Content>
+    </Container>
   );
 };

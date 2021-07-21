@@ -10,14 +10,16 @@ export type NavLinkProps = {
   className?: string;
 };
 
-export const NavLink = ({ href, exact = false, children }: NavLinkProps) => {
+export const NavLink = ({ href, exact = false, children, className }: NavLinkProps) => {
   const { asPath } = useRouter();
   const isActive = exact ? asPath === href : asPath.startsWith(href);
-  const className = isActive ? 'active' : '';
+  let styleClass = className;
+
+  isActive ? (styleClass += ' active') : '';
 
   return (
     <Link href={href}>
-      <NavItem className={className}>
+      <NavItem className={styleClass}>
         <a>{children}</a>
       </NavItem>
     </Link>

@@ -24,4 +24,21 @@ export const theme = {
       medium: '23px',
     },
   },
+
+  panel: {
+    colors: {
+      primary: '#10151b',
+      secondary: '#141821',
+      tertiary: '#4877d3',
+    },
+    font: {
+      colors: {
+        primary: '#abbbdd',
+        secondary: '#313a4b',
+      },
+      sizes: {
+        regular: '17px',
+      },
+    },
+  },
 };
