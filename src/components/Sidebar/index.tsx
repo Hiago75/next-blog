@@ -32,6 +32,9 @@ export const Sidebar = () => {
           </SideNavLink>
           <p>Página inicial</p>
         </NavItem>
+        <SideNavLink href="/cadastro">
+          <a>Cadastro</a>
+        </SideNavLink>
       </Navigation>
 
       <LogOff>Sair</LogOff>

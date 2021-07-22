@@ -6,6 +6,7 @@ export const Container = styled.header`
   background-color: ${({ theme }) => theme.panel.colors.secondary};
   width: 250px;
   text-align: center;
+  overflow-y: auto;
 `;
 
 export const Logo = styled.div`
@@ -66,6 +67,11 @@ export const SideNavLink = styled(NavLink)`
       a {
         color: #ffffff;
       }
+    }
+
+    &:hover {
+      border: 0;
+      border-left: 2px solid ${theme.colors.secondary};
     }
   `}
 `;
