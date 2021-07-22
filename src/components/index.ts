@@ -12,6 +12,10 @@ import { RecentPosts } from './RecentPosts';
 import { Spotlight } from './Spotlight';
 import { CategoryCta } from './CategoryCta';
 import { Loading } from './Loading';
+import { Sidebar } from './Sidebar';
+import { BigPanel } from './BigPanel';
+import { MediumPanel } from './MediumPanel';
+import { SmallPanel } from './SmallPanel';
 
 export {
   Header,
@@ -28,4 +32,8 @@ export {
   Spotlight,
   CategoryCta,
   Loading,
+  Sidebar,
+  BigPanel,
+  MediumPanel,
+  SmallPanel,
 };

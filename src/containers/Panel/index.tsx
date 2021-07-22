@@ -1,6 +1,8 @@
 import Head from 'next/head';
-import { Sidebar } from '../../components/Sidebar';
-import { Container, Content } from './style';
+import { Sidebar, BigPanel } from '../../components';
+import { MediumPanel } from '../../components/MediumPanel';
+import { SmallPanel } from '../../components/SmallPanel';
+import { Container, Content, Panels } from './style';
 
 export const Panel = () => {
   return (
@@ -12,7 +14,7 @@ export const Panel = () => {
       <Content>
         <svg
           xmlns="http://www.w3.org/2000/none"
-          viewBox="0 0 1440 320"
+          viewBox="0 0 1440 252"
           preserveAspectRatio="xMidYMid meet"
         >
           <path
@@ -24,6 +26,10 @@ export const Panel = () => {
             Olá, Hiago
           </text>
         </svg>
+        <Panels>
+          <MediumPanel>Flashbang</MediumPanel>
+          <SmallPanel>Out</SmallPanel>
+        </Panels>
       </Content>
     </Container>
   );
