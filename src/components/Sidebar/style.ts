@@ -7,6 +7,7 @@ export const Container = styled.header`
   width: 250px;
   text-align: center;
   overflow-y: auto;
+  position: fixed;
 `;
 
 export const Logo = styled.div`

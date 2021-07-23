@@ -36,6 +36,10 @@ export const Panel = () => {
             <h1>27</h1>
             <span>-13%</span>
           </SmallPanel>
+          <SmallPanel>
+            <h2>Total posts</h2>
+            <h1>450</h1>
+          </SmallPanel>
         </Panels>
       </Content>
     </Container>

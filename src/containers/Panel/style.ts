@@ -6,7 +6,9 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  width: calc(100% - 250px);
+  width: 100%;
+  margin-left: 250px;
+  overflow-y: auto;
 `;
 
 export const Panels = styled.section`
