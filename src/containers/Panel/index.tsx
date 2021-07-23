@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import { Sidebar, BigPanel } from '../../components';
+import { Sidebar } from '../../components';
+import { BarChart } from '../../components/BarChart';
 import { MediumPanel } from '../../components/MediumPanel';
 import { SmallPanel } from '../../components/SmallPanel';
 import { Container, Content, Panels } from './style';
@@ -27,8 +28,14 @@ export const Panel = () => {
           </text>
         </svg>
         <Panels>
-          <MediumPanel>Flashbang</MediumPanel>
-          <SmallPanel>Out</SmallPanel>
+          <MediumPanel>
+            <BarChart></BarChart>
+          </MediumPanel>
+          <SmallPanel>
+            <h2>Posts feitos esse mês</h2>
+            <h1>27</h1>
+            <span>-13%</span>
+          </SmallPanel>
         </Panels>
       </Content>
     </Container>

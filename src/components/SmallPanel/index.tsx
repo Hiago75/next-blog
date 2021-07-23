@@ -1,5 +1,4 @@
-import { Container } from './style';
-import { BasePanel } from '../BasePanel';
+import { Container, PanelContent } from './style';
 
 type SmallPanelProps = {
   children: React.ReactNode;
@@ -8,7 +7,7 @@ type SmallPanelProps = {
 export const SmallPanel = ({ children }: SmallPanelProps) => {
   return (
     <Container>
-      <BasePanel>{children}</BasePanel>
+      <PanelContent>{children}</PanelContent>
     </Container>
   );
 };
