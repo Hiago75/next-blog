@@ -10,12 +10,12 @@ export const NavItem = styled.li`
     cursor: pointer;
 
     a {
-      color: ${theme.font.colors.tertiary};
+      color: ${theme.font.colors.lightGray};
       text-decoration: none;
     }
 
     &.active {
-      border-bottom: 1px solid ${theme.colors.secondary};
+      border-bottom: 1px solid ${theme.colors.mediumBlue};
       font-weight: bold;
       a {
         color: #ffffff;
@@ -23,7 +23,7 @@ export const NavItem = styled.li`
     }
 
     &:hover {
-      border-bottom: 1px solid ${theme.colors.secondary};
+      border-bottom: 1px solid ${theme.colors.mediumBlue};
 
       a {
         color: #ffffff;

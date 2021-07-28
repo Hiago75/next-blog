@@ -9,7 +9,7 @@ export const Container = styled.div`
 
 export const Button = styled.button`
   background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.colors.secondary};
+  border: 1px solid ${({ theme }) => theme.colors.mediumBlue};
   padding: 8px;
   border-radius: 3px;
   margin: 0 8px;
@@ -20,7 +20,7 @@ export const Button = styled.button`
   a {
     font-size: 17px;
     text-decoration: none;
-    color: ${({ theme }) => theme.colors.secondary};
+    color: ${({ theme }) => theme.colors.mediumBlue};
   }
 
   &:hover {
@@ -31,11 +31,11 @@ export const Button = styled.button`
   }
 
   &.inactive {
-    border: 1px solid ${({ theme }) => theme.colors.borders.darkGray};
+    border: 1px solid ${({ theme }) => theme.colors.darkGray};
     pointer-events: none;
 
     a {
-      color: ${({ theme }) => theme.colors.borders.darkGray};
+      color: ${({ theme }) => theme.colors.darkGray};
     }
   }
 `;

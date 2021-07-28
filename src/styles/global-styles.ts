@@ -15,28 +15,28 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body{
-    background: ${theme.colors.gradients.primary};
-    color: ${theme.font.colors.primary};
+    background: ${theme.colors.gradients.purpleToGray};
+    color: ${theme.font.colors.lightest};
   }
 `;
 
 export const BallDivider = styled.span`
   width: 5px;
   height: 5px;
-  background-color: ${({ theme }) => theme.font.colors.primary};
+  background-color: ${({ theme }) => theme.font.colors.lightest};
   border-radius: 50%;
   margin: 3px 8px;
   display: inline-block;
 `;
 
 export const Category = styled.span`
-  background-color: ${({ theme }) => theme.colors.secondary};
+  background-color: ${({ theme }) => theme.colors.mediumBlue};
   padding: 1px 4px;
   border-radius: 5px;
   display: inline-block;
 
   a {
-    color: ${({ theme }) => theme.font.colors.primary} !important;
+    color: ${({ theme }) => theme.font.colors.lightest} !important;
     font-size: 15px;
   }
 `;

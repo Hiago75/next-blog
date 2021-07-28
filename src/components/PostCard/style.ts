@@ -44,8 +44,8 @@ export const PostCardHeading = styled.div`
     width: 100%;
     padding: 0 25px;
     h2 {
-      font-size: ${theme.font.sizes.medium};
-      color: ${theme.font.colors.primary};
+      font-size: ${theme.font.sizes.regular};
+      color: ${theme.font.colors.lightest};
       margin: 10px 0;
 
       &:after {

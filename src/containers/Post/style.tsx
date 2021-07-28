@@ -5,7 +5,7 @@ export const Heading = styled.h2`
     font-size: 4rem;
     margin: 10px 0;
     text-align: center;
-    color: ${theme.colors.secondary};
+    color: ${theme.colors.mediumBlue};
   `}
 `;
 
@@ -23,7 +23,7 @@ export const PostDetails = styled.div`
   p,
   h5 {
     text-transform: uppercase;
-    color: ${({ theme }) => theme.font.colors.secondary};
+    color: ${({ theme }) => theme.font.colors.light};
     padding: 10px 0;
     font-size: 15px;
     letter-spacing: 2px;
@@ -35,7 +35,7 @@ export const PostDetails = styled.div`
 
   a {
     text-decoration: none;
-    color: ${({ theme }) => theme.colors.secondary};
+    color: ${({ theme }) => theme.colors.mediumBlue};
 
     &:hover {
       text-decoration: underline;
@@ -46,7 +46,7 @@ export const PostDetails = styled.div`
 export const LineDivider = styled.span`
   width: 100%;
   height: 1px;
-  background-color: ${({ theme }) => theme.colors.borders.darkGray};
+  background-color: ${({ theme }) => theme.colors.darkGray};
   display: inline-block;
   margin: 15px 0;
 `;
@@ -62,14 +62,14 @@ export const Content = styled.article`
     }
 
     h2 {
-      color: ${theme.font.colors.primary};
+      color: ${theme.font.colors.lightest};
       font-size: 32px;
     }
 
     p,
     ol {
       margin: 10px 0;
-      color: ${theme.font.colors.secondary};
+      color: ${theme.font.colors.light};
       line-height: 22px;
     }
 
@@ -81,7 +81,7 @@ export const Content = styled.article`
 
     a {
       text-decoration: none;
-      color: ${theme.colors.secondary};
+      color: ${theme.colors.mediumBlue};
 
       &:hover {
         text-decoration: underline;
@@ -90,7 +90,7 @@ export const Content = styled.article`
 
     pre {
       line-height: 25px;
-      background-color: ${theme.colors.tertiary};
+      background-color: ${theme.colors.darkBlue};
       padding: 20px;
 
       code {

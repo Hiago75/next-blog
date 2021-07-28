@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  background-color: ${({ theme }) => theme.panel.colors.quaternary};
+  background-color: ${({ theme }) => theme.dashboard.colors.lightBlue};
 `;
 
 export const Content = styled.div`

@@ -9,11 +9,11 @@ export const Container = styled.section`
     align-items: center;
     min-height: calc(100vh - 110px);
 
-    color: ${theme.font.colors.primary};
+    color: ${theme.font.colors.lightest};
 
     h1 {
       font-size: 120px;
-      color: ${theme.colors.secondary};
+      color: ${theme.colors.black};
     }
 
     h2 {
@@ -27,7 +27,7 @@ export const Container = styled.section`
     }
 
     button {
-      background: ${theme.colors.secondary};
+      background: ${theme.colors.mediumBlue};
       border: 0;
       border-radius: 10px;
       padding: 7px 30px;
@@ -35,7 +35,7 @@ export const Container = styled.section`
       cursor: pointer;
 
       a {
-        color: ${theme.font.colors.primary};
+        color: ${theme.font.colors.lightest};
         text-decoration: none;
         font-size: 20px;
       }

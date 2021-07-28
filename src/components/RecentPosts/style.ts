@@ -17,7 +17,7 @@ export const TitleDivider = styled(LineDivider)`
   max-width: 35%;
   height: 4px;
   border-radius: 20px;
-  background-color: ${({ theme }) => theme.colors.secondary};
+  background-color: ${({ theme }) => theme.colors.mediumBlue};
   transition: max-width 300ms ease;
 
   ${Container}:hover & {

@@ -30,7 +30,7 @@ export const MainSpotlight = styled.div`
 
 export const Title = styled.h2`
   color {
-    ${({ theme }) => theme.font.colors.primary}
+    ${({ theme }) => theme.font.colors.lightest}
   }
   font-size: 38px;
   font-weight: normal;
@@ -52,7 +52,7 @@ export const Title = styled.h2`
 
 export const Details = styled.div`
   color {
-    ${({ theme }) => theme.colors.borders.darkGray}
+    ${({ theme }) => theme.colors.darkGray}
   }
   font-size: 15px;
   p {

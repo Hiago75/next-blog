@@ -12,14 +12,14 @@ export const Container = styled.div`
 
 export const MainHeader = styled.header`
   ${({ theme }) => css`
-    background-color: ${theme.colors.primary};
-    border-bottom: 1px solid ${theme.colors.borders.darkGray};
+    background-color: ${theme.colors.black};
+    border-bottom: 1px solid ${theme.colors.darkGray};
     height: 60px;
   `}
 `;
 
 export const Logo = styled.a`
-  color: ${({ theme }) => theme.font.colors.primary};
+  color: ${({ theme }) => theme.font.colors.light};
   text-decoration: none;
   font-size: 25px;
   transition: opacity 200ms ease;
@@ -50,7 +50,7 @@ export const MobileMenu = styled.nav`
 
   ul {
     padding: 10px 0;
-    background-color: ${({ theme }) => theme.colors.primary};
+    background-color: ${({ theme }) => theme.colors.black};
     display: none;
   }
 

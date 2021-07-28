@@ -17,7 +17,7 @@ export const PanelContent = styled(BasePanel)`
   h1,
   h2,
   span {
-    color: ${({ theme }) => theme.panel.font.colors.primary};
+    color: ${({ theme }) => theme.dashboard.font.colors.lightBlue};
     padding: 10px 0;
   }
 
@@ -30,6 +30,6 @@ export const PanelContent = styled(BasePanel)`
   }
 
   span {
-    color: ${({ theme }) => theme.panel.font.colors.secondary};
+    color: ${({ theme }) => theme.dashboard.font.colors.gray};
   }
 `;
