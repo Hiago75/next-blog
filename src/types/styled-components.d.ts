@@ -44,6 +44,7 @@ declare module 'styled-components' {
 
         sizes: {
           small: string;
+          regular: string;
           big: string;
         };
       };

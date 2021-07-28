@@ -1,5 +1,5 @@
-import { Panel } from '../../containers/Panel';
+import { Login } from '../../containers';
 
 export default function AdminHome() {
-  return <Panel></Panel>;
+  return <Login></Login>;
 }

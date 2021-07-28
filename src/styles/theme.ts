@@ -28,8 +28,8 @@ export const theme: DefaultTheme = {
     colors: {
       black: '#10151b',
       lighterBlack: '#141821',
-      darkGray: '#4877d3',
-      lightBlue: '#1c1f26',
+      darkGray: '#1c1f26',
+      lightBlue: '#4877d3',
     },
     font: {
       colors: {
@@ -38,7 +38,8 @@ export const theme: DefaultTheme = {
       },
       sizes: {
         small: '17px',
-        big: '55px',
+        regular: '25px',
+        big: '53px',
       },
     },
   },
