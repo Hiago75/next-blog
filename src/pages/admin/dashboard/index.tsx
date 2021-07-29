@@ -9,6 +9,8 @@ export default function AdminHome() {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { ['nextblog.auth']: token } = parseCookies(ctx);
 
+  console.log('fui chamado');
+
   if (!token) {
     return {
       redirect: {

@@ -3,6 +3,6 @@ import { getAllPosts } from './posts/get-all-posts';
 import { getPost } from './posts/get-post';
 import { signInRequest } from './auth/signInRequest';
 import { getAPIClient } from './auth/getAPIClient';
-import { renewUserData } from './auth/renewUserData';
+import { getUserData } from './auth/getUserData';
 
-export { countAllPosts, getAllPosts, getPost, signInRequest, getAPIClient, renewUserData };
+export { countAllPosts, getAllPosts, getPost, signInRequest, getAPIClient, getUserData };

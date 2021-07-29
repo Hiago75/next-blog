@@ -1,9 +1,8 @@
 import Image from 'next/image';
 import Router from 'next/router';
 
-import { useContext } from 'react';
-import { AuthContext } from '../../contexts/AuthContext';
 import { destroyCookie } from 'nookies';
+import { IUser } from '../../interfaces/IUser';
 
 import {
   Container,
@@ -18,9 +17,11 @@ import {
   NavItem,
 } from './style';
 
-export const Sidebar = () => {
-  const { user } = useContext(AuthContext);
+interface SidebarRequest {
+  user: IUser;
+}
 
+export const Sidebar = ({ user }: SidebarRequest) => {
   function handleLogout() {
     destroyCookie(undefined, 'nextblog.auth');
     Router.push('/admin');
@@ -34,20 +35,16 @@ export const Sidebar = () => {
 
       <User>
         <UserPic></UserPic>
-        <UserName>Hiago Brenha</UserName>
+        <UserName>{user?.name}</UserName>
         <UserRole>Desenvolvedor</UserRole>
       </User>
 
       <Navigation>
         <NavItem>
-          <SideNavLink href="/">
-            <a>Painel de controle</a>
-          </SideNavLink>
+          <SideNavLink href="/admin/dashboard">Painel de controle</SideNavLink>
           <p>Página inicial</p>
         </NavItem>
-        <SideNavLink href="/cadastro">
-          <a>Cadastro</a>
-        </SideNavLink>
+        <SideNavLink href="/cadastro">Cadastro</SideNavLink>
       </Navigation>
 
       <LogOff onClick={handleLogout}>Sair</LogOff>

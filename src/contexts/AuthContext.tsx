@@ -6,7 +6,7 @@ import { api } from '../config/api-config';
 
 import { ILoginRequest } from '../interfaces/ILoginRequest';
 import { IUser } from '../interfaces/IUser';
-import { renewUserData, signInRequest } from '../services/';
+import { getUserData, signInRequest } from '../services/';
 
 interface IAuthProviderRequest {
   children: React.ReactNode;
@@ -30,7 +30,7 @@ export function AuthProvider({ children }: IAuthProviderRequest) {
     const { 'nextblog.auth': token } = parseCookies();
 
     if (token) {
-      renewUserData(token).then((user) => {
+      getUserData(token).then((user) => {
         setUser(user);
       });
     }
