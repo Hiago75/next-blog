@@ -1,11 +1,14 @@
 import Head from 'next/head';
-import { Sidebar } from '../../components';
-import { BarChart } from '../../components/BarChart';
-import { MediumPanel } from '../../components/MediumPanel';
-import { SmallPanel } from '../../components/SmallPanel';
+
+import { Sidebar, BarChart, MediumPanel, SmallPanel } from '../../components';
 import { Container, Content, Panels } from './style';
+import { AuthContext } from '../../contexts/AuthContext';
+import { useContext } from 'react';
 
 export const Panel = () => {
+  const { user } = useContext(AuthContext);
+  const [firstName] = user.name.split(' ');
+
   return (
     <Container>
       <Head>
@@ -24,7 +27,7 @@ export const Panel = () => {
             d="M0,128L48,149.3C96,171,192,213,288,234.7C384,256,480,256,576,224C672,192,768,128,864,117.3C960,107,1056,149,1152,176C1248,203,1344,213,1392,218.7L1440,224L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
           ></path>
           <text x="80" y="90" fontSize="37" fontWeight="bold" fill="#0a0c21">
-            Olá, Hiago
+            Olá, {firstName}
           </text>
         </svg>
         <Panels>

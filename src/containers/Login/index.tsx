@@ -1,16 +1,17 @@
 import Image from 'next/image';
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import isEmail from 'validator/lib/isEmail';
 import { FiMail, FiLock } from 'react-icons/fi';
-import { IconContext } from 'react-icons/lib';
 
+import { AuthContext } from '../../contexts/AuthContext';
 import { Container, LoginForm, LoginBox, IconInput } from './style';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isFilled, setIsFilled] = useState(false);
+  const { signIn } = useContext(AuthContext);
 
   //Set password value
   function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -52,7 +53,7 @@ export const Login = () => {
     const isValid = formIsValid();
 
     //TODO: Add login system
-    if (isValid) console.log('Passou');
+    if (isValid) signIn({ email, password });
   }
 
   useEffect(() => {
@@ -72,24 +73,22 @@ export const Login = () => {
         <Image src="/logo.svg" alt="Colster" width={180} height={80} />
 
         <LoginForm>
-          <IconContext.Provider value={{ color: '#4877d3', size: '18' }}>
-            <IconInput htmlFor="email">
-              <input onChange={handleEmailChange} name="email" type="text" placeholder="E-mail" />
-              <FiMail />
-            </IconInput>
-            <IconInput htmlFor="password">
-              <input
-                onChange={handlePasswordChange}
-                name="password"
-                type="password"
-                placeholder="Senha"
-              />
-              <FiLock />
-            </IconInput>
-            <button onClick={handleSubmit} className={isFilled ? 'form-filled' : ''}>
-              Entrar
-            </button>
-          </IconContext.Provider>
+          <IconInput htmlFor="email">
+            <input onChange={handleEmailChange} name="email" type="text" placeholder="E-mail" />
+            <FiMail color="#4877d3" size="18" />
+          </IconInput>
+          <IconInput htmlFor="password">
+            <input
+              onChange={handlePasswordChange}
+              name="password"
+              type="password"
+              placeholder="Senha"
+            />
+            <FiLock color="#4877d3" size="18" />
+          </IconInput>
+          <button onClick={handleSubmit} className={isFilled ? 'form-filled' : ''}>
+            Entrar
+          </button>
         </LoginForm>
       </LoginBox>
     </Container>

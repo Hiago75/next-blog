@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next';
-import { getAllPosts } from '../data/posts/get-all-posts';
+import { getAllPosts } from '../services/posts/get-all-posts';
 import { PostData } from '../domain/posts/post';
 import { HomePage } from '../containers/HomePage';
 

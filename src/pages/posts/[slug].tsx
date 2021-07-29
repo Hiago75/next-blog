@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { countAllPosts, getAllPosts, getPost } from '../../data/posts';
+import { countAllPosts, getAllPosts, getPost } from '../../services';
 import { PostData } from '../../domain/posts/post';
 import { Post } from '../../containers/Post';
 import Custom404 from '../404';

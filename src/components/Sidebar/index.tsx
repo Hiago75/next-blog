@@ -1,4 +1,10 @@
 import Image from 'next/image';
+import Router from 'next/router';
+
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
+import { destroyCookie } from 'nookies';
+
 import {
   Container,
   Logo,
@@ -13,6 +19,13 @@ import {
 } from './style';
 
 export const Sidebar = () => {
+  const { user } = useContext(AuthContext);
+
+  function handleLogout() {
+    destroyCookie(undefined, 'nextblog.auth');
+    Router.push('/admin');
+  }
+
   return (
     <Container>
       <Logo>
@@ -37,7 +50,7 @@ export const Sidebar = () => {
         </SideNavLink>
       </Navigation>
 
-      <LogOff>Sair</LogOff>
+      <LogOff onClick={handleLogout}>Sair</LogOff>
     </Container>
   );
 };

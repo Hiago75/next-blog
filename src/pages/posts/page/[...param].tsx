@@ -2,7 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 
 import Custom404 from '../../404';
-import { getAllPosts, countAllPosts } from '../../../data/posts/';
+import { getAllPosts, countAllPosts } from '../../../services';
 import { PostData } from '../../../domain/posts/post';
 import { PaginationPage } from '../../../containers';
 import { PaginationData } from '../../../domain/posts/pagination';

@@ -16,6 +16,7 @@ import { Sidebar } from './Sidebar';
 import { BigPanel } from './BigPanel';
 import { MediumPanel } from './MediumPanel';
 import { SmallPanel } from './SmallPanel';
+import { BarChart } from './BarChart';
 
 export {
   Header,
@@ -36,4 +37,5 @@ export {
   BigPanel,
   MediumPanel,
   SmallPanel,
+  BarChart,
 };
