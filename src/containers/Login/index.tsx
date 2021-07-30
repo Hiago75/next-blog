@@ -25,7 +25,7 @@ export const Login = () => {
     setEmail(e.target.value);
     resetFields();
   }
-
+  // Toggle password visibility
   function handleVisible() {
     setPasswordVisible(!passwordVisible);
   }

@@ -1,8 +1,7 @@
 import Image from 'next/image';
-import Router from 'next/router';
 
-import { destroyCookie } from 'nookies';
 import { IUser } from '../../interfaces/IUser';
+import { logout } from '../../utils/logout';
 
 import {
   Container,
@@ -23,8 +22,7 @@ interface SidebarRequest {
 
 export const Sidebar = ({ user }: SidebarRequest) => {
   function handleLogout() {
-    destroyCookie(undefined, 'nextblog.auth');
-    Router.push('/admin');
+    logout();
   }
 
   return (

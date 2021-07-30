@@ -31,7 +31,7 @@ export function AuthProvider({ children }: IAuthProviderRequest) {
 
     if (token) {
       getUserData(token).then((user) => {
-        setUser(user);
+        if (user) setUser(user);
       });
     }
   }, []);
@@ -56,7 +56,6 @@ export function AuthProvider({ children }: IAuthProviderRequest) {
     setUser(user);
 
     //Redirect to Dashboard
-
     Router.push('/admin/dashboard');
   }
 
