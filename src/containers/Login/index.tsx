@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import React, { useContext, useEffect, useState } from 'react';
 import isEmail from 'validator/lib/isEmail';
-import { FiMail, FiLock } from 'react-icons/fi';
+import { FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
 
 import { AuthContext } from '../../contexts/AuthContext';
 import { Container, LoginForm, LoginBox, IconInput } from './style';
@@ -11,6 +11,7 @@ export const Login = () => {
   const { signIn } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
 
   //Set password value
@@ -23,6 +24,10 @@ export const Login = () => {
   function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
     setEmail(e.target.value);
     resetFields();
+  }
+
+  function handleVisible() {
+    setPasswordVisible(!passwordVisible);
   }
 
   //Create a "p" element containing the error message and add a error class to the input
@@ -75,6 +80,7 @@ export const Login = () => {
 
     const isValid = formIsValid();
 
+    //TODO: add errors based on API response
     if (isValid) signIn({ email, password });
   }
 
@@ -99,14 +105,21 @@ export const Login = () => {
             <input onChange={handleEmailChange} type="text" placeholder="E-mail" />
             <FiMail color="#4877d3" size="18" />
           </IconInput>
-          <IconInput htmlFor="password">
+          <IconInput htmlFor="password" id="password">
             <input
               onChange={handlePasswordChange}
-              id="password"
-              type="password"
+              name="password"
+              type={passwordVisible ? 'text' : 'password'}
               placeholder="Senha"
             />
             <FiLock color="#4877d3" size="18" />
+            <a onClick={handleVisible} id="toggleVisible">
+              {passwordVisible ? (
+                <FiEyeOff color="#4877d3" size="20" />
+              ) : (
+                <FiEye color="#4877d3" size="20" />
+              )}
+            </a>
           </IconInput>
           <button onClick={handleSubmit} className={isFilled ? 'form-filled' : ''}>
             Entrar

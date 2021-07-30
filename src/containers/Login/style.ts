@@ -34,6 +34,13 @@ export const IconInput = styled.label`
       top: -1px;
     }
 
+    a {
+      position: absolute;
+      right: 50px;
+      top: 0px;
+      cursor: pointer;
+    }
+
     input {
       margin: 10px 0;
       border-radius: 10px;
