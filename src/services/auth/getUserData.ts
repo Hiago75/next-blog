@@ -10,6 +10,7 @@ export const getUserData = async (tokenToSearch: string) => {
     .catch((error) => {
       //If API send error logout the user and show message
       logout(error.response.data.error);
+      return;
     });
 
   if (!response) return;

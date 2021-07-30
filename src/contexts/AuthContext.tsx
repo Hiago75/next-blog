@@ -40,7 +40,7 @@ export function AuthProvider({ children }: IAuthProviderRequest) {
   async function signIn({ email: username, password }: ILoginRequest) {
     // Retrieve user information and token from axios request
     const response = await signInRequest({ email: username, password });
-    if (!response) throw new Error('Server failed to respond');
+    if (!response) return;
 
     const { token, user } = response;
 
