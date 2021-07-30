@@ -11,6 +11,8 @@ export const Container = styled.div`
 `;
 
 export const LoginBox = styled.div`
+  margin: 0 2%;
+  width: 100%;
   max-width: 512px;
   background-color: ${({ theme }) => theme.dashboard.colors.lighterBlack};
   border-radius: 20px;
@@ -21,15 +23,15 @@ export const LoginBox = styled.div`
 export const IconInput = styled.label`
   ${({ theme }) => css`
     position: relative;
+    text-align: left;
+    & p.error-message {
+      color: red;
+    }
 
     svg {
       position: absolute;
       left: 15px;
       top: -1px;
-
-      & input:focus {
-        fill: ${theme.dashboard.colors.lightBlue};
-      }
     }
 
     input {
@@ -54,6 +56,10 @@ export const IconInput = styled.label`
         font-size: ${theme.dashboard.font.sizes.small};
       }
 
+      &.form-error {
+        border-color: red;
+      }
+
       //TODO: Change autofill style
     }
   `}
@@ -74,10 +80,10 @@ export const LoginForm = styled.form`
 
     button {
       background-color: ${theme.colors.mediumBlue};
-      color: ${theme.dashboard.font.colors.lightBlue};
+      color: ${theme.font.colors.light};
       font-size: ${theme.dashboard.font.sizes.small};
       font-weight: bold;
-      opacity: 0.7;
+      opacity: 0.5;
       border: 0;
       margin-top: 20px;
       cursor: not-allowed;

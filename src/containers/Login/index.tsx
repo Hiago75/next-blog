@@ -8,37 +8,57 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { Container, LoginForm, LoginBox, IconInput } from './style';
 
 export const Login = () => {
+  const { signIn } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isFilled, setIsFilled] = useState(false);
-  const { signIn } = useContext(AuthContext);
 
   //Set password value
   function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
     setPassword(e.target.value);
+    resetFields();
   }
 
   //Set email value
   function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
     setEmail(e.target.value);
+    resetFields();
+  }
+
+  //Create a "p" element containing the error message and add a error class to the input
+  function showError(fieldName: string, message: string) {
+    const label = document.getElementById(fieldName);
+    const input = label.querySelector('input');
+    const p = document.createElement('p');
+
+    p.innerText = message;
+    p.classList.add('error-message');
+
+    input.classList.add('form-error');
+    label.appendChild(p);
+  }
+
+  //Remove all "p" from the labels and remove the error class from the inputs
+  function resetFields() {
+    const labels = document.querySelectorAll('label');
+    labels.forEach((label) => {
+      const errorMessage = label.querySelector('p');
+      const input = label.querySelector('input');
+
+      if (errorMessage) errorMessage.remove();
+      input.classList.remove('form-error');
+    });
   }
 
   //Check if form is valid
   const formIsValid = () => {
     let isValid = true;
-    //TODO: Add a method to show users the errors
-
-    // Check if email and password has been filled
-    if (!email || !password) {
-      console.log('Os dois campos precisam ser preenchidos');
-      return (isValid = false);
-    }
 
     //Use validator to check if the email is valid
     const emailIsValid = isEmail(email);
 
     if (!emailIsValid) {
-      console.log('Email inválido');
+      showError('email', 'Insira um e-mail válido');
       return (isValid = false);
     }
 
@@ -49,10 +69,12 @@ export const Login = () => {
   //Handle what happens when someone click on form button
   function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
+    resetFields();
+
+    if (!isFilled) return;
 
     const isValid = formIsValid();
 
-    //TODO: Add login system
     if (isValid) signIn({ email, password });
   }
 
@@ -65,7 +87,7 @@ export const Login = () => {
     const formFilled = emailIsFilled && passwordIsFilled ? true : false;
 
     setIsFilled(formFilled);
-  }, [email, password, isFilled]);
+  }, [email, password, setIsFilled]);
 
   return (
     <Container>
@@ -73,14 +95,14 @@ export const Login = () => {
         <Image src="/logo.svg" alt="Colster" width={180} height={80} />
 
         <LoginForm>
-          <IconInput htmlFor="email">
-            <input onChange={handleEmailChange} name="email" type="text" placeholder="E-mail" />
+          <IconInput htmlFor="email" id="email">
+            <input onChange={handleEmailChange} type="text" placeholder="E-mail" />
             <FiMail color="#4877d3" size="18" />
           </IconInput>
           <IconInput htmlFor="password">
             <input
               onChange={handlePasswordChange}
-              name="password"
+              id="password"
               type="password"
               placeholder="Senha"
             />
