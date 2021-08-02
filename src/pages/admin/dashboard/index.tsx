@@ -9,7 +9,7 @@ export default function AdminHome() {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { ['nextblog.auth']: token } = parseCookies(ctx);
 
-  if (!token) {
+  if (!token || token === undefined) {
     return {
       redirect: {
         destination: '/admin',

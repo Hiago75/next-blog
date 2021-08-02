@@ -5,10 +5,10 @@ import isEmail from 'validator/lib/isEmail';
 import { FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
 
 import { AuthContext } from '../../contexts/AuthContext';
-import { Container, LoginForm, LoginBox, IconInput } from './style';
+import { Container, LoginForm, LoginBox, IconInput, ErrorField } from './style';
 
 export const Login = () => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn, errors } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -72,7 +72,7 @@ export const Login = () => {
   };
 
   //Handle what happens when someone click on form button
-  function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
+  async function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     resetFields();
 
@@ -80,8 +80,8 @@ export const Login = () => {
 
     const isValid = formIsValid();
 
-    //TODO: add errors based on API response
-    if (isValid) signIn({ email, password });
+    //TODO: style errors from API
+    if (isValid) await signIn({ email, password });
   }
 
   useEffect(() => {
@@ -99,7 +99,11 @@ export const Login = () => {
     <Container>
       <LoginBox>
         <Image src="/logo.svg" alt="Colster" width={180} height={80} />
-
+        {errors && (
+          <ErrorField>
+            <span>{errors}</span>
+          </ErrorField>
+        )}
         <LoginForm>
           <IconInput htmlFor="email" id="email">
             <input onChange={handleEmailChange} type="text" placeholder="E-mail" />

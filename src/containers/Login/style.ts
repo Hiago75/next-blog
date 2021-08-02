@@ -103,3 +103,13 @@ export const LoginForm = styled.form`
     }
   `}
 `;
+
+export const ErrorField = styled.div`
+  margin-top: 20px;
+  padding: 10px 0;
+  border-left: 1px solid red;
+
+  span {
+    color: red;
+  }
+`;

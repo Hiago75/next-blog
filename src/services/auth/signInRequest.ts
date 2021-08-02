@@ -9,18 +9,18 @@ export const signInRequest = async ({ email: username, password }: ILoginRequest
       email: username,
       password,
     })
+    .then(async (response) => {
+      const token = response.data.token;
+      if (!token) return;
+
+      const { name, email, sub } = jwtDecode<IUser>(token);
+      const user = { name, email, sub };
+
+      return { token, user };
+    })
     .catch((error) => {
-      console.log(error.response.data.error);
-      return;
+      return error.response.data;
     });
 
-  if (!response) return;
-
-  const { token }: { token: string } = await response.data;
-  if (!token) return;
-
-  const { name, email, sub } = jwtDecode<IUser>(token);
-  const user = { name, email, sub };
-
-  return { token, user };
+  return response;
 };
