@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import { IUser } from '../../interfaces/IUser';
-import { logout } from '../../utils/logout';
+import { logoutUser } from '../../utils/logout';
 
 import {
   Container,
@@ -22,7 +22,7 @@ interface SidebarRequest {
 
 export const Sidebar = ({ user }: SidebarRequest) => {
   function handleLogout() {
-    logout();
+    logoutUser();
   }
 
   return (

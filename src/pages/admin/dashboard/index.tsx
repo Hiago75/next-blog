@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import { parseCookies } from 'nookies';
 import { Panel } from '../../../containers/Panel';
 
 export default function AdminHome() {
@@ -7,9 +6,9 @@ export default function AdminHome() {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { ['nextblog.auth']: token } = parseCookies(ctx);
+  const { access_token } = ctx.req.cookies;
 
-  if (!token || token === undefined) {
+  if (!access_token || access_token === undefined) {
     return {
       redirect: {
         destination: '/admin',

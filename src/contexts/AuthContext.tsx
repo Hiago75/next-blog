@@ -1,8 +1,6 @@
 import Router from 'next/router';
 
-import { setCookie, parseCookies } from 'nookies';
-import { createContext, useEffect, useState } from 'react';
-import { api } from '../config/api-config';
+import { createContext, useState } from 'react';
 
 import { ILoginRequest } from '../interfaces/ILoginRequest';
 import { IUser } from '../interfaces/IUser';
@@ -31,45 +29,31 @@ export function AuthProvider({ children }: IAuthProviderRequest) {
   const [errors, setErrors] = useState<IError | null>(null);
   const isAuthenticated = !!user;
 
-  //If token exists and have a real value try to renew user data
-  useEffect(() => {
-    const { 'nextblog.auth': token } = parseCookies();
-
-    if (token && token !== undefined) {
-      getUserData(token).then((user) => {
-        if (user) {
-          setUser(user);
-          Router.push('/admin/dashboard');
-        }
-      });
-    }
-  }, []);
+  //TODO: Refactor
+  // If token exists and have a real value try to renew user data
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     getUserData().then((user) => {
+  //       if (user) {
+  //         setUser(user);
+  //         Router.push('/admin/dashboard');
+  //       }
+  //     });
+  //   }
+  // }, []);
 
   //Login user on application
   async function signIn({ email: username, password }: ILoginRequest) {
-    // Retrieve user information and token from axios request
-    const response = await signInRequest({ email: username, password });
-    if (!response) return;
+    const isAuthorized = await signInRequest({ email: username, password });
 
-    const { error } = response;
-    if (error) return setErrors(error);
+    const { error, message } = isAuthorized;
+    if (error) return setErrors(message);
 
-    //Clear the errors
     setErrors(null);
 
-    const { token, user } = response;
-
-    //Set the cookie that will be used by the application
-    setCookie(undefined, 'nextblog.auth', token, {
-      maxAge: 60 * 60 * 24, //1 day (24 hours)
-    });
-
-    //Define the authorization header as the token for new requests to API
-    api.defaults.headers['Authorization'] = `Bearer ${token}`;
-
+    const user = await getUserData();
     setUser(user);
 
-    //Redirect to Dashboard
     Router.push('/admin/dashboard');
   }
 

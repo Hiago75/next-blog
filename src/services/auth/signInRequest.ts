@@ -1,26 +1,16 @@
-import jwtDecode from 'jwt-decode';
-import { api } from '../../config/api-config';
+import axios from 'axios';
 import { ILoginRequest } from '../../interfaces/ILoginRequest';
-import { IUser } from '../../interfaces/IUser';
 
 export const signInRequest = async ({ email: username, password }: ILoginRequest) => {
-  const response = await api
-    .post('/auth/login', {
-      email: username,
+  return await axios
+    .post('http://127.0.0.1:3000/api/login', {
+      username,
       password,
     })
-    .then(async (response) => {
-      const token = response.data.token;
-      if (!token) return;
-
-      const { name, email, sub } = jwtDecode<IUser>(token);
-      const user = { name, email, sub };
-
-      return { token, user };
+    .then(() => {
+      return { error: false };
     })
-    .catch((error) => {
-      return error.response.data;
+    .catch((e) => {
+      return { error: true, message: e.response.data.error };
     });
-
-  return response;
 };

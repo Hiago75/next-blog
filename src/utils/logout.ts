@@ -1,7 +1,7 @@
 import Router from 'next/router';
-import { destroyCookie } from 'nookies';
 
-export function logout() {
-  destroyCookie(undefined, 'nextblog.auth');
+export function logoutUser() {
+  //TODO: send request to destroy user refresh token
+  //TODO: Render error screen
   Router.push('/admin');
 }
