@@ -1,15 +1,12 @@
 import cookie from 'cookie';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { externalApi } from '../../config/api-config';
+import { handleToken } from './middlewares/handleToken';
 
 //Request the server to delete the sent refresh-token and destroy the cookies
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const { access_token, refresh_token } = req.cookies;
-
+const logout = async (req: NextApiRequest, res: NextApiResponse) => {
   await externalApi
-    .delete('/auth/logout', {
-      headers: { Authorization: access_token, cookie: refresh_token },
-    })
+    .delete('/auth/logout')
     .then(() => {
       const cookies = [
         cookie.serialize('access_token', '', {
@@ -20,7 +17,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           path: '/',
         }),
 
-        'Set-Cookie',
         cookie.serialize('refresh_token', '', {
           httpOnly: true,
           secure: true,
@@ -37,3 +33,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(error.response.status).send(error.response.data.error);
     });
 };
+
+export default handleToken(logout);

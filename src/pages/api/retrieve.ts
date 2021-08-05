@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { externalApi } from '../../config/api-config';
+import { handleToken } from './middlewares/handleToken';
 
 //Request the user data to External API using access token
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const refreshData = async (req: NextApiRequest, res: NextApiResponse) => {
   const { access_token, refresh_token } = req.cookies;
 
   await externalApi
@@ -21,3 +22,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(error.response.status).send(error.response.data.error);
     });
 };
+
+export default handleToken(refreshData);
