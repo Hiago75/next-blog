@@ -1,9 +1,9 @@
-import axios from 'axios';
+import { internalApi } from '../../config/api-config';
 import { ILoginRequest } from '../../interfaces/ILoginRequest';
 
 export const signInRequest = async ({ email: username, password }: ILoginRequest) => {
-  return await axios
-    .post('http://127.0.0.1:3000/api/login', {
+  return await internalApi
+    .post('/api/login', {
       username,
       password,
     })

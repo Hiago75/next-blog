@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { externalApi } from '../../config/api-config';
 
+//Request the user data to External API using access token
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { access_token, refresh_token } = req.cookies;
 
@@ -9,7 +10,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       '/auth/retrieve',
       {},
       {
-        headers: { Authorization: access_token, cookies: refresh_token },
+        headers: { Authorization: access_token, cookie: refresh_token },
       },
     )
     .then((response) => {

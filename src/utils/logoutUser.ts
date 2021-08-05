@@ -1,7 +1,8 @@
 import Router from 'next/router';
+import { logoutRequest } from '../services/auth/logoutRequest';
 
 export function logoutUser() {
-  //TODO: send request to destroy user refresh token
   //TODO: Render error screen
+  logoutRequest();
   Router.push('/admin');
 }

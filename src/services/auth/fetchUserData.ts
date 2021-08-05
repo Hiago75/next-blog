@@ -1,4 +1,4 @@
-import { logoutUser } from '../../utils/logout';
+import { logoutUser } from '../../utils/logoutUser';
 import { internalApi } from '../../config/api-config';
 
 // Try to fetch user data from API

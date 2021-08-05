@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import cookie from 'cookie';
 import { externalApi } from '../../config/api-config';
 
+//Request the server to auth the user and return a token, then create cookies with the access token and the refresh token.
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { username, password } = req.body;
 

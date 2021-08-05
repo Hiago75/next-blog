@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import { IUser } from '../../interfaces/IUser';
-import { logoutUser } from '../../utils/logout';
+import { logoutUser } from '../../utils/logoutUser';
 
 import {
   Container,
