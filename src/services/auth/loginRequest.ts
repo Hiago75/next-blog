@@ -1,16 +1,16 @@
 import { internalApi } from '../../config/api-config';
 import { ILoginRequest } from '../../interfaces/ILoginRequest';
 
-export const signInRequest = async ({ email: username, password }: ILoginRequest) => {
+export const loginRequest = async ({ email: username, password }: ILoginRequest) => {
   return await internalApi
     .post('/api/login', {
       username,
       password,
     })
     .then(() => {
-      return { error: false };
+      return { error: false, message: 'Access granted' };
     })
-    .catch((e) => {
-      return { error: true, message: e.response.data.error };
+    .catch((error) => {
+      return { error: true, message: error.response.data.error };
     });
 };

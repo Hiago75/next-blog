@@ -8,8 +8,8 @@ export const handleToken = (handler) => {
 
     if (!access_token && !refresh_token) return res.status(401).json('Missing token');
 
-    externalApi.defaults.headers.Authorization = access_token;
-    externalApi.defaults.headers.cookie = refresh_token;
+    if (access_token) externalApi.defaults.headers.Authorization = access_token;
+    if (refresh_token) externalApi.defaults.headers.cookie = refresh_token;
 
     return handler(req, res);
   };

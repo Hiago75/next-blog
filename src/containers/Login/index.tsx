@@ -8,7 +8,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { Container, LoginForm, LoginBox, IconInput, ErrorField } from './style';
 
 export const Login = () => {
-  const { signIn, errors } = useContext(AuthContext);
+  const { login, errors } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -81,7 +81,7 @@ export const Login = () => {
     const isValid = formIsValid();
 
     //TODO: style errors from API
-    if (isValid) await signIn({ email, password });
+    if (isValid) await login({ email, password });
   }
 
   useEffect(() => {

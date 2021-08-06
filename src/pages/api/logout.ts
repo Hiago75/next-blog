@@ -30,7 +30,8 @@ const logout = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(200).json('User succesfully logged out');
     })
     .catch((error) => {
-      return res.status(error.response.status).send(error.response.data.error);
+      if (error.response) res.status(error.response.status).json(error.response.data.error);
+      return res.status(500).json('Internal server error');
     });
 };
 

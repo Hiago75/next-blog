@@ -3,24 +3,17 @@ import { externalApi } from '../../config/api-config';
 import { handleToken } from './middlewares/handleToken';
 
 //Request the user data to External API using access token
-const refreshData = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { access_token, refresh_token } = req.cookies;
-
+const retrieveData = async (req: NextApiRequest, res: NextApiResponse) => {
   await externalApi
-    .post(
-      '/auth/retrieve',
-      {},
-      {
-        headers: { Authorization: access_token, cookie: refresh_token },
-      },
-    )
+    .post('/auth/retrieve')
     .then((response) => {
       const user = response.data.user;
       return res.status(response.status).send(user);
     })
     .catch((error) => {
-      return res.status(error.response.status).send(error.response.data.error);
+      if (error.response) return res.status(error.response.status).json(error.response.data);
+      return res.status(500).json('Internal server error');
     });
 };
 
-export default handleToken(refreshData);
+export default handleToken(retrieveData);

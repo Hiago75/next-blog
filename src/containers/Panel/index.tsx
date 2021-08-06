@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useContext } from 'react';
 
-import { Sidebar, BarChart, MediumPanel, SmallPanel } from '../../components';
+import { Sidebar, BarChart, MediumPanel, SmallPanel, Loading } from '../../components';
 import { AuthContext } from '../../contexts/AuthContext';
 import { IUser } from '../../interfaces/IUser';
 import { Container, Content, Panels } from './style';
@@ -11,7 +11,15 @@ export interface PanelProps {
 }
 
 export const Panel = () => {
-  const { user } = useContext(AuthContext);
+  const { user, isRetrievingUserData } = useContext(AuthContext);
+
+  {
+    isRetrievingUserData && (
+      <Loading>
+        <h1>Espera só um pouquinho enquanto procuro seus dados</h1>
+      </Loading>
+    );
+  }
 
   return (
     <Container>

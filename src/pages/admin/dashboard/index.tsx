@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import { destroyCookie } from 'nookies';
 import { Panel } from '../../../containers/Panel';
 
 export default function AdminHome() {
@@ -6,9 +7,10 @@ export default function AdminHome() {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { access_token } = ctx.req.cookies;
+  const { access_token, refresh_token } = ctx.req.cookies;
 
-  if (!access_token || access_token === undefined) {
+  if (!access_token && !refresh_token) {
+    destroyCookie(ctx, 'isAuthenticated');
     return {
       redirect: {
         destination: '/admin',

@@ -1,5 +1,6 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import cookie from 'cookie';
+
+import { NextApiRequest, NextApiResponse } from 'next';
 import { externalApi } from '../../config/api-config';
 
 //Request the server to auth the user and return a token, then create cookies with the access token and the refresh token.
@@ -14,14 +15,19 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     .then(async (response) => {
       const token = response.data.accessToken;
       const refreshToken = response.data.refreshToken;
+
+      const tokenExpiration = response.data.accessTokenExpiration;
       const refreshTokenExpiration = response.data.refreshTokenExpiration;
+
+      const formatedTokenExpiration = new Date(tokenExpiration * 1000);
+      const formatedRefreshTokenExpiration = new Date(refreshTokenExpiration * 1000);
 
       const cookies = [
         cookie.serialize('access_token', token, {
           httpOnly: true,
           secure: true,
-          maxAge: 60 * 60,
-          sameSite: 'strict',
+          expires: formatedTokenExpiration,
+          sameSite: 'lax',
           path: '/',
         }),
 
@@ -29,17 +35,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         cookie.serialize('refresh_token', refreshToken, {
           httpOnly: true,
           secure: true,
-          maxAge: refreshTokenExpiration,
-          sameSite: 'strict',
+          expires: formatedRefreshTokenExpiration,
+          sameSite: 'lax',
           path: '/',
         }),
       ];
 
       res.setHeader('Set-Cookie', cookies);
 
-      res.status(response.status).send('Access granted');
+      return res.status(response.status).json('Access granted');
     })
     .catch((error) => {
-      return res.status(error.response.status).send(error.response.data);
+      if (error.response) return res.status(error.response.status).json(error.response.data);
+      return res.status(500).json('Internal server error');
     });
 };

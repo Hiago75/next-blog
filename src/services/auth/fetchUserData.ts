@@ -1,13 +1,21 @@
 import { logoutUser } from '../../utils/logoutUser';
 import { internalApi } from '../../config/api-config';
+import { refreshUserToken } from './refreshUserToken';
 
 // Try to fetch user data from API
-export const getUserData = async () => {
+export const fetchUserData = async (refreshToken: boolean) => {
+  if (refreshToken) await refreshUserToken();
+
   return await internalApi
-    .post('/api/retrieve')
-    .then((response) => response.data)
+    .post('/api/retrieve', {
+      refreshToken: true,
+    })
+    .then((response) => {
+      console.log('tamo ai');
+      return response.data;
+    })
     .catch(() => {
       logoutUser();
-      return;
+      return { error: true, message: 'Não foi possível recuperar os dados do usuário' };
     });
 };
