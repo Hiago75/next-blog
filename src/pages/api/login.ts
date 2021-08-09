@@ -27,7 +27,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           httpOnly: true,
           secure: true,
           expires: formatedTokenExpiration,
-          sameSite: 'lax',
+          sameSite: 'strict',
           path: '/',
         }),
 
@@ -36,7 +36,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           httpOnly: true,
           secure: true,
           expires: formatedRefreshTokenExpiration,
-          sameSite: 'lax',
+          sameSite: 'strict',
           path: '/',
         }),
       ];

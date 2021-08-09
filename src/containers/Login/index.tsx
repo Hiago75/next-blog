@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Router from 'next/router';
 
 import React, { useContext, useEffect, useState } from 'react';
 import isEmail from 'validator/lib/isEmail';
@@ -7,12 +8,18 @@ import { FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
 import { AuthContext } from '../../contexts/AuthContext';
 import { Container, LoginForm, LoginBox, IconInput, ErrorField } from './style';
 
+//TODO: Clean this code
 export const Login = () => {
-  const { login, errors } = useContext(AuthContext);
+  const { login, errors, isAuthenticated, refreshUserData } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
+
+  if (isAuthenticated) {
+    refreshUserData(true);
+    Router.push('/admin/dashboard');
+  }
 
   //Set password value
   function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {

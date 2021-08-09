@@ -17,6 +17,7 @@ import { BigPanel } from './BigPanel';
 import { MediumPanel } from './MediumPanel';
 import { SmallPanel } from './SmallPanel';
 import { BarChart } from './BarChart';
+import { DashboardContainer } from './DashboardContainer';
 
 export {
   Header,
@@ -38,4 +39,5 @@ export {
   MediumPanel,
   SmallPanel,
   BarChart,
+  DashboardContainer,
 };

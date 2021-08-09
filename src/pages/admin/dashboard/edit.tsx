@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import { destroyCookie } from 'nookies';
 import { useContext } from 'react';
 import { DashboardContainer } from '../../../components';
-import { PanelHomePage } from '../../../containers';
+import { EditUser } from '../../../containers/';
 import { AuthContext } from '../../../contexts/AuthContext';
 
 export default function AdminHome() {
@@ -10,7 +10,7 @@ export default function AdminHome() {
 
   return (
     <DashboardContainer>
-      <PanelHomePage user={user} />
+      <EditUser user={user} />
     </DashboardContainer>
   );
 }

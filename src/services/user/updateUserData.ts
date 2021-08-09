@@ -1,14 +1,12 @@
 import { logoutUser } from '../../utils/logoutUser';
 import { internalApi } from '../../config/api-config';
-import { refreshUserToken } from './refreshUserToken';
 
 // Try to fetch user data from API
-export const fetchUserData = async (hasRefreshToken: boolean) => {
-  if (hasRefreshToken) await refreshUserToken();
-
+export const updateUserData = async ({ name, email }) => {
   return await internalApi
-    .post('/api/retrieve', {
-      refreshToken: true,
+    .put('/api/update', {
+      name,
+      email,
     })
     .then((response) => {
       return response.data;

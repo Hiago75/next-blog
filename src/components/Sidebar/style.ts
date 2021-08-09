@@ -28,6 +28,18 @@ export const UserPic = styled.span`
   border-radius: 50%;
   background-color: lightcyan;
   margin-bottom: 10px;
+
+  svg {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
 `;
 
 export const UserName = styled.h2`

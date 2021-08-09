@@ -5,6 +5,7 @@ import { loginRequest } from './auth/loginRequest';
 import { getExternalAPIClient } from './getExternalAPIClient';
 import { getInternalAPIClient } from './getInternalAPIClient';
 import { fetchUserData } from './auth/fetchUserData';
+import { updateUserData } from './user/updateUserData';
 
 export {
   countAllPosts,
@@ -14,4 +15,5 @@ export {
   getExternalAPIClient,
   getInternalAPIClient,
   fetchUserData,
+  updateUserData,
 };

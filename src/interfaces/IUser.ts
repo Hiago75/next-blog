@@ -1,5 +1,7 @@
 export interface IUser {
   name: string;
   email: string;
-  sub: string;
+  id: string;
+  profilePhotoUrl: string;
+  admin: boolean;
 }
