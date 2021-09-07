@@ -105,18 +105,21 @@ export const Login = () => {
   return (
     <Container>
       <LoginBox>
-        <Image src="/logo.svg" alt="Colster" width={180} height={80} />
+        <Image src="/logo.svg" alt="Colster" width={260} height={120} />
         {errors && (
           <ErrorField>
             <span>{errors}</span>
           </ErrorField>
         )}
+
         <LoginForm>
           <IconInput htmlFor="email" id="email">
+            E-mail
             <input onChange={handleEmailChange} type="text" placeholder="E-mail" />
             <FiMail color="#4877d3" size="18" />
           </IconInput>
           <IconInput htmlFor="password" id="password">
+            Senha
             <input
               onChange={handlePasswordChange}
               name="password"

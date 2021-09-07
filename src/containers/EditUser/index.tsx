@@ -22,6 +22,7 @@ import {
 import { FaUserAlt, FaPencilAlt } from 'react-icons/fa';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
+import { UserImage } from '../../components';
 
 interface IEditUserRequest {
   user: IUser;
@@ -62,13 +63,7 @@ export const EditUser = ({ user }: IEditUserRequest) => {
     <Container>
       <PageTitle>{isEditing ? 'Editar perfil' : 'Visualizar perfil'}</PageTitle>
       <UserPreview>
-        <UserPhoto>
-          {user?.profilePhotoUrl ? (
-            <img src={user.profilePhotoUrl}></img>
-          ) : (
-            <FaUserAlt color="lightcyan" size={230} />
-          )}
-        </UserPhoto>
+        <UserImage user={user} imageSize="230" iconSize={230}></UserImage>
         <PreviewData>
           <PreviewName>{user?.name}</PreviewName>
           <UserRole>{userRole}</UserRole>

@@ -8,6 +8,21 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     outline: none;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scrollbar-width: 10px;
+    scrollbar-color: #7D7D7D;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: none;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #7D7D7D;
   }
 
   html, body{

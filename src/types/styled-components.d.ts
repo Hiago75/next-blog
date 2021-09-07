@@ -24,12 +24,26 @@ declare module 'styled-components' {
         lightGray: string;
       };
       sizes: {
-        small: '17px';
-        regular: '25px;';
+        small: string;
+        regular: string;
       };
     };
 
     dashboard: {
+      dark: {
+        background: string;
+        primaryBlack: string;
+        lightBlue: string;
+        darkBlue: string;
+
+        font: {
+          colors: {
+            darkBlue: string;
+            white: string;
+            lightGray: string;
+          };
+        };
+      };
       colors: {
         black: string;
         lighterBlack: string;
@@ -39,6 +53,7 @@ declare module 'styled-components' {
       font: {
         colors: {
           lightBlue: string;
+          darkBlue: string;
           gray: string;
         };
 

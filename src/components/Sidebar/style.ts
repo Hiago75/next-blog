@@ -1,118 +1,69 @@
 import styled, { css } from 'styled-components';
-import { NavLink } from '../NavLink/';
 
 export const Container = styled.header`
   height: 100vh;
-  background-color: ${({ theme }) => theme.dashboard.colors.lighterBlack};
+  background-color: ${({ theme }) => theme.dashboard.dark.background};
   width: 250px;
-  text-align: center;
-  overflow-y: auto;
   position: fixed;
+
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    visibility: hidden;
+    transition: visibility 0.2s;
+  }
+
+  &:hover {
+    visibility: visible;
+  }
 `;
 
-export const Logo = styled.div`
+export const LogoBox = styled.div`
   text-align: center;
-  margin: 60px 0;
-`;
-
-export const User = styled.div`
+  margin: 20px 0 60px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: space-around;
 `;
 
-export const UserPic = styled.span`
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background-color: lightcyan;
-  margin-bottom: 10px;
-
-  svg {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-  }
-`;
-
-export const UserName = styled.h2`
+export const NavItems = styled.nav`
   ${({ theme }) => css`
-    color: ${theme.dashboard.font.colors.lightBlue};
-    font-size: ${theme.dashboard.font.sizes.small};
-  `}
-`;
+    li {
+      svg {
+        position: relative;
+        margin: 0 15px;
+        top: 3px;
+      }
 
-export const UserRole = styled.p`
-  ${({ theme }) => css`
-    color ${theme.dashboard.font.colors.gray};
-    letter-spacing: 1px;
-    padding: 3px 0;
-  `}
-`;
+      &.sidebar {
+        box-sizing: border-box;
+        padding: 15px;
+        margin: 20px 0;
 
-export const Navigation = styled.nav`
-  margin: 30px 0;
-`;
+        &.active,
+        &:hover {
+          border-left: 5px solid ${theme.dashboard.dark.lightBlue};
+          border-bottom: 0;
+          border-bottom: 0;
+          a {
+            color: #ffffff;
+          }
+        }
 
-export const SideNavLink = styled(NavLink)`
-  ${({ theme }) => css`
-    margin: 2px;
-    line-height: 35px;
-
-    a {
-      color: ${theme.dashboard.font.colors.lightBlue} !important;
-      width: 100%;
-      text-align: left;
-      margin: 0 10px;
-    }
-
-    &.active {
-      border: 0;
-      border-left: 2px solid ${theme.colors.mediumBlue};
-      font-weight: bold;
-      a {
-        color: #ffffff;
+        &.active {
+          font-weight: bold;
+        }
       }
     }
-
-    &:hover {
-      border: 0;
-      border-left: 2px solid ${theme.colors.mediumBlue};
-    }
-  `}
+  `};
 `;
 
-export const NavItem = styled.div`
-  ${({ theme }) => css`
-    text-align: left;
-    p {
-      width: 80%;
-      border-top: 2px solid ${theme.dashboard.font.colors.gray};
-      margin: 0 20px;
-      padding: 15px 0;
-      color: ${theme.dashboard.font.colors.gray};
-    }
-  `}
-`;
-
-export const LogOff = styled.button`
-  ${({ theme }) => css`
-    border: 0;
-    color: ${theme.dashboard.font.colors.gray};
-    font-size: 20px;
-    background-color: ${theme.dashboard.colors.black};
-    padding: 5px 30px;
+export const Logout = styled.div`
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  text-align: center;
+  svg {
     cursor: pointer;
-
-    &:hover{
-      color ${theme.dashboard.font.colors.lightBlue}
-    }
-  `}
+  }
 `;

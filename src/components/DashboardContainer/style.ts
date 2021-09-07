@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  background-color: ${({ theme }) => theme.dashboard.colors.darkGray};
+  background-color: ${({ theme }) => theme.dashboard.dark.primaryBlack};
 `;
 
 export const Content = styled.div`

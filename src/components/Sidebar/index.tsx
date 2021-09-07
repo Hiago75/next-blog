@@ -1,62 +1,55 @@
 import Image from 'next/image';
 
+import { logoutRequest } from '../../services/auth/logoutRequest';
+
+import { NavLink } from '..';
 import { IUser } from '../../interfaces/IUser';
-import { logoutUser } from '../../utils/logoutUser';
-
+import { IconContext } from 'react-icons';
+import { BiLogOut } from 'react-icons/bi';
 import {
-  Container,
-  Logo,
-  User,
-  UserPic,
-  UserName,
-  UserRole,
-  Navigation,
-  SideNavLink,
-  LogOff,
-  NavItem,
-} from './style';
+  AiOutlineHome,
+  AiOutlineUser,
+  AiOutlineUnorderedList,
+  AiOutlineFileAdd,
+} from 'react-icons/ai';
+import { Container, LogoBox, NavItems, Logout } from './style';
 
-import { FaUserAlt } from 'react-icons/fa';
-
-interface SidebarRequest {
-  user: IUser;
-}
-
-export const Sidebar = ({ user }: SidebarRequest) => {
+export const Sidebar = () => {
   function handleLogout() {
-    logoutUser();
+    logoutRequest();
   }
 
   return (
     <Container>
-      <Logo>
-        <Image src="/logo.svg" alt="Colster" width={180} height={80} />
-      </Logo>
+      <LogoBox>
+        <Image src="/logo.svg" alt="Colster" width={180} height={100} />
+      </LogoBox>
+      <IconContext.Provider value={{ size: '26', color: '#5A8BD6' }}>
+        <NavItems>
+          <ul>
+            <NavLink href="/admin/dashboard" exact className="sidebar">
+              <AiOutlineHome />
+              Página Inicial
+            </NavLink>
+            <NavLink href="/admin/profile" className="sidebar">
+              <AiOutlineUser />
+              Meu perfil
+            </NavLink>
+            <NavLink href="/admin/posts" className="sidebar">
+              <AiOutlineFileAdd />
+              Posts
+            </NavLink>
+            <NavLink href="/admin/categories" className="sidebar">
+              <AiOutlineUnorderedList />
+              Categorias
+            </NavLink>
+          </ul>
+        </NavItems>
 
-      <User>
-        <UserPic>
-          {user?.profilePhotoUrl ? (
-            <img src={user.profilePhotoUrl}></img>
-          ) : (
-            <FaUserAlt size="80" color={'#1c1f26'} />
-          )}
-        </UserPic>
-        <UserName>{user?.name}</UserName>
-        <UserRole>{user?.admin === true ? 'Desenvolvedor(a)' : 'Autor(a)'}</UserRole>
-      </User>
-
-      {/* TODO: Show more options when active */}
-      <Navigation>
-        <NavItem>
-          <SideNavLink href="/admin/dashboard" exact>
-            Painel de controle
-          </SideNavLink>
-          <p>Página inicial</p>
-        </NavItem>
-        <SideNavLink href="/admin/dashboard/edit">Editar perfil</SideNavLink>
-      </Navigation>
-
-      <LogOff onClick={handleLogout}>Sair</LogOff>
+        <Logout>
+          <BiLogOut size={32} color="#5A8BD6" onClick={handleLogout}></BiLogOut>
+        </Logout>
+      </IconContext.Provider>
     </Container>
   );
 };
