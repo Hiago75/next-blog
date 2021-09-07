@@ -27,7 +27,6 @@ export const theme: DefaultTheme = {
   dashboard: {
     dark: {
       background: '#1B1B1B',
-      bgBlue: '52617B',
       primaryBlack: '#101010',
       lightBlue: '#5A8BD6',
       darkBlue: '#091323',

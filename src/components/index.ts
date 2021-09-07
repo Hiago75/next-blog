@@ -13,10 +13,8 @@ import { Spotlight } from './Spotlight';
 import { CategoryCta } from './CategoryCta';
 import { Loading } from './Loading';
 import { Sidebar } from './Sidebar';
-import { BigPanel } from './BigPanel';
-import { MediumPanel } from './MediumPanel';
-import { SmallPanel } from './SmallPanel';
 import { BarChart } from './BarChart';
+import { BasePanel } from './BasePanel';
 import { DashboardContainer } from './DashboardContainer';
 import { UserImage } from './UserImage';
 import { PanelHeader } from './PanelHeader';
@@ -37,11 +35,9 @@ export {
   CategoryCta,
   Loading,
   Sidebar,
-  BigPanel,
-  MediumPanel,
-  SmallPanel,
   BarChart,
   DashboardContainer,
   UserImage,
-  PanelHeader
+  PanelHeader,
+  BasePanel,
 };
