@@ -32,7 +32,6 @@ declare module 'styled-components' {
     dashboard: {
       dark: {
         background: string;
-        bgBlue: string;
         primaryBlack: string;
         lightBlue: string;
         darkBlue: string;

@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { logoutRequest } from '../../services/auth/logoutRequest';
 
 import { NavLink } from '..';
-import { IUser } from '../../interfaces/IUser';
 import { IconContext } from 'react-icons';
 import { BiLogOut } from 'react-icons/bi';
 import {
@@ -31,15 +30,15 @@ export const Sidebar = () => {
               <AiOutlineHome />
               Página Inicial
             </NavLink>
-            <NavLink href="/admin/profile" className="sidebar">
+            <NavLink href="/admin/dashboard/profile" className="sidebar">
               <AiOutlineUser />
               Meu perfil
             </NavLink>
-            <NavLink href="/admin/posts" className="sidebar">
+            <NavLink href="/admin/dashboard/posts" className="sidebar">
               <AiOutlineFileAdd />
               Posts
             </NavLink>
-            <NavLink href="/admin/categories" className="sidebar">
+            <NavLink href="/admin/dashboard/categories" className="sidebar">
               <AiOutlineUnorderedList />
               Categorias
             </NavLink>

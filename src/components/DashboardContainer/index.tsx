@@ -1,15 +1,16 @@
 import Head from 'next/head';
 import { useContext } from 'react';
 
-import { Sidebar, Loading } from '..';
+import { Sidebar, Loading, PanelHeader } from '..';
 import { AuthContext } from '../../contexts/AuthContext';
 import { Container, Content } from './style';
 
 export interface PanelProps {
+  headerMessage?: string;
   children: React.ReactNode;
 }
 
-export const DashboardContainer = ({ children }: PanelProps) => {
+export const DashboardContainer = ({ headerMessage, children }: PanelProps) => {
   const { user, isRetrievingUserData, refreshUserData, isAuthenticated } = useContext(AuthContext);
 
   if (isAuthenticated && !user) {
@@ -28,8 +29,11 @@ export const DashboardContainer = ({ children }: PanelProps) => {
       <Head>
         <title>NextBlog | Admin</title>
       </Head>
-      <Sidebar user={user} />
-      <Content>{children}</Content>
+      <Sidebar />
+      <Content>
+        <PanelHeader message={headerMessage} user={user} />
+        {children}
+      </Content>
     </Container>
   );
 };

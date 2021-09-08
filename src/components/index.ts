@@ -18,6 +18,7 @@ import { BasePanel } from './BasePanel';
 import { DashboardContainer } from './DashboardContainer';
 import { UserImage } from './UserImage';
 import { PanelHeader } from './PanelHeader';
+import { PanelButton } from './PanelButton';
 
 export {
   Header,
@@ -40,4 +41,5 @@ export {
   UserImage,
   PanelHeader,
   BasePanel,
+  PanelButton,
 };

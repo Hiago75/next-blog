@@ -9,14 +9,15 @@ import { Container, UserInfo, Message, UserBar, NotificationBall, Notifications 
 import { IUser } from '../../interfaces/IUser';
 
 interface PanelHeaderProps {
+  message?: string;
   user: IUser;
 }
 
-export const PanelHeader = ({ user }: PanelHeaderProps) => {
+export const PanelHeader = ({ user, message }: PanelHeaderProps) => {
   return (
     <Container>
       <UserInfo>
-        <Message>{`Olá, ${user?.name.split(' ')[0]}!`}</Message>
+        <Message>{message || `Olá, ${user?.name.split(' ')[0]}!`}</Message>
       </UserInfo>
       <UserBar>
         <IconContext.Provider value={{ size: '24', color: '#F9FBFF' }}>

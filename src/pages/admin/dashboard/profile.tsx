@@ -9,7 +9,7 @@ export default function AdminHome() {
   const { user } = useContext(AuthContext);
 
   return (
-    <DashboardContainer>
+    <DashboardContainer headerMessage="Meu perfil">
       <EditUser user={user} />
     </DashboardContainer>
   );

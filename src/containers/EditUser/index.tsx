@@ -1,28 +1,22 @@
+import { useState, useContext } from 'react';
+
 import { IUser } from '../../interfaces/IUser';
 import {
   Container,
   UserPreview,
-  UserData,
   UserRole,
-  UserPhoto,
-  UserDataForm,
   PreviewData,
-  DataField,
-  Title,
-  Content,
-  FilledButton,
-  BaseButton,
   UserDataContainer,
-  ButtonBox,
-  FormDataField,
-  EditInput,
   PreviewName,
-  PageTitle,
+  UserDataLabel,
+  UserDataInput,
+  LabelTitle,
+  EditPassword,
+  FormWrapper,
 } from './style';
-import { FaUserAlt, FaPencilAlt } from 'react-icons/fa';
-import { useContext, useState } from 'react';
+
 import { AuthContext } from '../../contexts/AuthContext';
-import { UserImage } from '../../components';
+import { UserImage, PanelButton } from '../../components';
 
 interface IEditUserRequest {
   user: IUser;
@@ -30,102 +24,93 @@ interface IEditUserRequest {
 
 export const EditUser = ({ user }: IEditUserRequest) => {
   const { updateUser } = useContext(AuthContext);
-  const [isEditing, setIsEditing] = useState(false);
-  const [email, setEmail] = useState<string | undefined>();
-  const [name, setName] = useState<string | undefined>();
+  const [editingPassword, setEditingPassword] = useState(false);
   const userRole = user?.admin ? 'Desenvolvedor(a)' : 'Autor(a)';
 
-  function handleEditButton(event: React.MouseEvent<HTMLButtonElement>) {
+  function handleSubmit(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
-    setIsEditing(true);
+    alert('Feito');
   }
 
-  function handleEmailField(event: React.ChangeEvent<HTMLInputElement>) {
-    setEmail(event.target.value);
-  }
-
-  function handleNameField(event: React.ChangeEvent<HTMLInputElement>) {
-    setName(event.target.value);
-  }
-
-  function handleSaveButton(event: React.MouseEvent<HTMLButtonElement>) {
+  function togglePasswordEditor(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
-    setIsEditing(false);
-    updateUser({ email, name });
-  }
-
-  function handleCancelButton(event: React.MouseEvent<HTMLButtonElement>) {
-    event.preventDefault();
-    setIsEditing(false);
+    setEditingPassword(!editingPassword);
   }
 
   return (
     <Container>
-      <PageTitle>{isEditing ? 'Editar perfil' : 'Visualizar perfil'}</PageTitle>
-      <UserPreview>
-        <UserImage user={user} imageSize="230" iconSize={230}></UserImage>
-        <PreviewData>
-          <PreviewName>{user?.name}</PreviewName>
-          <UserRole>{userRole}</UserRole>
-        </PreviewData>
-      </UserPreview>
-      <UserDataContainer>
-        {isEditing ? (
-          <UserDataForm>
-            <FormDataField>
-              <Title>Nome:</Title>
-              <EditInput
-                name="username"
-                type="text"
-                placeholder="Nome"
-                defaultValue={user?.name}
-                onChange={handleNameField}
-              ></EditInput>
-            </FormDataField>
-            <FormDataField>
-              <Title>E-mail:</Title>
-              <EditInput
-                name="email"
-                type="email"
-                placeholder="E-mail"
-                defaultValue={user?.email}
-                onChange={handleEmailField}
-              ></EditInput>
-            </FormDataField>
-            <DataField className="full-size not-editable">
-              <Title>Cargo:</Title>
-              <Content className="full-size">{userRole}</Content>
-            </DataField>
-            <ButtonBox>
-              <FilledButton onClick={handleSaveButton}>Salvar</FilledButton>
-              <BaseButton onClick={handleCancelButton}>Cancelar</BaseButton>
-            </ButtonBox>
-          </UserDataForm>
-        ) : (
-          <UserData>
-            <DataField>
-              <Title>Nome:</Title>
-              <Content>{user?.name}</Content>
-            </DataField>
+      <FormWrapper>
+        <UserPreview>
+          <UserImage user={user} imageSize="200" iconSize={200}></UserImage>
+          <PreviewData>
+            <span />
+            <PreviewName>{user?.name}</PreviewName>
+            <UserRole>{userRole}</UserRole>
+          </PreviewData>
+        </UserPreview>
 
-            <DataField>
-              <Title>E-mail:</Title>
-              <Content>{user?.email}</Content>
-            </DataField>
+        {!editingPassword && (
+          <>
+            <UserDataContainer>
+              <UserDataLabel>
+                <LabelTitle>Nome</LabelTitle>
+                <UserDataInput value={user?.name} type="text"></UserDataInput>
+              </UserDataLabel>
+              <UserDataLabel>
+                <LabelTitle>E-mail</LabelTitle>
+                <UserDataInput value={user?.email} type="email"></UserDataInput>
+              </UserDataLabel>
+              <UserDataLabel>
+                <LabelTitle>Senha</LabelTitle>
+                <UserDataInput
+                  value="loremipsumdolor"
+                  readOnly
+                  className="userPassword"
+                  type="password"
+                ></UserDataInput>
+              </UserDataLabel>
 
-            <DataField>
-              <Title>Cargo:</Title>
-              <Content>{userRole}</Content>
-            </DataField>
+              <EditPassword type="button" onClick={togglePasswordEditor}>
+                Quero alterar minha senha
+              </EditPassword>
 
-            <ButtonBox>
-              <BaseButton onClick={handleEditButton}>
-                <FaPencilAlt /> Editar o perfil
-              </BaseButton>
-            </ButtonBox>
-          </UserData>
+              <PanelButton type="submit" onClick={handleSubmit}>
+                Atualizar
+              </PanelButton>
+            </UserDataContainer>
+          </>
         )}
-      </UserDataContainer>
+
+        {editingPassword && (
+          <UserDataContainer>
+            <UserDataLabel>
+              <LabelTitle>Senha atual</LabelTitle>
+              <UserDataInput
+                value="loremipsumdolor"
+                readOnly
+                className="userPassword"
+                type="password"
+              ></UserDataInput>
+            </UserDataLabel>
+            <UserDataLabel>
+              <LabelTitle>Nova senha</LabelTitle>
+              <UserDataInput type="password"></UserDataInput>
+            </UserDataLabel>
+            <UserDataLabel>
+              <LabelTitle>Confirmar senha</LabelTitle>
+              <UserDataInput type="password"></UserDataInput>
+            </UserDataLabel>
+
+            <EditPassword type="button" onClick={togglePasswordEditor}>
+              Quero alterar outros dados
+            </EditPassword>
+
+            <PanelButton type="submit" onClick={handleSubmit}>
+              Atualizar
+            </PanelButton>
+          </UserDataContainer>
+        )}
+      </FormWrapper>
     </Container>
   );
 };

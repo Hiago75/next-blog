@@ -1,52 +1,24 @@
 import styled, { css } from 'styled-components';
 
 export const Container = styled.section`
-  width: 100%;
-  height: 100%;
   display: flex;
+  width: 100%;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
 `;
 
-export const PageTitle = styled.h1`
-  margin: 20px 30px;
+export const FormWrapper = styled.div`
+  width: 600px;
 `;
 
-export const UserDataContainer = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  height: 70%;
-`;
-
-export const BaseButton = styled.button`
-  ${({ theme }) => css`
-    padding: 15px 0;
-    width: calc(50% - 20px);
-    margin: 0 10px;
-    background-color: ${theme.dashboard.colors.darkGray};
-    color: ${theme.colors.mediumBlue};
-    font-size: ${theme.dashboard.font.sizes.small};
-    border: 1px solid ${theme.colors.mediumBlue};
-    border-radius: 10px;
-    cursor: pointer;
-
-    svg {
-      position: relative;
-      top: 3px;
-      margin: 0 3px;
-    }
-  `}
-`;
-
+// Preview
 export const UserPreview = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  margin: 20px;
-  height: 30%;
+  justify-content: flex-start;
+  margin: 5px 0;
 `;
 
 export const PreviewData = styled.div`
@@ -54,97 +26,85 @@ export const PreviewData = styled.div`
   flex-direction: column;
   justify-content: center;
   margin: 0 50px;
+  position: relative;
+
+  span {
+    height: 35px;
+    width: 1px;
+    background-color: ${({ theme }) => theme.dashboard.dark.lightBlue};
+    display: inline-block;
+    position: absolute;
+    left: -10px;
+    bottom: 95px;
+  }
 `;
 
 export const PreviewName = styled.h2`
   font-weight: normal;
+  font-size: 26px;
 `;
 
 export const UserRole = styled.p`
   padding: 10px 0;
   color: ${({ theme }) => theme.font.colors.lightGray};
   font-weight: normal;
-  font-size: 15px;
-`;
-
-export const UserPhoto = styled.div`
-  svg,
-  img {
-    border-radius: 50%;
-    max-width: 240px;
-    width: 100%;
-  }
-`;
-
-export const UserData = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0 2%;
-`;
-
-export const UserDataForm = styled.form`
-  width: 100%;
-  padding: 0 2%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-`;
-
-export const DataField = styled.div`
-  margin: 15px 0;
-
-  &.full-size {
-    display: flex;
-    text-align: center;
-  }
-
-  &.not-editable {
-    cursor: not-allowed;
-  }
-`;
-
-export const Title = styled.h2`
   font-size: 17px;
-  font-weight: normal;
-  color: ${({ theme }) => theme.font.colors.lightGray};
 `;
 
-export const Content = styled.p`
-  margin: 8px 15px;
-  color: ${({ theme }) => theme.font.colors.light};
+// Form
 
-  &.full-size {
-    margin: 0;
+export const UserDataContainer = styled.form`
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-top: 10px;
+
+  & button[type='submit'] {
+    margin-top: 25px;
   }
 `;
 
-export const FormDataField = styled.div`
-  width: 45%;
-  margin: 8px 2%;
-`;
-
-export const ButtonBox = styled.div`
+export const UserDataLabel = styled.label`
   width: 100%;
-  text-align: center;
+  margin-top: 25px;
 `;
 
-export const FilledButton = styled(BaseButton)`
-  background-color: ${({ theme }) => theme.dashboard.colors.lightBlue};
-  color: ${({ theme }) => theme.font.colors.light};
+export const LabelTitle = styled.p`
+  color: ${({ theme }) => theme.dashboard.dark.font.colors.lightGray};
+  padding: 5px 0;
 `;
 
-export const EditInput = styled.input`
+export const UserDataInput = styled.input`
   ${({ theme }) => css`
     width: 100%;
-    height: 45px;
-    padding-left: 15px;
-    background-color: ${theme.dashboard.colors.darkGray};
-    color: ${theme.font.colors.light};
     border: 0;
-    border-bottom: 2px solid ${theme.dashboard.colors.lightBlue};
-    text-align: center;
-    font-size: 19px;
+    outline: 0;
+    color ${theme.dashboard.dark.font.colors.white};
+    background: ${theme.dashboard.dark.darkBlue};
+    height: 45px;
+    font-size: 18px;
+    padding-left: 15px;
   `}
+
+  &.userPassword {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+`;
+
+//Edit password;
+
+export const EditPassword = styled.button`
+  background: none;
+  border: 0;
+  outline: 0;
+  color: ${({ theme }) => theme.dashboard.dark.lightBlue};
+  margin: 4px 0;
+  cursor: pointer;
+  display: block;
+
+  &:hover {
+    box-shadow: 0 2px 0 -1px ${({ theme }) => theme.dashboard.dark.lightBlue};
+  }
 `;

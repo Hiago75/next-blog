@@ -1,8 +1,8 @@
 import { IUser } from '../../interfaces/IUser';
-import { PanelHeader, BarChart } from '../../components';
+import { BarChart, PanelButton } from '../../components';
 import { AiOutlineFileAdd } from 'react-icons/ai';
 
-import { ContentPanel, PanelTitle, Panels, Content, ContentField, PanelButton } from './style';
+import { ContentPanel, PanelTitle, Panels, Content, ContentField } from './style';
 
 interface PanelHomePageProps {
   user: IUser;
@@ -12,7 +12,6 @@ export const PanelHomePage = ({ user }: PanelHomePageProps) => {
   return (
     <>
       {/* TODO: Add real data */}
-      <PanelHeader user={user} />
       <Panels>
         <ContentPanel className="w80">
           <PanelTitle>Número de posts por usuário</PanelTitle>
@@ -50,8 +49,8 @@ export const PanelHomePage = ({ user }: PanelHomePageProps) => {
           <PanelTitle>Novo post</PanelTitle>
           <Content>
             <p>Quer criar uma nova publicação ?</p>
-            <PanelButton>Criar post</PanelButton>
           </Content>
+          <PanelButton>Criar post</PanelButton>
         </ContentPanel>
       </Panels>
     </>
