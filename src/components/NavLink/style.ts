@@ -8,9 +8,15 @@ export const NavItem = styled.li`
     align-items: center;
     cursor: pointer;
 
+    svg {
+      margin: 0 15px;
+    }
+
     a {
       color: ${theme.font.colors.lightGray};
+      position: relative;
       text-decoration: none;
+      top: 5px;
     }
 
     &.active {

@@ -30,10 +30,8 @@ export const DashboardContainer = ({ headerMessage, children }: PanelProps) => {
         <title>NextBlog | Admin</title>
       </Head>
       <Sidebar />
-      <Content>
-        <PanelHeader message={headerMessage} user={user} />
-        {children}
-      </Content>
+      <PanelHeader message={headerMessage} user={user} />
+      <Content>{children}</Content>
     </Container>
   );
 };

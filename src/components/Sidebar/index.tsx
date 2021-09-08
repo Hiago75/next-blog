@@ -7,10 +7,13 @@ import { IconContext } from 'react-icons';
 import { BiLogOut } from 'react-icons/bi';
 import {
   AiOutlineHome,
-  AiOutlineUser,
+  AiFillHome,
   AiOutlineUnorderedList,
+  AiOutlineOrderedList,
   AiOutlineFileAdd,
+  AiFillFileAdd,
 } from 'react-icons/ai';
+import { RiUserLine, RiUserFill } from 'react-icons/ri';
 import { Container, LogoBox, NavItems, Logout } from './style';
 
 export const Sidebar = () => {
@@ -26,20 +29,37 @@ export const Sidebar = () => {
       <IconContext.Provider value={{ size: '26', color: '#5A8BD6' }}>
         <NavItems>
           <ul>
-            <NavLink href="/admin/dashboard" exact className="sidebar">
-              <AiOutlineHome />
+            <NavLink
+              outlineIcon={<AiOutlineHome />}
+              filledIcon={<AiFillHome />}
+              href="/admin/dashboard"
+              exact
+              className="sidebar"
+            >
               Página Inicial
             </NavLink>
-            <NavLink href="/admin/dashboard/profile" className="sidebar">
-              <AiOutlineUser />
+            <NavLink
+              outlineIcon={<RiUserLine />}
+              filledIcon={<RiUserFill />}
+              href="/admin/dashboard/profile"
+              className="sidebar"
+            >
               Meu perfil
             </NavLink>
-            <NavLink href="/admin/dashboard/posts" className="sidebar">
-              <AiOutlineFileAdd />
+            <NavLink
+              outlineIcon={<AiOutlineFileAdd />}
+              filledIcon={<AiFillFileAdd />}
+              href="/admin/dashboard/posts"
+              className="sidebar"
+            >
               Posts
             </NavLink>
-            <NavLink href="/admin/dashboard/categories" className="sidebar">
-              <AiOutlineUnorderedList />
+            <NavLink
+              outlineIcon={<AiOutlineUnorderedList />}
+              filledIcon={<AiOutlineOrderedList />}
+              href="/admin/dashboard/categories"
+              className="sidebar"
+            >
               Categorias
             </NavLink>
           </ul>

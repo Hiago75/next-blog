@@ -1,11 +1,10 @@
 import styled, { css } from 'styled-components';
 
-export const Container = styled.header`
+export const Container = styled.aside`
   height: 100vh;
   background-color: ${({ theme }) => theme.dashboard.dark.background};
   width: 250px;
   position: fixed;
-
   overflow-y: auto;
 
   &::-webkit-scrollbar {
@@ -29,12 +28,6 @@ export const LogoBox = styled.div`
 export const NavItems = styled.nav`
   ${({ theme }) => css`
     li {
-      svg {
-        position: relative;
-        margin: 0 15px;
-        top: 3px;
-      }
-
       &.sidebar {
         box-sizing: border-box;
         padding: 15px;

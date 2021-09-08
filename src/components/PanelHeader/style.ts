@@ -4,8 +4,11 @@ export const Container = styled.header`
   display: flex;
   justify-content: space-between;
   padding: 10px 20px;
-  position: relative;
+  height: 70px;
+  position: fixed;
   align-items: center;
+  width: calc(100% - 250px);
+  background-color: ${({ theme }) => theme.dashboard.dark.primaryBlack};
 `;
 
 export const UserInfo = styled.div`
