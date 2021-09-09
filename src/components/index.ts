@@ -19,6 +19,7 @@ import { DashboardContainer } from './DashboardContainer';
 import { UserImage } from './UserImage';
 import { PanelHeader } from './PanelHeader';
 import { PanelButton } from './PanelButton';
+import { PanelPasswordInput } from './PanelPasswordInput';
 
 export {
   Header,
@@ -42,4 +43,5 @@ export {
   PanelHeader,
   BasePanel,
   PanelButton,
+  PanelPasswordInput,
 };

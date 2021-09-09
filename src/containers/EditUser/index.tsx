@@ -16,7 +16,7 @@ import {
 } from './style';
 
 import { AuthContext } from '../../contexts/AuthContext';
-import { UserImage, PanelButton } from '../../components';
+import { UserImage, PanelButton, PanelPasswordInput } from '../../components';
 
 interface IEditUserRequest {
   user: IUser;
@@ -29,6 +29,14 @@ export const EditUser = ({ user }: IEditUserRequest) => {
 
   function handleSubmit(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
+    alert('Feito');
+  }
+
+  function handleNewPasswordChange() {
+    alert('Feito');
+  }
+
+  function handleConfirmPasswordChange() {
     alert('Feito');
   }
 
@@ -92,14 +100,14 @@ export const EditUser = ({ user }: IEditUserRequest) => {
                 type="password"
               ></UserDataInput>
             </UserDataLabel>
-            <UserDataLabel>
-              <LabelTitle>Nova senha</LabelTitle>
-              <UserDataInput type="password"></UserDataInput>
-            </UserDataLabel>
-            <UserDataLabel>
-              <LabelTitle>Confirmar senha</LabelTitle>
-              <UserDataInput type="password"></UserDataInput>
-            </UserDataLabel>
+            <PanelPasswordInput
+              inputName="Nova senha"
+              onInputChange={handleNewPasswordChange}
+            ></PanelPasswordInput>
+            <PanelPasswordInput
+              inputName="Confirmar senha"
+              onInputChange={handleConfirmPasswordChange}
+            ></PanelPasswordInput>
 
             <EditPassword type="button" onClick={togglePasswordEditor}>
               Quero alterar outros dados
