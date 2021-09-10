@@ -4,8 +4,9 @@ import { PaginationPage } from './PaginationPage';
 import { Error404 } from './Error404';
 import { DashboardContainer } from '../components/DashboardContainer';
 import { Login } from './Login';
-import { EditUser } from './EditUser';
+import { EditUser } from './PanelEditUser';
 import { PanelHomePage } from './PanelHomePage';
+import { PanelCategories } from './PanelCategories';
 
 export {
   Post,
@@ -16,4 +17,5 @@ export {
   Login,
   EditUser,
   PanelHomePage,
+  PanelCategories,
 };

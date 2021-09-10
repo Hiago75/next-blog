@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { BasePanel } from '../../components';
 
 export const Panels = styled.div`
   display: flex;
@@ -12,19 +11,6 @@ export const Panels = styled.div`
 
 export const PanelTitle = styled.h2`
   font-size: 19px;
-`;
-
-export const ContentPanel = styled(BasePanel)`
-  &.w80 {
-    width: calc(80% - 20px);
-  }
-  &.w40 {
-    width: 40%;
-  }
-  &.w20 {
-    width: 20%;
-    text-align: center;
-  }
 `;
 
 export const Content = styled.div`

@@ -70,12 +70,6 @@ export const IconInput = styled.label`
       color: red;
     }
 
-    svg {
-      position: absolute;
-      left: 15px;
-      top: 42px;
-    }
-
     a {
       position: absolute;
       right: 50px;
@@ -89,7 +83,7 @@ export const IconInput = styled.label`
       outline: 0;
       width: 100%;
       height: 50px;
-      padding: 0 20px 0 45px;
+      padding-left: 10px;
       transition: border-color 300ms ease;
       background-color: ${theme.dashboard.dark.darkBlue};
       border: 2px solid ${theme.dashboard.dark.darkBlue};

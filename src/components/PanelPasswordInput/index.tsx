@@ -23,7 +23,6 @@ export const PanelPasswordInput = ({ inputName, onInputChange }: PanelPasswordIn
         name="password"
         type={passwordVisible ? 'text' : 'password'}
       />
-      <FiLock color="#4877d3" size="18" />
       <a onClick={handleVisible} id="toggleVisible">
         {passwordVisible ? (
           <FiEyeOff color="#4877d3" size="20" />

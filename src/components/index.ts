@@ -20,6 +20,8 @@ import { UserImage } from './UserImage';
 import { PanelHeader } from './PanelHeader';
 import { PanelButton } from './PanelButton';
 import { PanelPasswordInput } from './PanelPasswordInput';
+import { PanelBox } from './PanelBox';
+import { RingChart } from './RingChart';
 
 export {
   Header,
@@ -44,4 +46,6 @@ export {
   BasePanel,
   PanelButton,
   PanelPasswordInput,
+  PanelBox,
+  RingChart,
 };

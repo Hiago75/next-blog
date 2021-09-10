@@ -112,7 +112,6 @@ export const Login = () => {
           <IconInput htmlFor="email" id="email">
             E-mail
             <input onChange={handleEmailChange} type="text" />
-            <FiMail color="#4877d3" size="18" />
           </IconInput>
 
           <PanelPasswordInput inputName="Senha" onInputChange={handlePasswordChange} />
