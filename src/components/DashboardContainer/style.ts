@@ -7,6 +7,15 @@ export const Container = styled.div`
   & header {
     margin-left: 250px;
   }
+
+  & input {
+    background-color: ${({ theme }) => theme.dashboard.dark.darkBlue};
+    color: ${({ theme }) => theme.dashboard.dark.font.colors.white};
+    padding-left: 10px;
+    border: none;
+    height: 35px;
+    border-radius: 10px;
+  }
 `;
 
 export const Content = styled.div`

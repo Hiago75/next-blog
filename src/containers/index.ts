@@ -7,6 +7,7 @@ import { Login } from './Login';
 import { EditUser } from './PanelEditUser';
 import { PanelHomePage } from './PanelHomePage';
 import { PanelCategories } from './PanelCategories';
+import { PanelPosts } from './PanelPosts';
 
 export {
   Post,
@@ -18,4 +19,5 @@ export {
   EditUser,
   PanelHomePage,
   PanelCategories,
+  PanelPosts,
 };

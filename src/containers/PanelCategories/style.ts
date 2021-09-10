@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { BasePanel } from '../../components';
 
 export const Container = styled.section`
   display: flex;
