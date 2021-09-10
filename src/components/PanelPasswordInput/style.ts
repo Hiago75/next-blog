@@ -7,7 +7,7 @@ export const IconInput = styled.label`
     color: ${theme.dashboard.dark.font.colors.lightGray};
     font-size: 16px;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 25px;
 
     & p.error-message {
       color: red;
@@ -16,7 +16,7 @@ export const IconInput = styled.label`
     svg {
       position: absolute;
       left: 15px;
-      top: 42px;
+      top: 39px;
     }
 
     a {
@@ -27,7 +27,7 @@ export const IconInput = styled.label`
     }
 
     input {
-      margin: 10px 0;
+      margin: 5px 0;
       border-radius: 10px;
       outline: 0;
       width: 100%;

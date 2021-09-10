@@ -1,8 +1,8 @@
 import { IUser } from '../../interfaces/IUser';
-import { BarChart, PanelButton, PanelBox } from '../../components';
+import { BarChart, PanelBox } from '../../components';
 import { AiOutlineFileAdd } from 'react-icons/ai';
 
-import { PanelTitle, Panels, Content, ContentField } from './style';
+import { PanelTitle, Panels, Content, ContentField, LinkButton } from './style';
 
 interface PanelHomePageProps {
   user: IUser;
@@ -40,7 +40,7 @@ export const PanelHomePage = ({ user }: PanelHomePageProps) => {
           <Content>
             <p>Quer criar uma nova publicação ?</p>
           </Content>
-          <PanelButton>Criar post</PanelButton>
+          <LinkButton href="dashboard/posts">Criar post</LinkButton>
         </PanelBox>
       </Panels>
     </>

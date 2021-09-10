@@ -24,7 +24,9 @@ export const Sidebar = () => {
   return (
     <Container>
       <LogoBox>
-        <Image src="/logo.svg" alt="Colster" width={180} height={100} />
+        <img className="full-logo" src="/logo.svg" alt="Logo da Colster" width={180} height={100} />
+
+        <img className="min-logo" src="/colster-reduzido.svg" alt="Logo da Colster reduzida" />
       </LogoBox>
       <IconContext.Provider value={{ size: '26', color: '#5A8BD6' }}>
         <NavItems>

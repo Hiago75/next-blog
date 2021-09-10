@@ -5,7 +5,12 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.dashboard.dark.primaryBlack};
 
   & header {
-    margin-left: 250px;
+    margin-left: 190px;
+
+    @media (max-width: 900px) {
+      margin-left: 0;
+      width: 100%;
+    }
   }
 
   & input {
@@ -13,15 +18,19 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.dashboard.dark.font.colors.white};
     padding-left: 10px;
     border: none;
-    height: 35px;
+    height: 50px;
     border-radius: 10px;
   }
 `;
 
 export const Content = styled.div`
-  width: 100%;
+  width: calc(100% - 250px);
   min-height: calc(100vh - 70px);
+  margin-left: 190px;
   margin-top: 70px;
-  margin-left: 250px;
   overflow-y: auto;
+
+  @media (max-width: 900px) {
+    margin-left: 0;
+  }
 `;

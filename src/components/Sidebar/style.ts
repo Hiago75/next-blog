@@ -1,28 +1,62 @@
 import styled, { css } from 'styled-components';
-
-export const Container = styled.aside`
-  height: 100vh;
-  background-color: ${({ theme }) => theme.dashboard.dark.background};
-  width: 250px;
-  position: fixed;
-  overflow-y: auto;
-
-  &::-webkit-scrollbar {
-    visibility: hidden;
-    transition: visibility 0.2s;
-  }
-
-  &:hover {
-    visibility: visible;
-  }
-`;
+import { Content } from '../DashboardContainer/style';
 
 export const LogoBox = styled.div`
   text-align: center;
   margin: 20px 0 60px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+
+  & img.min-logo {
+    margin: 25px 0;
+  }
+`;
+
+export const Container = styled.aside`
+  height: 100vh;
+  background-color: ${({ theme }) => theme.dashboard.dark.background};
+  width: 90px;
+  transition: width 0.2s ease-in-out;
+  position: fixed;
+  overflow-y: auto;
+  z-index: 2;
+
+  & a {
+    display: none;
+  }
+
+  ${LogoBox} {
+    & img.full-logo {
+      display: none !important;
+    }
+
+    & img.min-logo {
+      display: inline-block !important;
+    }
+  }
+
+  &:hover {
+    width: 205px;
+
+    & a {
+      display: block;
+    }
+
+    ${LogoBox} {
+      & img.full-logo {
+        display: inline-block !important;
+      }
+
+      & img.min-logo {
+        display: none !important;
+      }
+    }
+  }
+
+  @media (max-width: 900px) {
+    display: none;
+  }
 `;
 
 export const NavItems = styled.nav`
