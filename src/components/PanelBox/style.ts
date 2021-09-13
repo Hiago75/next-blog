@@ -9,15 +9,26 @@ export const ContentPanel = styled(BasePanel)`
   &.w80 {
     width: calc(80% - 20px);
   }
+  &.w50 {
+    width: 50%;
+  }
   &.w40 {
     width: 40%;
+  }
+  &.w20 {
+    width: 20%;
   }
   &.w30 {
     width: 30%;
   }
-  &.w20 {
-    width: 20%;
+
+  &.center {
     text-align: center;
+  }
+
+  @media (max-width: 900px) {
+    width: 100% !important;
+    margin: 0;
   }
 `;
 
@@ -35,5 +46,6 @@ export const Content = styled.div`
   &.flexContent {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
 `;

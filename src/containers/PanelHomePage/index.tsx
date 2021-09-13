@@ -17,11 +17,11 @@ export const PanelHomePage = ({ user }: PanelHomePageProps) => {
           <BarChart></BarChart>
         </PanelBox>
 
-        <PanelBox className="w20" panelTitle="Total de posts">
+        <PanelBox className="w20 center" panelTitle="Total de posts">
           <h1>4</h1>
         </PanelBox>
 
-        <PanelBox className="w40" panelTitle="Meus posts" contentClassName="flexContent">
+        <PanelBox className="w50" panelTitle="Meus posts" contentClassName="flexContent">
           <ContentField>
             <p>Categorias:</p>
             <h3>Python</h3>
@@ -34,7 +34,7 @@ export const PanelHomePage = ({ user }: PanelHomePageProps) => {
           </ContentField>
         </PanelBox>
 
-        <PanelBox className="w20">
+        <PanelBox className="w30 center">
           <AiOutlineFileAdd size={50} color="#5A8BD6" />
           <PanelTitle>Novo post</PanelTitle>
           <Content>

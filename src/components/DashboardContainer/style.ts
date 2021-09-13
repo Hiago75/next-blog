@@ -31,6 +31,9 @@ export const Content = styled.div`
   overflow-y: auto;
 
   @media (max-width: 900px) {
+    width: 100%;
     margin-left: 0;
+
+    margin: 70px 2% 0 2%;
   }
 `;

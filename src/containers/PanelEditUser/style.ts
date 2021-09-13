@@ -19,6 +19,10 @@ export const UserPreview = styled.div`
   flex-wrap: wrap;
   justify-content: flex-start;
   margin: 5px 0;
+
+  @media (max-width: 900px) {
+    justify-content: center;
+  }
 `;
 
 export const PreviewData = styled.div`
@@ -36,6 +40,10 @@ export const PreviewData = styled.div`
     position: absolute;
     left: -10px;
     bottom: 95px;
+
+    @media (max-width: 900px) {
+      display: none;
+    }
   }
 `;
 
@@ -62,6 +70,10 @@ export const UserDataContainer = styled.form`
 
   & button[type='submit'] {
     margin-top: 25px;
+  }
+
+  @media (max-width: 900px) {
+    margin-bottom: 25px;
   }
 `;
 

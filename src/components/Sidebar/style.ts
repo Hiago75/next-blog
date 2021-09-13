@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { Content } from '../DashboardContainer/style';
 
 export const LogoBox = styled.div`
   text-align: center;
@@ -20,7 +19,7 @@ export const Container = styled.aside`
   transition: width 0.2s ease-in-out;
   position: fixed;
   overflow-y: auto;
-  z-index: 2;
+  z-index: 1;
 
   & a {
     display: none;
@@ -55,7 +54,27 @@ export const Container = styled.aside`
   }
 
   @media (max-width: 900px) {
-    display: none;
+    width: 0;
+
+    &.menu-open {
+      width: 100%;
+
+      & a {
+        display: block;
+      }
+
+      ${LogoBox} {
+        display: flex;
+        justify-content: space-around;
+        & img.full-logo {
+          display: inline-block !important;
+        }
+
+        & img.min-logo {
+          display: none !important;
+        }
+      }
+    }
   }
 `;
 

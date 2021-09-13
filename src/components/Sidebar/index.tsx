@@ -1,8 +1,6 @@
-import Image from 'next/image';
-
 import { logoutRequest } from '../../services/auth/logoutRequest';
 
-import { NavLink } from '..';
+import { NavLink, MenuController } from '..';
 import { IconContext } from 'react-icons';
 import { BiLogOut } from 'react-icons/bi';
 import {
@@ -15,16 +13,24 @@ import {
 } from 'react-icons/ai';
 import { RiUserLine, RiUserFill } from 'react-icons/ri';
 import { Container, LogoBox, NavItems, Logout } from './style';
+import { Dispatch, SetStateAction } from 'hoist-non-react-statics/node_modules/@types/react';
 
-export const Sidebar = () => {
+interface SidebarRequest {
+  menuOpen: boolean;
+  setMenuOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+export const Sidebar = ({ menuOpen, setMenuOpen }: SidebarRequest) => {
   function handleLogout() {
     logoutRequest();
   }
 
   return (
-    <Container>
+    <Container className={menuOpen ? ' menu-open' : ''}>
       <LogoBox>
         <img className="full-logo" src="/logo.svg" alt="Logo da Colster" width={180} height={100} />
+
+        {menuOpen && <MenuController setMenuOpen={setMenuOpen} menuOpen={menuOpen} />}
 
         <img className="min-logo" src="/colster-reduzido.svg" alt="Logo da Colster reduzida" />
       </LogoBox>

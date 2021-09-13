@@ -14,6 +14,10 @@ export const Container = styled.header`
 export const UserInfo = styled.div`
   display: flex;
   align-items: center;
+
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
 `;
 
 export const Notifications = styled.span`

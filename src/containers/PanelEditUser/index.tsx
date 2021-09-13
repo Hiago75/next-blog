@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 
 import { IUser } from '../../interfaces/IUser';
 import {
@@ -15,7 +15,6 @@ import {
   FormWrapper,
 } from './style';
 
-import { AuthContext } from '../../contexts/AuthContext';
 import { UserImage, PanelButton, PanelPasswordInput } from '../../components';
 
 interface IEditUserRequest {
@@ -23,7 +22,6 @@ interface IEditUserRequest {
 }
 
 export const EditUser = ({ user }: IEditUserRequest) => {
-  const { updateUser } = useContext(AuthContext);
   const [editingPassword, setEditingPassword] = useState(false);
   const userRole = user?.admin ? 'Desenvolvedor(a)' : 'Autor(a)';
 
