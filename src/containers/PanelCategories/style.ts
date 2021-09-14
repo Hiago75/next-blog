@@ -15,7 +15,7 @@ export const CategoryBox = styled.div`
 `;
 
 export const PanelInput = styled.input`
-  background: ${({ theme }) => theme.dashboard.dark.primaryBlack} !important;
+  background: ${({ theme }) => theme.colors.mainBackground} !important;
   width: 100%;
   margin: 35px 0;
 `;

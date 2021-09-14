@@ -21,9 +21,11 @@ export const NavLink = ({
   outlineIcon,
 }: NavLinkProps) => {
   const { asPath } = useRouter();
+  // Verify if the url matches with the actual one
   const isActive = exact ? asPath === href : asPath.startsWith(href);
   let styleClass = className;
 
+  // Add the active class to the list if the "isActive" const is true;
   isActive ? (styleClass += ' active') : '';
 
   return (

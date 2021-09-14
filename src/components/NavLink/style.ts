@@ -13,25 +13,25 @@ export const NavItem = styled.li`
     }
 
     a {
-      color: ${theme.font.colors.lightGray};
+      color: ${theme.fonts.smothFont};
       position: relative;
       text-decoration: none;
       top: 5px;
     }
 
     &.active {
-      border-bottom: 1px solid ${theme.colors.mediumBlue};
+      border-bottom: 1px solid ${theme.colors.contrastColor};
       font-weight: bold;
       a {
-        color: #ffffff;
+        color: ${({ theme }) => theme.fonts.smothFont};
       }
     }
 
     &:hover {
-      border-bottom: 1px solid ${theme.colors.mediumBlue};
+      border-bottom: 1px solid ${theme.colors.contrastBackground};
 
       a {
-        color: #ffffff;
+        color: ${({ theme }) => theme.fonts.smothFont};
       }
     }
   `}

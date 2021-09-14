@@ -25,19 +25,23 @@ export const EditUser = ({ user }: IEditUserRequest) => {
   const [editingPassword, setEditingPassword] = useState(false);
   const userRole = user?.admin ? 'Desenvolvedor(a)' : 'Autor(a)';
 
+  // Submit the form
   function handleSubmit(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
-    alert('Feito');
+    console.log('Feito');
   }
 
+  // Handle the password field changes
   function handleNewPasswordChange() {
-    alert('Feito');
+    console.log('Feito');
   }
 
+  // Handle the confirm password field changes
   function handleConfirmPasswordChange() {
-    alert('Feito');
+    console.log('Feito');
   }
 
+  // Toggle the form from the normal data to password
   function togglePasswordEditor(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     setEditingPassword(!editingPassword);

@@ -19,10 +19,6 @@ export const Content = styled.div`
     font-size: 55px;
   }
 
-  p {
-    color: ${({ theme }) => theme.dashboard.dark.font.colors.lightGray};
-  }
-
   &.flexContent {
     display: flex;
     justify-content: space-between;
@@ -36,12 +32,12 @@ export const ContentField = styled.div`
   h3 {
     font-weight: normal;
     font-size: 18px;
-    color: ${({ theme }) => theme.dashboard.dark.font.colors.white};
+    color: ${({ theme }) => theme.fonts.primaryFont};
   }
 `;
 
 export const LinkButton = styled.a`
-  background-color: ${({ theme }) => theme.dashboard.dark.lightBlue};
+  background-color: ${({ theme }) => theme.colors.contrastColor};
   border: 0;
   outline: 0;
   padding: 8px 15px;
@@ -50,6 +46,6 @@ export const LinkButton = styled.a`
   margin-top: 10px;
   cursor: pointer;
   font-weight: bolder;
-  color: ${({ theme }) => theme.dashboard.dark.font.colors.white};
+  color: ${({ theme }) => theme.fonts.contrastFont};
   text-decoration: none;
 `;

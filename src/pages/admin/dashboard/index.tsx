@@ -4,12 +4,13 @@ import { useContext } from 'react';
 import { DashboardContainer } from '../../../components';
 import { PanelHomePage } from '../../../containers';
 import { AuthContext } from '../../../contexts/AuthContext';
+import { IContainerRequest } from '../../../interfaces/IContainerRequest';
 
-export default function AdminHome() {
+export default function AdminHome({ theme, toggleTheme }: IContainerRequest) {
   const { user } = useContext(AuthContext);
 
   return (
-    <DashboardContainer>
+    <DashboardContainer toggleTheme={toggleTheme} theme={theme}>
       <PanelHomePage user={user} />
     </DashboardContainer>
   );

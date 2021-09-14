@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const AdminButton = styled.button`
-  background-color: ${({ theme }) => theme.dashboard.dark.lightBlue};
+  background-color: ${({ theme }) => theme.colors.contrastColor};
   border: 0;
   outline: 0;
   padding: 8px 15px;
@@ -10,10 +10,10 @@ export const AdminButton = styled.button`
   margin-top: 10px;
   cursor: pointer;
   font-weight: bolder;
-  color: ${({ theme }) => theme.dashboard.dark.font.colors.white};
+  color: ${({ theme }) => theme.fonts.contrastFont};
 
   & a {
-    color: ${({ theme }) => theme.dashboard.dark.font.colors.white};
+    color: ${({ theme }) => theme.fonts.contrastFont};
     text-decoration: none;
   }
 `;

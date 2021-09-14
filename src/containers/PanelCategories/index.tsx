@@ -5,7 +5,7 @@ export const PanelCategories = () => {
   return (
     <Container>
       <PanelBox className="w50" panelTitle="Criar nova categoria">
-        <PanelInput type="text" />
+        <PanelInput placeholder="Categoria..." type="text" />
         <PanelButton>Criar categoria</PanelButton>
       </PanelBox>
       <PanelBox className="w30" panelTitle="Categorias">

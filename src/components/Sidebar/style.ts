@@ -17,7 +17,7 @@ export const LogoBox = styled.div`
 
 export const Container = styled.aside`
   height: 100vh;
-  background-color: ${({ theme }) => theme.dashboard.dark.background};
+  background-color: ${({ theme }) => theme.colors.alternativeBackground};
   width: 90px;
   transition: width 0.2s ease-in-out;
   position: fixed;
@@ -92,12 +92,9 @@ export const NavItems = styled.nav`
 
         &.active,
         &:hover {
-          border-left: 5px solid ${theme.dashboard.dark.lightBlue};
+          border-left: 5px solid ${theme.colors.contrastColor};
           border-bottom: 0;
           border-bottom: 0;
-          a {
-            color: #ffffff;
-          }
         }
 
         &.active {

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  background-color: ${({ theme }) => theme.dashboard.dark.primaryBlack};
+  background-color: ${({ theme }) => theme.colors.mainBackground};
 
   & header {
     margin-left: 190px;
@@ -14,8 +14,8 @@ export const Container = styled.div`
   }
 
   & input {
-    background-color: ${({ theme }) => theme.dashboard.dark.darkBlue};
-    color: ${({ theme }) => theme.dashboard.dark.font.colors.white};
+    background-color: ${({ theme }) => theme.colors.contrastBackground};
+    color: ${({ theme }) => theme.fonts.primaryFont};
     padding-left: 10px;
     border: none;
     height: 50px;

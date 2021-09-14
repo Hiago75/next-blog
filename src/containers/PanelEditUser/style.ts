@@ -35,7 +35,7 @@ export const PreviewData = styled.div`
   span {
     height: 35px;
     width: 1px;
-    background-color: ${({ theme }) => theme.dashboard.dark.lightBlue};
+    background-color: ${({ theme }) => theme.colors.contrastColor};
     display: inline-block;
     position: absolute;
     left: -10px;
@@ -54,7 +54,7 @@ export const PreviewName = styled.h2`
 
 export const UserRole = styled.p`
   padding: 10px 0;
-  color: ${({ theme }) => theme.font.colors.lightGray};
+  color: ${({ theme }) => theme.fonts.smothFont};
   font-weight: normal;
   font-size: 17px;
 `;
@@ -83,7 +83,7 @@ export const UserDataLabel = styled.label`
 `;
 
 export const LabelTitle = styled.p`
-  color: ${({ theme }) => theme.dashboard.dark.font.colors.lightGray};
+  color: ${({ theme }) => theme.fonts.smothFont};
   padding: 5px 0;
 `;
 
@@ -92,8 +92,8 @@ export const UserDataInput = styled.input`
     width: 100%;
     border: 0;
     outline: 0;
-    color ${theme.dashboard.dark.font.colors.white};
-    background: ${theme.dashboard.dark.darkBlue};
+    color ${theme.fonts.primaryFont};
+    background: ${theme.colors.contrastBackground};
     height: 45px;
     font-size: 18px;
     padding-left: 15px;
@@ -111,12 +111,12 @@ export const EditPassword = styled.button`
   background: none;
   border: 0;
   outline: 0;
-  color: ${({ theme }) => theme.dashboard.dark.lightBlue};
+  color: ${({ theme }) => theme.colors.contrastColor};
   margin: 4px 0;
   cursor: pointer;
   display: block;
 
   &:hover {
-    box-shadow: 0 2px 0 -1px ${({ theme }) => theme.dashboard.dark.lightBlue};
+    box-shadow: 0 2px 0 -1px ${({ theme }) => theme.colors.contrastColor};
   }
 `;

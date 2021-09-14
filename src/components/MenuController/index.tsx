@@ -7,6 +7,7 @@ interface MenuControllerRequest {
 }
 
 export const MenuController = ({ setMenuOpen, menuOpen }: MenuControllerRequest) => {
+  // Toggle menu state
   function handleMenuClick() {
     setMenuOpen(!menuOpen);
   }

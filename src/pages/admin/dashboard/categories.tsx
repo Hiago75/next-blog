@@ -3,10 +3,11 @@ import { destroyCookie } from 'nookies';
 import { useContext } from 'react';
 import { DashboardContainer } from '../../../components';
 import { PanelCategories } from '../../../containers';
+import { IContainerRequest } from '../../../interfaces/IContainerRequest';
 
-export default function AdminCategories() {
+export default function AdminCategories({ theme, toggleTheme }: IContainerRequest) {
   return (
-    <DashboardContainer>
+    <DashboardContainer toggleTheme={toggleTheme} theme={theme}>
       <PanelCategories />
     </DashboardContainer>
   );

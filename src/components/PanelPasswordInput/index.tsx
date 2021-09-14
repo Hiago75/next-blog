@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { IconInput } from './style';
 
 interface PanelPasswordInputRequest {
@@ -24,6 +24,7 @@ export const PanelPasswordInput = ({ inputName, onInputChange }: PanelPasswordIn
         type={passwordVisible ? 'text' : 'password'}
       />
       <a onClick={handleVisible} id="toggleVisible">
+        {/* Change the icon depending on passwordVisible state */}
         {passwordVisible ? (
           <FiEyeOff color="#4877d3" size="20" />
         ) : (

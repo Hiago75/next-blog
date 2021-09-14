@@ -7,8 +7,8 @@ export const Container = styled.header`
   height: 70px;
   position: fixed;
   align-items: center;
-  width: calc(100% - 250px);
-  background-color: ${({ theme }) => theme.dashboard.dark.primaryBlack};
+  width: calc(100% - 190px);
+  background-color: ${({ theme }) => theme.colors.mainBackground};
 `;
 
 export const UserInfo = styled.div`
@@ -25,8 +25,8 @@ export const Notifications = styled.span`
 `;
 
 export const NotificationBall = styled.span`
-  background-color: ${({ theme }) => theme.dashboard.dark.background};
-  color: ${({ theme }) => theme.dashboard.dark.font.colors.white};
+  background-color: ${({ theme }) => theme.colors.alternativeBackground};
+  color: ${({ theme }) => theme.fonts.primaryFont};
   display: inline-block;
   height: 15px;
   width: 15px;
@@ -41,7 +41,7 @@ export const Message = styled.p`
   padding: 0 30px;
   font-weight: bolder;
   font-size: 26px;
-  color: ${({ theme }) => theme.dashboard.dark.font.colors.white};
+  color: ${({ theme }) => theme.fonts.primaryFont};
 `;
 
 export const UserBar = styled.div`

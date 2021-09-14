@@ -22,6 +22,7 @@ interface SidebarRequest {
 }
 
 export const Sidebar = ({ menuOpen, setMenuOpen }: SidebarRequest) => {
+  //Logout the user
   function handleLogout() {
     logoutRequest();
   }
@@ -39,6 +40,7 @@ export const Sidebar = ({ menuOpen, setMenuOpen }: SidebarRequest) => {
           />
         </Link>
 
+        {/* Show the menu icon if the mobile menu is open */}
         {menuOpen && <MenuController setMenuOpen={setMenuOpen} menuOpen={menuOpen} />}
 
         <Link href="/admin/dashboard">

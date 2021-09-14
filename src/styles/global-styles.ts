@@ -31,12 +31,11 @@ export const GlobalStyles = createGlobalStyle`
 
   body{
     background: ${theme.colors.gradients.purpleToGray};
-    color: ${theme.font.colors.lightest};
   }
 
   select{
     background-color: #a0aaba;
-    color: ${({ theme }) => theme.dashboard.dark.font.colors.darkBlue};
+    color: ${({ theme }) => theme.fonts.contrastFont};
     font-size: 16px;
     border-radius: 10px;
     border: none;
@@ -56,20 +55,20 @@ export const GlobalStyles = createGlobalStyle`
 export const BallDivider = styled.span`
   width: 5px;
   height: 5px;
-  background-color: ${({ theme }) => theme.font.colors.lightest};
+  background-color: ${({ theme }) => theme.fonts.primaryFont};
   border-radius: 50%;
   margin: 3px 8px;
   display: inline-block;
 `;
 
 export const Category = styled.span`
-  background-color: ${({ theme }) => theme.colors.mediumBlue};
+  background-color: ${({ theme }) => theme.colors.contrastColor};
   padding: 1px 4px;
   border-radius: 5px;
   display: inline-block;
 
   a {
-    color: ${({ theme }) => theme.font.colors.lightest} !important;
+    color: ${({ theme }) => theme.fonts.primaryFont} !important;
     font-size: 15px;
   }
 `;

@@ -8,17 +8,22 @@ import { Container, Content } from './style';
 export interface PanelProps {
   headerMessage?: string;
   children: React.ReactNode;
+  theme: string;
+  toggleTheme: () => void;
 }
 
-export const DashboardContainer = ({ headerMessage, children }: PanelProps) => {
+export const DashboardContainer = ({ headerMessage, children, theme, toggleTheme }: PanelProps) => {
   const { user, isRetrievingUserData, refreshUserData, isAuthenticated } = useContext(AuthContext);
 
+  // Mobile menu state
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // refresh user data if this one is authenticated but has no data stored
   if (isAuthenticated && !user) {
     refreshUserData(true);
   }
 
+  // Set the loading screen when retrieving user data
   if (isRetrievingUserData)
     return (
       <Loading>
@@ -37,6 +42,8 @@ export const DashboardContainer = ({ headerMessage, children }: PanelProps) => {
         setMenuOpen={setMenuOpen}
         message={headerMessage}
         user={user}
+        toggleTheme={toggleTheme}
+        theme={theme}
       />
       <Content className="menu-open">{children}</Content>
     </Container>

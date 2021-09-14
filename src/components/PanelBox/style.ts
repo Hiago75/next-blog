@@ -3,6 +3,7 @@ import { BasePanel } from '..';
 
 export const PanelTitle = styled.h2`
   font-size: 19px;
+  color: ${({ theme }) => theme.fonts.primaryFont};
 `;
 
 export const ContentPanel = styled(BasePanel)`
@@ -35,12 +36,17 @@ export const ContentPanel = styled(BasePanel)`
 export const Content = styled.div`
   padding: 15px 0;
 
+  h2 {
+    color: ${({ theme }) => theme.fonts.primaryFont};
+  }
+
   h1 {
+    color: ${({ theme }) => theme.fonts.primaryFont};
     font-size: 55px;
   }
 
   p {
-    color: ${({ theme }) => theme.dashboard.dark.font.colors.lightGray};
+    color: ${({ theme }) => theme.fonts.smothFont};
   }
 
   &.flexContent {

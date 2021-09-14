@@ -17,10 +17,7 @@ export const PanelPosts = () => {
     <Container>
       <FormContainer>
         <TitleInput type="text" placeholder="Título"></TitleInput>
-        <SelectInput>
-          <option value="none" selected disabled hidden>
-            Categoria
-          </option>
+        <SelectInput defaultValue="Categoria">
           <option value="typescript">TypeScript</option>
           <option value="python">Python</option>
           <option value="marketing">Marketing</option>
@@ -33,6 +30,7 @@ export const PanelPosts = () => {
 
         {/* TODO: Add real rich text editor */}
         <TextEditor
+          // TODO: Add real upload image to the cloudinary provider
           uploadImage={async (file) => {
             console.log(file);
             return file.name;

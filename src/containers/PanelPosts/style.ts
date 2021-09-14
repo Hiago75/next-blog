@@ -32,7 +32,8 @@ export const MediaBox = styled.label`
   width: 100%;
   margin: 20px 0;
   padding: 25px 0;
-  background-color: ${({ theme }) => theme.dashboard.dark.darkBlue};
+  background-color: ${({ theme }) => theme.colors.contrastBackground};
+  color: ${({ theme }) => theme.fonts.primaryFont};
   font-size: 25px;
   border-radius: 20px;
 
@@ -51,18 +52,18 @@ export const TextEditor = styled(Editor)`
   overflow-y: auto;
   border-radius: 20px;
   width: 100%;
-  background-color: ${({ theme }) => theme.dashboard.dark.darkBlue};
+  background-color: ${({ theme }) => theme.colors.contrastBackground};
   padding: 10px 30px;
 
   & div {
-    background-color: ${({ theme }) => theme.dashboard.dark.darkBlue};
+    background-color: ${({ theme }) => theme.colors.contrastBackground};
     border-radius: 20px;
   }
 
   & div.ProseMirror {
     border-radius: 20px;
     width: 100%;
-    background-color: ${({ theme }) => theme.dashboard.dark.darkBlue};
+    background-color: ${({ theme }) => theme.colors.contrastBackground};
     height: 350px;
   }
 
@@ -70,7 +71,7 @@ export const TextEditor = styled(Editor)`
   h1,
   h2,
   h3 {
-    background-color: ${({ theme }) => theme.dashboard.dark.darkBlue};
+    background-color: ${({ theme }) => theme.colors.contrastBackground};
   }
 `;
 

@@ -4,7 +4,7 @@ export const IconInput = styled.label`
   ${({ theme }) => css`
     position: relative;
     text-align: left;
-    color: ${theme.dashboard.dark.font.colors.lightGray};
+    color: ${theme.fonts.smothFont};
     font-size: 16px;
     width: 100%;
     margin-top: 25px;
@@ -34,18 +34,18 @@ export const IconInput = styled.label`
       height: 50px;
       padding-left: 10px;
       transition: border-color 300ms ease;
-      background-color: ${theme.dashboard.dark.darkBlue};
-      border: 2px solid ${theme.dashboard.dark.darkBlue};
-      border-color: ${theme.dashboard.dark.darkBlue};
-      color: ${theme.dashboard.font.colors.lightBlue};
-      font-size: ${theme.dashboard.font.sizes.small};
+      background-color: ${theme.colors.contrastBackground};
+      border: 2px solid ${theme.colors.contrastBackground};
+      border-color: ${theme.colors.contrastBackground};
+      color: ${theme.colors.contrastColor};
+      font-size: 17px;
 
       &:focus {
-        border-color: ${theme.dashboard.colors.lightBlue};
+        border-color: ${theme.colors.contrastColor};
       }
 
       &::placeholder {
-        font-size: ${theme.dashboard.font.sizes.small};
+        font-size: 17px;
       }
 
       &.form-error {

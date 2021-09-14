@@ -3,7 +3,6 @@ import Router from 'next/router';
 
 import React, { useContext, useEffect, useState } from 'react';
 import isEmail from 'validator/lib/isEmail';
-import { FiMail } from 'react-icons/fi';
 
 import { AuthContext } from '../../contexts/AuthContext';
 import { PanelPasswordInput } from '../../components';

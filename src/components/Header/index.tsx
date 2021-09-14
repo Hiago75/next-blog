@@ -6,8 +6,10 @@ import { NavLink } from '../';
 import { useState } from 'react';
 
 export const Header = () => {
+  // Mobile menu state
   const [isOpen, setIsOpen] = useState(false);
 
+  // Toggle mobile menu state
   function mobileMenuClick() {
     setIsOpen(!isOpen);
   }
