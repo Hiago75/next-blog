@@ -33,6 +33,24 @@ export const GlobalStyles = createGlobalStyle`
     background: ${theme.colors.gradients.purpleToGray};
     color: ${theme.font.colors.lightest};
   }
+
+  select{
+    background-color: #a0aaba;
+    color: ${({ theme }) => theme.dashboard.dark.font.colors.darkBlue};
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+    padding: 0 15px;
+
+    @media(max-width: 900px){
+      width: 100%;
+      margin-top: 20px;
+      padding: 15px 15px;
+    }
+  }
+
+
+
 `;
 
 export const BallDivider = styled.span`

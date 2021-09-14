@@ -1,4 +1,5 @@
 import { logoutRequest } from '../../services/auth/logoutRequest';
+import Link from 'next/link';
 
 import { NavLink, MenuController } from '..';
 import { IconContext } from 'react-icons';
@@ -28,11 +29,21 @@ export const Sidebar = ({ menuOpen, setMenuOpen }: SidebarRequest) => {
   return (
     <Container className={menuOpen ? ' menu-open' : ''}>
       <LogoBox>
-        <img className="full-logo" src="/logo.svg" alt="Logo da Colster" width={180} height={100} />
+        <Link href="/admin/dashboard">
+          <img
+            className="full-logo"
+            src="/logo.svg"
+            alt="Logo da Colster"
+            width={180}
+            height={100}
+          />
+        </Link>
 
         {menuOpen && <MenuController setMenuOpen={setMenuOpen} menuOpen={menuOpen} />}
 
-        <img className="min-logo" src="/colster-reduzido.svg" alt="Logo da Colster reduzida" />
+        <Link href="/admin/dashboard">
+          <img className="min-logo" src="/colster-reduzido.svg" alt="Logo da Colster reduzida" />
+        </Link>
       </LogoBox>
       <IconContext.Provider value={{ size: '26', color: '#5A8BD6' }}>
         <NavItems>

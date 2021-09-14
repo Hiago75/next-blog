@@ -7,6 +7,9 @@ export const LogoBox = styled.div`
   align-items: center;
   justify-content: center;
 
+  & img {
+    cursor: pointer;
+  }
   & img.min-logo {
     margin: 25px 0;
   }
@@ -19,6 +22,7 @@ export const Container = styled.aside`
   transition: width 0.2s ease-in-out;
   position: fixed;
   overflow-y: auto;
+  overflow-x: hidden;
   z-index: 1;
 
   & a {

@@ -24,9 +24,10 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  width: calc(100% - 250px);
+  width: calc(100% - 190px);
   min-height: calc(100vh - 70px);
   margin-left: 190px;
+  padding: 10px 3%;
   margin-top: 70px;
   overflow-y: auto;
 

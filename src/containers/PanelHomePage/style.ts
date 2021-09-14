@@ -6,7 +6,6 @@ export const Panels = styled.div`
   gap: 20px;
   flex-wrap: wrap;
   align-items: flex-start;
-  padding: 10px 40px;
 `;
 
 export const PanelTitle = styled.h2`

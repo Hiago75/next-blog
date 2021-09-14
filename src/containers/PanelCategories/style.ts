@@ -6,7 +6,6 @@ export const Container = styled.section`
   gap: 20px;
   flex-wrap: wrap;
   align-items: flex-start;
-  padding: 10px 40px;
 `;
 
 export const CategoryBox = styled.div`
