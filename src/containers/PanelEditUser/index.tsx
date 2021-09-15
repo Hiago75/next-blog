@@ -15,6 +15,7 @@ import {
   FormWrapper,
 } from './style';
 
+import { AiFillCamera } from 'react-icons/ai';
 import { UserImage, PanelButton, PanelPasswordInput } from '../../components';
 
 interface IEditUserRequest {
@@ -51,7 +52,10 @@ export const EditUser = ({ user }: IEditUserRequest) => {
     <Container>
       <FormWrapper>
         <UserPreview>
-          <UserImage user={user} imageSize="200" iconSize={200}></UserImage>
+          <UserImage user={user} imageSize="200" iconSize={200}>
+            <AiFillCamera size={32} />
+            <p>Alterar foto de perfil</p>
+          </UserImage>
           <PreviewData>
             <span />
             <PreviewName>{user?.name}</PreviewName>

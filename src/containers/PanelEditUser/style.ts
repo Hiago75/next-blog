@@ -60,7 +60,6 @@ export const UserRole = styled.p`
 `;
 
 // Form
-
 export const UserDataContainer = styled.form`
   width: 100%;
   display: flex;

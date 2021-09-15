@@ -1,4 +1,6 @@
-import { Dispatch, SetStateAction } from 'hoist-non-react-statics/node_modules/@types/react';
+import { Dispatch, SetStateAction, useContext } from 'react';
+import { ThemeContext } from 'styled-components';
+
 import { MenuBars } from './style';
 
 interface MenuControllerRequest {
@@ -7,10 +9,12 @@ interface MenuControllerRequest {
 }
 
 export const MenuController = ({ setMenuOpen, menuOpen }: MenuControllerRequest) => {
+  const theme = useContext(ThemeContext);
+
   // Toggle menu state
   function handleMenuClick() {
     setMenuOpen(!menuOpen);
   }
 
-  return <MenuBars onClick={handleMenuClick} size={32} />;
+  return <MenuBars color={theme.fonts.primaryFont} onClick={handleMenuClick} size={32} />;
 };
