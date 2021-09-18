@@ -21,8 +21,8 @@ export const UserImage = ({ user, imageSize, children }: IUserImageProps) => {
       </EditUserImage>
 
       {/* If the user has image then display the image, otherwise displays the default "image" */}
-      {user?.profilePhotoUrl ? (
-        <img width={imageSize} src={user.profilePhotoUrl}></img>
+      {user?.profilePhoto.url ? (
+        <img width={imageSize} src={user.profilePhoto.url}></img>
       ) : (
         <FaUserAlt className="icon-image" color={theme.fonts.primaryFont} size={imageSize} />
       )}

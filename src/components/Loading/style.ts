@@ -23,9 +23,9 @@ export const LoadingWheel = styled.div`
   height: 128px;
   width: 128px;
   border-radius: 50%;
-  border: 10px solid ${({ theme }) => theme.colors.darkGray};
-  border-top: 10px solid ${({ theme }) => theme.colors.mediumBlue};
-  border-bottom: 10px solid ${({ theme }) => theme.colors.mediumBlue};
+  border: 10px solid ${({ theme }) => theme.colors.alternativeBackground};
+  border-top: 10px solid ${({ theme }) => theme.colors.contrastColor};
+  border-bottom: 10px solid ${({ theme }) => theme.colors.contrastColor};
   animation: ${rotate} 2s infinite linear;
 `;
 
@@ -34,6 +34,6 @@ export const LoadingMessage = styled.div`
   padding: 20px 0;
   h1 {
     text-align: center;
-    color: ${({ theme }) => theme.font.colors.light};
+    color: ${({ theme }) => theme.fonts.primaryFont};
   }
 `;

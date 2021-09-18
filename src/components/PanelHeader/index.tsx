@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Link from 'next/link';
 
 import { IconContext } from 'react-icons';
 import { BsBellFill } from 'react-icons/bs';
@@ -46,29 +45,7 @@ export const PanelHeader = ({
   const [notificationsOpen, setNotificationsOpen] = useState(false);
 
   // TODO: Add real notification system
-  const notifications = [
-    {
-      id: 'fadsfasdfs',
-      who: 'Hiago',
-      title: 'fez uma nova publicação',
-      date: '13/09/2021',
-      visualized: false,
-    },
-    {
-      id: 'fadsfasdf3',
-      who: 'Você',
-      title: 'alterou sua foto de perfil',
-      date: '12/09/2021',
-      visualized: true,
-    },
-    {
-      id: 'fadsfasdf2',
-      who: 'Você',
-      title: 'alterou seu e-mail',
-      date: '11/09/2021',
-      visualized: false,
-    },
-  ];
+  const notifications = [];
 
   // Toggle the notification box between open and close
   function handleNotificationOpen() {
@@ -96,15 +73,14 @@ export const PanelHeader = ({
           </Notifications>
 
           {/* Change the icon depending on theme */}
+          {/* TODO: save the user preference */}
           {theme === 'dark' ? (
             <FaSun onClick={toggleTheme}></FaSun>
           ) : (
             <FaMoon onClick={toggleTheme}></FaMoon>
           )}
           <UserImageBox>
-            <Link href="/admin/dashboard/profile">
-              <UserImage user={user} imageSize={50}></UserImage>
-            </Link>
+            <UserImage user={user} imageSize={50}></UserImage>
           </UserImageBox>
         </IconContext.Provider>
       </UserBar>
@@ -130,7 +106,12 @@ export const PanelHeader = ({
             );
           })}
 
-        {notifications.length <= 0 && <h1>Opa, parece que não tem nada novo para você</h1>}
+        {notifications.length <= 0 && (
+          <p>
+            Opa, parece que não tem nada novo para você... Quando algo interessante acontecer vai
+            aparecer aqui
+          </p>
+        )}
       </NotificationBox>
     </Container>
   );

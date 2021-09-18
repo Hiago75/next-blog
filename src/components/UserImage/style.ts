@@ -21,7 +21,7 @@ export const EditUserImage = styled.span`
 export const Container = styled.div`
   position: relative;
 
-  &img,
+  & img,
   svg.icon-image {
     margin: 0;
     border-radius: 50%;

@@ -5,7 +5,7 @@ import { handleToken } from './middlewares/handleToken';
 //Request the user data to External API using access token
 const retrieveData = async (req: NextApiRequest, res: NextApiResponse) => {
   await externalApi
-    .post('/auth/retrieve')
+    .get('/auth/retrieve')
     .then((response) => {
       const user = response.data.user;
       return res.send(user);

@@ -52,7 +52,7 @@ export const EditUser = ({ user }: IEditUserRequest) => {
     <Container>
       <FormWrapper>
         <UserPreview>
-          <UserImage user={user} imageSize="200" iconSize={200}>
+          <UserImage user={user} imageSize={200}>
             <AiFillCamera size={32} />
             <p>Alterar foto de perfil</p>
           </UserImage>

@@ -3,34 +3,62 @@ import { BarChart, PanelBox } from '../../components';
 import { AiOutlineFileAdd } from 'react-icons/ai';
 
 import { PanelTitle, Panels, Content, ContentField, LinkButton } from './style';
+import { PostCount } from '../../domain/posts/post';
 
 interface PanelHomePageProps {
   user: IUser;
+  numberOfPosts: PostCount;
 }
 
-export const PanelHomePage = ({ user }: PanelHomePageProps) => {
+export const PanelHomePage = ({ user, numberOfPosts }: PanelHomePageProps) => {
+  const authors = numberOfPosts.authors;
+
+  function getChartData() {
+    const labels: string[] = [];
+    const numbers: number[] = [];
+
+    authors.forEach((author) => {
+      labels.push(author.name);
+      numbers.push(author.posts);
+    });
+
+    return { labels, numbers };
+  }
+
+  function getUserPostData() {
+    const author = authors.filter((author) => author.name === user?.name);
+
+    return { categories: author[0].categories };
+  }
+
+  const { labels, numbers } = getChartData();
+  const { categories } = getUserPostData();
+
   return (
     <>
-      {/* TODO: Add real data */}
-      <Panels>
+      <Panels onClick={getUserPostData}>
         <PanelBox className="w80" panelTitle="Número de posts por usuário">
-          <BarChart></BarChart>
+          <BarChart datasetLabel="Posts" labels={labels} numbers={numbers}></BarChart>
         </PanelBox>
 
         <PanelBox className="w20 center" panelTitle="Total de posts">
-          <h1>4</h1>
+          <h1>{numberOfPosts.total}</h1>
         </PanelBox>
 
         <PanelBox className="w50" panelTitle="Meus posts" contentClassName="flexContent">
           <ContentField>
             <p>Categorias:</p>
-            <h3>Python</h3>
-            <h3>TypeScript</h3>
+            {categories.map((category) => (
+              <h3 key={category.name}>{category.name}</h3>
+            ))}
           </ContentField>
           <ContentField>
             <p>Quantidade por categorias:</p>
-            <h3>Python - 1</h3>
-            <h3>TypeScript - 3</h3>
+            {categories.map((category) => (
+              <h3 key={category.name}>
+                {category.name} - {category.posts}
+              </h3>
+            ))}
           </ContentField>
         </PanelBox>
 

@@ -12,7 +12,6 @@ export const FormContainer = styled.div`
   flex-flow: inherit;
   justify-content: space-between;
   width: 100%;
-  max-width: 1024px;
 `;
 
 export const TitleInput = styled.input`

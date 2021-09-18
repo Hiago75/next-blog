@@ -81,6 +81,12 @@ export const NotificationBox = styled.div`
       color: ${theme.fonts.primaryFont};
     }
 
+    p {
+      font-size: 17px;
+      font-weight: normal;
+      color: ${theme.fonts.smothFont};
+    }
+
     /* Responsive */
     @media (max-width: 900px) {
       right: unset;

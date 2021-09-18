@@ -49,6 +49,7 @@ export const PreviewData = styled.div`
 
 export const PreviewName = styled.h2`
   font-weight: normal;
+  color: ${({ theme }) => theme.fonts.primaryFont};
   font-size: 26px;
 `;
 
