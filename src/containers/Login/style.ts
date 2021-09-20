@@ -17,12 +17,20 @@ export const LoginBox = styled.div`
   justify-content: space-around;
   margin: 0 2%;
   width: 80%;
-  height: 80%;
-  max-width: 612px;
-  max-height: 624px;
+  max-height: 100%;
+  max-width: 700px;
   background-color: ${({ theme }) => theme.colors.mainBackground};
   border-radius: 20px;
   padding: 40px 20px;
+
+  @media (max-width: 900px) {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    margin: 0;
+    border-radius: 0px;
+  }
 `;
 
 export const LoginForm = styled.form`
@@ -30,9 +38,7 @@ export const LoginForm = styled.form`
     margin: 15px 0;
     max-width: 70%;
 
-    input,
     button {
-      margin: 10px 0;
       border-radius: 10px;
       outline: 0;
       height: 50px;
@@ -57,27 +63,31 @@ export const LoginForm = styled.form`
       }
     }
   `}
+
+  @media (max-width: 900px) {
+    max-width: 100%;
+
+    button {
+      width: 100%;
+    }
+  }
 `;
 
 export const IconInput = styled.label`
   ${({ theme }) => css`
-    position: relative;
+    display: block;
     text-align: left;
     color: ${theme.fonts.smothFont};
-    font-size: 16px;
+    font-size: 17px;
+    margin: 20px 0;
 
     & p.error-message {
       color: red;
-    }
-
-    a {
-      position: absolute;
-
-      cursor: pointer;
+      margin-bottom: 20px;
     }
 
     input {
-      margin: 10px 0;
+      margin-top: 10px;
       border-radius: 10px;
       outline: 0;
       width: 100%;
@@ -109,8 +119,9 @@ export const IconInput = styled.label`
 
 export const ErrorField = styled.div`
   margin-top: 20px;
-  padding: 10px 0;
+  padding: 10px;
   border-left: 1px solid red;
+  background-color: ${({ theme }) => theme.colors.alternativeBackground};
 
   span {
     color: red;

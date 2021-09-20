@@ -22,16 +22,17 @@ export const NavItem = styled.li`
     &.active {
       border-bottom: 1px solid ${theme.colors.contrastColor};
       font-weight: bold;
+
       a {
-        color: ${({ theme }) => theme.fonts.smothFont};
+        color: ${({ theme }) => theme.fonts.primaryFont};
       }
     }
 
     &:hover {
-      border-bottom: 1px solid ${theme.colors.contrastBackground};
+      border-bottom: 1px solid ${theme.colors.contrastColor};
 
       a {
-        color: ${({ theme }) => theme.fonts.smothFont};
+        color: ${({ theme }) => theme.fonts.primaryFont};
       }
     }
   `}

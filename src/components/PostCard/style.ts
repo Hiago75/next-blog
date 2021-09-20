@@ -44,8 +44,8 @@ export const PostCardHeading = styled.div`
     width: 100%;
     padding: 0 25px;
     h2 {
-      font-size: ${theme.font.sizes.regular};
-      color: ${theme.font.colors.lightest};
+      font-size: 23px;
+      color: ${theme.fonts.primaryFont};
       margin: 10px 0;
 
       &:after {
@@ -67,6 +67,7 @@ export const PostCardHeading = styled.div`
         display: inline-block;
         opacity: 0.5;
         font-size: 13px;
+        color: ${({ theme }) => theme.fonts.smothFont};
       }
     }
   `}

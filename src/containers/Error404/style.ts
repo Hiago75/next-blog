@@ -9,11 +9,11 @@ export const Container = styled.section`
     align-items: center;
     min-height: calc(100vh - 110px);
 
-    color: ${theme.font.colors.lightest};
+    color: ${theme.fonts.primaryFont};
 
     h1 {
       font-size: 120px;
-      color: ${theme.colors.black};
+      color: ${theme.fonts.primaryFont};
     }
 
     h2 {
@@ -22,12 +22,13 @@ export const Container = styled.section`
     }
 
     p {
+      color: ${theme.fonts.smothFont};
       margin: 30px;
       font-size: 17px;
     }
 
     button {
-      background: ${theme.colors.mediumBlue};
+      background: ${theme.colors.contrastColor};
       border: 0;
       border-radius: 10px;
       padding: 7px 30px;
@@ -35,7 +36,7 @@ export const Container = styled.section`
       cursor: pointer;
 
       a {
-        color: ${theme.font.colors.lightest};
+        color: ${theme.fonts.primaryFont};
         text-decoration: none;
         font-size: 20px;
       }

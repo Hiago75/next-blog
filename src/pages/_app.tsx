@@ -3,7 +3,7 @@ import { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import { AuthProvider } from '../contexts/AuthContext';
 
-import { GlobalStyles } from '../styles/global-styles';
+import GlobalStyles from '../styles/global-styles';
 import { themes } from '../styles/theme';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <AuthProvider>
       <ThemeProvider theme={themes[theme]}>
         <Component {...pageProps} theme={theme} toggleTheme={toggleTheme} />
-        <GlobalStyles />
+        <GlobalStyles theme={themes[theme]} />
       </ThemeProvider>
     </AuthProvider>
   );

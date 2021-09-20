@@ -8,21 +8,21 @@ export const Container = styled.div`
   justify-content: space-between;
   height: 100%;
   padding: 0 10px;
+
+  & li {
+    margin: 0 15px;
+  }
 `;
 
 export const MainHeader = styled.header`
   ${({ theme }) => css`
-    background-color: ${theme.colors.black};
-    border-bottom: 1px solid ${theme.colors.darkGray};
-    height: 60px;
+    background-color: ${theme.colors.alternativeBackground};
+    border-bottom: 1px solid ${theme.colors.contrastBackground};
+    height: 65px;
   `}
 `;
 
 export const Logo = styled.a`
-  color: ${({ theme }) => theme.font.colors.light};
-  text-decoration: none;
-  font-size: 25px;
-  transition: opacity 200ms ease;
   cursor: pointer;
 `;
 
@@ -50,7 +50,7 @@ export const MobileMenu = styled.nav`
 
   ul {
     padding: 10px 0;
-    background-color: ${({ theme }) => theme.colors.black};
+    background-color: ${({ theme }) => theme.colors.mainBackground};
     display: none;
   }
 

@@ -17,26 +17,39 @@ export const PanelHomePage = ({ user, numberOfPosts }: PanelHomePageProps) => {
     const labels: string[] = [];
     const numbers: number[] = [];
 
-    authors.forEach((author) => {
-      labels.push(author.name);
+    for (const authorName in authors) {
+      const author = authors[authorName];
+
+      labels.push(authorName);
       numbers.push(author.posts);
-    });
+    }
 
     return { labels, numbers };
   }
 
   function getUserPostData() {
-    const author = authors.filter((author) => author.name === user?.name);
+    const author = authors[user?.name];
+    const rawCategories = author?.categories;
 
-    return { categories: author[0].categories };
+    const categories: { name: string; posts: number }[] = [];
+
+    for (const category in rawCategories) {
+      const categoryObject = { name: category, posts: rawCategories[category] };
+      categories.push(categoryObject);
+    }
+
+    return { categories };
   }
 
+  getUserPostData();
+
   const { labels, numbers } = getChartData();
+
   const { categories } = getUserPostData();
 
   return (
     <>
-      <Panels onClick={getUserPostData}>
+      <Panels>
         <PanelBox className="w80" panelTitle="Número de posts por usuário">
           <BarChart datasetLabel="Posts" labels={labels} numbers={numbers}></BarChart>
         </PanelBox>
@@ -53,7 +66,7 @@ export const PanelHomePage = ({ user, numberOfPosts }: PanelHomePageProps) => {
             ))}
           </ContentField>
           <ContentField>
-            <p>Quantidade por categorias:</p>
+            <p>Quantidade por categoria:</p>
             {categories.map((category) => (
               <h3 key={category.name}>
                 {category.name} - {category.posts}

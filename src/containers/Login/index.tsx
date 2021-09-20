@@ -82,7 +82,6 @@ export const Login = () => {
 
     const isValid = formIsValid();
 
-    //TODO: style errors from API
     if (isValid) await login({ email, password });
   }
 

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.section`
   display: flex;
@@ -29,9 +29,7 @@ export const MainSpotlight = styled.div`
 `;
 
 export const Title = styled.h2`
-  color {
-    ${({ theme }) => theme.font.colors.lightest}
-  }
+  color: ${({ theme }) => theme.fonts.primaryFont};
   font-size: 38px;
   font-weight: normal;
   padding: 10px 0;
@@ -51,13 +49,15 @@ export const Title = styled.h2`
 `;
 
 export const Details = styled.div`
-  color {
-    ${({ theme }) => theme.colors.darkGray}
-  }
-  font-size: 15px;
-  p {
-    display: inline-block;
-  }
+  ${({ theme }) => css`
+    color: ${theme.colors.alternativeBackground};
+    font-size: 15px;
+
+    p {
+      color: ${theme.fonts.primaryFont}
+      display: inline-block;
+    }
+  `}
 `;
 
 export const SpotlightContent = styled.div`

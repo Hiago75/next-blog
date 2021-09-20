@@ -13,20 +13,20 @@ export default function AdminCategories({ theme, toggleTheme }: IContainerReques
   );
 }
 
-// export const getServerSideProps: GetServerSideProps = async (ctx) => {
-//   const { refresh_token, isAuthenticated } = ctx.req.cookies;
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { refresh_token, isAuthenticated } = ctx.req.cookies;
 
-//   if (!refresh_token) {
-//     isAuthenticated ? destroyCookie(ctx, 'isAuthenticated') : '';
-//     return {
-//       redirect: {
-//         destination: '/admin',
-//         permanent: false,
-//       },
-//     };
-//   }
+  if (!refresh_token) {
+    isAuthenticated ? destroyCookie(ctx, 'isAuthenticated') : '';
+    return {
+      redirect: {
+        destination: '/admin',
+        permanent: false,
+      },
+    };
+  }
 
-//   return {
-//     props: {},
-//   };
-// };
+  return {
+    props: {},
+  };
+};

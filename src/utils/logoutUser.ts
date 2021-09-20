@@ -2,9 +2,9 @@ import Router from 'next/router';
 import { destroyCookie } from 'nookies';
 import { logoutRequest } from '../services/auth/logoutRequest';
 
-export function logoutUser() {
+export async function logoutUser() {
   //TODO: Render error screen
-  logoutRequest();
+  await logoutRequest();
   destroyCookie(undefined, 'isAuthenticated');
   Router.push('/admin');
 }

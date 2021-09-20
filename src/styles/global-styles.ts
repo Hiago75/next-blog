@@ -1,7 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import { theme } from './theme';
 
-export const GlobalStyles = createGlobalStyle`
+export default createGlobalStyle`
   *{
     margin: 0;
     padding: 0;
@@ -30,12 +29,12 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body{
-    background: ${theme.colors.gradients.purpleToGray};
+    background: ${({ theme }) => theme.colors.mainBackground};
   }
 
   select{
     background-color: #a0aaba;
-    color: ${({ theme }) => theme.fonts.contrastFont};
+    color: #091323;
     font-size: 16px;
     border-radius: 10px;
     border: none;

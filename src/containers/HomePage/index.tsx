@@ -62,7 +62,7 @@ export function HomePage({ posts, category }: HomePageProps) {
                 key={post.slug}
                 slug={post.slug}
                 title={post.title}
-                cover={post.cover.formats.small}
+                cover={post.cover.format.small}
                 category={post.category.name}
                 author={post.author.name}
               />

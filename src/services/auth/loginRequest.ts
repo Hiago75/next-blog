@@ -11,6 +11,6 @@ export const loginRequest = async ({ email: username, password }: ILoginRequest)
       return { error: false, message: 'Access granted' };
     })
     .catch((error) => {
-      return { error: true, message: error.response.error };
+      return { error: true, message: error.response.data.message };
     });
 };

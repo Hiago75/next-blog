@@ -8,8 +8,8 @@ export const refreshUserToken = async () => {
     .then(() => {
       return { error: false, message: 'Ok' };
     })
-    .catch((error) => {
-      logoutUser();
+    .catch(async (error) => {
+      await logoutUser();
       return { error: true, message: error.response.data.error };
     });
 };

@@ -18,7 +18,7 @@ export const Spotlight = ({ posts }: SpotlightProps) => {
     <Container>
       <Link href="/posts/[slug]" as={`/posts/${slug}`}>
         <MainSpotlight>
-          <img src={cover.formats.medium.url}></img>
+          <img src={cover.format.medium.url}></img>
           <Title>{title}</Title>
           <Details>
             <p>{author.name}</p>
@@ -34,7 +34,7 @@ export const Spotlight = ({ posts }: SpotlightProps) => {
               key={post.slug}
               slug={post.slug}
               title={post.title}
-              cover={post.cover.formats.small}
+              cover={post.cover.format.small}
               category={post.category.name}
               author={post.author.name}
             />

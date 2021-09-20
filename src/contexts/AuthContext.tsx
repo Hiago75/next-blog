@@ -26,6 +26,7 @@ interface IUpdateRequest {
   name: string;
   email: string;
 }
+
 interface IError {
   message: string;
 }

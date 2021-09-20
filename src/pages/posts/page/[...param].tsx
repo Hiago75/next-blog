@@ -46,12 +46,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
     `_sort=id:desc&_start=${startFrom}&_limit=${postsPerPage}${categoryQuery}`,
   );
 
-  const numberOfPosts = Number(await countAllPosts(categoryQuery));
+  const numberOfPosts = await countAllPosts();
+  const numberOfCategoryPosts = Number(numberOfPosts.categories[category]);
 
   const pagination: PaginationData = {
     nextPage,
     previousPage,
-    numberOfPosts,
+    numberOfPosts: numberOfCategoryPosts,
     category,
     postsPerPage,
   };

@@ -30,7 +30,7 @@ export const PaginationPage = ({ posts, pagination }: PaginationProps) => {
                   key={post.slug}
                   slug={post.slug}
                   title={post.title}
-                  cover={post.cover.formats.small}
+                  cover={post.cover.format.small}
                   category={post.category.name}
                   author={post.author.name}
                 />

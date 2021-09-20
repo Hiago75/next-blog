@@ -1,7 +1,7 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { MainHeader, Container, Logo, MobileHamburger, MobileMenu, DesktopMenu } from './styles';
-import { APP_NAME } from '../../config/';
 import { NavLink } from '../';
 import { useState } from 'react';
 
@@ -18,7 +18,9 @@ export const Header = () => {
     <MainHeader>
       <Container>
         <Link href="/">
-          <Logo>{APP_NAME}</Logo>
+          <Logo>
+            <Image src="/logo.svg" width={120} height={120}></Image>
+          </Logo>
         </Link>
         <DesktopMenu>
           <ul>

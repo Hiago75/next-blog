@@ -13,8 +13,8 @@ export const fetchUserData = async (hasRefreshToken: boolean) => {
     .then((response) => {
       return response.data;
     })
-    .catch(() => {
-      logoutUser();
+    .catch(async () => {
+      await logoutUser();
       return { error: true, message: 'Não foi possível recuperar os dados do usuário' };
     });
 };

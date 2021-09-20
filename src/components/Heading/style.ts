@@ -7,14 +7,14 @@ export const Container = styled.h2`
 
     h1 {
       font-size: 17px;
-      color: ${theme.colors.mediumBlue};
+      color: ${theme.colors.contrastBackground};
       letter-spacing: 4px;
       font-weight: normal;
     }
 
     p {
       font-size: 55px;
-      color: ${theme.font.colors.light};
+      color: ${theme.fonts.primaryFont};
       font-weight: normal;
     }
 
