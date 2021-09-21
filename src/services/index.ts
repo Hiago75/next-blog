@@ -6,6 +6,8 @@ import { getExternalAPIClient } from './getExternalAPIClient';
 import { getInternalAPIClient } from './getInternalAPIClient';
 import { fetchUserData } from './auth/fetchUserData';
 import { updateUserData } from './user/updateUserData';
+import { updateUserPhoto } from './user/updateUserPhoto';
+import { createUserPhoto } from './user/createUserPhoto';
 
 export {
   countAllPosts,
@@ -16,4 +18,6 @@ export {
   getInternalAPIClient,
   fetchUserData,
   updateUserData,
+  updateUserPhoto,
+  createUserPhoto,
 };

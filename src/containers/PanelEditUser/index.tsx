@@ -1,45 +1,86 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { AiFillCamera, AiOutlineClose } from 'react-icons/ai';
 
-import { IUser } from '../../interfaces/IUser';
 import {
   Container,
   UserPreview,
   UserRole,
-  PreviewData,
+  UserData,
   UserDataContainer,
+  PreviewProfilePhoto,
+  PreviewProfilePhotoBox,
+  PreviewProfilePhotoHeader,
+  UserImageBox,
   PreviewName,
+  PhotoInput,
   UserDataLabel,
   UserDataInput,
   LabelTitle,
   EditPassword,
+  ConfirmText,
   FormWrapper,
 } from './style';
 
-import { AiFillCamera } from 'react-icons/ai';
-import { UserImage, PanelButton, PanelPasswordInput } from '../../components';
+import { updateUserData, updateUserPhoto, createUserPhoto } from '../../services';
+import { UserImage, PanelButton, PanelPasswordInput, Loading } from '../../components';
+import { AuthContext } from '../../contexts/AuthContext';
+import { ThemeContext } from 'styled-components';
 
-interface IEditUserRequest {
-  user: IUser;
-}
+// Edit User component
+export const EditUser = () => {
+  const theme = useContext(ThemeContext);
+  const { user, refreshUserData } = useContext(AuthContext);
 
-export const EditUser = ({ user }: IEditUserRequest) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [profilePhoto, setProfilePhoto] = useState<File | undefined>();
+  const [temporaryProfilePhoto, setTemporaryPhoto] = useState('');
+  const [editingProfilePhoto, setEditingProfilePhoto] = useState(false);
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
+  //TODO: add password change option
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [editingPassword, setEditingPassword] = useState(false);
+
   const userRole = user?.admin ? 'Desenvolvedor(a)' : 'Autor(a)';
 
-  // Submit the form
-  function handleSubmit(event: React.MouseEvent<HTMLButtonElement>) {
-    event.preventDefault();
-    console.log('Feito');
+  // Handle the name field changes
+  function handleNameChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setName(event.target.value);
+  }
+
+  //Handle the email field changes
+  function handleEmailChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setEmail(event.target.value);
   }
 
   // Handle the password field changes
-  function handleNewPasswordChange() {
-    console.log('Feito');
+  function handleNewPasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setNewPassword(event.target.value);
+    console.log(newPassword);
   }
 
   // Handle the confirm password field changes
-  function handleConfirmPasswordChange() {
-    console.log('Feito');
+  function handleConfirmPasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setConfirmPassword(event.target.value);
+    console.log(confirmPassword);
+  }
+
+  // Open the preview profile photo element and set the temporary photo
+  function handlePhotoInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const photo = event.target.files[0];
+
+    setEditingProfilePhoto(true);
+    setProfilePhoto(photo);
+    setTemporaryPhoto(URL.createObjectURL(photo));
+  }
+
+  // Clear the profile photo values;
+  function handlePhotoInputClick(event) {
+    event.target.value = null;
   }
 
   // Toggle the form from the normal data to password
@@ -48,19 +89,90 @@ export const EditUser = ({ user }: IEditUserRequest) => {
     setEditingPassword(!editingPassword);
   }
 
+  // Close the preview profile photo element
+  function handleClosePreviewClick() {
+    setEditingProfilePhoto(false);
+    setTemporaryPhoto('');
+    setProfilePhoto(undefined);
+  }
+
+  // Handle the profile photo submit event
+  async function handleProfilePhotoSubmit(event: React.MouseEvent<HTMLButtonElement>) {
+    event.preventDefault();
+    setIsLoading(true);
+
+    if (user?.profilePhoto) {
+      await updateUserPhoto({ profilePhoto });
+    } else {
+      await createUserPhoto({ profilePhoto });
+    }
+
+    setIsLoading(false);
+
+    //Update the stored user data
+    await refreshUserData(true);
+  }
+
+  // Submit the form
+  async function handleSubmit(event: React.MouseEvent<HTMLButtonElement>) {
+    event.preventDefault();
+    await updateUserData({ name, email });
+    //Update the stored user data
+    await refreshUserData(true);
+  }
+
+  if (isLoading)
+    return (
+      <Loading>
+        <h1>Espera só um segundo enquanto eu atualizo tudo por aqui</h1>
+      </Loading>
+    );
+
   return (
     <Container>
+      {editingProfilePhoto && (
+        <PreviewProfilePhoto>
+          <PreviewProfilePhotoBox>
+            <PreviewProfilePhotoHeader>
+              <p>Sua nova foto de perfil irá ficar assim:</p>
+              <AiOutlineClose
+                onClick={handleClosePreviewClick}
+                size={32}
+                color={theme.fonts.primaryFont}
+              />
+            </PreviewProfilePhotoHeader>
+
+            <img src={temporaryProfilePhoto} alt="Temporary profile photo" />
+
+            <ConfirmText>
+              <p>Deseja realmente alterar sua foto ?</p>
+              <PanelButton onClick={handleProfilePhotoSubmit} type="submit">
+                Confirmar
+              </PanelButton>
+            </ConfirmText>
+          </PreviewProfilePhotoBox>
+        </PreviewProfilePhoto>
+      )}
       <FormWrapper>
         <UserPreview>
-          <UserImage user={user} imageSize={200}>
-            <AiFillCamera size={32} />
-            <p>Alterar foto de perfil</p>
-          </UserImage>
-          <PreviewData>
+          <UserImageBox>
+            <UserImage user={user} imageSize={200}>
+              <AiFillCamera size={32} />
+              <p>Alterar foto de perfil</p>
+              <PhotoInput
+                onChange={handlePhotoInputChange}
+                onClick={handlePhotoInputClick}
+                type="file"
+                id="photo"
+                accept="image/png, image/jpeg, image/jpg"
+              />
+            </UserImage>
+          </UserImageBox>
+          <UserData>
             <span />
             <PreviewName>{user?.name}</PreviewName>
             <UserRole>{userRole}</UserRole>
-          </PreviewData>
+          </UserData>
         </UserPreview>
 
         {!editingPassword && (
@@ -68,16 +180,26 @@ export const EditUser = ({ user }: IEditUserRequest) => {
             <UserDataContainer>
               <UserDataLabel>
                 <LabelTitle>Nome</LabelTitle>
-                <UserDataInput value={user?.name} type="text"></UserDataInput>
+                <UserDataInput
+                  onChange={handleNameChange}
+                  placeholder={user?.name}
+                  value={name}
+                  type="text"
+                ></UserDataInput>
               </UserDataLabel>
               <UserDataLabel>
                 <LabelTitle>E-mail</LabelTitle>
-                <UserDataInput value={user?.email} type="email"></UserDataInput>
+                <UserDataInput
+                  onChange={handleEmailChange}
+                  placeholder={user?.email}
+                  value={email}
+                  type="email"
+                ></UserDataInput>
               </UserDataLabel>
               <UserDataLabel>
                 <LabelTitle>Senha</LabelTitle>
                 <UserDataInput
-                  value="loremipsumdolor"
+                  value="loremipsumdolorsit"
                   readOnly
                   className="userPassword"
                   type="password"
@@ -100,7 +222,7 @@ export const EditUser = ({ user }: IEditUserRequest) => {
             <UserDataLabel>
               <LabelTitle>Senha atual</LabelTitle>
               <UserDataInput
-                value="loremipsumdolor"
+                value="loremipsumdolorsit"
                 readOnly
                 className="userPassword"
                 type="password"

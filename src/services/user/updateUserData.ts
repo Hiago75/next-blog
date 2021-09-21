@@ -1,10 +1,10 @@
 import { logoutUser } from '../../utils/logoutUser';
-import { internalApi } from '../../config/api-config';
+import { externalApi } from '../../config/api-config';
 
 // Try to fetch user data from API
 export const updateUserData = async ({ name, email }) => {
-  return await internalApi
-    .put('/api/update', {
+  return await externalApi
+    .put('/authors', {
       name,
       email,
     })

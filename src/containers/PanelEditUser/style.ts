@@ -5,6 +5,7 @@ export const Container = styled.section`
   width: 100%;
   align-items: center;
   justify-content: center;
+  position: relative;
   flex-wrap: wrap;
 `;
 
@@ -25,7 +26,77 @@ export const UserPreview = styled.div`
   }
 `;
 
-export const PreviewData = styled.div`
+export const PreviewProfilePhoto = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+`;
+
+export const PreviewProfilePhotoBox = styled.div`
+  ${({ theme }) => css`
+    width: 80%;
+    height: 450px;
+    background-color: ${theme.colors.alternativeBackground};
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-flow: column wrap;
+
+    p {
+      color: ${theme.fonts.primaryFont};
+      font-size: 20px;
+    }
+
+    img {
+      width: 256px;
+      height: 256px;
+      border-radius: 50%;
+      margin: 15px 0;
+    }
+  `}
+`;
+
+export const PreviewProfilePhotoHeader = styled.div`
+  padding: 0 15px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+
+  svg {
+    cursor: pointer;
+  }
+`;
+
+export const ConfirmText = styled.div`
+  border-top: 1px solid white;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 15px;
+
+  p,
+  button {
+    display: inline-block;
+  }
+`;
+
+export const UserImageBox = styled.label`
+  display: block;
+  border-radius: 50%;
+`;
+
+export const PhotoInput = styled.input`
+  display: none;
+`;
+
+export const UserData = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -1,4 +1,3 @@
-import { logoutRequest } from '../../services/auth/logoutRequest';
 import Link from 'next/link';
 
 import { NavLink, MenuController } from '..';
@@ -15,6 +14,7 @@ import {
 import { RiUserLine, RiUserFill } from 'react-icons/ri';
 import { Container, LogoBox, NavItems, Logout } from './style';
 import { Dispatch, SetStateAction } from 'hoist-non-react-statics/node_modules/@types/react';
+import { logoutUser } from '../../utils/logoutUser';
 
 interface SidebarRequest {
   menuOpen: boolean;
@@ -24,7 +24,7 @@ interface SidebarRequest {
 export const Sidebar = ({ menuOpen, setMenuOpen }: SidebarRequest) => {
   //Logout the user
   function handleLogout() {
-    logoutRequest();
+    logoutUser();
   }
 
   return (

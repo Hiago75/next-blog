@@ -1,8 +1,8 @@
-import { internalApi } from '../../config/api-config';
+import { externalApi } from '../../config/api-config';
 
 export const logoutRequest = async () => {
-  return internalApi
-    .delete('/api/logout')
+  return externalApi
+    .delete('/auth/logout')
     .then((response) => {
       return response;
     })

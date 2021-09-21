@@ -1,10 +1,10 @@
-import { internalApi } from '../../config/api-config';
+import { externalApi } from '../../config/api-config';
 import { ILoginRequest } from '../../interfaces/ILoginRequest';
 
-export const loginRequest = async ({ email: username, password }: ILoginRequest) => {
-  return await internalApi
-    .post('/api/login', {
-      username,
+export const loginRequest = async ({ email, password }: ILoginRequest) => {
+  return await externalApi
+    .post('/auth/login', {
+      email,
       password,
     })
     .then(() => {

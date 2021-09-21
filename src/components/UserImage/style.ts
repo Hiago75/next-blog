@@ -5,7 +5,7 @@ export const EditUserImage = styled.span`
   position: absolute;
   width: 100%;
   height: 100%;
-  bottom: 0;
+  bottom: -1px;
   border-radius: 50%;
   background: rgb(0, 0, 0);
   background: linear-gradient(
@@ -26,6 +26,7 @@ export const Container = styled.div`
     margin: 0;
     border-radius: 50%;
     background-color: ${({ theme }) => theme.colors.alternativeBackground};
+    height: 100%;
   }
 
   &:hover {

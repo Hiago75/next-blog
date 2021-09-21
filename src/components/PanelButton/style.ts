@@ -16,4 +16,8 @@ export const AdminButton = styled.button`
     color: ${({ theme }) => theme.fonts.contrastFont};
     text-decoration: none;
   }
+
+  &:hover {
+    background-color: rgba(90, 139, 214, 0.8);
+  }
 `;

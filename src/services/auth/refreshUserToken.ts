@@ -1,10 +1,10 @@
 import { logoutUser } from '../../utils/logoutUser';
-import { internalApi } from '../../config/api-config';
+import { externalApi } from '../../config/api-config';
 
 // Try to fetch user data from API
 export const refreshUserToken = async () => {
-  return await internalApi
-    .get('/api/refresh')
+  return await externalApi
+    .get('/auth/refresh')
     .then(() => {
       return { error: false, message: 'Ok' };
     })

@@ -61,17 +61,22 @@ export const PanelHomePage = ({ user, numberOfPosts }: PanelHomePageProps) => {
         <PanelBox className="w50" panelTitle="Meus posts" contentClassName="flexContent">
           <ContentField>
             <p>Categorias:</p>
-            {categories.map((category) => (
-              <h3 key={category.name}>{category.name}</h3>
-            ))}
+            {categories.map((category) => {
+              if (category.posts >= 1) {
+                return <h3 key={category.name}>{category.name}</h3>;
+              }
+            })}
           </ContentField>
           <ContentField>
             <p>Quantidade por categoria:</p>
-            {categories.map((category) => (
-              <h3 key={category.name}>
-                {category.name} - {category.posts}
-              </h3>
-            ))}
+            {categories.map((category) => {
+              if (category.posts >= 1)
+                return (
+                  <h3 key={category.name}>
+                    {category.name} - {category.posts}
+                  </h3>
+                );
+            })}
           </ContentField>
         </PanelBox>
 

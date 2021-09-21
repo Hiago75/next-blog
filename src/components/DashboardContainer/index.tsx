@@ -3,6 +3,7 @@ import { useState, useContext } from 'react';
 
 import { Sidebar, Loading, PanelHeader } from '..';
 import { AuthContext } from '../../contexts/AuthContext';
+import { logoutUser } from '../../utils/logoutUser';
 import { Container, Content } from './style';
 
 export interface PanelProps {
@@ -20,7 +21,11 @@ export const DashboardContainer = ({ headerMessage, children, theme, toggleTheme
 
   // refresh user data if this one is authenticated but has no data stored
   if (isAuthenticated && !user) {
-    refreshUserData(true);
+    try {
+      refreshUserData(true);
+    } catch (e) {
+      logoutUser();
+    }
   }
 
   // Set the loading screen when retrieving user data

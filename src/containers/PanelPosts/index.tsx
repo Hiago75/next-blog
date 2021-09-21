@@ -25,7 +25,7 @@ export const PanelPosts = () => {
         <MediaBox>
           <AiFillCamera size={44} />
           Alterar foto de capa
-          <MediaInput type="file" />
+          <MediaInput type="file" accept="image/png, image/gif, image/jpeg" />
         </MediaBox>
 
         {/* TODO: Add real rich text editor */}
