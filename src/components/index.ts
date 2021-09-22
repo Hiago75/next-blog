@@ -14,7 +14,6 @@ import { CategoryCta } from './CategoryCta';
 import { Loading } from './Loading';
 import { Sidebar } from './Sidebar';
 import { BarChart } from './BarChart';
-import { BasePanel } from './BasePanel';
 import { DashboardContainer } from './DashboardContainer';
 import { UserImage } from './UserImage';
 import { PanelHeader } from './PanelHeader';
@@ -44,7 +43,6 @@ export {
   DashboardContainer,
   UserImage,
   PanelHeader,
-  BasePanel,
   PanelButton,
   PanelPasswordInput,
   PanelBox,

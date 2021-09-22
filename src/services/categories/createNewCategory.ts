@@ -1,16 +1,12 @@
 import { externalApi } from '../../config/api-config';
 
-// Try to fetch user data from API
-export const updateUserData = async ({ name, email }) => {
+export async function createNewCategory(categoryName: string) {
   return await externalApi
-    .put('/authors', {
-      name,
-      email,
-    })
+    .post('/categories', { name: categoryName })
     .then((response) => {
-      return response.data;
+      return { error: false, message: response.data.message };
     })
     .catch((error) => {
       return { error: true, message: error.response.data.message };
     });
-};
+}

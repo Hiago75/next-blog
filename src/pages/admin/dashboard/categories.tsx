@@ -1,32 +1,30 @@
 import { GetServerSideProps } from 'next';
-import { destroyCookie } from 'nookies';
-import { useContext } from 'react';
+
 import { DashboardContainer } from '../../../components';
 import { PanelCategories } from '../../../containers';
-import { IContainerRequest } from '../../../interfaces/IContainerRequest';
+import { IDashboardCategoriesPageRequest } from '../../../interfaces/IDashboardCategoriesPageRequest';
+import { countAllPosts, verifyAuthentication } from '../../../services';
 
-export default function AdminCategories({ theme, toggleTheme }: IContainerRequest) {
+export default function AdminCategories({
+  numberOfPosts,
+  theme,
+  toggleTheme,
+}: IDashboardCategoriesPageRequest) {
   return (
     <DashboardContainer toggleTheme={toggleTheme} theme={theme}>
-      <PanelCategories />
+      <PanelCategories numberOfPosts={numberOfPosts} />
     </DashboardContainer>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { refresh_token, isAuthenticated } = ctx.req.cookies;
+  const numberOfPosts = await countAllPosts();
 
-  if (!refresh_token) {
-    isAuthenticated ? destroyCookie(ctx, 'isAuthenticated') : '';
-    return {
-      redirect: {
-        destination: '/admin',
-        permanent: false,
-      },
-    };
-  }
+  verifyAuthentication(ctx);
 
   return {
-    props: {},
+    props: {
+      numberOfPosts,
+    },
   };
 };

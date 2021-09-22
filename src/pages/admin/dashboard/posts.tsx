@@ -1,9 +1,9 @@
 import { GetServerSideProps } from 'next';
-import { destroyCookie } from 'nookies';
 
 import { PanelPosts } from '../../../containers';
 import { DashboardContainer } from '../../../components';
 import { IContainerRequest } from '../../../interfaces/IContainerRequest';
+import { verifyAuthentication } from '../../../services';
 
 export default function AdminPosts({ theme, toggleTheme }: IContainerRequest) {
   return (
@@ -14,17 +14,7 @@ export default function AdminPosts({ theme, toggleTheme }: IContainerRequest) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { refresh_token, isAuthenticated } = ctx.req.cookies;
-
-  if (!refresh_token) {
-    isAuthenticated ? destroyCookie(ctx, 'isAuthenticated') : '';
-    return {
-      redirect: {
-        destination: '/admin',
-        permanent: false,
-      },
-    };
-  }
+  verifyAuthentication(ctx);
 
   return {
     props: {},

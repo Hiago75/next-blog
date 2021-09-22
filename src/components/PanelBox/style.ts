@@ -1,27 +1,15 @@
 import styled from 'styled-components';
-import { BasePanel } from '..';
 
 export const PanelTitle = styled.h2`
   font-size: 19px;
   color: ${({ theme }) => theme.fonts.primaryFont};
 `;
 
-export const ContentPanel = styled(BasePanel)`
-  &.w80 {
-    width: calc(80% - 20px);
-  }
-  &.w50 {
-    width: 50%;
-  }
-  &.w40 {
-    width: 40%;
-  }
-  &.w20 {
-    width: 20%;
-  }
-  &.w30 {
-    width: 30%;
-  }
+export const ContentPanel = styled.div`
+  background-color: ${({ theme }) => theme.colors.contrastBackground};
+  width: 100%;
+  border-radius: 20px;
+  padding: 15px 25px;
 
   &.center {
     text-align: center;

@@ -1,8 +1,8 @@
 import { IUser } from '../../interfaces/IUser';
-import { BarChart, PanelBox } from '../../components';
+import { BarChart, PanelBox, RingChart } from '../../components';
 import { AiOutlineFileAdd } from 'react-icons/ai';
 
-import { PanelTitle, Panels, Content, ContentField, LinkButton } from './style';
+import { PanelTitle, Panels, Content, LinkButton } from './style';
 import { PostCount } from '../../domain/posts/post';
 
 interface PanelHomePageProps {
@@ -14,79 +14,64 @@ export const PanelHomePage = ({ user, numberOfPosts }: PanelHomePageProps) => {
   const authors = numberOfPosts.authors;
 
   function getChartData() {
-    const labels: string[] = [];
-    const numbers: number[] = [];
+    const numOfPostsLabels: string[] = [];
+    const numOfPostsNumbers: number[] = [];
 
     for (const authorName in authors) {
       const author = authors[authorName];
 
-      labels.push(authorName);
-      numbers.push(author.posts);
+      numOfPostsLabels.push(authorName);
+      numOfPostsNumbers.push(author.posts);
     }
 
-    return { labels, numbers };
+    return { numOfPostsLabels, numOfPostsNumbers };
   }
 
   function getUserPostData() {
     const author = authors[user?.name];
-    const rawCategories = author?.categories;
+    const categories = author?.categories;
 
-    const categories: { name: string; posts: number }[] = [];
+    const numOfUserPostsLabels: string[] = [];
+    const numOfUserPostsNumbers: number[] = [];
 
-    for (const category in rawCategories) {
-      const categoryObject = { name: category, posts: rawCategories[category] };
-      categories.push(categoryObject);
+    for (const categoryName in categories) {
+      numOfUserPostsLabels.push(categoryName);
+      numOfUserPostsNumbers.push(categories[categoryName]);
     }
 
-    return { categories };
+    return { numOfUserPostsLabels, numOfUserPostsNumbers };
   }
 
-  getUserPostData();
+  const { numOfPostsLabels, numOfPostsNumbers } = getChartData();
 
-  const { labels, numbers } = getChartData();
-
-  const { categories } = getUserPostData();
+  const { numOfUserPostsLabels, numOfUserPostsNumbers } = getUserPostData();
 
   return (
     <>
       <Panels>
-        <PanelBox className="w80" panelTitle="Número de posts por usuário">
-          <BarChart datasetLabel="Posts" labels={labels} numbers={numbers}></BarChart>
+        <PanelBox widthPercentage={64} panelTitle="Número de posts por usuário">
+          <BarChart
+            datasetLabel="Posts"
+            labels={numOfPostsLabels}
+            numbers={numOfPostsNumbers}
+          ></BarChart>
         </PanelBox>
 
-        <PanelBox className="w20 center" panelTitle="Total de posts">
-          <h1>{numberOfPosts.total}</h1>
+        <PanelBox widthPercentage={36} panelTitle="Meus posts por categoria">
+          <RingChart labels={numOfUserPostsLabels} numbers={numOfUserPostsNumbers}></RingChart>
         </PanelBox>
 
-        <PanelBox className="w50" panelTitle="Meus posts" contentClassName="flexContent">
-          <ContentField>
-            <p>Categorias:</p>
-            {categories.map((category) => {
-              if (category.posts >= 1) {
-                return <h3 key={category.name}>{category.name}</h3>;
-              }
-            })}
-          </ContentField>
-          <ContentField>
-            <p>Quantidade por categoria:</p>
-            {categories.map((category) => {
-              if (category.posts >= 1)
-                return (
-                  <h3 key={category.name}>
-                    {category.name} - {category.posts}
-                  </h3>
-                );
-            })}
-          </ContentField>
-        </PanelBox>
-
-        <PanelBox className="w30 center">
+        <PanelBox widthPercentage={30} className="center">
           <AiOutlineFileAdd size={50} color="#5A8BD6" />
           <PanelTitle>Novo post</PanelTitle>
           <Content>
-            <p>Quer criar uma nova publicação ?</p>
+            <p>Que tal mexer nesses números ? Crie uma nova publicação!</p>
           </Content>
           <LinkButton href="dashboard/posts">Criar post</LinkButton>
+        </PanelBox>
+
+        <PanelBox widthPercentage={20} className="center" panelTitle="Total de posts">
+          <h1>{numberOfPosts.total}</h1>
         </PanelBox>
       </Panels>
     </>
