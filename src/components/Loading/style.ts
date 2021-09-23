@@ -11,12 +11,16 @@ const rotate = keyframes`
 `;
 
 export const Container = styled.div`
+  position: absolute;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  z-index: 12;
   flex-wrap: wrap;
   height: 100vh;
+  width: 100%;
   flex-direction: column;
+  background-color: rgba(16, 16, 16, 0.5);
 `;
 
 export const LoadingWheel = styled.div`
@@ -25,13 +29,13 @@ export const LoadingWheel = styled.div`
   border-radius: 50%;
   border: 10px solid ${({ theme }) => theme.colors.alternativeBackground};
   border-top: 10px solid ${({ theme }) => theme.colors.contrastColor};
-  border-bottom: 10px solid ${({ theme }) => theme.colors.contrastColor};
   animation: ${rotate} 2s infinite linear;
 `;
 
 export const LoadingMessage = styled.div`
   width: 100%;
   padding: 20px 0;
+
   h1 {
     text-align: center;
     color: ${({ theme }) => theme.fonts.primaryFont};

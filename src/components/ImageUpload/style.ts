@@ -12,6 +12,13 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
   }
+
+  @media (max-width: 900px) {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    background-color: rgba(16, 16, 16, 0.5);
+  }
 `;
 
 export const PreviewBox = styled.div`
@@ -32,6 +39,12 @@ export const PreviewBox = styled.div`
       color: ${theme.fonts.primaryFont};
       font-size: 20px;
     }
+
+    @media (max-width: 900px) {
+      width: 100%;
+      height: 80%;
+      border-radius: 0;
+    }
   `}
 `;
 
@@ -48,15 +61,15 @@ export const Header = styled.div`
 `;
 
 export const PreviewImage = styled.img`
-  width: auto;
-  height: auto;
-  max-width: 256px;
-  max-height: 256px;
+  width: 256px;
+  height: 256px;
   border-radius: 50%;
   margin: 15px 0;
 
   &.cover {
     border-radius: 0;
+    width: auto;
+    height: auto;
     max-width: 340px;
     max-height: 256px;
   }
@@ -67,11 +80,20 @@ export const Footer = styled.footer`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
   padding: 5px 15px;
 
   p,
   button {
     display: inline-block;
+  }
+
+  @media (max-width: 900px) {
+    padding: 20px 5px;
+    p,
+    button {
+      width: 100%;
+    }
   }
 `;

@@ -8,6 +8,10 @@ export const Container = styled.section`
   position: relative;
   width: 100%;
   padding-right: 20px;
+
+  @media (max-width: 900px) {
+    padding-right: 0;
+  }
 `;
 
 export const FormContainer = styled.form`

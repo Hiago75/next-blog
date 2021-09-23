@@ -12,7 +12,7 @@ interface ImageUploadRequest {
   headerText: string;
   confirmText: string;
   temporaryPhoto: string;
-  uploadMethod: () => void;
+  uploadMethod?: () => Promise<void>;
 }
 
 export const ImageUpload = ({
@@ -35,7 +35,8 @@ export const ImageUpload = ({
   async function handlePhotoSubmit(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
 
-    uploadMethod();
+    if (uploadMethod) await uploadMethod();
+    setIsOpen(false);
   }
 
   return (

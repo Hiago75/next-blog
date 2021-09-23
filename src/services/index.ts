@@ -11,6 +11,7 @@ import { verifyAuthentication } from './auth/verifyAuthentication';
 import { createNewCategory } from './categories/createNewCategory';
 import { getAllCategories } from './categories/getAllCategories';
 import { createNewPost } from './posts/createNewPost';
+import { refreshUserToken } from './auth/refreshUserToken';
 import { createNewCover } from './covers/createNewCover';
 
 export {
@@ -28,4 +29,5 @@ export {
   getAllCategories,
   createNewPost,
   createNewCover,
+  refreshUserToken,
 };

@@ -10,7 +10,7 @@ export const Label = styled.label`
 
     & p.error-message {
       color: red;
-      margin-bottom: 20px;
+      margin-top: 5px;
     }
 
     &.onPanel {
@@ -27,6 +27,13 @@ export const Label = styled.label`
 
       input {
         margin: 0;
+      }
+    }
+
+    &.notEditable {
+      input {
+        cursor: not-allowed;
+        opacity: 0.5;
       }
     }
 

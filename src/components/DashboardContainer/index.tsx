@@ -41,6 +41,7 @@ export const DashboardContainer = ({ headerMessage, children, theme, toggleTheme
       <Head>
         <title>NextBlog | Admin</title>
       </Head>
+
       <Sidebar setMenuOpen={setMenuOpen} menuOpen={menuOpen} />
       <PanelHeader
         menuOpen={menuOpen}

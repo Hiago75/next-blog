@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, Dispatch, SetStateAction } from 'react';
 import { AiFillCamera } from 'react-icons/ai';
 
 import {
@@ -12,11 +12,14 @@ import {
 } from './style';
 
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
-import { PanelButton, ImageUpload, InputLabel } from '../../components';
+import { PanelButton, ImageUpload, InputLabel, ErrorBox } from '../../components';
 import { PostCategory, PostCover } from '../../domain/posts/post';
-import { createNewCover, createNewPost } from '../../services';
+import { createNewCover, createNewPost, refreshUserToken } from '../../services';
+import { showInputError } from '../../utils/showInputErrors';
+import { resetInputErrors } from '../../utils/resetInputErrors';
 
 interface PanelPostsRequest {
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
   categories: PostCategory;
 }
 
@@ -25,26 +28,35 @@ export const PanelPosts = ({ categories }: PanelPostsRequest) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [categoryId, setCategoryId] = useState('');
-  const [cover, setCover] = useState<PostCover>();
 
-  const [temporaryPhoto, setTemporaryPhoto] = useState('');
+  // Cover states
+  const [cover, setCover] = useState<PostCover>();
   const [photo, setPhoto] = useState<File>();
+  const [temporaryPhoto, setTemporaryPhoto] = useState('');
   const [editingCover, setEditingCover] = useState(false);
 
+  // Error states
+  const [error, setError] = useState('');
+
+  // Handle the change event of the title input
   function handleTitleInputChange(event: IOnChangeInput) {
     setTitle(event.target.value);
+    resetInputErrors();
   }
 
+  // Handle the change event of the select category input
   function handleSelectInput(event: React.ChangeEvent<HTMLSelectElement>) {
     setCategoryId(event.target.value);
   }
 
+  // Reset the photo and temporary photo states on click of the cover file input
   function handleCoverInputClick(event) {
     event.target.value = null;
     setPhoto(undefined);
-    setTemporaryPhoto('');
+    setTemporaryPhoto(undefined);
   }
 
+  // Open the image upload element and set the photo/temporary photo
   function handleCoverInputChange(event: IOnChangeInput) {
     const sentPhoto = event.target.files[0];
 
@@ -53,23 +65,60 @@ export const PanelPosts = ({ categories }: PanelPostsRequest) => {
     setTemporaryPhoto(URL.createObjectURL(sentPhoto));
   }
 
-  async function uploadCover() {
-    const cover = await createNewCover({ photo });
-    setCover(cover);
-    console.log(cover);
-  }
-
+  // set the content state as the value sent on the text editor
   function handleContentInputChange(value: () => string) {
     setContent(value());
   }
 
-  function handlePostFormSubmit(event: React.FormEvent) {
+  // Search for errors on form and display them, if nothing is wrong just return true;
+  function validateForm() {
+    let isValid = true;
+
+    if (!title) {
+      showInputError('title', 'É necessário enviar um titulo');
+      isValid = false;
+    }
+
+    if (!categoryId) return setError('É necessário selecionar uma categoria');
+    if (!photo) return setError('É necessário enviar uma foto de capa');
+    if (!content) return setError('É necessário enviar algum conteúdo para ser postado');
+
+    if (error) isValid = false;
+
+    return isValid;
+  }
+
+  // Upload the cover to the cloud
+  async function uploadCover() {
+    const cover = await createNewCover({ photo });
+    if (cover.error) return setError(cover.message);
+
+    setCover(cover);
+  }
+
+  // Reset the inputs and try to submit the form, if something goes wrong displays the error
+  async function handlePostFormSubmit(event: React.FormEvent) {
     event.preventDefault();
-    createNewPost(title, content, categoryId, cover.id);
+
+    // Resets the errors
+    resetInputErrors();
+    setError(undefined);
+
+    const isValid = validateForm();
+    if (!isValid) return;
+
+    await refreshUserToken();
+    await uploadCover();
+
+    const post = await createNewPost(title, content, categoryId, cover.id);
+
+    if (post.error) return setError(post.message);
   }
 
   return (
     <Container>
+      {error && <ErrorBox error={error} />}
+
       <ImageUpload
         cover
         headerText="Foto de capa da publicação"
@@ -77,7 +126,6 @@ export const PanelPosts = ({ categories }: PanelPostsRequest) => {
         isOpen={editingCover}
         setIsOpen={setEditingCover}
         temporaryPhoto={temporaryPhoto}
-        uploadMethod={uploadCover}
       ></ImageUpload>
 
       <FormContainer onSubmit={handlePostFormSubmit}>
@@ -112,7 +160,7 @@ export const PanelPosts = ({ categories }: PanelPostsRequest) => {
             accept="image/png, image/gif, image/jpeg"
           />
 
-          {cover && <ImagePreview src={cover.url}></ImagePreview>}
+          {temporaryPhoto && !editingCover && <ImagePreview src={temporaryPhoto}></ImagePreview>}
         </MediaBox>
 
         <TextEditor

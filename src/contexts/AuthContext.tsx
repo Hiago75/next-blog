@@ -15,7 +15,7 @@ interface IAuthProviderRequest {
 interface IAuthContext {
   isAuthenticated: string;
   user: IUser;
-  errors: IError;
+  errors: string;
   isRetrievingUserData: boolean;
   login: (data: ILoginRequest) => Promise<void>;
   refreshUserData: (hasRefreshToken: boolean) => Promise<void>;
@@ -27,16 +27,12 @@ interface IUpdateRequest {
   email: string;
 }
 
-interface IError {
-  message: string;
-}
-
 //Create context for authentication
 export const AuthContext = createContext({} as IAuthContext);
 
 export function AuthProvider({ children }: IAuthProviderRequest) {
   const [user, setUser] = useState<IUser | null>(null);
-  const [errors, setErrors] = useState<IError | null>(null);
+  const [errors, setErrors] = useState<string | null>(null);
   const [isRetrievingUserData, setIsRetrievingUserData] = useState(false);
   const { isAuthenticated } = parseCookies();
 

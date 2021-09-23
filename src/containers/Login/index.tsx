@@ -5,8 +5,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import isEmail from 'validator/lib/isEmail';
 
 import { AuthContext } from '../../contexts/AuthContext';
-import { PanelPasswordInput, InputLabel } from '../../components';
-import { Container, LoginForm, LoginBox, ErrorField } from './style';
+import { PanelPasswordInput, InputLabel, ErrorBox } from '../../components';
+import { Container, LoginForm, LoginBox } from './style';
+import { showInputError } from '../../utils/showInputErrors';
+import { resetInputErrors } from '../../utils/resetInputErrors';
 
 //TODO: Clean this code
 export const Login = () => {
@@ -23,38 +25,13 @@ export const Login = () => {
   //Set password value
   function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
     setPassword(e.target.value);
-    resetFields();
+    resetInputErrors();
   }
 
   //Set email value
   function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
     setEmail(e.target.value);
-    resetFields();
-  }
-
-  //Create a "p" element containing the error message and add a error class to the input
-  function showError(fieldName: string, message: string) {
-    const label = document.getElementById(fieldName);
-    const input = label.querySelector('input');
-    const p = document.createElement('p');
-
-    p.innerText = message;
-    p.classList.add('error-message');
-
-    input.classList.add('form-error');
-    label.appendChild(p);
-  }
-
-  //Remove all "p" from the labels and remove the error class from the inputs
-  function resetFields() {
-    const labels = document.querySelectorAll('label');
-    labels.forEach((label) => {
-      const errorMessage = label.querySelector('p');
-      const input = label.querySelector('input');
-
-      if (errorMessage) errorMessage.remove();
-      input.classList.remove('form-error');
-    });
+    resetInputErrors();
   }
 
   //Check if form is valid
@@ -65,7 +42,7 @@ export const Login = () => {
     const emailIsValid = isEmail(email);
 
     if (!emailIsValid) {
-      showError('email', 'Insira um e-mail válido');
+      showInputError('email', 'Insira um e-mail válido');
       return (isValid = false);
     }
 
@@ -76,7 +53,7 @@ export const Login = () => {
   //Handle what happens when someone click on form button
   async function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    resetFields();
+    resetInputErrors();
 
     if (!isFilled) return;
 
@@ -100,11 +77,7 @@ export const Login = () => {
     <Container>
       <LoginBox>
         <Image src="/logo.svg" alt="Colster" width={260} height={120} />
-        {errors && (
-          <ErrorField>
-            <span>{errors}</span>
-          </ErrorField>
-        )}
+        {errors && <ErrorBox error={errors} />}
 
         <LoginForm>
           <InputLabel htmlFor="email" id="email">

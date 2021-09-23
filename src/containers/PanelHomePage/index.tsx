@@ -1,9 +1,12 @@
-import { IUser } from '../../interfaces/IUser';
-import { BarChart, PanelBox, RingChart } from '../../components';
+import { Bar, Doughnut } from 'react-chartjs-2';
 import { AiOutlineFileAdd } from 'react-icons/ai';
+
+import { IUser } from '../../interfaces/IUser';
+import { PanelBox } from '../../components';
 
 import { PanelTitle, Panels, Content, LinkButton } from './style';
 import { PostCount } from '../../domain/posts/post';
+import { baseChart } from '../../utils/base-chart';
 
 interface PanelHomePageProps {
   user: IUser;
@@ -35,30 +38,30 @@ export const PanelHomePage = ({ user, numberOfPosts }: PanelHomePageProps) => {
     const numOfUserPostsNumbers: number[] = [];
 
     for (const categoryName in categories) {
-      numOfUserPostsLabels.push(categoryName);
-      numOfUserPostsNumbers.push(categories[categoryName]);
+      if (categories[categoryName] >= 1) {
+        numOfUserPostsLabels.push(categoryName);
+        numOfUserPostsNumbers.push(categories[categoryName]);
+      }
     }
 
     return { numOfUserPostsLabels, numOfUserPostsNumbers };
   }
 
   const { numOfPostsLabels, numOfPostsNumbers } = getChartData();
+  const numOfPostsChartData = baseChart(numOfPostsLabels, numOfPostsNumbers, 'Posts');
 
   const { numOfUserPostsLabels, numOfUserPostsNumbers } = getUserPostData();
+  const numOfUserPostsData = baseChart(numOfUserPostsLabels, numOfUserPostsNumbers);
 
   return (
     <>
       <Panels>
         <PanelBox widthPercentage={64} panelTitle="Número de posts por usuário">
-          <BarChart
-            datasetLabel="Posts"
-            labels={numOfPostsLabels}
-            numbers={numOfPostsNumbers}
-          ></BarChart>
+          <Bar options={numOfPostsChartData.options} data={numOfPostsChartData.data} />
         </PanelBox>
 
         <PanelBox widthPercentage={36} panelTitle="Meus posts por categoria">
-          <RingChart labels={numOfUserPostsLabels} numbers={numOfUserPostsNumbers}></RingChart>
+          <Doughnut options={numOfUserPostsData.options} data={numOfUserPostsData.data}></Doughnut>
         </PanelBox>
 
         <PanelBox widthPercentage={30} className="center">

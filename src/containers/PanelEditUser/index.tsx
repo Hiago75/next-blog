@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, FormEvent } from 'react';
 import { AiFillCamera } from 'react-icons/ai';
 
 import {
@@ -10,9 +10,6 @@ import {
   UserImageBox,
   PreviewName,
   PhotoInput,
-  UserDataLabel,
-  UserDataInput,
-  LabelTitle,
   EditPassword,
   FormWrapper,
 } from './style';
@@ -27,6 +24,9 @@ import {
 } from '../../components';
 import { AuthContext } from '../../contexts/AuthContext';
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
+import { showInputError } from '../../utils/showInputErrors';
+import { resetInputErrors } from '../../utils/resetInputErrors';
+import isEmail from 'validator/lib/isEmail';
 
 // Edit User component
 export const EditUser = () => {
@@ -49,11 +49,13 @@ export const EditUser = () => {
   // Handle the name field changes
   function handleNameChange(event: IOnChangeInput) {
     setName(event.target.value);
+    resetInputErrors();
   }
 
   //Handle the email field changes
   function handleEmailChange(event: IOnChangeInput) {
     setEmail(event.target.value);
+    resetInputErrors();
   }
 
   // Handle the password field changes
@@ -99,10 +101,33 @@ export const EditUser = () => {
     setEditingPassword(!editingPassword);
   }
 
+  function validateForm() {
+    let isValid = true;
+
+    if (name && name.length < 3) {
+      showInputError('name', 'Este nome é curto demais');
+      isValid = false;
+    }
+
+    const emailIsValid = isEmail(email);
+
+    if (email && !emailIsValid) {
+      showInputError('email', 'Insira um e-mail valido');
+      isValid = false;
+    }
+
+    return isValid;
+  }
+
   // Submit the form
-  async function handleSubmit(event: React.MouseEvent<HTMLButtonElement>) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault();
+
+    const isValid = validateForm();
+    if (!isValid) return;
+
     await updateUserData({ name, email });
+
     //Update the stored user data
     await refreshUserData(true);
   }
@@ -142,59 +167,57 @@ export const EditUser = () => {
 
         {!editingPassword && (
           <>
-            <UserDataContainer>
-              <InputLabel htmlFor="name" id="name">
+            <UserDataContainer onSubmit={handleSubmit}>
+              <InputLabel htmlFor="name-input" id="name">
                 Nome
                 <input
                   onChange={handleNameChange}
                   placeholder={user?.name}
                   value={name}
                   type="text"
-                  name="name"
+                  name="name-input"
                 />
               </InputLabel>
-              <InputLabel htmlFor="email" id="email">
+              <InputLabel htmlFor="email-input" id="email">
                 E-mail
                 <input
                   onChange={handleEmailChange}
                   placeholder={user?.email}
                   value={email}
                   type="email"
-                  name="email"
+                  name="email-input"
                 ></input>
               </InputLabel>
-              <UserDataLabel>
-                <LabelTitle>Senha</LabelTitle>
-                <UserDataInput
+              <InputLabel notEditable htmlFor="password-input" id="password">
+                Senha
+                <input
                   value="loremipsumdolorsit"
                   readOnly
                   className="userPassword"
                   type="password"
-                ></UserDataInput>
-              </UserDataLabel>
+                ></input>
+              </InputLabel>
 
               <EditPassword type="button" onClick={togglePasswordEditor}>
                 Quero alterar minha senha
               </EditPassword>
 
-              <PanelButton type="submit" onClick={handleSubmit}>
-                Atualizar
-              </PanelButton>
+              <PanelButton type="submit">Atualizar</PanelButton>
             </UserDataContainer>
           </>
         )}
 
         {editingPassword && (
           <UserDataContainer>
-            <UserDataLabel>
-              <LabelTitle>Senha atual</LabelTitle>
-              <UserDataInput
+            <InputLabel notEditable htmlFor="password-input" id="password">
+              Senha
+              <input
                 value="loremipsumdolorsit"
                 readOnly
                 className="userPassword"
                 type="password"
-              ></UserDataInput>
-            </UserDataLabel>
+              ></input>
+            </InputLabel>
             <PanelPasswordInput
               inputName="Nova senha"
               onInputChange={handleNewPasswordChange}

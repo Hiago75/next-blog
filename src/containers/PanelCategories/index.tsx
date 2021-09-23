@@ -5,6 +5,8 @@ import { PanelBox, PanelButton, InputLabel } from '../../components';
 import { PostCount } from '../../domain/posts/post';
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
 import { createNewCategory } from '../../services';
+import { showInputError } from '../../utils/showInputErrors';
+import { resetInputErrors } from '../../utils/resetInputErrors';
 
 interface IPanelCategoriesRequest {
   numberOfPosts: PostCount;
@@ -31,6 +33,7 @@ export const PanelCategories = ({ numberOfPosts }: IPanelCategoriesRequest) => {
   // Handle category input change
   function handleCategoryInputChange(event: IOnChangeInput) {
     setNewCategory(event.target.value);
+    resetInputErrors();
   }
 
   // Submit the new category
@@ -38,12 +41,10 @@ export const PanelCategories = ({ numberOfPosts }: IPanelCategoriesRequest) => {
     event.preventDefault();
     const { error, message } = await createNewCategory(newCategory);
 
-    if (error) return alert(message);
+    if (error) showInputError('category', message);
 
-    window.location.reload();
+    if (!error) window.location.reload();
   }
-
-  //     <PanelInput  placeholder="Categoria..." type="text" />
 
   return (
     <Container>

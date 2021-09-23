@@ -34,7 +34,7 @@ export const Content = styled.div`
   @media (max-width: 900px) {
     width: 100%;
     margin-left: 0;
-
+    padding: 0;
     margin: 70px 2% 0 2%;
   }
 `;

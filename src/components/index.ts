@@ -13,17 +13,16 @@ import { Spotlight } from './Spotlight';
 import { CategoryCta } from './CategoryCta';
 import { Loading } from './Loading';
 import { Sidebar } from './Sidebar';
-import { BarChart } from './BarChart';
 import { DashboardContainer } from './DashboardContainer';
 import { UserImage } from './UserImage';
 import { PanelHeader } from './PanelHeader';
 import { PanelButton } from './PanelButton';
 import { PanelPasswordInput } from './PanelPasswordInput';
 import { PanelBox } from './PanelBox';
-import { RingChart } from './RingChart';
 import { MenuController } from './MenuController';
 import { ImageUpload } from './ImageUpload';
 import { InputLabel } from './InputLabel';
+import { ErrorBox } from './ErrorBox';
 
 export {
   Header,
@@ -41,15 +40,14 @@ export {
   CategoryCta,
   Loading,
   Sidebar,
-  BarChart,
   DashboardContainer,
   UserImage,
   PanelHeader,
   PanelButton,
   PanelPasswordInput,
   PanelBox,
-  RingChart,
   MenuController,
   ImageUpload,
   InputLabel,
+  ErrorBox,
 };

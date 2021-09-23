@@ -44,6 +44,10 @@ export const LoginForm = styled.form`
       height: 50px;
     }
 
+    label {
+      margin-bottom: 25px !important;
+    }
+
     button {
       background-color: ${theme.colors.contrastColor};
       color: ${theme.fonts.contrastFont};
@@ -70,16 +74,5 @@ export const LoginForm = styled.form`
     button {
       width: 100%;
     }
-  }
-`;
-
-export const ErrorField = styled.div`
-  margin-top: 20px;
-  padding: 10px;
-  border-left: 1px solid red;
-  background-color: ${({ theme }) => theme.colors.alternativeBackground};
-
-  span {
-    color: red;
   }
 `;

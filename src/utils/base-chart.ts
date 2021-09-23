@@ -1,7 +1,6 @@
 import randomColor from 'randomcolor';
-import { IChartRequest } from '../interfaces/IChartRequest';
 
-export const baseChart = ({ datasetLabel, labels, numbers }: IChartRequest) => {
+export const baseChart = (labels: string[], numbers: number[], datasetLabel?: string) => {
   const backgroundColors = randomColor({
     count: labels.length,
     hue: 'blue',

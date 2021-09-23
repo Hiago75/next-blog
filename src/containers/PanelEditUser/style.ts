@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const Container = styled.section`
   display: flex;
@@ -84,34 +84,6 @@ export const UserDataContainer = styled.form`
 
   @media (max-width: 900px) {
     margin-bottom: 25px;
-  }
-`;
-
-export const UserDataLabel = styled.label`
-  width: 100%;
-  margin-top: 25px;
-`;
-
-export const LabelTitle = styled.p`
-  color: ${({ theme }) => theme.fonts.smothFont};
-  padding: 5px 0;
-`;
-
-export const UserDataInput = styled.input`
-  ${({ theme }) => css`
-    width: 100%;
-    border: 0;
-    outline: 0;
-    color ${theme.fonts.primaryFont};
-    background: ${theme.colors.contrastBackground};
-    height: 45px;
-    font-size: 18px;
-    padding-left: 15px;
-  `}
-
-  &.userPassword {
-    cursor: not-allowed;
-    opacity: 0.5;
   }
 `;
 
