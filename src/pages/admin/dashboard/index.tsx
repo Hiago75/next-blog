@@ -20,8 +20,9 @@ export default function AdminHome({ numberOfPosts, theme, toggleTheme }: IDashbo
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const numberOfPosts = await countAllPosts();
+  const { invalidUser, loggoutUser } = verifyAuthentication(ctx);
 
-  verifyAuthentication(ctx);
+  if (invalidUser) return loggoutUser;
 
   return {
     props: { numberOfPosts },

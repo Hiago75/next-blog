@@ -14,7 +14,7 @@ export type PostCategory = {
   name: string;
   created_at: string;
   updated_at: string;
-};
+}[];
 
 export type PostCreatedBy = {
   id: PostID;
@@ -38,10 +38,14 @@ export type PostCover = PostCoverFormat & {
   publicId: string;
   width: number;
   height: number;
+  url: string;
   provider: string;
   createdAt: string;
   updatedAt: string;
   format: {
+    id: string;
+    createdAt: string;
+    updatedAt: string;
     thumbnail: PostCoverFormat;
     small: PostCoverFormat;
     medium: PostCoverFormat;

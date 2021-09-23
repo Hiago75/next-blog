@@ -19,12 +19,11 @@ export default function AdminCategories({
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const numberOfPosts = await countAllPosts();
+  const { invalidUser, loggoutUser } = verifyAuthentication(ctx);
 
-  verifyAuthentication(ctx);
+  if (invalidUser) return loggoutUser;
 
   return {
-    props: {
-      numberOfPosts,
-    },
+    props: { numberOfPosts },
   };
 };

@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { AiFillCamera, AiOutlineClose } from 'react-icons/ai';
+import { AiFillCamera } from 'react-icons/ai';
 
 import {
   Container,
@@ -7,9 +7,6 @@ import {
   UserRole,
   UserData,
   UserDataContainer,
-  PreviewProfilePhoto,
-  PreviewProfilePhotoBox,
-  PreviewProfilePhotoHeader,
   UserImageBox,
   PreviewName,
   PhotoInput,
@@ -17,21 +14,23 @@ import {
   UserDataInput,
   LabelTitle,
   EditPassword,
-  ConfirmText,
   FormWrapper,
 } from './style';
 
-import { updateUserData, updateUserPhoto, createUserPhoto } from '../../services';
-import { UserImage, PanelButton, PanelPasswordInput, Loading } from '../../components';
+import { createUserPhoto, updateUserData, updateUserPhoto } from '../../services';
+import {
+  UserImage,
+  PanelButton,
+  PanelPasswordInput,
+  ImageUpload,
+  InputLabel,
+} from '../../components';
 import { AuthContext } from '../../contexts/AuthContext';
-import { ThemeContext } from 'styled-components';
+import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
 
 // Edit User component
 export const EditUser = () => {
-  const theme = useContext(ThemeContext);
   const { user, refreshUserData } = useContext(AuthContext);
-
-  const [isLoading, setIsLoading] = useState(false);
 
   const [profilePhoto, setProfilePhoto] = useState<File | undefined>();
   const [temporaryProfilePhoto, setTemporaryPhoto] = useState('');
@@ -48,29 +47,29 @@ export const EditUser = () => {
   const userRole = user?.admin ? 'Desenvolvedor(a)' : 'Autor(a)';
 
   // Handle the name field changes
-  function handleNameChange(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleNameChange(event: IOnChangeInput) {
     setName(event.target.value);
   }
 
   //Handle the email field changes
-  function handleEmailChange(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleEmailChange(event: IOnChangeInput) {
     setEmail(event.target.value);
   }
 
   // Handle the password field changes
-  function handleNewPasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleNewPasswordChange(event: IOnChangeInput) {
     setNewPassword(event.target.value);
     console.log(newPassword);
   }
 
   // Handle the confirm password field changes
-  function handleConfirmPasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleConfirmPasswordChange(event: IOnChangeInput) {
     setConfirmPassword(event.target.value);
     console.log(confirmPassword);
   }
 
   // Open the preview profile photo element and set the temporary photo
-  function handlePhotoInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+  function handlePhotoInputChange(event: IOnChangeInput) {
     const photo = event.target.files[0];
 
     setEditingProfilePhoto(true);
@@ -83,34 +82,21 @@ export const EditUser = () => {
     event.target.value = null;
   }
 
+  // Handle the upload/update of the profile photo
+  async function handleProfilePhoto() {
+    if (user?.profilePhoto) {
+      await updateUserPhoto({ photo: profilePhoto });
+    } else {
+      await createUserPhoto({ photo: profilePhoto });
+    }
+
+    await refreshUserData(true);
+  }
+
   // Toggle the form from the normal data to password
   function togglePasswordEditor(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     setEditingPassword(!editingPassword);
-  }
-
-  // Close the preview profile photo element
-  function handleClosePreviewClick() {
-    setEditingProfilePhoto(false);
-    setTemporaryPhoto('');
-    setProfilePhoto(undefined);
-  }
-
-  // Handle the profile photo submit event
-  async function handleProfilePhotoSubmit(event: React.MouseEvent<HTMLButtonElement>) {
-    event.preventDefault();
-    setIsLoading(true);
-
-    if (user?.profilePhoto) {
-      await updateUserPhoto({ profilePhoto });
-    } else {
-      await createUserPhoto({ profilePhoto });
-    }
-
-    setIsLoading(false);
-
-    //Update the stored user data
-    await refreshUserData(true);
   }
 
   // Submit the form
@@ -121,38 +107,17 @@ export const EditUser = () => {
     await refreshUserData(true);
   }
 
-  if (isLoading)
-    return (
-      <Loading>
-        <h1>Espera só um segundo enquanto eu atualizo tudo por aqui</h1>
-      </Loading>
-    );
-
   return (
     <Container>
-      {editingProfilePhoto && (
-        <PreviewProfilePhoto>
-          <PreviewProfilePhotoBox>
-            <PreviewProfilePhotoHeader>
-              <p>Sua nova foto de perfil irá ficar assim:</p>
-              <AiOutlineClose
-                onClick={handleClosePreviewClick}
-                size={32}
-                color={theme.fonts.primaryFont}
-              />
-            </PreviewProfilePhotoHeader>
+      <ImageUpload
+        isOpen={editingProfilePhoto}
+        setIsOpen={setEditingProfilePhoto}
+        headerText="Foto de perfil"
+        confirmText="Deseja realmente usar essa foto como foto de perfil ?"
+        temporaryPhoto={temporaryProfilePhoto}
+        uploadMethod={handleProfilePhoto}
+      ></ImageUpload>
 
-            <img src={temporaryProfilePhoto} alt="Temporary profile photo" />
-
-            <ConfirmText>
-              <p>Deseja realmente alterar sua foto ?</p>
-              <PanelButton onClick={handleProfilePhotoSubmit} type="submit">
-                Confirmar
-              </PanelButton>
-            </ConfirmText>
-          </PreviewProfilePhotoBox>
-        </PreviewProfilePhoto>
-      )}
       <FormWrapper>
         <UserPreview>
           <UserImageBox>
@@ -178,24 +143,26 @@ export const EditUser = () => {
         {!editingPassword && (
           <>
             <UserDataContainer>
-              <UserDataLabel>
-                <LabelTitle>Nome</LabelTitle>
-                <UserDataInput
+              <InputLabel htmlFor="name" id="name">
+                Nome
+                <input
                   onChange={handleNameChange}
                   placeholder={user?.name}
                   value={name}
                   type="text"
-                ></UserDataInput>
-              </UserDataLabel>
-              <UserDataLabel>
-                <LabelTitle>E-mail</LabelTitle>
-                <UserDataInput
+                  name="name"
+                />
+              </InputLabel>
+              <InputLabel htmlFor="email" id="email">
+                E-mail
+                <input
                   onChange={handleEmailChange}
                   placeholder={user?.email}
                   value={email}
                   type="email"
-                ></UserDataInput>
-              </UserDataLabel>
+                  name="email"
+                ></input>
+              </InputLabel>
               <UserDataLabel>
                 <LabelTitle>Senha</LabelTitle>
                 <UserDataInput

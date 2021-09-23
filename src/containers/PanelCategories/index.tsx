@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { Container, CategoryBox, PanelInput } from './style';
-import { PanelBox, PanelButton } from '../../components';
+import { Container, CategoryBox } from './style';
+import { PanelBox, PanelButton, InputLabel } from '../../components';
 import { PostCount } from '../../domain/posts/post';
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
 import { createNewCategory } from '../../services';
@@ -43,11 +43,20 @@ export const PanelCategories = ({ numberOfPosts }: IPanelCategoriesRequest) => {
     window.location.reload();
   }
 
+  //     <PanelInput  placeholder="Categoria..." type="text" />
+
   return (
     <Container>
       <PanelBox widthPercentage={50} panelTitle="Criar nova categoria">
         <form onSubmit={handleCategorySubmit}>
-          <PanelInput onChange={handleCategoryInputChange} placeholder="Categoria..." type="text" />
+          <InputLabel panel htmlFor="category" id="category">
+            <input
+              name="category"
+              placeholder="Categoria"
+              type="text"
+              onChange={handleCategoryInputChange}
+            />
+          </InputLabel>
           <PanelButton type="submit">Criar categoria</PanelButton>
         </form>
       </PanelBox>

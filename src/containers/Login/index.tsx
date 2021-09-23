@@ -5,8 +5,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import isEmail from 'validator/lib/isEmail';
 
 import { AuthContext } from '../../contexts/AuthContext';
-import { PanelPasswordInput } from '../../components';
-import { Container, LoginForm, LoginBox, IconInput, ErrorField } from './style';
+import { PanelPasswordInput, InputLabel } from '../../components';
+import { Container, LoginForm, LoginBox, ErrorField } from './style';
 
 //TODO: Clean this code
 export const Login = () => {
@@ -107,11 +107,10 @@ export const Login = () => {
         )}
 
         <LoginForm>
-          <IconInput htmlFor="email" id="email">
+          <InputLabel htmlFor="email" id="email">
             E-mail
-            <input onChange={handleEmailChange} type="text" />
-          </IconInput>
-
+            <input onChange={handleEmailChange} type="email" name="email" />
+          </InputLabel>
           <PanelPasswordInput inputName="Senha" onInputChange={handlePasswordChange} />
 
           <button onClick={handleSubmit} className={isFilled ? 'form-filled' : ''}>

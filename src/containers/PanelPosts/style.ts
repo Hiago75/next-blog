@@ -4,23 +4,17 @@ import Editor from 'rich-markdown-editor';
 export const Container = styled.section`
   display: flex;
   flex-flow: wrap;
+  justify-content: flex-start;
+  position: relative;
   width: 100%;
+  padding-right: 20px;
 `;
 
-export const FormContainer = styled.div`
+export const FormContainer = styled.form`
   display: inherit;
   flex-flow: inherit;
   justify-content: space-between;
   width: 100%;
-`;
-
-export const TitleInput = styled.input`
-  width: 80%;
-  font-size: 18px;
-
-  @media (max-width: 900px) {
-    width: 100%;
-  }
 `;
 
 export const MediaBox = styled.label`
@@ -35,9 +29,15 @@ export const MediaBox = styled.label`
   color: ${({ theme }) => theme.fonts.primaryFont};
   font-size: 25px;
   border-radius: 20px;
+  max-height: 450px;
 
   & svg {
     width: 100%;
+  }
+
+  div {
+    width: 100%;
+    text-align: center;
   }
 `;
 
@@ -84,8 +84,17 @@ export const TextEditor = styled(Editor)`
 
 export const SelectInput = styled.select`
   width: calc(20% - 10px);
+  height: 50px;
 
   @media (max-width: 900px) {
     width: 100%;
   }
+`;
+
+export const ImagePreview = styled.img`
+  width: auto;
+  height: auto;
+  max-height: 250px;
+  border-radius: 20px;
+  margin-top: 20px;
 `;

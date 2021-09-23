@@ -73,50 +73,6 @@ export const LoginForm = styled.form`
   }
 `;
 
-export const IconInput = styled.label`
-  ${({ theme }) => css`
-    display: block;
-    text-align: left;
-    color: ${theme.fonts.smothFont};
-    font-size: 17px;
-    margin: 20px 0;
-
-    & p.error-message {
-      color: red;
-      margin-bottom: 20px;
-    }
-
-    input {
-      margin-top: 10px;
-      border-radius: 10px;
-      outline: 0;
-      width: 100%;
-      height: 50px;
-      padding-left: 10px;
-      transition: border-color 300ms ease;
-      background-color: ${theme.colors.contrastBackground};
-      border: 2px solid ${theme.colors.contrastBackground};
-      border-color: ${theme.colors.contrastBackground};
-      color: ${theme.fonts.primaryFont};
-      font-size: 17px;
-
-      &:focus {
-        border-color: ${theme.colors.contrastColor};
-      }
-
-      &::placeholder {
-        font-size: 17px;
-      }
-
-      &.form-error {
-        border-color: red;
-      }
-
-      //TODO: Change autofill style
-    }
-  `}
-`;
-
 export const ErrorField = styled.div`
   margin-top: 20px;
   padding: 10px;

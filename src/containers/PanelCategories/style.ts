@@ -13,9 +13,3 @@ export const CategoryBox = styled.div`
   justify-content: space-between;
   margin: 13px 0;
 `;
-
-export const PanelInput = styled.input`
-  background: ${({ theme }) => theme.colors.mainBackground} !important;
-  width: 100%;
-  margin: 35px 0;
-`;

@@ -15,7 +15,9 @@ export default function AdminHome({ theme, toggleTheme }: IContainerRequest) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  verifyAuthentication(ctx);
+  const { invalidUser, loggoutUser } = verifyAuthentication(ctx);
+
+  if (invalidUser) return loggoutUser;
 
   return {
     props: {},

@@ -23,7 +23,7 @@ export const Container = styled.aside`
   position: fixed;
   overflow-y: auto;
   overflow-x: hidden;
-  z-index: 4;
+  z-index: 7;
 
   & a {
     display: none;

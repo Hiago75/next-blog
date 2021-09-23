@@ -9,6 +9,9 @@ import { updateUserPhoto } from './user/updateUserPhoto';
 import { createUserPhoto } from './user/createUserPhoto';
 import { verifyAuthentication } from './auth/verifyAuthentication';
 import { createNewCategory } from './categories/createNewCategory';
+import { getAllCategories } from './categories/getAllCategories';
+import { createNewPost } from './posts/createNewPost';
+import { createNewCover } from './covers/createNewCover';
 
 export {
   countAllPosts,
@@ -22,4 +25,7 @@ export {
   createUserPhoto,
   verifyAuthentication,
   createNewCategory,
+  getAllCategories,
+  createNewPost,
+  createNewCover,
 };

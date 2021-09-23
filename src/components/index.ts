@@ -22,6 +22,8 @@ import { PanelPasswordInput } from './PanelPasswordInput';
 import { PanelBox } from './PanelBox';
 import { RingChart } from './RingChart';
 import { MenuController } from './MenuController';
+import { ImageUpload } from './ImageUpload';
+import { InputLabel } from './InputLabel';
 
 export {
   Header,
@@ -48,4 +50,6 @@ export {
   PanelBox,
   RingChart,
   MenuController,
+  ImageUpload,
+  InputLabel,
 };

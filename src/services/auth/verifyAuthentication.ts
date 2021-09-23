@@ -4,14 +4,17 @@ import { ParsedUrlQuery } from 'querystring';
 
 export function verifyAuthentication(ctx: GetServerSidePropsContext<ParsedUrlQuery>) {
   const { refresh_token } = ctx.req.cookies;
+  const loggoutUser = {
+    redirect: {
+      destination: '/admin',
+      permanent: false,
+    },
+  };
 
   if (!refresh_token) {
     destroyCookie(ctx, 'isAuthenticated');
-    return {
-      redirect: {
-        destination: '/admin',
-        permanent: false,
-      },
-    };
+    return { invalidUser: true, loggoutUser };
   }
+
+  return { invalidUser: false };
 }

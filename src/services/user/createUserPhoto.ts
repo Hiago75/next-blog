@@ -2,9 +2,9 @@ import FormData from 'form-data';
 import { externalApi } from '../../config/api-config';
 
 // Update the user profile photo
-export const createUserPhoto = async ({ profilePhoto }: { profilePhoto: File }) => {
+export const createUserPhoto = async ({ photo }: { photo: File }) => {
   const formData = new FormData();
-  formData.append('image', profilePhoto, profilePhoto.name);
+  formData.append('image', photo, photo.name);
 
   return await externalApi
     .post('/photo', formData, {
@@ -14,9 +14,9 @@ export const createUserPhoto = async ({ profilePhoto }: { profilePhoto: File }) 
       withCredentials: true,
     })
     .then((response) => {
-      return response.data;
+      return response.data.message;
     })
     .catch((error) => {
-      return { error: true, message: 'Não foi possível atualizar a foto do usuário' };
+      return { error: true, message: error.response.data.message };
     });
 };
