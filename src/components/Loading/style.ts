@@ -11,13 +11,13 @@ const rotate = keyframes`
 `;
 
 export const Container = styled.div`
-  position: absolute;
+  position: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 12;
   flex-wrap: wrap;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   flex-direction: column;
   background-color: rgba(16, 16, 16, 0.5);

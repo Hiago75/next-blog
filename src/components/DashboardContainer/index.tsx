@@ -1,8 +1,9 @@
 import Head from 'next/head';
 import { useState, useContext } from 'react';
 
-import { Sidebar, Loading, PanelHeader } from '..';
+import { Sidebar, Loading, PanelHeader, Status } from '..';
 import { AuthContext } from '../../contexts/AuthContext';
+import { RequestContext } from '../../contexts/RequestContext';
 import { logoutUser } from '../../utils/logoutUser';
 import { Container, Content } from './style';
 
@@ -15,6 +16,7 @@ export interface PanelProps {
 
 export const DashboardContainer = ({ headerMessage, children, theme, toggleTheme }: PanelProps) => {
   const { user, isRetrievingUserData, refreshUserData, isAuthenticated } = useContext(AuthContext);
+  const { isLoading, success, displayResponse, requestMessage } = useContext(RequestContext);
 
   // Mobile menu state
   const [menuOpen, setMenuOpen] = useState(false);
@@ -41,6 +43,9 @@ export const DashboardContainer = ({ headerMessage, children, theme, toggleTheme
       <Head>
         <title>NextBlog | Admin</title>
       </Head>
+
+      {isLoading && <Loading></Loading>}
+      {displayResponse && <Status success={success} message={requestMessage}></Status>}
 
       <Sidebar setMenuOpen={setMenuOpen} menuOpen={menuOpen} />
       <PanelHeader

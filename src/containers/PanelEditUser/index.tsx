@@ -14,13 +14,14 @@ import {
   FormWrapper,
 } from './style';
 
-import { createUserPhoto, updateUserData, updateUserPhoto } from '../../services';
+import { createUserPhoto, refreshUserToken, updateUserData, updateUserPhoto } from '../../services';
 import {
   UserImage,
   PanelButton,
   PanelPasswordInput,
   ImageUpload,
   InputLabel,
+  ErrorBox,
 } from '../../components';
 import { AuthContext } from '../../contexts/AuthContext';
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
@@ -43,6 +44,8 @@ export const EditUser = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [editingPassword, setEditingPassword] = useState(false);
+
+  const [error, setError] = useState('');
 
   const userRole = user?.admin ? 'Desenvolvedor(a)' : 'Autor(a)';
 
@@ -126,7 +129,10 @@ export const EditUser = () => {
     const isValid = validateForm();
     if (!isValid) return;
 
-    await updateUserData({ name, email });
+    await refreshUserToken();
+    const { error, message } = await updateUserData({ name, email });
+
+    if (error) setError(message);
 
     //Update the stored user data
     await refreshUserData(true);
@@ -144,6 +150,7 @@ export const EditUser = () => {
       ></ImageUpload>
 
       <FormWrapper>
+        {error && <ErrorBox error={error} />}
         <UserPreview>
           <UserImageBox>
             <UserImage user={user} imageSize={200}>

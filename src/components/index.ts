@@ -23,6 +23,7 @@ import { MenuController } from './MenuController';
 import { ImageUpload } from './ImageUpload';
 import { InputLabel } from './InputLabel';
 import { ErrorBox } from './ErrorBox';
+import { Status } from './Status';
 
 export {
   Header,
@@ -50,4 +51,5 @@ export {
   ImageUpload,
   InputLabel,
   ErrorBox,
+  Status,
 };

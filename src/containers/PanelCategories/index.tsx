@@ -4,7 +4,7 @@ import { Container, CategoryBox } from './style';
 import { PanelBox, PanelButton, InputLabel } from '../../components';
 import { PostCount } from '../../domain/posts/post';
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
-import { createNewCategory } from '../../services';
+import { createNewCategory, refreshUserToken } from '../../services';
 import { showInputError } from '../../utils/showInputErrors';
 import { resetInputErrors } from '../../utils/resetInputErrors';
 
@@ -39,6 +39,7 @@ export const PanelCategories = ({ numberOfPosts }: IPanelCategoriesRequest) => {
   // Submit the new category
   async function handleCategorySubmit(event: React.FormEvent) {
     event.preventDefault();
+    await refreshUserToken();
     const { error, message } = await createNewCategory(newCategory);
 
     if (error) showInputError('category', message);

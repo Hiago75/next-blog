@@ -1,4 +1,4 @@
-import { useState, Dispatch, SetStateAction } from 'react';
+import { useState, useContext } from 'react';
 import { AiFillCamera } from 'react-icons/ai';
 
 import {
@@ -13,24 +13,27 @@ import {
 
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
 import { PanelButton, ImageUpload, InputLabel, ErrorBox } from '../../components';
-import { PostCategory, PostCover } from '../../domain/posts/post';
+import { PostCategory } from '../../domain/posts/post';
 import { createNewCover, createNewPost, refreshUserToken } from '../../services';
 import { showInputError } from '../../utils/showInputErrors';
 import { resetInputErrors } from '../../utils/resetInputErrors';
+import { RequestContext } from '../../contexts/RequestContext';
 
 interface PanelPostsRequest {
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
   categories: PostCategory;
 }
 
 export const PanelPosts = ({ categories }: PanelPostsRequest) => {
+  const { setLoading, setDisplayResponse, setSuccess, setRequestMessage } =
+    useContext(RequestContext);
+
   //Form states
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [categoryId, setCategoryId] = useState('');
+  let coverId: string;
 
-  // Cover states
-  const [cover, setCover] = useState<PostCover>();
+  // Photo
   const [photo, setPhoto] = useState<File>();
   const [temporaryPhoto, setTemporaryPhoto] = useState('');
   const [editingCover, setEditingCover] = useState(false);
@@ -90,35 +93,48 @@ export const PanelPosts = ({ categories }: PanelPostsRequest) => {
 
   // Upload the cover to the cloud
   async function uploadCover() {
-    const cover = await createNewCover({ photo });
-    if (cover.error) return setError(cover.message);
+    await createNewCover({ photo })
+      .then(({ id }) => (coverId = id))
+      .catch(({ message }) => handleSubmitResponse(false, message));
+  }
 
-    setCover(cover);
+  function handleSubmitResponse(success: boolean, message: string) {
+    setLoading(false);
+    setDisplayResponse(true);
+    setSuccess(success);
+    setRequestMessage(message);
   }
 
   // Reset the inputs and try to submit the form, if something goes wrong displays the error
   async function handlePostFormSubmit(event: React.FormEvent) {
     event.preventDefault();
+    window.scrollTo(0, 0);
+
+    setLoading(true);
 
     // Resets the errors
     resetInputErrors();
     setError(undefined);
 
     const isValid = validateForm();
-    if (!isValid) return;
+    if (!isValid) return setLoading(false);
 
     await refreshUserToken();
     await uploadCover();
 
-    const post = await createNewPost(title, content, categoryId, cover.id);
+    const post = await createNewPost(title, content, categoryId, coverId);
 
-    if (post.error) return setError(post.message);
+    if (post.error) return handleSubmitResponse(false, post.message);
+
+    handleSubmitResponse(
+      true,
+      'Publicação feita :) \n Em breve ela vai estar presente no blog para que todos possam ler',
+    );
   }
 
   return (
     <Container>
       {error && <ErrorBox error={error} />}
-
       <ImageUpload
         cover
         headerText="Foto de capa da publicação"
