@@ -10,7 +10,6 @@ export const refreshUserToken = async () => {
     })
     .catch(async (error) => {
       await logoutUser();
-      console.log('erro no refresh mano ', error.response.data.message);
       return { error: true, message: error.response.data.message };
     });
 };

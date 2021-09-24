@@ -24,8 +24,7 @@ interface PanelPostsRequest {
 }
 
 export const PanelPosts = ({ categories }: PanelPostsRequest) => {
-  const { setLoading, setDisplayResponse, setSuccess, setRequestMessage } =
-    useContext(RequestContext);
+  const { setLoading, setDisplayResponse, setSuccess, setStatusText } = useContext(RequestContext);
 
   //Form states
   const [title, setTitle] = useState('');
@@ -95,14 +94,16 @@ export const PanelPosts = ({ categories }: PanelPostsRequest) => {
   async function uploadCover() {
     await createNewCover({ photo })
       .then(({ id }) => (coverId = id))
-      .catch(({ message }) => handleSubmitResponse(false, message));
+      .catch(({ message }) => handleSubmitResponse(false, 'Opa, algo deu errado :(', message));
   }
 
-  function handleSubmitResponse(success: boolean, message: string) {
+  function handleSubmitResponse(success: boolean, title: string, message: string) {
+    const statusText = { title, message };
+
     setLoading(false);
-    setDisplayResponse(true);
     setSuccess(success);
-    setRequestMessage(message);
+    setStatusText(statusText);
+    setDisplayResponse(true);
   }
 
   // Reset the inputs and try to submit the form, if something goes wrong displays the error
@@ -124,11 +125,13 @@ export const PanelPosts = ({ categories }: PanelPostsRequest) => {
 
     const post = await createNewPost(title, content, categoryId, coverId);
 
-    if (post.error) return handleSubmitResponse(false, post.message);
+    if (post.error)
+      return handleSubmitResponse(false, 'Opa, acho que algo não está certo', post.message);
 
     handleSubmitResponse(
       true,
-      'Publicação feita :) \n Em breve ela vai estar presente no blog para que todos possam ler',
+      'Publicação feita :)',
+      'Em breve ela vai estar presente no blog para que todos possam ler',
     );
   }
 
@@ -191,7 +194,7 @@ export const PanelPosts = ({ categories }: PanelPostsRequest) => {
           onChange={handleContentInputChange}
         />
 
-        <PanelButton>Salvar publicação</PanelButton>
+        <PanelButton type="submit">Salvar publicação</PanelButton>
       </FormContainer>
     </Container>
   );

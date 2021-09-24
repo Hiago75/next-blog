@@ -1,18 +1,27 @@
 import { useEffect, useState, createContext, Dispatch, SetStateAction } from 'react';
+import { ITimer } from '../interfaces/ITimer';
+import { timer } from '../utils/timer';
 
 interface IRequestContext {
   isLoading: boolean;
   displayResponse: boolean;
   success: boolean;
-  requestMessage: string;
+  requestTimer: ITimer;
+  statusText: IStatusText;
+  transitionTime: number;
   setLoading: Dispatch<SetStateAction<boolean>>;
   setDisplayResponse: Dispatch<SetStateAction<boolean>>;
   setSuccess: Dispatch<SetStateAction<boolean>>;
-  setRequestMessage: Dispatch<SetStateAction<string>>;
+  setStatusText: Dispatch<SetStateAction<IStatusText>>;
 }
 
 interface IRequestProvider {
   children: React.ReactNode;
+}
+
+interface IStatusText {
+  title: string;
+  message: string;
 }
 
 export const RequestContext = createContext({} as IRequestContext);
@@ -22,27 +31,31 @@ export function RequestProvider({ children }: IRequestProvider) {
   const [displayResponse, setDisplayResponse] = useState(false);
 
   const [success, setSuccess] = useState<boolean>();
-  const [requestMessage, setRequestMessage] = useState('');
+  const [statusText, setStatusText] = useState<IStatusText>();
+
+  // Create a new timer
+  const transitionTime = 2500;
+  const [requestTimer] = useState(timer(() => setDisplayResponse(false), transitionTime));
 
   useEffect(() => {
     if (displayResponse) {
-      setTimeout(() => {
-        setDisplayResponse(false);
-      }, 5000);
+      requestTimer.resume();
     }
   });
 
   return (
     <RequestContext.Provider
       value={{
+        transitionTime,
         isLoading,
         displayResponse,
+        requestTimer,
         success,
-        requestMessage,
+        statusText,
         setLoading,
         setDisplayResponse,
         setSuccess,
-        setRequestMessage,
+        setStatusText,
       }}
     >
       {children}
