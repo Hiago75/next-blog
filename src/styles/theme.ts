@@ -6,6 +6,8 @@ export const darkTheme: DefaultTheme = {
     alternativeBackground: '#1B1B1B',
     contrastBackground: '#091323',
     contrastColor: '#5A8BD6',
+    errorColor: '#aa2020',
+    successColor: '#22b479',
   },
 
   fonts: {
@@ -21,6 +23,8 @@ export const lightTheme: DefaultTheme = {
     alternativeBackground: '#E4EAF2',
     contrastBackground: '#E4EAF2',
     contrastColor: '#5A8BD6',
+    errorColor: '#aa2020',
+    successColor: '#22b479',
   },
 
   fonts: {

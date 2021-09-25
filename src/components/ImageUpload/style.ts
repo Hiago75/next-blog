@@ -24,7 +24,7 @@ export const Container = styled.div`
 export const PreviewBox = styled.div`
   ${({ theme }) => css`
     width: 80%;
-    height: 450px;
+    height: auto;
     background-color: ${theme.colors.alternativeBackground};
     border-radius: 20px;
     display: flex;
@@ -32,6 +32,7 @@ export const PreviewBox = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    padding: 5px 0;
     -webkit-box-shadow: 0px 8px 12px -1px rgba(0, 0, 0, 0.35);
     box-shadow: 0px 8px 12px -1px rgba(0, 0, 0, 0.35);
 
@@ -42,7 +43,7 @@ export const PreviewBox = styled.div`
 
     @media (max-width: 900px) {
       width: 100%;
-      height: 80%;
+      height: 100%;
       border-radius: 0;
     }
   `}
@@ -72,6 +73,12 @@ export const PreviewImage = styled.img`
     height: auto;
     max-width: 340px;
     max-height: 256px;
+  }
+
+  @media (max-width: 900px) {
+    &.cover {
+      max-width: 300px;
+    }
   }
 `;
 

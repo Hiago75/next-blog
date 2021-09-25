@@ -40,7 +40,7 @@ export const EditUser = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
-  //TODO: add password change option
+  //TODO: add change password system
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [editingPassword, setEditingPassword] = useState(false);

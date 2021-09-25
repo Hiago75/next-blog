@@ -16,7 +16,7 @@ export interface PanelProps {
 
 export const DashboardContainer = ({ headerMessage, children, theme, toggleTheme }: PanelProps) => {
   const { user, isRetrievingUserData, refreshUserData, isAuthenticated } = useContext(AuthContext);
-  const { displayResponse, isLoading, success, statusText } = useContext(RequestContext);
+  const { responseStatus, isLoading } = useContext(RequestContext);
 
   // Mobile menu state
   const [menuOpen, setMenuOpen] = useState(false);
@@ -46,9 +46,7 @@ export const DashboardContainer = ({ headerMessage, children, theme, toggleTheme
 
       {isLoading && <Loading></Loading>}
 
-      {displayResponse && (
-        <Status success={success} title={statusText?.title} message={statusText?.message}></Status>
-      )}
+      {responseStatus.displayResponse && <Status></Status>}
 
       <Sidebar setMenuOpen={setMenuOpen} menuOpen={menuOpen} />
       <PanelHeader

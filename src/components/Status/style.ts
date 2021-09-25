@@ -64,7 +64,7 @@ export const SuccessAdvice = styled.div`
 
   @media (max-width: 900px) {
     width: 300px;
-    height: 300px;
+    height: 350px;
   }
 `;
 

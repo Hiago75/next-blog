@@ -11,6 +11,8 @@ declare module 'styled-components' {
       alternativeBackground: string;
       contrastBackground: string;
       contrastColor: string;
+      errorColor: string;
+      successColor: string;
     };
     fonts: {
       primaryFont: string;

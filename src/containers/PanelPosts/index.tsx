@@ -9,6 +9,8 @@ import {
   FormContainer,
   SelectInput,
   ImagePreview,
+  MediaEditor,
+  CoverPreview,
 } from './style';
 
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
@@ -20,11 +22,11 @@ import { resetInputErrors } from '../../utils/resetInputErrors';
 import { RequestContext } from '../../contexts/RequestContext';
 
 interface PanelPostsRequest {
-  categories: PostCategory;
+  categories: PostCategory[];
 }
 
 export const PanelPosts = ({ categories }: PanelPostsRequest) => {
-  const { setLoading, setDisplayResponse, setSuccess, setStatusText } = useContext(RequestContext);
+  const { setLoading, responseStatusFactory, setResponseStatus } = useContext(RequestContext);
 
   //Form states
   const [title, setTitle] = useState('');
@@ -98,12 +100,10 @@ export const PanelPosts = ({ categories }: PanelPostsRequest) => {
   }
 
   function handleSubmitResponse(success: boolean, title: string, message: string) {
-    const statusText = { title, message };
+    const statusText = responseStatusFactory(success, title, message);
 
     setLoading(false);
-    setSuccess(success);
-    setStatusText(statusText);
-    setDisplayResponse(true);
+    setResponseStatus(statusText);
   }
 
   // Reset the inputs and try to submit the form, if something goes wrong displays the error
@@ -166,20 +166,24 @@ export const PanelPosts = ({ categories }: PanelPostsRequest) => {
             </option>
           ))}
         </SelectInput>
-        <MediaBox>
-          <div>
-            <AiFillCamera size={44} />
-            Alterar foto de capa
-          </div>
+        <MediaBox className={temporaryPhoto ? 'image-cover' : ''}>
+          <CoverPreview>
+            {temporaryPhoto && !editingCover && <ImagePreview src={temporaryPhoto}></ImagePreview>}
 
-          <MediaInput
-            onClick={handleCoverInputClick}
-            onChange={handleCoverInputChange}
-            type="file"
-            accept="image/png, image/gif, image/jpeg"
-          />
+            <MediaEditor className={temporaryPhoto ? 'image-cover' : ''}>
+              <div>
+                <AiFillCamera size={44} />
+                Alterar foto de capa
+              </div>
 
-          {temporaryPhoto && !editingCover && <ImagePreview src={temporaryPhoto}></ImagePreview>}
+              <MediaInput
+                onClick={handleCoverInputClick}
+                onChange={handleCoverInputChange}
+                type="file"
+                accept="image/png, image/gif, image/jpeg"
+              />
+            </MediaEditor>
+          </CoverPreview>
         </MediaBox>
 
         <TextEditor

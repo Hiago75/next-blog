@@ -13,6 +13,7 @@ import { getAllCategories } from './categories/getAllCategories';
 import { createNewPost } from './posts/createNewPost';
 import { refreshUserToken } from './auth/refreshUserToken';
 import { createNewCover } from './covers/createNewCover';
+import { deleteCategory } from './categories/deleteCategory';
 
 export {
   countAllPosts,
@@ -30,4 +31,5 @@ export {
   createNewPost,
   createNewCover,
   refreshUserToken,
+  deleteCategory,
 };

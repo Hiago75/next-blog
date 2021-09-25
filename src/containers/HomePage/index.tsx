@@ -35,7 +35,7 @@ export function HomePage({ posts, category }: HomePageProps) {
           <p>Um lugar para aprender a magia da programação</p>
         </Heading>
         <Spotlight posts={posts} />
-        {/* TODO - Create dynamic categories ctas */}
+
         <CategoriesContainer>
           <CategoryCta
             as="/posts/page/1/javascript"

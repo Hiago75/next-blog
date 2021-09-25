@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FaTrash } from 'react-icons/fa';
 
 export const Container = styled.section`
   display: flex;
@@ -12,4 +13,8 @@ export const CategoryBox = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 13px 0;
+`;
+
+export const Trashcan = styled(FaTrash)`
+  cursor: pointer;
 `;

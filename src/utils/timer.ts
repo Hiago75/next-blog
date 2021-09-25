@@ -1,10 +1,10 @@
 export const timer = (callback: () => void, delay: number) => {
   let timerId: ReturnType<typeof setTimeout>;
-  let start: Date;
+  let start: number;
   let remaining = delay;
 
   function resume() {
-    start = new Date();
+    start = new Date().getTime();
 
     timerId = setTimeout(() => {
       remaining = delay;
@@ -14,7 +14,11 @@ export const timer = (callback: () => void, delay: number) => {
 
   function pause() {
     clearInterval(timerId);
-    remaining -= new Date().getTime() - start.getTime();
+    const pausedAt = new Date().getTime();
+
+    remaining -= pausedAt - start;
+
+    console.log('Paused the ' + name + ' ' + timerId + ' counter, remains ' + remaining + ' ms');
   }
 
   return { pause, resume };

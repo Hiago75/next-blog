@@ -10,7 +10,6 @@ import { Container, LoginForm, LoginBox } from './style';
 import { showInputError } from '../../utils/showInputErrors';
 import { resetInputErrors } from '../../utils/resetInputErrors';
 
-//TODO: Clean this code
 export const Login = () => {
   const { login, errors, isAuthenticated, refreshUserData } = useContext(AuthContext);
   const [email, setEmail] = useState('');

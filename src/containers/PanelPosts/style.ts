@@ -17,12 +17,14 @@ export const Container = styled.section`
 export const FormContainer = styled.form`
   display: inherit;
   flex-flow: inherit;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
+  margin: 10px 0;
 `;
 
 export const MediaBox = styled.label`
   display: flex;
+  position: relative;
   cursor: pointer;
   flex-wrap: wrap;
   justify-content: center;
@@ -35,13 +37,54 @@ export const MediaBox = styled.label`
   border-radius: 20px;
   max-height: 450px;
 
-  & svg {
+  svg {
     width: 100%;
   }
 
   div {
     width: 100%;
     text-align: center;
+  }
+
+  &.image-cover {
+    width: auto;
+    padding: 0;
+
+    img {
+      margin: 0;
+    }
+  }
+`;
+
+export const CoverPreview = styled.div``;
+
+export const ImagePreview = styled.img`
+  width: auto;
+  height: auto;
+  max-height: 450px;
+  border-radius: 20px;
+  margin-top: 20px;
+  filter: grayscale(0);
+
+  ${CoverPreview}:hover & {
+    opacity: 0.5;
+  }
+
+  @media (max-width: 900px) {
+    width: 95%;
+  }
+`;
+
+export const MediaEditor = styled.div`
+  &.image-cover {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+
+    ${CoverPreview}:hover & {
+      display: flex;
+    }
   }
 `;
 
@@ -93,12 +136,4 @@ export const SelectInput = styled.select`
   @media (max-width: 900px) {
     width: 100%;
   }
-`;
-
-export const ImagePreview = styled.img`
-  width: auto;
-  height: auto;
-  max-height: 250px;
-  border-radius: 20px;
-  margin-top: 20px;
 `;

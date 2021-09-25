@@ -1,18 +1,19 @@
 import { useEffect, useState, createContext, Dispatch, SetStateAction } from 'react';
+import { useRouter } from 'next/router';
+
 import { ITimer } from '../interfaces/ITimer';
 import { timer } from '../utils/timer';
 
 interface IRequestContext {
   isLoading: boolean;
-  displayResponse: boolean;
-  success: boolean;
+  isRefreshing: boolean;
+  responseStatus: IResponseStatus;
   requestTimer: ITimer;
-  statusText: IStatusText;
   transitionTime: number;
   setLoading: Dispatch<SetStateAction<boolean>>;
-  setDisplayResponse: Dispatch<SetStateAction<boolean>>;
-  setSuccess: Dispatch<SetStateAction<boolean>>;
-  setStatusText: Dispatch<SetStateAction<IStatusText>>;
+  setIsRefreshing: Dispatch<SetStateAction<boolean>>;
+  responseStatusFactory: (successful: boolean, title: string, message: string) => void;
+  refreshServerSideProps: () => void;
 }
 
 interface IRequestProvider {
@@ -24,38 +25,78 @@ interface IStatusText {
   message: string;
 }
 
+interface IResponseStatus {
+  displayResponse: boolean;
+  successful: boolean;
+  statusText: IStatusText;
+}
+
 export const RequestContext = createContext({} as IRequestContext);
 
 export function RequestProvider({ children }: IRequestProvider) {
-  const [isLoading, setLoading] = useState(false);
-  const [displayResponse, setDisplayResponse] = useState(false);
+  const router = useRouter();
 
-  const [success, setSuccess] = useState<boolean>();
-  const [statusText, setStatusText] = useState<IStatusText>();
+  // Window render related states
+  const [isLoading, setLoading] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const defaultResponseStatus = {
+    displayResponse: false,
+    successful: undefined,
+    statusText: undefined,
+  };
+
+  const [responseStatus, setResponseStatus] = useState<IResponseStatus>(defaultResponseStatus);
 
   // Create a new timer
   const transitionTime = 2500;
-  const [requestTimer] = useState(timer(() => setDisplayResponse(false), transitionTime));
+  const [requestTimer, setRequestTimer] = useState<ITimer>();
+
+  function responseStatusFactory(successful: boolean, title: string, message: string) {
+    const responseStatusObj = {
+      displayResponse: true,
+      successful,
+      statusText: {
+        title,
+        message,
+      },
+    };
+
+    setResponseStatus(responseStatusObj);
+  }
+
+  function refreshServerSideProps() {
+    router.replace(router.asPath);
+    setIsRefreshing(true);
+  }
+
+  function handleTimerEnd() {
+    setResponseStatus({ displayResponse: false, ...responseStatus });
+    console.log('Terminou');
+  }
 
   useEffect(() => {
-    if (displayResponse) {
+    const requestTimer = timer(handleTimerEnd, transitionTime);
+    setRequestTimer(requestTimer);
+
+    if (responseStatus.displayResponse) {
       requestTimer.resume();
+      alert(responseStatus.displayResponse);
     }
-  });
+  }, []);
 
   return (
     <RequestContext.Provider
       value={{
-        transitionTime,
         isLoading,
-        displayResponse,
+        isRefreshing,
+        transitionTime,
+        responseStatus,
         requestTimer,
-        success,
-        statusText,
         setLoading,
-        setDisplayResponse,
-        setSuccess,
-        setStatusText,
+        setIsRefreshing,
+        responseStatusFactory,
+        refreshServerSideProps,
       }}
     >
       {children}
