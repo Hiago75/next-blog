@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 import { ThemeContext } from 'styled-components';
 
 import { Container, CategoryBox, Trashcan } from './style';
-import { PanelBox, PanelButton, InputLabel } from '../../components';
+import { PanelBox, PanelButton, InputLabel, Warning } from '../../components';
 
 import { PostCategory, PostCount } from '../../domain/posts/post';
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
@@ -22,6 +22,8 @@ export const PanelCategories = ({ categories, numberOfPosts }: IPanelCategoriesR
     useContext(RequestContext);
 
   const [newCategory, setNewCategory] = useState('');
+  const [categoryToBeDeleted, setCategoryToBeDeleted] = useState('');
+  const [warning, setWarning] = useState(false);
 
   // Format the received categories into an array of objects
   function getCategoriesData() {
@@ -42,21 +44,6 @@ export const PanelCategories = ({ categories, numberOfPosts }: IPanelCategoriesR
   function handleCategoryInputChange(event: IOnChangeInput) {
     setNewCategory(event.target.value);
     resetInputErrors();
-  }
-
-  // Delete the category which've the trashcan clicked
-  async function handleDeleteClick(categoryId: string) {
-    setLoading(true);
-    const { error, message } = await deleteCategory(categoryId);
-    setLoading(false);
-
-    //Fail
-    if (error) return responseStatusFactory(false, 'Opa, algo deu errado', message);
-
-    refreshServerSideProps();
-
-    //Success
-    responseStatusFactory(true, 'Categoria apagada', 'Ela partiu...');
   }
 
   // Submit the new category
@@ -82,12 +69,50 @@ export const PanelCategories = ({ categories, numberOfPosts }: IPanelCategoriesR
     );
   }
 
+  // Delete the category which've the trashcan clicked
+  async function handleDeleteClick(categoryId: string) {
+    setCategoryToBeDeleted(categoryId);
+    setWarning(true);
+  }
+
+  // Callback that will be executed when the user confirm the warning box, basically deletes the category
+  async function warningConfirmClick() {
+    setWarning(false);
+    setLoading(true);
+    const { error, message } = await deleteCategory(categoryToBeDeleted);
+    setLoading(false);
+
+    //Fail
+    if (error) return responseStatusFactory(false, 'Opa, algo deu errado', message);
+
+    refreshServerSideProps();
+
+    //Success
+    responseStatusFactory(true, 'Categoria apagada', 'Ela partiu...');
+    setCategoryToBeDeleted('');
+  }
+
+  // Function that will be executed when the user cancel the warning box, just closes the box
+  function warningCancelClick() {
+    setWarning(false);
+    setCategoryToBeDeleted('');
+  }
+
   useEffect(() => {
     setIsRefreshing(false);
-  }, [categories, numberOfPosts]);
+  }, [categories, numberOfPosts, warning]);
 
   return (
     <Container>
+      {warning && (
+        <Warning
+          title="Tem certeza disso ?"
+          message="Assim que esta categoria for excluida, todos os posts nela também serão"
+          confirmCallback={warningConfirmClick}
+          cancelCallback={warningCancelClick}
+        />
+      )}
+
       <PanelBox widthPercentage={100} panelTitle="Criar nova categoria">
         <form onSubmit={handleCategorySubmit}>
           <InputLabel panel htmlFor="category" id="category">

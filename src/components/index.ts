@@ -24,6 +24,7 @@ import { ImageUpload } from './ImageUpload';
 import { InputLabel } from './InputLabel';
 import { ErrorBox } from './ErrorBox';
 import { Status } from './Status';
+import { Warning } from './Warning';
 
 export {
   Header,
@@ -52,4 +53,5 @@ export {
   InputLabel,
   ErrorBox,
   Status,
+  Warning,
 };

@@ -87,7 +87,7 @@ export const Sidebar = ({ menuOpen, setMenuOpen }: SidebarRequest) => {
         </NavItems>
 
         <Logout>
-          <BiLogOut size={32} color="#5A8BD6" onClick={handleLogout}></BiLogOut>
+          <BiLogOut size={32} onClick={handleLogout}></BiLogOut>
         </Logout>
       </IconContext.Provider>
     </Container>

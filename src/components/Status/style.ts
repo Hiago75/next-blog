@@ -20,32 +20,20 @@ export const trackProgress = keyframes`
   }
 `;
 
-export const Container = styled.div`
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 12;
-  flex-wrap: wrap;
-  height: 100%;
-  width: 100%;
-  flex-direction: column;
-`;
-
-export const SuccessAdvice = styled.div`
+export const ResponseStatus = styled.div`
   width: 400px;
   height: 450px;
+  cursor: pointer;
 
   //Position
   position: absolute;
-  bottom: -100%;
+  bottom: 50%;
   left: 50%;
-  transform: translate(-50%, 50%);
-  transition: bottom 0.4s ease-in;
+  transform: translate(-50%, 50%) scale(0);
+  transition: transform 0.2s ease-in;
 
-  ${Container}.active & {
-    display: block;
-    bottom: 50%;
+  &.active {
+    transform: translate(-50%, 50%) scale(1);
   }
 
   svg {
@@ -68,7 +56,7 @@ export const SuccessAdvice = styled.div`
   }
 `;
 
-export const SuccessBox = styled.div`
+export const ResponseBox = styled.div`
   ${({ theme }) => css`
     width: 100%;
     height: 100%;
@@ -93,7 +81,7 @@ export const ProgressBar = styled.span`
   background-color: ${({ theme }) => theme.colors.contrastColor};
   animation: ${trackProgress} linear 1 forwards;
 
-  ${Container}.paused & {
+  ${ResponseStatus}.paused & {
     animation-play-state: paused;
   }
 `;
