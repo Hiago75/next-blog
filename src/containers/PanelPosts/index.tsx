@@ -26,7 +26,7 @@ interface PanelPostsRequest {
 }
 
 export const PanelPosts = ({ categories }: PanelPostsRequest) => {
-  const { setLoading, responseStatusFactory, setResponseStatus } = useContext(RequestContext);
+  const { setLoading, responseStatusFactory } = useContext(RequestContext);
 
   //Form states
   const [title, setTitle] = useState('');
@@ -100,10 +100,8 @@ export const PanelPosts = ({ categories }: PanelPostsRequest) => {
   }
 
   function handleSubmitResponse(success: boolean, title: string, message: string) {
-    const statusText = responseStatusFactory(success, title, message);
-
     setLoading(false);
-    setResponseStatus(statusText);
+    responseStatusFactory(success, title, message);
   }
 
   // Reset the inputs and try to submit the form, if something goes wrong displays the error

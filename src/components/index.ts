@@ -25,6 +25,7 @@ import { InputLabel } from './InputLabel';
 import { ErrorBox } from './ErrorBox';
 import { Status } from './Status';
 import { Warning } from './Warning';
+import { SubMenu } from './SubMenu';
 
 export {
   Header,
@@ -54,4 +55,5 @@ export {
   ErrorBox,
   Status,
   Warning,
+  SubMenu,
 };

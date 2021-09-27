@@ -132,6 +132,7 @@ export const TextEditor = styled(Editor)`
 export const SelectInput = styled.select`
   width: calc(20% - 10px);
   height: 50px;
+  margin-left: 10px;
 
   @media (max-width: 900px) {
     width: 100%;

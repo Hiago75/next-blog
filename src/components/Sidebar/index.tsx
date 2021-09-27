@@ -1,20 +1,13 @@
+import { Dispatch, SetStateAction } from 'react';
 import Link from 'next/link';
 
-import { NavLink, MenuController } from '..';
 import { IconContext } from 'react-icons';
 import { BiLogOut } from 'react-icons/bi';
-import {
-  AiOutlineHome,
-  AiFillHome,
-  AiOutlineUnorderedList,
-  AiOutlineOrderedList,
-  AiOutlineFileAdd,
-  AiFillFileAdd,
-} from 'react-icons/ai';
-import { RiUserLine, RiUserFill } from 'react-icons/ri';
-import { Container, LogoBox, NavItems, Logout } from './style';
-import { Dispatch, SetStateAction } from 'hoist-non-react-statics/node_modules/@types/react';
+
+import { MenuController, SubMenu } from '..';
+import { Container, LogoBox, SidebarNav, SidebarUl, Logout } from './style';
 import { logoutUser } from '../../utils/logoutUser';
+import { SidebarData } from './sidebarData';
 
 interface SidebarRequest {
   menuOpen: boolean;
@@ -47,44 +40,14 @@ export const Sidebar = ({ menuOpen, setMenuOpen }: SidebarRequest) => {
           <img className="min-logo" src="/colster-reduzido.svg" alt="Logo da Colster reduzida" />
         </Link>
       </LogoBox>
-      <IconContext.Provider value={{ size: '26', color: '#5A8BD6' }}>
-        <NavItems>
-          <ul>
-            <NavLink
-              outlineIcon={<AiOutlineHome />}
-              filledIcon={<AiFillHome />}
-              href="/admin/dashboard"
-              exact
-              className="sidebar"
-            >
-              Página Inicial
-            </NavLink>
-            <NavLink
-              outlineIcon={<RiUserLine />}
-              filledIcon={<RiUserFill />}
-              href="/admin/dashboard/profile"
-              className="sidebar"
-            >
-              Meu perfil
-            </NavLink>
-            <NavLink
-              outlineIcon={<AiOutlineFileAdd />}
-              filledIcon={<AiFillFileAdd />}
-              href="/admin/dashboard/posts"
-              className="sidebar"
-            >
-              Posts
-            </NavLink>
-            <NavLink
-              outlineIcon={<AiOutlineUnorderedList />}
-              filledIcon={<AiOutlineOrderedList />}
-              href="/admin/dashboard/categories"
-              className="sidebar"
-            >
-              Categorias
-            </NavLink>
-          </ul>
-        </NavItems>
+      <IconContext.Provider value={{ size: '28', color: '#5A8BD6' }}>
+        <SidebarNav>
+          <SidebarUl>
+            {SidebarData.map((item, index) => (
+              <SubMenu item={item} key={index}></SubMenu>
+            ))}
+          </SidebarUl>
+        </SidebarNav>
 
         <Logout>
           <BiLogOut size={32} onClick={handleLogout}></BiLogOut>

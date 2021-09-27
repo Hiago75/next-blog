@@ -1,11 +1,12 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const LogoBox = styled.div`
   text-align: center;
-  margin: 20px 0 60px;
+  margin: 20px 0 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 80px;
 
   & img {
     cursor: pointer;
@@ -25,8 +26,15 @@ export const Container = styled.aside`
   overflow-x: hidden;
   z-index: 7;
 
-  & a {
+  a,
+  span {
     display: none;
+  }
+
+  li {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
   }
 
   ${LogoBox} {
@@ -42,8 +50,10 @@ export const Container = styled.aside`
   &:hover {
     width: 205px;
 
-    & a {
-      display: block;
+    a,
+    li,
+    span {
+      display: inline-block;
     }
 
     ${LogoBox} {
@@ -82,28 +92,9 @@ export const Container = styled.aside`
   }
 `;
 
-export const NavItems = styled.nav`
-  ${({ theme }) => css`
-    li {
-      &.sidebar {
-        box-sizing: border-box;
-        padding: 15px;
-        margin: 20px 0;
+export const SidebarNav = styled.nav``;
 
-        &.active,
-        &:hover {
-          border-left: 5px solid ${theme.colors.contrastColor};
-          border-bottom: 0;
-          border-bottom: 0;
-        }
-
-        &.active {
-          font-weight: bold;
-        }
-      }
-    }
-  `};
-`;
+export const SidebarUl = styled.ul``;
 
 export const Logout = styled.div`
   position: absolute;
