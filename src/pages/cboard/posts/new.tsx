@@ -1,14 +1,18 @@
 import { GetServerSideProps } from 'next';
 
-import { PanelPosts } from '../../../containers';
+import { DashboardNewPost } from '../../../containers';
 import { DashboardContainer } from '../../../components';
 import { verifyAuthentication, getAllCategories } from '../../../services';
-import { IDashboardPostsPageRequest } from '../../../interfaces/IDashboardPostsPageRequest';
+import { IDashboardNewPostPageRequest } from '../../../interfaces/IDashboardNewPostPageRequest';
 
-export default function AdminPosts({ categories, theme, toggleTheme }: IDashboardPostsPageRequest) {
+export default function AdminPosts({
+  categories,
+  theme,
+  toggleTheme,
+}: IDashboardNewPostPageRequest) {
   return (
     <DashboardContainer toggleTheme={toggleTheme} theme={theme} headerMessage="Criação de post">
-      <PanelPosts categories={categories} />
+      <DashboardNewPost categories={categories} />
     </DashboardContainer>
   );
 }

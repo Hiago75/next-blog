@@ -60,9 +60,9 @@ export type PostData = {
   slug: string;
   author: PostAuthor;
   category: PostCategory;
+  cover: PostCover;
   created_at: string;
   updated_at: string;
-  cover: PostCover;
 };
 
 export type PostCount = {

@@ -8,6 +8,11 @@ export const Container = styled.div`
   height: 100vh;
   width: 100%;
   background-color: ${({ theme }) => theme.colors.alternativeBackground};
+
+  & div.login-box {
+    margin-bottom: 0;
+    margin-top: 40px;
+  }
 `;
 
 export const LoginBox = styled.div`

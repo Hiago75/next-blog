@@ -60,23 +60,19 @@ export function AuthProvider({ children }: IAuthProviderRequest) {
 
     setErrors(null);
 
-    try {
-      const user = await fetchUserData(false);
-      setUser(user);
+    const user = await fetchUserData(false);
+    setUser(user);
 
-      const expireDate = new Date();
-      expireDate.setDate(expireDate.getDate() + 1);
+    const expireDate = new Date();
+    expireDate.setDate(expireDate.getDate() + 1);
 
-      setCookie(undefined, 'isAuthenticated', 'true', {
-        expires: expireDate,
-        sameSite: 'strict',
-        secure: true,
-      });
+    setCookie(undefined, 'isAuthenticated', 'true', {
+      expires: expireDate,
+      sameSite: 'strict',
+      secure: true,
+    });
 
-      Router.push('/admin/dashboard');
-    } catch (e) {
-      console.log(e);
-    }
+    Router.push('/cboard');
   }
 
   //Update user data on DB

@@ -18,7 +18,7 @@ export const Login = () => {
 
   if (isAuthenticated) {
     refreshUserData(true);
-    Router.push('/admin/dashboard');
+    Router.push('/cboard');
   }
 
   //Set password value
@@ -76,7 +76,7 @@ export const Login = () => {
     <Container>
       <LoginBox>
         <Image src="/logo.svg" alt="Colster" width={260} height={120} />
-        {errors && <ErrorBox error={errors} />}
+        {errors && <ErrorBox className="login-box" error={errors} />}
 
         <LoginForm>
           <InputLabel htmlFor="email" id="email">

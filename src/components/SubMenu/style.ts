@@ -32,6 +32,12 @@ export const SidebarList = styled.li`
   &.active {
     border-left: 3px solid ${({ theme }) => theme.colors.contrastColor};
   }
+
+  @media (max-width: 900px) {
+    svg {
+      display: inline-block;
+    }
+  }
 `;
 
 export const SidebarLabel = styled.a`
@@ -44,6 +50,10 @@ export const SidebarLabel = styled.a`
     &.active {
       font-weight: bold;
       color: ${theme.fonts.primaryFont};
+    }
+
+    @media (max-width: 900px) {
+      display: inline-block;
     }
   `}
 `;

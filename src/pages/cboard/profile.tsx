@@ -1,15 +1,15 @@
 import { GetServerSideProps } from 'next';
-import { DashboardContainer } from '../../../components';
-import { EditUser } from '../../../containers/';
+import { DashboardContainer } from '../../components';
+import { DashboardEditUser } from '../../containers';
 
-import { IContainerRequest } from '../../../interfaces/IContainerRequest';
+import { IContainerRequest } from '../../interfaces/IContainerRequest';
 
-import { verifyAuthentication } from '../../../services/auth/verifyAuthentication';
+import { verifyAuthentication } from '../../services/auth/verifyAuthentication';
 
 export default function AdminHome({ theme, toggleTheme }: IContainerRequest) {
   return (
     <DashboardContainer toggleTheme={toggleTheme} theme={theme} headerMessage="Meu perfil">
-      <EditUser />
+      <DashboardEditUser />
     </DashboardContainer>
   );
 }

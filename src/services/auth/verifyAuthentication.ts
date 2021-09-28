@@ -6,7 +6,7 @@ export function verifyAuthentication(ctx: GetServerSidePropsContext<ParsedUrlQue
   const { refresh_token } = ctx.req.cookies;
   const loggoutUser = {
     redirect: {
-      destination: '/admin',
+      destination: '/cboard/login',
       permanent: false,
     },
   };

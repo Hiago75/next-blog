@@ -4,10 +4,11 @@ import { PaginationPage } from './PaginationPage';
 import { Error404 } from './Error404';
 import { DashboardContainer } from '../components/DashboardContainer';
 import { Login } from './Login';
-import { EditUser } from './PanelEditUser';
-import { PanelHomePage } from './PanelHomePage';
-import { PanelCategories } from './PanelCategories';
-import { PanelPosts } from './PanelPosts';
+import { DashboardEditUser } from './DashboardEditUser';
+import { DashboardHomePage } from './DashboardHomePage';
+import { DashboardCategories } from './DashboardCategories';
+import { DashboardPostsHome } from './DashboardPostsHome';
+import { DashboardNewPost } from './DashboardNewPost';
 
 export {
   Post,
@@ -16,8 +17,9 @@ export {
   Error404,
   DashboardContainer,
   Login,
-  EditUser,
-  PanelHomePage,
-  PanelCategories,
-  PanelPosts,
+  DashboardCategories,
+  DashboardEditUser,
+  DashboardHomePage,
+  DashboardPostsHome,
+  DashboardNewPost,
 };

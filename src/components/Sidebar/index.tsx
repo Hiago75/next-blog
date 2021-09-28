@@ -23,7 +23,7 @@ export const Sidebar = ({ menuOpen, setMenuOpen }: SidebarRequest) => {
   return (
     <Container className={menuOpen ? ' menu-open' : ''}>
       <LogoBox>
-        <Link href="/admin/dashboard">
+        <Link href="/cboard">
           <img
             className="full-logo"
             src="/logo.svg"
@@ -36,7 +36,7 @@ export const Sidebar = ({ menuOpen, setMenuOpen }: SidebarRequest) => {
         {/* Show the menu icon if the mobile menu is open */}
         {menuOpen && <MenuController setMenuOpen={setMenuOpen} menuOpen={menuOpen} />}
 
-        <Link href="/admin/dashboard">
+        <Link href="/cboard">
           <img className="min-logo" src="/colster-reduzido.svg" alt="Logo da Colster reduzida" />
         </Link>
       </LogoBox>

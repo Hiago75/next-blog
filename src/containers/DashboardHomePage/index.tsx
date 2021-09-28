@@ -8,12 +8,12 @@ import { PanelTitle, Panels, Content, LinkButton } from './style';
 import { PostCount } from '../../domain/posts/post';
 import { baseChart } from '../../utils/base-chart';
 
-interface PanelHomePageProps {
+interface IDashboardHomePageProps {
   user: IUser;
   numberOfPosts: PostCount;
 }
 
-export const PanelHomePage = ({ user, numberOfPosts }: PanelHomePageProps) => {
+export const DashboardHomePage = ({ user, numberOfPosts }: IDashboardHomePageProps) => {
   const authors = numberOfPosts.authors;
 
   function getChartData() {

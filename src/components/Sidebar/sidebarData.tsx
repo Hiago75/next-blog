@@ -11,39 +11,39 @@ import { RiUserLine, RiUserFill } from 'react-icons/ri';
 export const SidebarData = [
   {
     title: 'Página inicial',
-    path: '/admin/dashboard',
+    path: '/cboard',
     outlineIcon: <AiOutlineHome />,
     filledIcon: <AiFillHome />,
   },
   {
     title: 'Meu perfil',
-    path: '/admin/dashboard/profile',
+    path: '/cboard/profile',
     outlineIcon: <RiUserLine />,
     filledIcon: <RiUserFill />,
   },
   {
     title: 'Posts',
-    path: '/admin/dashboard/posts',
+    path: '/cboard/posts',
     outlineIcon: <AiOutlineFileAdd />,
     filledIcon: <AiFillFileAdd />,
     subNav: [
       {
         title: 'Página inicial',
-        path: '/admin/dashboard/posts',
+        path: '/cboard/posts',
       },
       {
         title: 'Editar post',
-        path: '/admin/dashboard/posts/edit',
+        path: '/cboard/posts/edit',
       },
       {
         title: 'Criar post',
-        path: 'admin/dashboard/posts/create',
+        path: '/cboard/posts/new',
       },
     ],
   },
   {
     title: 'Categorias',
-    path: '/admin/dashboard/categories',
+    path: '/cboard/categories',
     outlineIcon: <AiOutlineUnorderedList />,
     filledIcon: <AiOutlineOrderedList />,
   },

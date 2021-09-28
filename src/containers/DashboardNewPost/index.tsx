@@ -21,11 +21,11 @@ import { showInputError } from '../../utils/showInputErrors';
 import { resetInputErrors } from '../../utils/resetInputErrors';
 import { RequestContext } from '../../contexts/RequestContext';
 
-interface PanelPostsRequest {
+interface IDashboardNewPostRequest {
   categories: PostCategory[];
 }
 
-export const PanelPosts = ({ categories }: PanelPostsRequest) => {
+export const DashboardNewPost = ({ categories }: IDashboardNewPostRequest) => {
   const { setLoading, responseStatusFactory } = useContext(RequestContext);
 
   //Form states

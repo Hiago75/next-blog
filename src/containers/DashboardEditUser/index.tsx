@@ -30,7 +30,7 @@ import { resetInputErrors } from '../../utils/resetInputErrors';
 import isEmail from 'validator/lib/isEmail';
 
 // Edit User component
-export const EditUser = () => {
+export const DashboardEditUser = () => {
   const { user, refreshUserData } = useContext(AuthContext);
 
   const [profilePhoto, setProfilePhoto] = useState<File | undefined>();

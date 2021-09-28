@@ -11,12 +11,12 @@ import { showInputError } from '../../utils/showInputErrors';
 import { resetInputErrors } from '../../utils/resetInputErrors';
 import { RequestContext } from '../../contexts/RequestContext';
 
-interface IPanelCategoriesRequest {
+interface IDashboardCategoriesRequest {
   categories: PostCategory[];
   numberOfPosts: PostCount;
 }
 
-export const PanelCategories = ({ categories, numberOfPosts }: IPanelCategoriesRequest) => {
+export const DashboardCategories = ({ categories, numberOfPosts }: IDashboardCategoriesRequest) => {
   const theme = useContext(ThemeContext);
   const { setLoading, responseStatusFactory, refreshServerSideProps, setIsRefreshing } =
     useContext(RequestContext);
@@ -69,7 +69,7 @@ export const PanelCategories = ({ categories, numberOfPosts }: IPanelCategoriesR
     );
   }
 
-  // Delete the category which've the trashcan clicked
+  //Open the warning and store the id
   async function handleDeleteClick(categoryId: string) {
     setCategoryToBeDeleted(categoryId);
     setWarning(true);
@@ -79,6 +79,7 @@ export const PanelCategories = ({ categories, numberOfPosts }: IPanelCategoriesR
   async function warningConfirmClick() {
     setWarning(false);
     setLoading(true);
+    await refreshUserToken();
     const { error, message } = await deleteCategory(categoryToBeDeleted);
     setLoading(false);
 

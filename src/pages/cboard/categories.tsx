@@ -1,9 +1,9 @@
 import { GetServerSideProps } from 'next';
 
-import { DashboardContainer } from '../../../components';
-import { PanelCategories } from '../../../containers';
-import { IDashboardCategoriesPageRequest } from '../../../interfaces/IDashboardCategoriesPageRequest';
-import { countAllPosts, getAllCategories, verifyAuthentication } from '../../../services';
+import { DashboardContainer } from '../../components';
+import { DashboardCategories } from '../../containers';
+import { IDashboardCategoriesPageRequest } from '../../interfaces/IDashboardCategoriesPageRequest';
+import { countAllPosts, getAllCategories, verifyAuthentication } from '../../services';
 
 export default function AdminCategories({
   numberOfPosts,
@@ -13,7 +13,7 @@ export default function AdminCategories({
 }: IDashboardCategoriesPageRequest) {
   return (
     <DashboardContainer toggleTheme={toggleTheme} theme={theme}>
-      <PanelCategories categories={categories} numberOfPosts={numberOfPosts} />
+      <DashboardCategories categories={categories} numberOfPosts={numberOfPosts} />
     </DashboardContainer>
   );
 }
