@@ -136,5 +136,6 @@ export const SelectInput = styled.select`
 
   @media (max-width: 900px) {
     width: 100%;
+    margin-left: 0;
   }
 `;

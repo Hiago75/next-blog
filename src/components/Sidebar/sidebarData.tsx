@@ -32,12 +32,12 @@ export const SidebarData = [
         path: '/cboard/posts',
       },
       {
-        title: 'Editar post',
-        path: '/cboard/posts/edit',
-      },
-      {
         title: 'Criar post',
         path: '/cboard/posts/new',
+      },
+      {
+        title: 'Editar post',
+        path: '/cboard/posts/edit',
       },
     ],
   },

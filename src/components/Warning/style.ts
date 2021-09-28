@@ -4,7 +4,7 @@ export const Container = styled.div`
   ${({ theme }) => css`
     color: ${theme.fonts.primaryFont};
     width: 310px;
-    position: absolute;
+    position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%) scale(0);

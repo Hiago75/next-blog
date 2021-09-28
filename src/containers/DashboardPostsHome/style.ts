@@ -22,7 +22,10 @@ export const PostTitle = styled.h2`
 `;
 
 export const PostActions = styled.div`
+  display: flex;
+  justify-content: flex-end;
   width: 25%;
+
   svg {
     margin: 0 5px;
     cursor: pointer;

@@ -15,6 +15,7 @@ export const SidebarList = styled.li`
   border-left: 0;
   transition: border-left 0.2s ease-in-out;
   list-style: none;
+  position: relative;
 
   svg {
     position: relative;
@@ -23,20 +24,14 @@ export const SidebarList = styled.li`
   }
 
   span {
-    position: relative;
-    top: 4px;
-    left: 45px;
+    position: absolute;
+    top: 18px;
+    right: 10px;
   }
 
   &:hover,
   &.active {
     border-left: 3px solid ${({ theme }) => theme.colors.contrastColor};
-  }
-
-  @media (max-width: 900px) {
-    svg {
-      display: inline-block;
-    }
   }
 `;
 
@@ -50,10 +45,6 @@ export const SidebarLabel = styled.a`
     &.active {
       font-weight: bold;
       color: ${theme.fonts.primaryFont};
-    }
-
-    @media (max-width: 900px) {
-      display: inline-block;
     }
   `}
 `;

@@ -7,6 +7,7 @@ export const LogoBox = styled.div`
   align-items: center;
   justify-content: center;
   height: 80px;
+  max-height: 15%;
 
   & img {
     cursor: pointer;
@@ -17,13 +18,15 @@ export const LogoBox = styled.div`
 `;
 
 export const Container = styled.aside`
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
   height: 100vh;
   background-color: ${({ theme }) => theme.colors.alternativeBackground};
   width: 90px;
   transition: width 0.2s ease-in-out;
   position: fixed;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   z-index: 7;
 
   a,
@@ -33,8 +36,7 @@ export const Container = styled.aside`
 
   li {
     display: flex;
-    flex-flow: column wrap;
-    align-items: center;
+    justify-content: center;
   }
 
   ${LogoBox} {
@@ -73,8 +75,10 @@ export const Container = styled.aside`
     &.menu-open {
       width: 100%;
 
-      & a {
-        display: block;
+      & a,
+      li,
+      span {
+        display: inline-block;
       }
 
       ${LogoBox} {
@@ -92,15 +96,27 @@ export const Container = styled.aside`
   }
 `;
 
-export const SidebarNav = styled.nav``;
+export const SidebarItems = styled.div`
+  max-height: 90%;
+`;
+
+export const SidebarNav = styled.nav`
+  overflow-y: auto;
+  max-height: 75%;
+`;
 
 export const SidebarUl = styled.ul``;
 
+export const SidebarFooter = styled.div`
+  max-height: 10%;
+`;
+
 export const Logout = styled.div`
-  position: absolute;
   bottom: 30px;
   width: 100%;
   text-align: center;
+  height: 50px;
+
   svg {
     cursor: pointer;
   }

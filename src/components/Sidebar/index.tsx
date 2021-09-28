@@ -5,7 +5,15 @@ import { IconContext } from 'react-icons';
 import { BiLogOut } from 'react-icons/bi';
 
 import { MenuController, SubMenu } from '..';
-import { Container, LogoBox, SidebarNav, SidebarUl, Logout } from './style';
+import {
+  Container,
+  LogoBox,
+  SidebarNav,
+  SidebarUl,
+  Logout,
+  SidebarItems,
+  SidebarFooter,
+} from './style';
 import { logoutUser } from '../../utils/logoutUser';
 import { SidebarData } from './sidebarData';
 
@@ -22,36 +30,45 @@ export const Sidebar = ({ menuOpen, setMenuOpen }: SidebarRequest) => {
 
   return (
     <Container className={menuOpen ? ' menu-open' : ''}>
-      <LogoBox>
-        <Link href="/cboard">
-          <img
-            className="full-logo"
-            src="/logo.svg"
-            alt="Logo da Colster"
-            width={180}
-            height={100}
-          />
-        </Link>
-
-        {/* Show the menu icon if the mobile menu is open */}
-        {menuOpen && <MenuController setMenuOpen={setMenuOpen} menuOpen={menuOpen} />}
-
-        <Link href="/cboard">
-          <img className="min-logo" src="/colster-reduzido.svg" alt="Logo da Colster reduzida" />
-        </Link>
-      </LogoBox>
       <IconContext.Provider value={{ size: '28', color: '#5A8BD6' }}>
-        <SidebarNav>
-          <SidebarUl>
-            {SidebarData.map((item, index) => (
-              <SubMenu item={item} key={index}></SubMenu>
-            ))}
-          </SidebarUl>
-        </SidebarNav>
+        <SidebarItems>
+          <LogoBox>
+            <Link href="/cboard">
+              <img
+                className="full-logo"
+                src="/logo.svg"
+                alt="Logo da Colster"
+                width={180}
+                height={100}
+              />
+            </Link>
 
-        <Logout>
-          <BiLogOut size={32} onClick={handleLogout}></BiLogOut>
-        </Logout>
+            {/* Show the menu icon if the mobile menu is open */}
+            {menuOpen && <MenuController setMenuOpen={setMenuOpen} menuOpen={menuOpen} />}
+
+            <Link href="/cboard">
+              <img
+                className="min-logo"
+                src="/colster-reduzido.svg"
+                alt="Logo da Colster reduzida"
+              />
+            </Link>
+          </LogoBox>
+
+          <SidebarNav>
+            <SidebarUl>
+              {SidebarData.map((item, index) => (
+                <SubMenu item={item} key={index}></SubMenu>
+              ))}
+            </SidebarUl>
+          </SidebarNav>
+        </SidebarItems>
+
+        <SidebarFooter>
+          <Logout>
+            <BiLogOut size={32} onClick={handleLogout}></BiLogOut>
+          </Logout>
+        </SidebarFooter>
       </IconContext.Provider>
     </Container>
   );
