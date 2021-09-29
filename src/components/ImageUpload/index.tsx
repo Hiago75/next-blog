@@ -3,7 +3,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { ThemeContext } from 'styled-components';
 
 import { PanelButton } from '..';
-import { Container, PreviewBox, Header, PreviewImage, Footer } from './style';
+import { PreviewBox, Header, PreviewImage, Footer } from './style';
 
 interface ImageUploadRequest {
   cover?: boolean;
@@ -11,8 +11,8 @@ interface ImageUploadRequest {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   headerText: string;
   confirmText: string;
-  temporaryPhoto: string;
-  uploadMethod?: () => Promise<void>;
+  previewPhoto: string;
+  uploadMethod?: () => Promise<void> | void;
 }
 
 export const ImageUpload = ({
@@ -21,7 +21,7 @@ export const ImageUpload = ({
   setIsOpen,
   headerText,
   confirmText,
-  temporaryPhoto,
+  previewPhoto,
   uploadMethod,
 }: ImageUploadRequest) => {
   const theme = useContext(ThemeContext);
@@ -40,24 +40,22 @@ export const ImageUpload = ({
   }
 
   return (
-    <Container className={isOpen ? 'open' : ''}>
-      <PreviewBox>
-        <Header>
-          <p>{headerText}</p>
-          <AiOutlineClose
-            onClick={handleClosePreviewClick}
-            size={32}
-            color={theme.fonts.primaryFont}
-          />
-        </Header>
+    <PreviewBox className={isOpen ? 'open' : ''}>
+      <Header>
+        <p>{headerText}</p>
+        <AiOutlineClose
+          onClick={handleClosePreviewClick}
+          size={32}
+          color={theme.fonts.primaryFont}
+        />
+      </Header>
 
-        <PreviewImage className={cover ? 'cover' : ''} src={temporaryPhoto}></PreviewImage>
+      <PreviewImage className={cover ? 'cover' : ''} src={previewPhoto}></PreviewImage>
 
-        <Footer>
-          <p>{confirmText}</p>
-          <PanelButton onClick={handlePhotoSubmit}>Confirmar</PanelButton>
-        </Footer>
-      </PreviewBox>
-    </Container>
+      <Footer>
+        <p>{confirmText}</p>
+        <PanelButton onClick={handlePhotoSubmit}>Confirmar</PanelButton>
+      </Footer>
+    </PreviewBox>
   );
 };

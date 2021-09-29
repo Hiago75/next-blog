@@ -1,30 +1,15 @@
 import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
-  position: absolute;
-  display: none;
-  z-index: 5;
-  width: 100%;
-  height: 100%;
-
-  &.open {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  @media (max-width: 900px) {
-    width: 100%;
-    height: 100%;
-    border-radius: 0;
-    background-color: rgba(16, 16, 16, 0.5);
-  }
-`;
-
 export const PreviewBox = styled.div`
   ${({ theme }) => css`
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 9999;
     width: 80%;
-    height: auto;
+    max-width: 800px;
+    height: 500px;
     background-color: ${theme.colors.alternativeBackground};
     border-radius: 20px;
     display: flex;
@@ -35,6 +20,11 @@ export const PreviewBox = styled.div`
     padding: 5px 0;
     -webkit-box-shadow: 0px 8px 12px -1px rgba(0, 0, 0, 0.35);
     box-shadow: 0px 8px 12px -1px rgba(0, 0, 0, 0.35);
+    transition: transform 0.2s ease-in;
+
+    &.open {
+      transform: translate(-50%, -50%) scale(1);
+    }
 
     p {
       color: ${theme.fonts.primaryFont};

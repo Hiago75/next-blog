@@ -21,7 +21,7 @@ export const SubMenu = ({ item }: ISubMenuRequest) => {
   const { asPath, push } = useRouter();
   const [displaySubNav, setDisplaySubNav] = useState(false);
 
-  const isActive = asPath === item.path;
+  const isActive = item.exact ? asPath === item.path : asPath.startsWith(item.path);
   const classList = isActive || displaySubNav ? 'active' : undefined;
 
   function handleLinkClick() {
@@ -48,15 +48,19 @@ export const SubMenu = ({ item }: ISubMenuRequest) => {
 
       {displaySubNav &&
         item.subNav &&
-        item.subNav.map((item, index) => (
-          <DropdownLink href={item.path} key={index}>
-            <DropdownLinkContainer>
-              <DropdownLabel className={asPath === item.path ? 'active' : undefined}>
-                {item.title}
-              </DropdownLabel>
-            </DropdownLinkContainer>
-          </DropdownLink>
-        ))}
+        item.subNav.map((item, index) => {
+          const isActive = item.exact ? asPath === item.path : asPath.startsWith(item.path);
+
+          return (
+            <DropdownLink href={item.path} key={index}>
+              <DropdownLinkContainer>
+                <DropdownLabel className={isActive ? 'active' : undefined}>
+                  {item.title}
+                </DropdownLabel>
+              </DropdownLinkContainer>
+            </DropdownLink>
+          );
+        })}
     </>
   );
 };

@@ -1,6 +1,7 @@
 interface subNav {
   title: string;
   path: string;
+  exact?: boolean;
 }
 
 export interface ISidebarData {
@@ -9,4 +10,5 @@ export interface ISidebarData {
   outlineIcon: React.ReactElement;
   filledIcon: React.ReactElement;
   subNav?: subNav[];
+  exact?: boolean;
 }

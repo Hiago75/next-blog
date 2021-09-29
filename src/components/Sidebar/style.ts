@@ -97,18 +97,22 @@ export const Container = styled.aside`
 `;
 
 export const SidebarItems = styled.div`
-  max-height: 90%;
+  height: 90%;
 `;
 
 export const SidebarNav = styled.nav`
   overflow-y: auto;
   max-height: 75%;
+  margin-bottom: 10px;
 `;
 
 export const SidebarUl = styled.ul``;
 
 export const SidebarFooter = styled.div`
+  z-index: 99;
+  position: inline-block;
   max-height: 10%;
+  background-color: ${({ theme }) => theme.colors.alternativeBackground};
 `;
 
 export const Logout = styled.div`

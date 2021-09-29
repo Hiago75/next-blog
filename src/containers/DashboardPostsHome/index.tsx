@@ -3,12 +3,23 @@ import { IconContext } from 'react-icons';
 import { ThemeContext } from 'styled-components';
 import { HiTrash, HiPencil } from 'react-icons/hi';
 
-import { Container, PostContainer, PostTitle, PostActions, PostText, PostCategory } from './style';
+import {
+  Container,
+  PostContainer,
+  PostTitle,
+  PostActions,
+  PostText,
+  PostCategory,
+  PostImage,
+  PostPreview,
+  PostsBox,
+} from './style';
 import { PanelBox, Warning } from '../../components';
 import { PostData } from '../../domain/posts/post';
 import { RequestContext } from '../../contexts/RequestContext';
 import { deletePost } from '../../services/posts/deletePost';
 import { refreshUserToken } from '../../services';
+import { useRouter } from 'next/router';
 
 interface IDashboardPostsHomeRequest {
   posts: PostData[];
@@ -16,6 +27,7 @@ interface IDashboardPostsHomeRequest {
 
 export const DashboardPostsHome = ({ posts }: IDashboardPostsHomeRequest) => {
   const theme = useContext(ThemeContext);
+  const router = useRouter();
   const { setLoading, responseStatusFactory, refreshServerSideProps } = useContext(RequestContext);
 
   const [postToBeDeleted, setPostToBeDeleted] = useState('');
@@ -25,6 +37,11 @@ export const DashboardPostsHome = ({ posts }: IDashboardPostsHomeRequest) => {
   function handleDeleteClick(postId: string) {
     setPostToBeDeleted(postId);
     setWarning(true);
+  }
+
+  //Redirect to editors page
+  function handleEditClick(postSlug: string) {
+    router.push(`posts/edit/${postSlug}`);
   }
 
   async function warningConfirmClick() {
@@ -60,23 +77,34 @@ export const DashboardPostsHome = ({ posts }: IDashboardPostsHomeRequest) => {
         />
       )}
       <PanelBox panelTitle="Posts recentes">
-        <IconContext.Provider value={{ size: '20' }}>
+        <PostsBox>
           {posts.map((post) => (
             <PostContainer key={post.id}>
-              <PostText>
-                <PostTitle>{post.title}</PostTitle>
-                <PostCategory>{post.category.name}</PostCategory>
-              </PostText>
-              <PostActions>
-                <HiPencil />
-                <HiTrash
-                  onClick={() => handleDeleteClick(post.id)}
-                  color={theme.colors.errorColor}
-                />
-              </PostActions>
+              <IconContext.Provider value={{ size: '25' }}>
+                <PostPreview>
+                  <PostImage
+                    height={64}
+                    width={70}
+                    src={post.cover.format.thumbnail.url}
+                  ></PostImage>
+                </PostPreview>
+
+                <PostText>
+                  <PostTitle>{post.title}</PostTitle>
+                  <PostCategory>{post.category.name}</PostCategory>
+                </PostText>
+                <PostActions>
+                  <HiPencil onClick={() => handleEditClick(post.slug)} />
+                  <HiTrash
+                    onClick={() => handleDeleteClick(post.id)}
+                    color={theme.colors.errorColor}
+                  />
+                </PostActions>
+              </IconContext.Provider>
             </PostContainer>
           ))}
-        </IconContext.Provider>
+        </PostsBox>
+        ;
       </PanelBox>
     </Container>
   );

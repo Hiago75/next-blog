@@ -1,31 +1,34 @@
-import { useState, useContext } from 'react';
+import { useContext, useState } from 'react';
+import { useRouter } from 'next/router';
 import { AiFillCamera } from 'react-icons/ai';
 
 import {
   Container,
-  MediaBox,
-  MediaInput,
-  TextEditor,
   FormContainer,
   SelectInput,
-  ImagePreview,
-  MediaEditor,
   CoverPreview,
+  ImagePreview,
+  MediaBox,
+  MediaEditor,
+  MediaInput,
+  TextEditor,
 } from './style';
+import { ErrorBox, ImageUpload, InputLabel, PanelButton } from '../../components';
 
-import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
-import { PanelButton, ImageUpload, InputLabel, ErrorBox } from '../../components';
-import { PostCategory } from '../../domain/posts/post';
-import { createNewCover, createNewPost, refreshUserToken } from '../../services';
-import { showInputError } from '../../utils/showInputErrors';
-import { resetInputErrors } from '../../utils/resetInputErrors';
+import { PostCategory, PostData } from '../../domain/posts/post';
 import { RequestContext } from '../../contexts/RequestContext';
+import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
+import { resetInputErrors } from '../../utils/resetInputErrors';
+import { createNewCover, refreshUserToken } from '../../services';
+import { updatePost } from '../../services/posts/updatePost';
 
-interface IDashboardNewPostRequest {
+interface IDashboardPostEditorRequest {
+  post: PostData;
   categories: PostCategory[];
 }
 
-export const DashboardNewPost = ({ categories }: IDashboardNewPostRequest) => {
+export const DashboardPostEditor = ({ post, categories }: IDashboardPostEditorRequest) => {
+  const router = useRouter();
   const { setLoading, responseStatusFactory } = useContext(RequestContext);
 
   //Form states
@@ -36,7 +39,7 @@ export const DashboardNewPost = ({ categories }: IDashboardNewPostRequest) => {
 
   // Photo
   const [photo, setPhoto] = useState<File>();
-  const [temporaryPhoto, setTemporaryPhoto] = useState('');
+  const [temporaryPhoto, setTemporaryPhoto] = useState(post.cover.url);
   const [previewPhoto, setPreviewPhoto] = useState('');
   const [editingCover, setEditingCover] = useState(false);
 
@@ -63,27 +66,13 @@ export const DashboardNewPost = ({ categories }: IDashboardNewPostRequest) => {
     setPreviewPhoto(URL.createObjectURL(sentPhoto));
   }
 
+  function handleCoverPhoto() {
+    setTemporaryPhoto(URL.createObjectURL(photo));
+  }
+
   // set the content state as the value sent on the text editor
   function handleContentInputChange(value: () => string) {
     setContent(value());
-  }
-
-  // Search for errors on form and display them, if nothing is wrong just return true;
-  function validateForm() {
-    let isValid = true;
-
-    if (!title) {
-      showInputError('title', 'É necessário enviar um titulo');
-      isValid = false;
-    }
-
-    if (!categoryId) return setError('É necessário selecionar uma categoria');
-    if (!photo) return setError('É necessário enviar uma foto de capa');
-    if (!content) return setError('É necessário enviar algum conteúdo para ser postado');
-
-    if (error) isValid = false;
-
-    return isValid;
   }
 
   // Upload the cover to the cloud
@@ -98,10 +87,6 @@ export const DashboardNewPost = ({ categories }: IDashboardNewPostRequest) => {
     responseStatusFactory(success, title, message);
   }
 
-  function handleCoverPhoto() {
-    setTemporaryPhoto(URL.createObjectURL(photo));
-  }
-
   // Reset the inputs and try to submit the form, if something goes wrong displays the error
   async function handlePostFormSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -113,21 +98,20 @@ export const DashboardNewPost = ({ categories }: IDashboardNewPostRequest) => {
     resetInputErrors();
     setError(undefined);
 
-    const isValid = validateForm();
-    if (!isValid) return setLoading(false);
-
     await refreshUserToken();
     await uploadCover();
 
-    const post = await createNewPost(title, content, categoryId, coverId);
+    const updatedPost = await updatePost(post.id, title, content, categoryId, coverId);
 
-    if (post.error)
-      return handleSubmitResponse(false, 'Opa, acho que algo não está certo', post.message);
+    if (updatedPost.error)
+      return handleSubmitResponse(false, 'Opa, acho que algo não está certo', updatedPost.message);
+
+    router.push('/cboard/posts/edit/');
 
     handleSubmitResponse(
       true,
-      'Publicação feita :)',
-      'Em breve ela vai estar presente no blog para que todos possam ler',
+      'Publicação alterada :)',
+      'Em breve essa alteração estará presente no blog',
     );
   }
 
@@ -151,12 +135,10 @@ export const DashboardNewPost = ({ categories }: IDashboardNewPostRequest) => {
             type="text"
             placeholder="Título"
             name="title"
+            defaultValue={post.title}
           ></input>
         </InputLabel>
-        <SelectInput defaultValue="Categorias" onChange={handleSelectInput}>
-          <option value="Categorias" disabled>
-            Categorias
-          </option>
+        <SelectInput defaultValue={post.category.id} onChange={handleSelectInput}>
           {categories.map((category) => (
             <option key={category.id} value={category.id}>
               {category.name}
@@ -192,6 +174,7 @@ export const DashboardNewPost = ({ categories }: IDashboardNewPostRequest) => {
           dark={true}
           className="edit-text"
           onChange={handleContentInputChange}
+          defaultValue={post.content}
         />
 
         <PanelButton type="submit">Salvar publicação</PanelButton>

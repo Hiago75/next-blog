@@ -27,6 +27,7 @@ export const ResponseStatus = styled.div`
 
   //Position
   position: absolute;
+  z-index: 9999;
   bottom: 50%;
   left: 50%;
   transform: translate(-50%, 50%) scale(0);

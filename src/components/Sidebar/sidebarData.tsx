@@ -14,6 +14,7 @@ export const SidebarData = [
     path: '/cboard',
     outlineIcon: <AiOutlineHome />,
     filledIcon: <AiFillHome />,
+    exact: true,
   },
   {
     title: 'Meu perfil',
@@ -30,6 +31,7 @@ export const SidebarData = [
       {
         title: 'Página inicial',
         path: '/cboard/posts',
+        exact: true,
       },
       {
         title: 'Criar post',

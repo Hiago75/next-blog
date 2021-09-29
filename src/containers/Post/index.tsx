@@ -38,7 +38,7 @@ export function Post({ post }: PostProps) {
           </Category>
         </PostDetails>
         <LineDivider />
-        <PostCover src={post.cover.formats.large.url} />
+        <PostCover src={post.cover.format.large.url} />
 
         <Content dangerouslySetInnerHTML={{ __html: post.content }}></Content>
         <Comments title={post.title} slug={post.slug} />

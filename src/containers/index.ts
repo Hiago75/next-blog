@@ -9,6 +9,8 @@ import { DashboardHomePage } from './DashboardHomePage';
 import { DashboardCategories } from './DashboardCategories';
 import { DashboardPostsHome } from './DashboardPostsHome';
 import { DashboardNewPost } from './DashboardNewPost';
+import { DashboardPostEditorHome } from './DashboardPostEditorHome';
+import { DashboardPostEditor } from './DashboardPostEditor';
 
 export {
   Post,
@@ -22,4 +24,6 @@ export {
   DashboardHomePage,
   DashboardPostsHome,
   DashboardNewPost,
+  DashboardPostEditorHome,
+  DashboardPostEditor,
 };

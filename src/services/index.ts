@@ -14,6 +14,7 @@ import { createNewPost } from './posts/createNewPost';
 import { refreshUserToken } from './auth/refreshUserToken';
 import { createNewCover } from './covers/createNewCover';
 import { deleteCategory } from './categories/deleteCategory';
+import { deletePost } from './posts/deletePost';
 
 export {
   countAllPosts,
@@ -32,4 +33,5 @@ export {
   createNewCover,
   refreshUserToken,
   deleteCategory,
+  deletePost,
 };
