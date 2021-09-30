@@ -16,8 +16,8 @@ export const PreviewBox = styled.div`
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    padding: 5px 0;
+    justify-content: space-between;
+    padding: 15px 0;
     -webkit-box-shadow: 0px 8px 12px -1px rgba(0, 0, 0, 0.35);
     box-shadow: 0px 8px 12px -1px rgba(0, 0, 0, 0.35);
     transition: transform 0.2s ease-in;

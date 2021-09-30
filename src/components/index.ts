@@ -26,6 +26,7 @@ import { ErrorBox } from './ErrorBox';
 import { Status } from './Status';
 import { Warning } from './Warning';
 import { SubMenu } from './SubMenu';
+import { PostEditor } from './PostEditor';
 
 export {
   Header,
@@ -56,4 +57,5 @@ export {
   Status,
   Warning,
   SubMenu,
+  PostEditor,
 };

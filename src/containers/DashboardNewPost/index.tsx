@@ -5,7 +5,6 @@ import {
   Container,
   MediaBox,
   MediaInput,
-  TextEditor,
   FormContainer,
   SelectInput,
   ImagePreview,
@@ -14,7 +13,7 @@ import {
 } from './style';
 
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
-import { PanelButton, ImageUpload, InputLabel, ErrorBox } from '../../components';
+import { PanelButton, ImageUpload, InputLabel, ErrorBox, PostEditor } from '../../components';
 import { PostCategory } from '../../domain/posts/post';
 import { createNewCover, createNewPost, refreshUserToken } from '../../services';
 import { showInputError } from '../../utils/showInputErrors';
@@ -182,17 +181,7 @@ export const DashboardNewPost = ({ categories }: IDashboardNewPostRequest) => {
           </CoverPreview>
         </MediaBox>
 
-        <TextEditor
-          // TODO: Add real upload image to the cloudinary provider
-          uploadImage={async (file) => {
-            console.log(file);
-            return file.name;
-          }}
-          placeholder="Escreva algo legal... Se não souber por onde começar aperte '/'"
-          dark={true}
-          className="edit-text"
-          onChange={handleContentInputChange}
-        />
+        <PostEditor onChange={handleContentInputChange} />
 
         <PanelButton type="submit">Salvar publicação</PanelButton>
       </FormContainer>

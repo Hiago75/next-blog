@@ -7,7 +7,7 @@ export default function Custom404() {
   return (
     <>
       <Head>
-        <title>404 | NextBlog</title>
+        <title>404 | Colster Blog</title>
       </Head>
       <Header />
       <Error404></Error404>

@@ -15,7 +15,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 12;
+  z-index: 999999;
   flex-wrap: wrap;
   height: 100%;
   width: 100%;

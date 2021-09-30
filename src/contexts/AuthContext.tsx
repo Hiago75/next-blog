@@ -6,6 +6,7 @@ import { ILoginRequest } from '../interfaces/ILoginRequest';
 import { IUser } from '../interfaces/IUser';
 import { fetchUserData, loginRequest, updateUserData } from '../services/';
 import { parseCookies, setCookie } from 'nookies';
+import { logoutUser } from '../utils/logoutUser';
 
 interface IAuthProviderRequest {
   children: React.ReactNode;
@@ -87,9 +88,8 @@ export function AuthProvider({ children }: IAuthProviderRequest) {
 
   // If isAuthenticated token exists and have a real value try to renew user data
   useEffect(() => {
-    if (isAuthenticated) {
-      refreshUserData(true);
-    }
+    if (isAuthenticated && !user) refreshUserData(true);
+    if (!isAuthenticated) logoutUser();
   }, []);
 
   return (

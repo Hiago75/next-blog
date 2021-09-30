@@ -15,6 +15,7 @@ import { refreshUserToken } from './auth/refreshUserToken';
 import { createNewCover } from './covers/createNewCover';
 import { deleteCategory } from './categories/deleteCategory';
 import { deletePost } from './posts/deletePost';
+import { uploadImage } from './posts/uploadImage';
 
 export {
   countAllPosts,
@@ -34,4 +35,5 @@ export {
   refreshUserToken,
   deleteCategory,
   deletePost,
+  uploadImage,
 };

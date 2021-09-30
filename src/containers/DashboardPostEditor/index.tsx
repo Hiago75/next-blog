@@ -11,9 +11,8 @@ import {
   MediaBox,
   MediaEditor,
   MediaInput,
-  TextEditor,
 } from './style';
-import { ErrorBox, ImageUpload, InputLabel, PanelButton } from '../../components';
+import { ErrorBox, ImageUpload, InputLabel, PanelButton, PostEditor } from '../../components';
 
 import { PostCategory, PostData } from '../../domain/posts/post';
 import { RequestContext } from '../../contexts/RequestContext';
@@ -164,18 +163,7 @@ export const DashboardPostEditor = ({ post, categories }: IDashboardPostEditorRe
           </CoverPreview>
         </MediaBox>
 
-        <TextEditor
-          // TODO: Add real upload image to the cloudinary provider
-          uploadImage={async (file) => {
-            console.log(file);
-            return file.name;
-          }}
-          placeholder="Escreva algo legal... Se não souber por onde começar aperte '/'"
-          dark={true}
-          className="edit-text"
-          onChange={handleContentInputChange}
-          defaultValue={post.content}
-        />
+        <PostEditor onChange={handleContentInputChange} />
 
         <PanelButton type="submit">Salvar publicação</PanelButton>
       </FormContainer>

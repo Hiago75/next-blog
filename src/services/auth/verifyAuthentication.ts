@@ -4,6 +4,7 @@ import { ParsedUrlQuery } from 'querystring';
 
 export function verifyAuthentication(ctx: GetServerSidePropsContext<ParsedUrlQuery>) {
   const { refresh_token } = ctx.req.cookies;
+
   const loggoutUser = {
     redirect: {
       destination: '/cboard/login',

@@ -31,7 +31,7 @@ export function HomePage({ posts, category }: HomePageProps) {
       <Header />
       <MainContainer>
         <Heading>
-          <h1>Bem vindo ao NextBlog</h1>
+          <h1>Bem vindo ao Colster Blog</h1>
           <p>Um lugar para aprender a magia da programação</p>
         </Heading>
         <Spotlight posts={posts} />

@@ -28,9 +28,11 @@ import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
 import { showInputError } from '../../utils/showInputErrors';
 import { resetInputErrors } from '../../utils/resetInputErrors';
 import isEmail from 'validator/lib/isEmail';
+import { RequestContext } from '../../contexts/RequestContext';
 
 // Edit User component
 export const DashboardEditUser = () => {
+  const { setLoading } = useContext(RequestContext);
   const { user, refreshUserData } = useContext(AuthContext);
 
   const [profilePhoto, setProfilePhoto] = useState<File | undefined>();
@@ -89,11 +91,13 @@ export const DashboardEditUser = () => {
 
   // Handle the upload/update of the profile photo
   async function handleProfilePhoto() {
+    setLoading(true);
     if (user?.profilePhoto) {
       await updateUserPhoto({ photo: profilePhoto });
     } else {
       await createUserPhoto({ photo: profilePhoto });
     }
+    setLoading(false);
 
     await refreshUserData(true);
   }
@@ -129,8 +133,10 @@ export const DashboardEditUser = () => {
     const isValid = validateForm();
     if (!isValid) return;
 
+    setLoading(true);
     await refreshUserToken();
     const { error, message } = await updateUserData({ name, email });
+    setLoading(false);
 
     if (error) setError(message);
 
@@ -145,7 +151,7 @@ export const DashboardEditUser = () => {
         setIsOpen={setEditingProfilePhoto}
         headerText="Foto de perfil"
         confirmText="Deseja realmente usar essa foto como foto de perfil ?"
-        temporaryPhoto={temporaryProfilePhoto}
+        previewPhoto={temporaryProfilePhoto}
         uploadMethod={handleProfilePhoto}
       ></ImageUpload>
 
