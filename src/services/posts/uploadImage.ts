@@ -10,7 +10,7 @@ export const uploadImage = async (fileToUpload: File) => {
     .post(`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/upload`, formData)
     .then((response) => {
       const responseUrl = response.data.url;
-      console.log(responseUrl);
+
       return responseUrl;
     });
 };

@@ -5,7 +5,7 @@ import { DashboardContainer } from '../../../components';
 import { verifyAuthentication, getAllCategories } from '../../../services';
 import { IDashboardNewPostPageRequest } from '../../../interfaces/IDashboardNewPostPageRequest';
 
-export default function AdminPosts({
+export default function DashboardNewPostPage({
   categories,
   theme,
   toggleTheme,

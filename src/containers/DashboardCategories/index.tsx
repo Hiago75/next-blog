@@ -4,11 +4,10 @@ import { ThemeContext } from 'styled-components';
 import { Container, CategoryBox, Trashcan } from './style';
 import { PanelBox, PanelButton, InputLabel, Warning } from '../../components';
 
+import createFormErrorHandler from '../../utils/createFormErrorHandler';
 import { PostCategory, PostCount } from '../../domain/posts/post';
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
 import { createNewCategory, deleteCategory, refreshUserToken } from '../../services';
-import { showInputError } from '../../utils/showInputErrors';
-import { resetInputErrors } from '../../utils/resetInputErrors';
 import { RequestContext } from '../../contexts/RequestContext';
 
 interface IDashboardCategoriesRequest {
@@ -24,6 +23,8 @@ export const DashboardCategories = ({ categories, numberOfPosts }: IDashboardCat
   const [newCategory, setNewCategory] = useState('');
   const [categoryToBeDeleted, setCategoryToBeDeleted] = useState('');
   const [warning, setWarning] = useState(false);
+
+  const { resetInputErrors, createInputError } = createFormErrorHandler();
 
   // Format the received categories into an array of objects
   function getCategoriesData() {
@@ -57,7 +58,7 @@ export const DashboardCategories = ({ categories, numberOfPosts }: IDashboardCat
     setLoading(false);
 
     //Fail
-    if (error) return showInputError('category', message);
+    if (error) return createInputError('category', message);
 
     //Success
     refreshServerSideProps();

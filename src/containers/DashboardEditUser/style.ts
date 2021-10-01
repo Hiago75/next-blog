@@ -10,7 +10,7 @@ export const Container = styled.section`
 `;
 
 export const FormWrapper = styled.div`
-  width: 600px;
+  width: 800px;
 `;
 
 // Preview

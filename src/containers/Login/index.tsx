@@ -4,17 +4,17 @@ import Router from 'next/router';
 import React, { useContext, useEffect, useState } from 'react';
 import isEmail from 'validator/lib/isEmail';
 
+import createFormErrorHandler from '../../utils/createFormErrorHandler';
 import { AuthContext } from '../../contexts/AuthContext';
 import { PanelPasswordInput, InputLabel, ErrorBox } from '../../components';
 import { Container, LoginForm, LoginBox } from './style';
-import { showInputError } from '../../utils/showInputErrors';
-import { resetInputErrors } from '../../utils/resetInputErrors';
 
 export const Login = () => {
   const { login, errors, isAuthenticated, refreshUserData } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isFilled, setIsFilled] = useState(false);
+  const { createInputError, resetInputErrors } = createFormErrorHandler();
 
   if (isAuthenticated) {
     refreshUserData(true);
@@ -41,7 +41,7 @@ export const Login = () => {
     const emailIsValid = isEmail(email);
 
     if (!emailIsValid) {
-      showInputError('email', 'Insira um e-mail válido');
+      createInputError('email', 'Insira um e-mail válido');
       return (isValid = false);
     }
 

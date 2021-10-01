@@ -13,7 +13,7 @@ interface IDashboardHomePageProps {
   numberOfPosts: PostCount;
 }
 
-export const DashboardHomePage = ({ user, numberOfPosts }: IDashboardHomePageProps) => {
+export const DashboardHome = ({ user, numberOfPosts }: IDashboardHomePageProps) => {
   const authors = numberOfPosts.authors;
 
   function getChartData() {

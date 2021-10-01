@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import { destroyCookie } from 'nookies';
 import { Login } from '../../containers';
 
-export default function AdminHome() {
+export default function DashboardLoginPage() {
   return <Login></Login>;
 }
 

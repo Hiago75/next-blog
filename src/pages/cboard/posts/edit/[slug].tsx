@@ -6,7 +6,7 @@ import { IDashboardPostEditor } from '../../../../interfaces/IDashboardPostEdito
 
 import { getAllCategories, getPost, verifyAuthentication } from '../../../../services';
 
-export default function DashboardPostsEditorHome({
+export default function DashboardPostsEditorPage({
   post,
   categories,
   theme,

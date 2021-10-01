@@ -13,7 +13,6 @@ export function updatePost(
       return { error: false, message: response.data.message };
     })
     .catch((error) => {
-      console.log(error);
       return { error: true, message: error.response.data.message };
     });
 }

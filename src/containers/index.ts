@@ -5,12 +5,13 @@ import { Error404 } from './Error404';
 import { DashboardContainer } from '../components/DashboardContainer';
 import { Login } from './Login';
 import { DashboardEditUser } from './DashboardEditUser';
-import { DashboardHomePage } from './DashboardHomePage';
+import { DashboardHome } from './DashboardHomePage';
 import { DashboardCategories } from './DashboardCategories';
 import { DashboardPostsHome } from './DashboardPostsHome';
 import { DashboardNewPost } from './DashboardNewPost';
 import { DashboardPostEditorHome } from './DashboardPostEditorHome';
 import { DashboardPostEditor } from './DashboardPostEditor';
+import { DashboardRegisterProfile } from './DashboardRegisterProfile';
 
 export {
   Post,
@@ -21,9 +22,10 @@ export {
   Login,
   DashboardCategories,
   DashboardEditUser,
-  DashboardHomePage,
+  DashboardHome,
   DashboardPostsHome,
   DashboardNewPost,
   DashboardPostEditorHome,
   DashboardPostEditor,
+  DashboardRegisterProfile,
 };

@@ -5,7 +5,7 @@ import { DashboardCategories } from '../../containers';
 import { IDashboardCategoriesPageRequest } from '../../interfaces/IDashboardCategoriesPageRequest';
 import { countAllPosts, getAllCategories, verifyAuthentication } from '../../services';
 
-export default function AdminCategories({
+export default function DashboardCategoriesPage({
   numberOfPosts,
   categories,
   theme,

@@ -12,12 +12,11 @@ import {
   CoverPreview,
 } from './style';
 
+import createFormErrorHandler from '../../utils/createFormErrorHandler';
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
 import { PanelButton, ImageUpload, InputLabel, ErrorBox, PostEditor } from '../../components';
 import { PostCategory } from '../../domain/posts/post';
 import { createNewCover, createNewPost, refreshUserToken } from '../../services';
-import { showInputError } from '../../utils/showInputErrors';
-import { resetInputErrors } from '../../utils/resetInputErrors';
 import { RequestContext } from '../../contexts/RequestContext';
 
 interface IDashboardNewPostRequest {
@@ -41,6 +40,7 @@ export const DashboardNewPost = ({ categories }: IDashboardNewPostRequest) => {
 
   // Error states
   const [error, setError] = useState('');
+  const { createInputError, resetInputErrors } = createFormErrorHandler();
 
   // Handle the change event of the title input
   function handleTitleInputChange(event: IOnChangeInput) {
@@ -72,7 +72,7 @@ export const DashboardNewPost = ({ categories }: IDashboardNewPostRequest) => {
     let isValid = true;
 
     if (!title) {
-      showInputError('title', 'É necessário enviar um titulo');
+      createInputError('title', 'É necessário enviar um titulo');
       isValid = false;
     }
 

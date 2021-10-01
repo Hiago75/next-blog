@@ -72,7 +72,6 @@ export function RequestProvider({ children }: IRequestProvider) {
 
   function handleTimerEnd() {
     setResponseStatus({ displayResponse: false, ...responseStatus });
-    console.log('Terminou');
   }
 
   useEffect(() => {

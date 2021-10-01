@@ -6,9 +6,10 @@ import { TextEditor } from './style';
 
 interface PostEditorRequest {
   onChange: (value: () => string) => void;
+  defaultValue?: string;
 }
 
-export const PostEditor = ({ onChange }: PostEditorRequest) => {
+export const PostEditor = ({ defaultValue, onChange }: PostEditorRequest) => {
   const { setLoading } = useContext(RequestContext);
 
   return (
@@ -20,6 +21,7 @@ export const PostEditor = ({ onChange }: PostEditorRequest) => {
       dark={true}
       className="edit-text"
       onChange={onChange}
+      defaultValue={defaultValue}
     />
   );
 };

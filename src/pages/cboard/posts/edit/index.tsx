@@ -5,7 +5,7 @@ import { DashboardPostEditorHome } from '../../../../containers';
 import { IDashboardPostHomePage } from '../../../../interfaces/IDashboardPostHomePage';
 import { getAllPosts, verifyAuthentication } from '../../../../services';
 
-export default function DashboardPostsEditorHome({
+export default function DashboardPostsEditorHomePage({
   posts,
   theme,
   toggleTheme,

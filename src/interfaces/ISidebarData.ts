@@ -2,6 +2,7 @@ interface subNav {
   title: string;
   path: string;
   exact?: boolean;
+  admin?: boolean;
 }
 
 export interface ISidebarData {

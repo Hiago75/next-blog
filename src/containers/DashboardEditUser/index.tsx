@@ -14,6 +14,7 @@ import {
   FormWrapper,
 } from './style';
 
+import createFormErrorHandler from '../../utils/createFormErrorHandler';
 import { createUserPhoto, refreshUserToken, updateUserData, updateUserPhoto } from '../../services';
 import {
   UserImage,
@@ -25,8 +26,6 @@ import {
 } from '../../components';
 import { AuthContext } from '../../contexts/AuthContext';
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
-import { showInputError } from '../../utils/showInputErrors';
-import { resetInputErrors } from '../../utils/resetInputErrors';
 import isEmail from 'validator/lib/isEmail';
 import { RequestContext } from '../../contexts/RequestContext';
 
@@ -50,6 +49,7 @@ export const DashboardEditUser = () => {
   const [error, setError] = useState('');
 
   const userRole = user?.admin ? 'Desenvolvedor(a)' : 'Autor(a)';
+  const { resetInputErrors, createInputError } = createFormErrorHandler();
 
   // Handle the name field changes
   function handleNameChange(event: IOnChangeInput) {
@@ -112,14 +112,14 @@ export const DashboardEditUser = () => {
     let isValid = true;
 
     if (name && name.length < 3) {
-      showInputError('name', 'Este nome é curto demais');
+      createInputError('name', 'Este nome é curto demais');
       isValid = false;
     }
 
     const emailIsValid = isEmail(email);
 
     if (email && !emailIsValid) {
-      showInputError('email', 'Insira um e-mail valido');
+      createInputError('email', 'Insira um e-mail valido');
       isValid = false;
     }
 
@@ -173,7 +173,7 @@ export const DashboardEditUser = () => {
           </UserImageBox>
           <UserData>
             <span />
-            <PreviewName>{user?.name}</PreviewName>
+            <PreviewName>{name || user?.name}</PreviewName>
             <UserRole>{userRole}</UserRole>
           </UserData>
         </UserPreview>

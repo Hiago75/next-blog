@@ -1,12 +1,12 @@
 import { GetServerSideProps } from 'next';
-import { DashboardContainer } from '../../components';
-import { DashboardEditUser } from '../../containers';
 
-import { IContainerRequest } from '../../interfaces/IContainerRequest';
+import { DashboardContainer } from '../../../components';
+import { DashboardEditUser } from '../../../containers';
 
-import { verifyAuthentication } from '../../services/auth/verifyAuthentication';
+import { IContainerRequest } from '../../../interfaces/IContainerRequest';
+import { verifyAuthentication } from '../../../services';
 
-export default function AdminHome({ theme, toggleTheme }: IContainerRequest) {
+export default function DashboardMyProfilePage({ theme, toggleTheme }: IContainerRequest) {
   return (
     <DashboardContainer toggleTheme={toggleTheme} theme={theme} headerMessage="Meu perfil">
       <DashboardEditUser />

@@ -5,7 +5,11 @@ import { DashboardContainer } from '../../../components';
 import { verifyAuthentication, getAllPosts } from '../../../services';
 import { IDashboardPostHomePage } from '../../../interfaces/IDashboardPostHomePage';
 
-export default function AdminPosts({ posts, theme, toggleTheme }: IDashboardPostHomePage) {
+export default function DashboardPostsHomePage({
+  posts,
+  theme,
+  toggleTheme,
+}: IDashboardPostHomePage) {
   return (
     <DashboardContainer toggleTheme={toggleTheme} theme={theme} headerMessage="Posts">
       <DashboardPostsHome posts={posts} />

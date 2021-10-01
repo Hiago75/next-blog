@@ -1,19 +1,23 @@
 import { GetServerSideProps } from 'next';
 import { useContext } from 'react';
 
-import { DashboardHomePage } from '../../containers';
+import { DashboardHome } from '../../containers';
 import { DashboardContainer } from '../../components';
 import { AuthContext } from '../../contexts/AuthContext';
 import { countAllPosts, verifyAuthentication } from '../../services';
 
 import { IDashboardHomeRequest } from '../../interfaces/IDashboardHomeRequest';
 
-export default function AdminHome({ numberOfPosts, theme, toggleTheme }: IDashboardHomeRequest) {
+export default function DashboardHomePage({
+  numberOfPosts,
+  theme,
+  toggleTheme,
+}: IDashboardHomeRequest) {
   const { user } = useContext(AuthContext);
 
   return (
     <DashboardContainer toggleTheme={toggleTheme} theme={theme}>
-      <DashboardHomePage user={user} numberOfPosts={numberOfPosts} />
+      <DashboardHome user={user} numberOfPosts={numberOfPosts} />
     </DashboardContainer>
   );
 }

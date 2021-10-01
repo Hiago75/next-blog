@@ -15,6 +15,8 @@ interface ImageUploadRequest {
   uploadMethod?: () => Promise<void> | void;
 }
 
+//TODO: refactor
+
 export const ImageUpload = ({
   cover,
   isOpen,

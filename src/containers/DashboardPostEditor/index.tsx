@@ -17,7 +17,6 @@ import { ErrorBox, ImageUpload, InputLabel, PanelButton, PostEditor } from '../.
 import { PostCategory, PostData } from '../../domain/posts/post';
 import { RequestContext } from '../../contexts/RequestContext';
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
-import { resetInputErrors } from '../../utils/resetInputErrors';
 import { createNewCover, refreshUserToken } from '../../services';
 import { updatePost } from '../../services/posts/updatePost';
 
@@ -48,7 +47,6 @@ export const DashboardPostEditor = ({ post, categories }: IDashboardPostEditorRe
   // Handle the change event of the title input
   function handleTitleInputChange(event: IOnChangeInput) {
     setTitle(event.target.value);
-    resetInputErrors();
   }
 
   // Handle the change event of the select category input
@@ -94,7 +92,6 @@ export const DashboardPostEditor = ({ post, categories }: IDashboardPostEditorRe
     setLoading(true);
 
     // Resets the errors
-    resetInputErrors();
     setError(undefined);
 
     await refreshUserToken();
@@ -163,7 +160,7 @@ export const DashboardPostEditor = ({ post, categories }: IDashboardPostEditorRe
           </CoverPreview>
         </MediaBox>
 
-        <PostEditor onChange={handleContentInputChange} />
+        <PostEditor defaultValue={post.content} onChange={handleContentInputChange} />
 
         <PanelButton type="submit">Salvar publicação</PanelButton>
       </FormContainer>

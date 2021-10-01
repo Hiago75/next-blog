@@ -17,10 +17,21 @@ export const SidebarData = [
     exact: true,
   },
   {
-    title: 'Meu perfil',
-    path: '/cboard/profile',
+    title: 'Usuários',
+    path: '/cboard/profiles/me',
     outlineIcon: <RiUserLine />,
     filledIcon: <RiUserFill />,
+    subNav: [
+      {
+        title: 'Meu perfil',
+        path: '/cboard/profiles/me',
+        exact: true,
+      },
+      {
+        title: 'Registrar usuário',
+        path: '/cboard/profiles/register',
+      },
+    ],
   },
   {
     title: 'Posts',
