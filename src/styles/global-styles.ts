@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
   *{
@@ -56,29 +56,5 @@ export default createGlobalStyle`
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-  }
-
-
-
-`;
-
-export const BallDivider = styled.span`
-  width: 5px;
-  height: 5px;
-  background-color: ${({ theme }) => theme.fonts.primaryFont};
-  border-radius: 50%;
-  margin: 3px 8px;
-  display: inline-block;
-`;
-
-export const Category = styled.span`
-  background-color: ${({ theme }) => theme.colors.contrastColor};
-  padding: 1px 4px;
-  border-radius: 5px;
-  display: inline-block;
-
-  a {
-    color: ${({ theme }) => theme.fonts.primaryFont} !important;
-    font-size: 15px;
   }
 `;

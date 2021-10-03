@@ -1,63 +1,98 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-export const Container = styled.section`
+export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
 
-export const MainSpotlight = styled.div`
-  width: 100%;
+export const Post = styled.div`
+  margin-bottom: 20px;
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  padding: 0 10px;
 
-  img {
-    max-width: 100%;
+  &.main-post {
+    width: 70%;
+    padding-right: 50px;
   }
 
-  @media screen and (max-width: 768px) {
+  &.side-post {
     width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    margin-bottom: 40px;
+
+    &.main-post {
+      width: 100%;
+      padding-right: 0px;
+    }
   }
 `;
 
-export const Title = styled.h2`
+export const PostImageBox = styled.div`
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+`;
+
+export const PostImage = styled.img`
+  max-width: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+
+  ${Post}:hover & {
+    transform: scale(1.1);
+  }
+`;
+
+export const PostPreviewData = styled.div`
+  margin-top: 5px;
+`;
+
+export const PostCategory = styled.span`
+  color: ${({ theme }) => theme.fonts.smothFont};
+  text-transform: uppercase;
+  font-size: 15px;
+  display: block;
+`;
+
+export const PostTitle = styled.h1`
   color: ${({ theme }) => theme.fonts.primaryFont};
-  font-size: 38px;
-  font-weight: normal;
-  padding: 10px 0;
+  font-weight: bold;
+  font-size: 24px;
+  margin: 7px 0;
+  position: relative;
+  display: inline-block;
 
   &:after {
-    display: block;
-    border-bottom: solid 3px white;
-    transform: scaleX(0);
-    transition: transform 350ms ease-in-out;
     content: '';
-    transform-origin: 0% 50%;
+    width: 0;
+    height: 3px;
+    background-color: ${({ theme }) => theme.fonts.primaryFont};
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+    transition: width 0.3s ease;
   }
 
-  ${MainSpotlight}:hover &:after {
-    transform: scaleX(1);
-  }
-`;
-
-export const Details = styled.div`
-  ${({ theme }) => css`
-    color: ${theme.colors.alternativeBackground};
-    font-size: 15px;
-
-    p {
-      color: ${theme.fonts.primaryFont}
-      display: inline-block;
+  ${Post}:hover & {
+    :after {
+      width: 100%;
     }
-  `}
+  }
 `;
 
-export const SpotlightContent = styled.div`
-  width: 50%;
+export const PostAuthor = styled.p`
+  color: ${({ theme }) => theme.fonts.primaryFont};
+`;
 
-  @media screen and (max-width: 768px) {
+export const SidePosts = styled.div`
+  width: 30%;
+  display: flex;
+  flex-flow: column wrap;
+
+  @media (max-width: 768px) {
     width: 100%;
   }
 `;
+
+export const SidePost = styled.div``;

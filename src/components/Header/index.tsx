@@ -4,7 +4,8 @@ import { MdWbSunny } from 'react-icons/md';
 import { ThemeContext } from 'styled-components';
 
 import {
-  Container,
+  BlogHeader,
+  HeaderContainer,
   LogoBox,
   Logo,
   DesktopNav,
@@ -34,69 +35,71 @@ export const Header = () => {
   }
 
   return (
-    <Container>
-      <DesktopNav>
-        <Link href="/">
-          <LogoBox>
-            <Logo src="/logo.svg" />
-            <span>Blog</span>
-          </LogoBox>
-        </Link>
+    <BlogHeader>
+      <HeaderContainer>
+        <DesktopNav>
+          <Link href="/">
+            <LogoBox>
+              <Logo src="/logo.svg" />
+              <span>Blog</span>
+            </LogoBox>
+          </Link>
 
-        <HeaderUl>
-          <HeaderLi>
-            <Link href="#" passHref>
-              <HeaderLink>Front-end</HeaderLink>
-            </Link>
-          </HeaderLi>
-          <HeaderLi>
-            <Link href="#" passHref>
-              <HeaderLink>Back-end</HeaderLink>
-            </Link>
-          </HeaderLi>
-          <HeaderLi>
-            <Link href="#" passHref>
-              <HeaderLink>Marketing</HeaderLink>
-            </Link>
-          </HeaderLi>
-        </HeaderUl>
-      </DesktopNav>
+          <HeaderUl>
+            <HeaderLi>
+              <Link href="#" passHref>
+                <HeaderLink>Front-end</HeaderLink>
+              </Link>
+            </HeaderLi>
+            <HeaderLi>
+              <Link href="#" passHref>
+                <HeaderLink>Back-end</HeaderLink>
+              </Link>
+            </HeaderLi>
+            <HeaderLi>
+              <Link href="#" passHref>
+                <HeaderLink>Marketing</HeaderLink>
+              </Link>
+            </HeaderLi>
+          </HeaderUl>
+        </DesktopNav>
 
-      <MobileHamburger className={menuClassList} onClick={handleMobileMenu}>
-        <span className="upperBar" />
-        <span className="lowerBar" />
-      </MobileHamburger>
+        <MobileHamburger className={menuClassList} onClick={handleMobileMenu}>
+          <span className="upperBar" />
+          <span className="lowerBar" />
+        </MobileHamburger>
 
-      <MobileNav>
-        <Link href="/">
-          <LogoBox>
-            <Logo src="/colster-reduzido.svg" />
-            <span>Blog</span>
-          </LogoBox>
-        </Link>
+        <MobileNav>
+          <Link href="/">
+            <LogoBox>
+              <Logo src="/colster-reduzido.svg" />
+              <span>Blog</span>
+            </LogoBox>
+          </Link>
 
-        <HeaderUl className={menuClassList}>
-          <HeaderLi className={`${menuClassList} `}>
-            <Link href="#" passHref>
-              <HeaderLink>Front-end</HeaderLink>
-            </Link>
-          </HeaderLi>
-          <HeaderLi className={`${menuClassList}`}>
-            <Link href="#" passHref>
-              <HeaderLink>Back-end</HeaderLink>
-            </Link>
-          </HeaderLi>
-          <HeaderLi className={`${menuClassList}`}>
-            <Link href="#" passHref>
-              <HeaderLink>Marketing</HeaderLink>
-            </Link>
-          </HeaderLi>
-        </HeaderUl>
-      </MobileNav>
+          <HeaderUl className={menuClassList}>
+            <HeaderLi className={`${menuClassList} `}>
+              <Link href="#" passHref>
+                <HeaderLink>Front-end</HeaderLink>
+              </Link>
+            </HeaderLi>
+            <HeaderLi className={`${menuClassList}`}>
+              <Link href="#" passHref>
+                <HeaderLink>Back-end</HeaderLink>
+              </Link>
+            </HeaderLi>
+            <HeaderLi className={`${menuClassList}`}>
+              <Link href="#" passHref>
+                <HeaderLink>Marketing</HeaderLink>
+              </Link>
+            </HeaderLi>
+          </HeaderUl>
+        </MobileNav>
 
-      <HeaderActions>
-        <MdWbSunny onClick={handleThemeChangeClick} color={theme.fonts.primaryFont} size={32} />
-      </HeaderActions>
-    </Container>
+        <HeaderActions>
+          <MdWbSunny onClick={handleThemeChangeClick} color={theme.fonts.primaryFont} size={32} />
+        </HeaderActions>
+      </HeaderContainer>
+    </BlogHeader>
   );
 };

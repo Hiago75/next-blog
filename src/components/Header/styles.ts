@@ -1,15 +1,20 @@
 import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+export const BlogHeader = styled.header`
+  width: 100%;
+  position: relative;
+  background-color: ${({ theme }) => theme.colors.alternativeBackground};
+  border-bottom: ${({ theme }) => theme.colors.mainBackground};
+`;
+
+export const HeaderContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   padding: 15px 25px;
-  width: 100%;
-  background-color: ${({ theme }) => theme.colors.alternativeBackground};
-  position: relative;
-  border-bottom: ${({ theme }) => theme.colors.mainBackground};
+  max-width: 1200px;
+  margin: 0 auto;
 `;
 
 //Logo
@@ -64,16 +69,19 @@ export const HeaderUl = styled.ul`
     position: absolute;
     top: 67px;
     width: 100%;
-    height: calc(50vh - 67px);
+    height: 0px;
     flex-direction: column;
     background-color: ${({ theme }) => theme.colors.alternativeBackground};
     z-index: 99;
-    left: -100%;
-    transition: left 0.3s ease-in-out;
+    left: 0%;
+    transition: height 0.3s ease-in-out;
     justify-content: space-evenly;
     text-align: center;
+    overflow-y: hidden;
+
     &.active {
-      left: 0;
+      height: calc(50vh - 67px);
+      overflow-y: auto;
     }
   }
 `;
@@ -87,14 +95,14 @@ export const HeaderLi = styled.li`
     margin: 0;
 
     opacity: 0;
-    transform: translateX(-50px);
+    transform: translateY(-50px);
     transition-property: opacity transform;
     transition: 0.4s ease;
-    transition-delay: 0.2s;
+    transition-delay: 0.3s;
 
     &.active {
       opacity: 1;
-      transform: translateX(0);
+      transform: translateY(0);
     }
   }
 `;

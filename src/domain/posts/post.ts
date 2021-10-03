@@ -61,8 +61,8 @@ export type PostData = {
   author: PostAuthor;
   category: PostCategory;
   cover: PostCover;
-  created_at: string;
-  updated_at: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type PostCount = {

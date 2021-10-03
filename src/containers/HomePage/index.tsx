@@ -1,8 +1,11 @@
 import Head from 'next/head';
+import Link from 'next/link';
+import { FiChevronsRight } from 'react-icons/fi';
 
 import { PostData } from '../../domain/posts/post';
 
-import { Header, MainContainer, Footer } from '../../components';
+import { RecentPosts, RecentPostsHeader, Title, LinkButton, LineDivider } from './style';
+import { Spotlight, Header, MainContainer, Footer } from '../../components';
 import { APP_NAME } from '../../config';
 
 export type HomePageProps = {
@@ -10,7 +13,7 @@ export type HomePageProps = {
   category?: string;
 };
 
-export function HomePage({ category }: HomePageProps) {
+export function HomePage({ posts, category }: HomePageProps) {
   return (
     <>
       <Head>
@@ -18,7 +21,20 @@ export function HomePage({ category }: HomePageProps) {
         <meta name="description" content="Just an simple test blog made with NextJS" />
       </Head>
       <Header />
-      <MainContainer>Container</MainContainer>
+      <MainContainer>
+        <RecentPosts>
+          <RecentPostsHeader>
+            <Title>Posts mais recentes</Title>
+            <Link href="/">
+              <LinkButton>
+                Ver todos os posts <FiChevronsRight />
+              </LinkButton>
+            </Link>
+            <LineDivider />
+          </RecentPostsHeader>
+          <Spotlight posts={posts} />
+        </RecentPosts>
+      </MainContainer>
       <Footer />
     </>
   );
