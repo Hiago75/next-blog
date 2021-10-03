@@ -88,8 +88,8 @@ export function AuthProvider({ children }: IAuthProviderRequest) {
 
   // If isAuthenticated token exists and have a real value try to renew user data
   useEffect(() => {
-    if (isAuthenticated && !user) refreshUserData(true);
-    if (!isAuthenticated) logoutUser();
+    if (Router.asPath.startsWith('/cboard') && isAuthenticated && !user) refreshUserData(true);
+    if (Router.asPath.startsWith('/cboard') && !isAuthenticated) logoutUser();
   }, []);
 
   return (

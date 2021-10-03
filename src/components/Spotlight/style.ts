@@ -3,21 +3,15 @@ import styled, { css } from 'styled-components';
 export const Container = styled.section`
   display: flex;
   flex-wrap: wrap;
-  margin: 50px 0;
 `;
 
 export const MainSpotlight = styled.div`
-  width: 50%;
+  width: 100%;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  transition: transform 350ms ease;
   padding: 0 10px;
-
-  &:hover {
-    transform: scale(1.1);
-  }
 
   img {
     max-width: 100%;

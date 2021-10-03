@@ -9,5 +9,6 @@ export const Container = styled.footer`
     position: relative;
     left: 0;
     bottom: 0;
+    color ${theme.fonts.primaryFont}
   `}
 `;

@@ -1,72 +1,102 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import { useState, useContext } from 'react';
+import { MdWbSunny } from 'react-icons/md';
+import { ThemeContext } from 'styled-components';
 
-import { MainHeader, Container, Logo, MobileHamburger, MobileMenu, DesktopMenu } from './styles';
-import { NavLink } from '../';
-import { useState } from 'react';
+import {
+  Container,
+  LogoBox,
+  Logo,
+  DesktopNav,
+  HeaderUl,
+  HeaderLi,
+  HeaderLink,
+  HeaderActions,
+  MobileNav,
+  MobileHamburger,
+} from './styles';
 
 export const Header = () => {
+  const theme = useContext(ThemeContext);
+
   // Mobile menu state
   const [isOpen, setIsOpen] = useState(false);
+  const menuClassList = isOpen ? 'active' : undefined;
 
   // Toggle mobile menu state
-  function mobileMenuClick() {
+  function handleMobileMenu() {
     setIsOpen(!isOpen);
   }
 
+  // Toggle the theme
+  function handleThemeChangeClick() {
+    alert('Tema trocado');
+  }
+
   return (
-    <MainHeader>
-      <Container>
+    <Container>
+      <DesktopNav>
         <Link href="/">
-          <Logo>
-            <Image src="/logo.svg" width={120} height={120}></Image>
-          </Logo>
+          <LogoBox>
+            <Logo src="/logo.svg" />
+            <span>Blog</span>
+          </LogoBox>
         </Link>
-        <DesktopMenu>
-          <ul>
-            <NavLink href="/" exact>
-              Home
-            </NavLink>
 
-            <NavLink href="/posts/page/1/javascript" exact>
-              JavaScript
-            </NavLink>
+        <HeaderUl>
+          <HeaderLi>
+            <Link href="#" passHref>
+              <HeaderLink>Front-end</HeaderLink>
+            </Link>
+          </HeaderLi>
+          <HeaderLi>
+            <Link href="#" passHref>
+              <HeaderLink>Back-end</HeaderLink>
+            </Link>
+          </HeaderLi>
+          <HeaderLi>
+            <Link href="#" passHref>
+              <HeaderLink>Marketing</HeaderLink>
+            </Link>
+          </HeaderLi>
+        </HeaderUl>
+      </DesktopNav>
 
-            <NavLink href="/posts/page/1/typescript" exact>
-              TypeScript
-            </NavLink>
+      <MobileHamburger className={menuClassList} onClick={handleMobileMenu}>
+        <span className="upperBar" />
+        <span className="lowerBar" />
+      </MobileHamburger>
 
-            <NavLink href="/posts/page/1/python" exact>
-              Python
-            </NavLink>
-          </ul>
-        </DesktopMenu>
+      <MobileNav>
+        <Link href="/">
+          <LogoBox>
+            <Logo src="/colster-reduzido.svg" />
+            <span>Blog</span>
+          </LogoBox>
+        </Link>
 
-        <MobileHamburger onClick={mobileMenuClick} className={isOpen ? 'active' : ''}>
-          <span className="bar1" />
-          <span className="bar2" />
-        </MobileHamburger>
-      </Container>
+        <HeaderUl className={menuClassList}>
+          <HeaderLi className={`${menuClassList} `}>
+            <Link href="#" passHref>
+              <HeaderLink>Front-end</HeaderLink>
+            </Link>
+          </HeaderLi>
+          <HeaderLi className={`${menuClassList}`}>
+            <Link href="#" passHref>
+              <HeaderLink>Back-end</HeaderLink>
+            </Link>
+          </HeaderLi>
+          <HeaderLi className={`${menuClassList}`}>
+            <Link href="#" passHref>
+              <HeaderLink>Marketing</HeaderLink>
+            </Link>
+          </HeaderLi>
+        </HeaderUl>
+      </MobileNav>
 
-      <MobileMenu className={isOpen ? 'active' : ''} onClick={mobileMenuClick}>
-        <ul>
-          <NavLink href="/" exact>
-            Home
-          </NavLink>
-
-          <NavLink href="/posts/page/1/javascript" exact>
-            JavaScript
-          </NavLink>
-
-          <NavLink href="/posts/page/1/typescript" exact>
-            TypeScript
-          </NavLink>
-
-          <NavLink href="/posts/page/1/python" exact>
-            Python
-          </NavLink>
-        </ul>
-      </MobileMenu>
-    </MainHeader>
+      <HeaderActions>
+        <MdWbSunny onClick={handleThemeChangeClick} color={theme.fonts.primaryFont} size={32} />
+      </HeaderActions>
+    </Container>
   );
 };

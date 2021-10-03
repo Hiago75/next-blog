@@ -8,11 +8,7 @@ export type HomeProps = {
 };
 
 export default function Home({ posts }: HomeProps) {
-  return (
-    <>
-      <HomePage posts={posts}></HomePage>
-    </>
-  );
+  return <HomePage posts={posts}></HomePage>;
 }
 
 export const getStaticProps: GetStaticProps = async () => {

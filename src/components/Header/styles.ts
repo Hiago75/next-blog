@@ -1,113 +1,174 @@
 import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
-  max-width: 1024px;
-  margin: 0 auto;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  height: 100%;
-  padding: 0 10px;
-
-  & li {
-    margin: 0 15px;
-  }
+  padding: 15px 25px;
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.alternativeBackground};
+  position: relative;
+  border-bottom: ${({ theme }) => theme.colors.mainBackground};
 `;
 
-export const MainHeader = styled.header`
+//Logo
+export const LogoBox = styled.div`
   ${({ theme }) => css`
-    background-color: ${theme.colors.alternativeBackground};
-    border-bottom: 1px solid ${theme.colors.contrastBackground};
-    height: 65px;
-  `}
-`;
-
-export const Logo = styled.a`
-  cursor: pointer;
-`;
-
-export const DesktopMenu = styled.nav`
-  height: 100%;
-
-  ul {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    height: 100%;
-  }
+    margin-right: 30px;
+    cursor: pointer;
 
-  @media screen and (max-width: 768px) {
+    span {
+      padding: 3px 10px;
+      background-color: ${theme.colors.contrastColor};
+      margin-left: 20px;
+      border-radius: 10px;
+      font-size: 20px;
+      color: ${({ theme }) => theme.fonts.primaryFont};
+
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+  `}
+
+  @media (max-width: 768px) {
+    margin-right: 0;
+  }
+`;
+
+export const Logo = styled.img`
+  width: 150px;
+  height: auto;
+
+  @media (max-width: 768px) {
+    width: 60px;
+  }
+`;
+
+//Desktop Nav
+export const DesktopNav = styled.nav`
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 768px) {
     display: none;
   }
 `;
 
-export const MobileMenu = styled.nav`
-  display: none;
-  position: relative;
-  z-index: 10;
-  cursor: pointer;
-
-  ul {
-    padding: 10px 0;
-    background-color: ${({ theme }) => theme.colors.mainBackground};
-    display: none;
-  }
-
-  li {
-    padding: 20px 0;
-    margin: 0 4%;
-  }
-
-  &.active {
-    & ul {
-      display: block;
+export const HeaderUl = styled.ul`
+  @media (max-width: 768px) {
+    display: flex;
+    position: absolute;
+    top: 67px;
+    width: 100%;
+    height: calc(50vh - 67px);
+    flex-direction: column;
+    background-color: ${({ theme }) => theme.colors.alternativeBackground};
+    z-index: 99;
+    left: -100%;
+    transition: left 0.3s ease-in-out;
+    justify-content: space-evenly;
+    text-align: center;
+    &.active {
+      left: 0;
     }
   }
+`;
 
-  @media screen and (max-width: 768px) {
+export const HeaderLi = styled.li`
+  list-style: none;
+  display: inline-block;
+  margin: 0 20px;
+
+  @media (max-width: 768px) {
+    margin: 0;
+
+    opacity: 0;
+    transform: translateX(-50px);
+    transition-property: opacity transform;
+    transition: 0.4s ease;
+    transition-delay: 0.2s;
+
+    &.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+`;
+
+export const HeaderLink = styled.a`
+  text-decoration: none;
+  color: ${({ theme }) => theme.fonts.smothFont};
+  font-size: 17px;
+
+  &:hover {
+    color: ${({ theme }) => theme.fonts.primaryFont};
+  }
+
+  @media (max-width: 768px) {
     display: block;
+    padding: 15px;
+    height: 100%;
+    width: 100%;
   }
 `;
 
-export const MobileHamburger = styled.span`
+//Mobile Nav
+export const MobileNav = styled.nav`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: flex;
+  }
+`;
+
+//Header actions
+export const HeaderActions = styled.div`
+  svg {
+    cursor: pointer;
+  }
+`;
+
+export const MobileHamburger = styled.div`
   position: relative;
-  bottom: 6px;
   display: none;
   cursor: pointer;
+  height: 15px;
+  transition: transform 300ms ease;
 
-  &:before {
-    content: '';
-    width: 20px;
-    top: 8px;
-    left: 20px;
+  & span {
     height: 2px;
-    display: inline-block;
-    background: white;
-    position: relative;
-    transition-property: transform width;
+    background: ${({ theme }) => theme.fonts.primaryFont};
+    display: block;
     transition: 300ms ease;
+    transform-origin: center;
   }
 
-  &:after {
-    content: '';
+  & span.upperBar {
     width: 30px;
-    top: -2px;
-    height: 2px;
-    display: inline-block;
-    background: white;
+    transition-property: transform;
+  }
+
+  & span.lowerBar {
+    width: 20px;
     position: relative;
-    transition: transform 300ms ease;
+    top: 10px;
+    transition-property: transform width;
   }
 
   &.active {
-    &:before {
-      transform: rotate(-50deg) translateX(13px);
-      width: 30px;
+    transform: translateX(-8px);
+
+    span.upperBar {
+      transform: rotate(50deg) translate(9px);
     }
 
-    &:after {
-      transform: rotate(50deg);
+    span.lowerBar {
+      transform: rotate(-50deg) translate(7px, 1px);
+      width: 30px;
     }
   }
 
