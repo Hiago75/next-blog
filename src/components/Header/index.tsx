@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useState, useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { MdWbSunny } from 'react-icons/md';
 import { ThemeContext } from 'styled-components';
 
@@ -22,6 +22,7 @@ export const Header = () => {
 
   // Mobile menu state
   const [isOpen, setIsOpen] = useState(false);
+  const [isFixed, setIsFixed] = useState(false);
   const menuClassList = isOpen ? 'active' : undefined;
 
   // Toggle mobile menu state
@@ -34,13 +35,29 @@ export const Header = () => {
     alert('Tema trocado');
   }
 
+  function listenScrollEvent() {
+    if (window.pageYOffset > 95) {
+      setIsFixed(true);
+    } else {
+      setIsFixed(false);
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', listenScrollEvent, { capture: true });
+
+    return () => {
+      window.removeEventListener('scroll', listenScrollEvent);
+    };
+  }, []);
+
   return (
-    <BlogHeader>
+    <BlogHeader className={isFixed ? 'fixed' : undefined}>
       <HeaderContainer>
         <DesktopNav>
           <Link href="/">
             <LogoBox>
-              <Logo src="/logo.svg" />
+              {isFixed ? <Logo src="/logo-min.svg" /> : <Logo src="/logo.svg" />}
               <span>Blog</span>
             </LogoBox>
           </Link>
@@ -72,7 +89,7 @@ export const Header = () => {
         <MobileNav>
           <Link href="/">
             <LogoBox>
-              <Logo src="/colster-reduzido.svg" />
+              <Logo src="/logo-min.svg" />
               <span>Blog</span>
             </LogoBox>
           </Link>

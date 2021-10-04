@@ -2,9 +2,11 @@ import styled, { css } from 'styled-components';
 
 export const BlogHeader = styled.header`
   width: 100%;
-  position: relative;
+  position: fixed;
   background-color: ${({ theme }) => theme.colors.alternativeBackground};
   border-bottom: ${({ theme }) => theme.colors.mainBackground};
+  top: 0;
+  z-index: 9999;
 `;
 
 export const HeaderContainer = styled.div`
@@ -31,7 +33,7 @@ export const LogoBox = styled.div`
       margin-left: 20px;
       border-radius: 10px;
       font-size: 20px;
-      color: ${({ theme }) => theme.fonts.primaryFont};
+      color: white;
 
       @media (max-width: 768px) {
         display: none;
@@ -47,9 +49,14 @@ export const LogoBox = styled.div`
 export const Logo = styled.img`
   width: 150px;
   height: auto;
+  transition: width 0.3s ease;
 
   @media (max-width: 768px) {
-    width: 60px;
+    width: 80px;
+  }
+
+  ${BlogHeader}.fixed & {
+    width: 80px;
   }
 `;
 

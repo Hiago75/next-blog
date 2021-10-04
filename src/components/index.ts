@@ -27,6 +27,8 @@ import { Status } from './Status';
 import { Warning } from './Warning';
 import { SubMenu } from './SubMenu';
 import { PostEditor } from './PostEditor';
+import { BlogHeadingTitle } from './BlogHeadingTitle';
+import { BlogPostCard } from './BlogPostCard';
 
 export {
   Header,
@@ -58,4 +60,6 @@ export {
   Warning,
   SubMenu,
   PostEditor,
+  BlogHeadingTitle,
+  BlogPostCard,
 };

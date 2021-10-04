@@ -1,11 +1,16 @@
 import Head from 'next/head';
-import Link from 'next/link';
-import { FiChevronsRight } from 'react-icons/fi';
 
 import { PostData } from '../../domain/posts/post';
 
-import { RecentPosts, RecentPostsHeader, Title, LinkButton, LineDivider } from './style';
-import { Spotlight, Header, MainContainer, Footer } from '../../components';
+import { RecentPosts, CategoryPosts, CategoryPostBox } from './style';
+import {
+  Spotlight,
+  Header,
+  MainContainer,
+  BlogHeadingTitle,
+  Footer,
+  BlogPostCard,
+} from '../../components';
 import { APP_NAME } from '../../config';
 
 export type HomePageProps = {
@@ -23,18 +28,34 @@ export function HomePage({ posts, category }: HomePageProps) {
       <Header />
       <MainContainer>
         <RecentPosts>
-          <RecentPostsHeader>
-            <Title>Posts mais recentes</Title>
-            <Link href="/">
-              <LinkButton>
-                Ver todos os posts <FiChevronsRight />
-              </LinkButton>
-            </Link>
-            <LineDivider />
-          </RecentPostsHeader>
+          <BlogHeadingTitle linkText="Ver todos os posts">Posts mais recentes</BlogHeadingTitle>
           <Spotlight posts={posts} />
         </RecentPosts>
+
+        <CategoryPosts>
+          <CategoryPostBox>
+            <BlogHeadingTitle linkText="Ver todos os posts desta categoria">
+              Front-end
+            </BlogHeadingTitle>
+            <BlogPostCard posts={posts} />
+          </CategoryPostBox>
+
+          <CategoryPostBox>
+            <BlogHeadingTitle linkText="Ver todos os posts desta categoria">
+              Back-End
+            </BlogHeadingTitle>
+            <BlogPostCard posts={posts} />
+          </CategoryPostBox>
+
+          <CategoryPostBox>
+            <BlogHeadingTitle linkText="Ver todos os posts desta categoria">
+              Marketing
+            </BlogHeadingTitle>
+            <BlogPostCard posts={posts} />
+          </CategoryPostBox>
+        </CategoryPosts>
       </MainContainer>
+
       <Footer />
     </>
   );

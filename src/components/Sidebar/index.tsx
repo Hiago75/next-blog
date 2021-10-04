@@ -47,11 +47,7 @@ export const Sidebar = ({ menuOpen, setMenuOpen }: SidebarRequest) => {
             {menuOpen && <MenuController setMenuOpen={setMenuOpen} menuOpen={menuOpen} />}
 
             <Link href="/cboard">
-              <img
-                className="min-logo"
-                src="/colster-reduzido.svg"
-                alt="Logo da Colster reduzida"
-              />
+              <img className="min-logo" src="/logo-min.svg" alt="Logo da Colster reduzida" />
             </Link>
           </LogoBox>
 
