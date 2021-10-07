@@ -1,15 +1,16 @@
 import Link from 'next/link';
 import { useState, useEffect, MutableRefObject } from 'react';
 
-import { GuideSidebarLi, GuideSidebarLink } from './style';
+import { Container, GuideSidebarLi, GuideSidebarLink } from './style';
 
 interface BlogTableOCRequest {
+  isVisible: boolean;
   contentRef: MutableRefObject<HTMLDivElement>;
 }
 
 type headingObject = { id: string; active: boolean; offsetTop: number };
 
-export const BlogTableOC = ({ contentRef }: BlogTableOCRequest) => {
+export const BlogTableOC = ({ isVisible, contentRef }: BlogTableOCRequest) => {
   const [headingsState, setHeadingsState] = useState<Element[]>();
   const [activeHeadingId, setActiveHeadingId] = useState('');
 
@@ -21,6 +22,8 @@ export const BlogTableOC = ({ contentRef }: BlogTableOCRequest) => {
     headings?.forEach((heading) => {
       headingsList.push(heading);
     });
+
+    if (headingsList.length < 1) return;
 
     setHeadingsState(headingsList);
     setActiveHeadingId(headingsList[0].id);
@@ -72,17 +75,19 @@ export const BlogTableOC = ({ contentRef }: BlogTableOCRequest) => {
 
         if (heading.offsetTop > window.scrollY) {
           currentHeadingIds.splice(currentHeadingIds.indexOf(heading.id));
+
           headingStatus.setHeadingsId(prevHeadingId);
           return refreshActiveHeadingId();
         }
 
         if (heading.offsetTop < window.scrollY && currentHeadingIds.length > 1) {
           const nextItemIndex = headingsArray.indexOf(heading.id) + 1;
-
           currentHeadingIds.splice(currentHeadingIds.indexOf(heading.id));
 
           return headingStatus.setHeadingsId(headingsArray[nextItemIndex]);
         }
+
+        currentHeadingIds.splice(currentHeadingIds.indexOf(heading.id));
       },
     };
 
@@ -129,15 +134,17 @@ export const BlogTableOC = ({ contentRef }: BlogTableOCRequest) => {
   return (
     <>
       {headingsState &&
-        headingsState.map((heading) => {
+        headingsState.map((heading, index) => {
           const isActive = activeHeadingId === heading.id;
 
           return (
-            <GuideSidebarLi className={isActive ? 'active' : undefined} key={heading.id}>
-              <Link href={`#${heading.id}`}>
-                <GuideSidebarLink>{heading.textContent}</GuideSidebarLink>
-              </Link>
-            </GuideSidebarLi>
+            <Container key={heading.id} className={isVisible ? 'is-visible' : undefined}>
+              <GuideSidebarLi index={index} className={isActive ? 'active' : undefined}>
+                <Link href={`#${heading.id}`}>
+                  <GuideSidebarLink>{heading.textContent}</GuideSidebarLink>
+                </Link>
+              </GuideSidebarLi>
+            </Container>
           );
         })}
     </>

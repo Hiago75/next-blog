@@ -4,7 +4,11 @@ export const RecentPosts = styled.section`
   margin-bottom: 50px;
 `;
 
-export const SectionTitle = styled.h2``;
+export const SectionTitle = styled.h2`
+  text-align: center;
+  font-size: 40px;
+  padding: 30px 0;
+`;
 
 export const CategoryPosts = styled.section``;
 

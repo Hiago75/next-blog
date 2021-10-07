@@ -3,7 +3,9 @@ import styled, { css } from 'styled-components';
 
 export const PostPresentation = styled.section`
   display: flex;
-  margin-bottom: 40px;
+  flex-wrap: wrap;
+  @media (max-width: 768px) {
+  }
 `;
 
 export const PostPresentationData = styled.div`
@@ -12,12 +14,18 @@ export const PostPresentationData = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
 
-  padding: 60px 80px 0 0;
+  padding: 60px 0 0 80px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 25px 0;
+  }
 `;
 
 export const PostPresentationTitle = styled.h1`
   color: ${({ theme }) => theme.fonts.primaryFont};
   font-size: 32px;
+  margin-bottom: 10px;
 `;
 
 export const PostPresentationCategory = styled.p`
@@ -30,6 +38,13 @@ export const PostPresentationCategory = styled.p`
   font-weight: bold;
 
   margin-bottom: 30px;
+`;
+
+export const PostPresentationReadingTimeCounter = styled.p`
+  color: ${({ theme }) => theme.fonts.primaryFont};
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  font-size: 13px;
 
   svg {
     position: relative;
@@ -40,6 +55,10 @@ export const PostPresentationCategory = styled.p`
 export const PostPresentationAuthor = styled.p`
   color: ${({ theme }) => theme.fonts.primaryFont};
   margin-bottom: 50px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 0px;
+  }
 `;
 
 export const PostPresentationPhoto = styled.div`
@@ -49,46 +68,61 @@ export const PostPresentationPhoto = styled.div`
     max-width: 100%;
     border-radius: 10px;
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const PostContentContainer = styled.section`
   display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
 `;
 
 export const PostContentGuideSidebar = styled.ul`
   width: 20%;
   max-width: 200px;
-  height: 200px;
   position: sticky;
   margin-top: 10px;
-  margin-left: 10px;
   transform: translateX(-10px);
-  top: 20%;
-`;
+  top: 30%;
 
-export const GuideSidebarLi = styled.li`
-  color: ${({ theme }) => theme.fonts.smothFont};
-  list-style: none;
-  margin-bottom: 25px;
+  span {
+    padding: 0 0 30px 10px;
+    font-size: 24px;
+    color: ${({ theme }) => theme.fonts.primaryFont};
+    display: none;
+  }
 
-  &.active {
-    color: ${({ theme }) => theme.colors.contrastColor};
+  @media (max-width: 1024px) {
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+
+    span {
+      display: block;
+    }
   }
 `;
 
-export const GuideSidebarLink = styled.a`
-  cursor: pointer;
+export const PostContentSentry = styled.span`
+  display: inline-block;
+  width: 100%;
+  height: 5px;
+  margin-bottom: 40px;
 
-  :hover {
-    color: ${({ theme }) => theme.fonts.lightSmothFont};
+  @media (max-width: 768px) {
+    border-top: 1px solid ${({ theme }) => theme.fonts.smothFont};
+    margin-bottom: 10px;
   }
 `;
 
 export const PostContent = styled(Markdown)`
   ${({ theme }) => css`
-    margin: 0 auto;
+    padding-left: 30px;
     width: 80%;
-    max-width: 800px;
+    max-width: 720px;
     color: ${theme.fonts.primaryFont};
 
     img {
@@ -126,12 +160,18 @@ export const PostContent = styled(Markdown)`
       line-height: 25px;
       background-color: ${theme.colors.alternativeBackground};
       padding: 20px;
+      overflow-x: auto;
 
       code {
         white-space: pre-wrap;
-        word-wrap: break-word;
         text-align: justify;
       }
+    }
+
+    @media (max-width: 1024px) {
+      width: 100%;
+      padding: 0 2%;
+      max-width: 100%;
     }
   `}
 `;

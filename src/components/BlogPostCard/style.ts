@@ -38,6 +38,7 @@ export const PostCardOverlay = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
 `;
 
 export const PostCardData = styled.div`
@@ -58,13 +59,12 @@ export const PostCardTitle = styled.h1`
 `;
 
 export const PostCardCategory = styled.span`
-  color: ${({ theme }) => theme.fonts.primaryFont};
+  color: #f9fbff;
   text-transform: uppercase;
   font-size: 13px;
 `;
 
 export const PostCardAuthor = styled.p`
   color: #f9fbff;
-
   font-size: 15px;
 `;

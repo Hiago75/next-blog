@@ -11,6 +11,7 @@ export const Container = styled.div`
 export const Title = styled.h1`
   color: ${({ theme }) => theme.fonts.primaryFont};
   margin-bottom: 10px;
+  font-size: 27px;
 `;
 
 export const LinkButton = styled.a`
@@ -38,4 +39,5 @@ export const LineDivider = styled.span`
   height: 1px;
   display: inline-block;
   background-color: ${({ theme }) => theme.fonts.smothFont};
+  opacity: 0.2;
 `;

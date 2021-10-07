@@ -17,22 +17,31 @@ import {
   MobileHamburger,
 } from './styles';
 
-// interface IBlogHeaderRequest {
-//   progressBar?: boolean;
-//   currentProgress?: number;
-// }
+interface IBlogHeaderRequest {
+  progressBar?: boolean;
+  currentProgress?: number;
+}
 
-export const Header = () => {
+export const Header = ({ progressBar, currentProgress }: IBlogHeaderRequest) => {
   const theme = useContext(ThemeContext);
 
   // Mobile menu state
   const [isOpen, setIsOpen] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
+  const headerClassList = handleHeaderClassList();
   const menuClassList = isOpen ? 'active' : undefined;
 
   // Toggle mobile menu state
-  function handleMobileMenu() {
+  function toggleMobileMenu() {
     setIsOpen(!isOpen);
+  }
+
+  function handleHeaderClassList() {
+    let classList = '';
+    classList += ' progress-bar';
+    isFixed ? (classList += ' fixed') : undefined;
+
+    return classList;
   }
 
   // Toggle the theme
@@ -49,7 +58,7 @@ export const Header = () => {
   }
 
   useEffect(() => {
-    window.addEventListener('scroll', listenScrollEvent, { capture: true });
+    window.addEventListener('scroll', listenScrollEvent);
 
     return () => {
       window.removeEventListener('scroll', listenScrollEvent);
@@ -57,7 +66,7 @@ export const Header = () => {
   }, []);
 
   return (
-    <BlogHeader className={isFixed ? 'fixed progress-bar' : undefined}>
+    <BlogHeader className={headerClassList} currentProgress={progressBar ? currentProgress : 0}>
       <HeaderContainer>
         <DesktopNav>
           <Link href="/">
@@ -86,7 +95,7 @@ export const Header = () => {
           </HeaderUl>
         </DesktopNav>
 
-        <MobileHamburger className={menuClassList} onClick={handleMobileMenu}>
+        <MobileHamburger className={menuClassList} onClick={toggleMobileMenu}>
           <span className="upperBar" />
           <span className="lowerBar" />
         </MobileHamburger>

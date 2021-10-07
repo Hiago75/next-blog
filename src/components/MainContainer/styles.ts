@@ -6,4 +6,8 @@ export const Container = styled.section`
   margin-bottom: 0;
   padding: 20px 2%;
   min-height: calc(100% - 146px);
+
+  @media (max-width: 768px) {
+    margin: 66px auto;
+  }
 `;

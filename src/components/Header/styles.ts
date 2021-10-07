@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const BlogHeader = styled.header`
+export const BlogHeader = styled.header<{ currentProgress: number }>`
   width: 100%;
   position: fixed;
   background-color: ${({ theme }) => theme.colors.alternativeBackground};
@@ -12,8 +12,9 @@ export const BlogHeader = styled.header`
     :after {
       content: '';
       position: fixed;
-      width: 70%;
-      height: 4px;
+      transition: width 0.1s ease;
+      width: ${(props) => props.currentProgress || 0}%;
+      height: 2px;
       display: inline-block;
       background-color: ${({ theme }) => theme.colors.contrastColor};
     }
@@ -102,8 +103,7 @@ export const HeaderUl = styled.ul`
     overflow-y: hidden;
 
     &.active {
-      height: calc(50vh - 67px);
-      overflow-y: auto;
+      height: calc(100vh - 67px);
     }
   }
 `;
@@ -152,6 +152,10 @@ export const MobileNav = styled.nav`
 
   @media (max-width: 768px) {
     display: flex;
+
+    ${BlogHeader}.fixed & {
+      padding: 11px 25px;
+    }
   }
 `;
 

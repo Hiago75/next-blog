@@ -2,7 +2,7 @@ import Head from 'next/head';
 
 import { PostData } from '../../domain/posts/post';
 
-import { RecentPosts, CategoryPosts, CategoryPostBox } from './style';
+import { RecentPosts, SectionTitle, CategoryPosts, CategoryPostBox } from './style';
 import {
   Spotlight,
   Header,
@@ -32,6 +32,7 @@ export function HomePage({ posts, category }: HomePageProps) {
           <Spotlight posts={posts} />
         </RecentPosts>
 
+        <SectionTitle>Fique por dentro das novidades em...</SectionTitle>
         <CategoryPosts>
           <CategoryPostBox>
             <BlogHeadingTitle linkText="Ver todos os posts desta categoria">
