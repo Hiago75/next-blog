@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import readingTimeCalculator from '../../utils/readingTimeCalculator';
+
 import {
   CategoryPostsBox,
   PostCard,
@@ -22,6 +24,7 @@ export const BlogPostCard = ({ posts }: IBlogPostCardRequest) => {
     <CategoryPostsBox>
       {posts.map((post, index) => {
         const formatedDate = formatDate(post.createdAt);
+        const postReadingTime = readingTimeCalculator(post.content);
 
         if (index >= 4) return;
 
@@ -32,7 +35,9 @@ export const BlogPostCard = ({ posts }: IBlogPostCardRequest) => {
               <PostCardData>
                 <div>
                   <PostCardTitle>{post.title}</PostCardTitle>
-                  <PostCardCategory>{post.category.name}</PostCardCategory>
+                  <PostCardCategory>
+                    <b>{post.category.name}</b> | {postReadingTime} min de leitura
+                  </PostCardCategory>
                 </div>
                 <PostCardAuthor>
                   <b>{post.author.name}</b>, {formatedDate}

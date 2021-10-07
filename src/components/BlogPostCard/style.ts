@@ -52,17 +52,19 @@ export const PostCardData = styled.div`
 `;
 
 export const PostCardTitle = styled.h1`
-  color: ${({ theme }) => theme.fonts.lightFont};
+  color: #f9fbff;
   font-size: 22px;
   padding-bottom: 10px;
 `;
 
 export const PostCardCategory = styled.span`
-  color: ${({ theme }) => theme.fonts.lightSmothFont};
+  color: ${({ theme }) => theme.fonts.primaryFont};
+  text-transform: uppercase;
+  font-size: 13px;
 `;
 
 export const PostCardAuthor = styled.p`
-  color: ${({ theme }) => theme.fonts.lightFont};
+  color: #f9fbff;
 
   font-size: 15px;
 `;

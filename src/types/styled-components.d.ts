@@ -15,7 +15,6 @@ declare module 'styled-components' {
       successColor: string;
     };
     fonts: {
-      lightFont: string;
       lightSmothFont: string;
       primaryFont: string;
       smothFont: string;

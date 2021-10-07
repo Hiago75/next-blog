@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import readingTimeCalculator from '../../utils/readingTimeCalculator';
+
 import { PostData } from '../../domain/posts/post';
 import {
   Container,
@@ -22,6 +24,7 @@ export const Spotlight = ({ posts }: SpotlightProps) => {
   const recentPosts = posts.slice(1, 3);
   const mainPost = posts[0];
   const mainPostFormatedDate = formatDate(mainPost.createdAt);
+  const readingTime = readingTimeCalculator(mainPost.content);
 
   return (
     <Container>
@@ -31,7 +34,9 @@ export const Spotlight = ({ posts }: SpotlightProps) => {
             <PostImage src={mainPost.cover.format.large.url} className="main-post" />
           </PostImageBox>
           <PostPreviewData className="main-post">
-            <PostCategory>{mainPost.category.name}</PostCategory>
+            <PostCategory>
+              <b>{mainPost.category.name}</b> | {readingTime} min de leitura
+            </PostCategory>
             <PostTitle>{mainPost.title}</PostTitle>
             <PostAuthor>
               {mainPost.author.name}, {mainPostFormatedDate}
@@ -43,7 +48,7 @@ export const Spotlight = ({ posts }: SpotlightProps) => {
       <SidePosts>
         {recentPosts.map((post) => {
           const formatedDate = formatDate(post.createdAt);
-
+          const readingTime = readingTimeCalculator(post.content);
           return (
             <Link key={post.id} href={{ pathname: '/posts/[slug]', query: { slug: post.slug } }}>
               <Post className="side-post">
@@ -51,7 +56,9 @@ export const Spotlight = ({ posts }: SpotlightProps) => {
                   <PostImage src={post.cover.format.medium.url} />
                 </PostImageBox>
                 <PostPreviewData>
-                  <PostCategory>{post.category.name}</PostCategory>
+                  <PostCategory>
+                    <b>{post.category.name}</b> | {readingTime} min de leitura
+                  </PostCategory>
                   <PostTitle>{post.title}</PostTitle>
                   <PostAuthor>
                     {post.author.name}, {formatedDate}

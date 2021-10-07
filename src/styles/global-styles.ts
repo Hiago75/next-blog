@@ -7,6 +7,7 @@ export default createGlobalStyle`
     box-sizing: border-box;
     outline: none;
     scroll-behavior: smooth;
+    scroll-margin-top: 60px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     scrollbar-width: 10px;
     scrollbar-color: #7D7D7D;

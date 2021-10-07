@@ -1,5 +1,4 @@
 import { DiscussionEmbed } from 'disqus-react';
-import { APP_URL } from '../../config/app-config';
 import { Container } from './style';
 
 export type CommentsProps = {
@@ -8,6 +7,12 @@ export type CommentsProps = {
 };
 
 export function Comments({ slug, title }: CommentsProps) {
+  let APP_URL: string;
+
+  if (typeof window !== 'undefined') {
+    APP_URL = window.location.hostname;
+  }
+
   return (
     <Container>
       <DiscussionEmbed

@@ -14,8 +14,7 @@ export const darkTheme: DefaultTheme = {
     primaryFont: '#F9FBFF',
     contrastFont: '#091323',
     smothFont: '#A0AABA',
-    lightFont: '#F9FBFF',
-    lightSmothFont: '#c4c6ca',
+    lightSmothFont: '#d5dce8',
   },
 };
 
@@ -33,8 +32,7 @@ export const lightTheme: DefaultTheme = {
     primaryFont: '#091323',
     contrastFont: '#F9FBFF',
     smothFont: '#4B5971',
-    lightFont: '#F9FBFF',
-    lightSmothFont: '#c4c6ca',
+    lightSmothFont: '#273040',
   },
 };
 

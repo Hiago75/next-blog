@@ -17,6 +17,11 @@ import {
   MobileHamburger,
 } from './styles';
 
+// interface IBlogHeaderRequest {
+//   progressBar?: boolean;
+//   currentProgress?: number;
+// }
+
 export const Header = () => {
   const theme = useContext(ThemeContext);
 
@@ -36,7 +41,7 @@ export const Header = () => {
   }
 
   function listenScrollEvent() {
-    if (window.pageYOffset > 95) {
+    if (window.scrollY > 30) {
       setIsFixed(true);
     } else {
       setIsFixed(false);
@@ -52,7 +57,7 @@ export const Header = () => {
   }, []);
 
   return (
-    <BlogHeader className={isFixed ? 'fixed' : undefined}>
+    <BlogHeader className={isFixed ? 'fixed progress-bar' : undefined}>
       <HeaderContainer>
         <DesktopNav>
           <Link href="/">

@@ -7,6 +7,17 @@ export const BlogHeader = styled.header`
   border-bottom: ${({ theme }) => theme.colors.mainBackground};
   top: 0;
   z-index: 9999;
+
+  &.progress-bar {
+    :after {
+      content: '';
+      position: fixed;
+      width: 70%;
+      height: 4px;
+      display: inline-block;
+      background-color: ${({ theme }) => theme.colors.contrastColor};
+    }
+  }
 `;
 
 export const HeaderContainer = styled.div`
@@ -17,6 +28,10 @@ export const HeaderContainer = styled.div`
   padding: 15px 25px;
   max-width: 1200px;
   margin: 0 auto;
+
+  ${BlogHeader}.fixed & {
+    padding: 5px 25px;
+  }
 `;
 
 //Logo
@@ -52,11 +67,11 @@ export const Logo = styled.img`
   transition: width 0.3s ease;
 
   @media (max-width: 768px) {
-    width: 80px;
+    width: 60px;
   }
 
   ${BlogHeader}.fixed & {
-    width: 80px;
+    width: 60px;
   }
 `;
 

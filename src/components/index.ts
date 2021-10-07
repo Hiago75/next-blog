@@ -29,6 +29,7 @@ import { SubMenu } from './SubMenu';
 import { PostEditor } from './PostEditor';
 import { BlogHeadingTitle } from './BlogHeadingTitle';
 import { BlogPostCard } from './BlogPostCard';
+import { BlogTableOC } from './BlogTableOC';
 
 export {
   Header,
@@ -62,4 +63,5 @@ export {
   PostEditor,
   BlogHeadingTitle,
   BlogPostCard,
+  BlogTableOC,
 };
