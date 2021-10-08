@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { GiTreasureMap } from 'react-icons/gi';
 
 export const Container = styled.section`
   ${({ theme }) => css`
@@ -7,13 +6,12 @@ export const Container = styled.section`
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    min-height: calc(100vh - 110px);
-
+    padding-top: 95px;
+    min-height: calc(100vh - 53px);
     color: ${theme.fonts.primaryFont};
 
     h1 {
       font-size: 120px;
-      color: ${theme.fonts.primaryFont};
     }
 
     h2 {
@@ -21,49 +19,30 @@ export const Container = styled.section`
       margin: 30px;
     }
 
-    p {
-      color: ${theme.fonts.smothFont};
-      margin: 30px;
-      font-size: 17px;
-    }
-
-    button {
-      background: ${theme.colors.contrastColor};
-      border: 0;
-      border-radius: 10px;
-      padding: 7px 30px;
-      transition: transform 300ms ease;
-      cursor: pointer;
-
-      a {
-        color: ${theme.fonts.primaryFont};
-        text-decoration: none;
-        font-size: 20px;
-      }
-
-      &:hover {
-        transform: scale(1.1);
-      }
-    }
-
     @media screen and (max-width: 768px) {
-      margin: 50px 0;
+      padding-top: 66px;
     }
   `}
 `;
 
 export const IllustrationBox = styled.div`
   flex: 1 0 50%;
-`;
+  align-items: center;
+  padding: 0 65px;
 
-export const Illustration = styled(GiTreasureMap)`
-  font-size: 30rem;
+  img {
+    max-width: 100%;
+  }
 
-  @media screen and (max-width: 625px) {
-    font-size: 12rem;
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 
 export const Cta = styled.div`
   flex: 1 0 50%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;

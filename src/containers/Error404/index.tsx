@@ -1,21 +1,21 @@
 import Link from 'next/link';
 
-import { Container, Illustration, Cta, IllustrationBox } from './style';
+import { BlogButton } from '../../components';
+import { Container, Cta, IllustrationBox } from './style';
 
 export const Error404 = () => {
   return (
     <Container>
       <IllustrationBox>
-        <Illustration />
+        <img src="/assets/lost.png" />
       </IllustrationBox>
+
       <Cta>
         <h1>404...</h1>
         <h2>Oops! Parece que não tem nada aqui</h2>
-        <p>Acho melhor olhar o seu mapa e voltar a trilha do tesouro</p>
-        <Link as="/posts/page/1" href="/posts/page/[...param]">
-          <button>
-            <a>Retornar a trilha</a>
-          </button>
+
+        <Link href="/">
+          <BlogButton>Retornar a página principal</BlogButton>
         </Link>
       </Cta>
     </Container>

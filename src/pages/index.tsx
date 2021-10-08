@@ -1,21 +1,23 @@
 import { GetStaticProps } from 'next';
 import { getAllPosts } from '../services/posts/get-all-posts';
-import { PostData } from '../domain/posts/post';
-import { HomePage } from '../containers/HomePage';
+import { PostCategory, PostData } from '../domain/posts/post';
+import { HomePage } from '../containers/BlogHomePage';
+import { getAllCategories } from '../services';
 
 export type HomeProps = {
   posts: PostData[];
+  categories: PostCategory[];
 };
 
-export default function Home({ posts }: HomeProps) {
-  return <HomePage posts={posts}></HomePage>;
+export default function Home({ posts, categories }: HomeProps) {
+  return <HomePage categories={categories} posts={posts}></HomePage>;
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const postsPerPage = 6;
-  const posts = await getAllPosts(`_sort=id:desc&_start=0&_limit=${postsPerPage}`);
+  const posts = await getAllPosts();
+  const categories = await getAllCategories();
 
   return {
-    props: { posts },
+    props: { posts, categories },
   };
 };

@@ -1,9 +1,9 @@
-import { HomePage } from './HomePage';
-import { Post } from './Post';
-import { PaginationPage } from './PaginationPage';
+import { HomePage } from './BlogHomePage';
+import { Post } from './BlogPost';
+import { PaginationPage } from './BlogPaginationPage';
 import { Error404 } from './Error404';
 import { DashboardContainer } from '../components/DashboardContainer';
-import { Login } from './Login';
+import { Login } from './DashboardLogin';
 import { DashboardEditUser } from './DashboardEditUser';
 import { DashboardHome } from './DashboardHomePage';
 import { DashboardCategories } from './DashboardCategories';

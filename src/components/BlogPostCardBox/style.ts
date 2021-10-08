@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+export const CategoryPostsBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
+
 export const PostCard = styled.div<{ image: string }>`
   background-image: url(${(props) => props.image});
   background-repeat: no-repeat;
