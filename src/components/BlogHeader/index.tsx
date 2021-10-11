@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { useEffect, useState, useContext } from 'react';
 import { MdWbSunny } from 'react-icons/md';
 import { ThemeContext } from 'styled-components';
+import { PostCategory } from '../../domain/posts/post';
 
 import {
   BlogHeader,
@@ -18,11 +19,12 @@ import {
 } from './styles';
 
 interface IBlogHeaderRequest {
+  data: PostCategory[];
   progressBar?: boolean;
   currentProgress?: number;
 }
 
-export const Header = ({ progressBar, currentProgress }: IBlogHeaderRequest) => {
+export const Header = ({ data, currentProgress, progressBar }: IBlogHeaderRequest) => {
   const theme = useContext(ThemeContext);
 
   // Mobile menu state
@@ -57,9 +59,12 @@ export const Header = ({ progressBar, currentProgress }: IBlogHeaderRequest) => 
     }
   }
 
+  //When the component mount...
   useEffect(() => {
+    //Add a scroll listener to know when to active the fixed style
     window.addEventListener('scroll', listenScrollEvent);
 
+    //Remove the scroll listener when component unmounts
     return () => {
       window.removeEventListener('scroll', listenScrollEvent);
     };
@@ -77,21 +82,13 @@ export const Header = ({ progressBar, currentProgress }: IBlogHeaderRequest) => 
           </Link>
 
           <HeaderUl>
-            <HeaderLi>
-              <Link href="#" passHref>
-                <HeaderLink>Front-end</HeaderLink>
-              </Link>
-            </HeaderLi>
-            <HeaderLi>
-              <Link href="#" passHref>
-                <HeaderLink>Back-end</HeaderLink>
-              </Link>
-            </HeaderLi>
-            <HeaderLi>
-              <Link href="#" passHref>
-                <HeaderLink>Marketing</HeaderLink>
-              </Link>
-            </HeaderLi>
+            {data?.map((category) => (
+              <HeaderLi key={category.name}>
+                <Link href={`/posts/${category.name}`} passHref>
+                  <HeaderLink>{category.name}</HeaderLink>
+                </Link>
+              </HeaderLi>
+            ))}
           </HeaderUl>
         </DesktopNav>
 
@@ -109,21 +106,13 @@ export const Header = ({ progressBar, currentProgress }: IBlogHeaderRequest) => 
           </Link>
 
           <HeaderUl className={menuClassList}>
-            <HeaderLi className={`${menuClassList} `}>
-              <Link href="#" passHref>
-                <HeaderLink>Front-end</HeaderLink>
-              </Link>
-            </HeaderLi>
-            <HeaderLi className={`${menuClassList}`}>
-              <Link href="#" passHref>
-                <HeaderLink>Back-end</HeaderLink>
-              </Link>
-            </HeaderLi>
-            <HeaderLi className={`${menuClassList}`}>
-              <Link href="#" passHref>
-                <HeaderLink>Marketing</HeaderLink>
-              </Link>
-            </HeaderLi>
+            {data?.map((category, index) => (
+              <HeaderLi index={index} className={menuClassList} key={category.name}>
+                <Link href={`/posts/${category.name}`} passHref>
+                  <HeaderLink>{category.name}</HeaderLink>
+                </Link>
+              </HeaderLi>
+            ))}
           </HeaderUl>
         </MobileNav>
 

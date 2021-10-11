@@ -6,5 +6,5 @@ type ChildrenElement = {
 };
 
 export function MainContainer({ onScroll, children }: ChildrenElement) {
-  return <Container onScroll={onScroll}>{children}</Container>;
+  return <Container>{children}</Container>;
 }

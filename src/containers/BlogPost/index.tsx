@@ -1,11 +1,10 @@
-import Head from 'next/head';
 import _ from 'lodash';
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, SetStateAction, Dispatch } from 'react';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 
 import { PostData } from '../../domain/posts/post';
-import { Header, MainContainer, BlogTableOC, Comments, Footer } from '../../components';
+import { BlogTableOC, Comments } from '../../components';
 import {
   PostPresentation,
   PostPresentationData,
@@ -19,20 +18,19 @@ import {
   PostContentSentry,
   PostContent,
 } from './style';
-import { APP_NAME } from '../../config';
 import { getElementTop, formatDate, readingTimeCalculator } from '../../utils';
 
 export type PostProps = {
   post: PostData;
+  setReadingProgress: Dispatch<SetStateAction<number>>;
 };
 
-export function Post({ post }: PostProps) {
+export function Post({ post, setReadingProgress }: PostProps) {
   const postContentRef = useRef<HTMLDivElement>(null);
   const postContentSidebarRef = useRef<HTMLUListElement>(null);
   const postContentSentryRef = useRef<HTMLSpanElement>(null);
 
   const [userReading, setUserReading] = useState(false);
-  const [readingProgress, setReadingsProgress] = useState(0);
 
   const { title, category, author, cover, content, createdAt } = post;
   const formatedCreatedAt = formatDate(createdAt);
@@ -41,7 +39,7 @@ export function Post({ post }: PostProps) {
   //When user pass the sentry show the progressbar on header;
   function toggleProgressBar(intersectionObserverEntries: IntersectionObserverEntry[]) {
     const sentry = intersectionObserverEntries[0];
-    const offset = getElementTop(sentry.target);
+    const offset = getElementTop(sentry.target) - 39;
 
     if (!sentry.isIntersecting && window.scrollY > offset) {
       return setUserReading(true);
@@ -67,7 +65,7 @@ export function Post({ post }: PostProps) {
     const currentProgress = Math.floor((windowOffset / totalDocScrollHeight) * 100);
 
     if (currentProgress > 110) return;
-    setReadingsProgress(currentProgress);
+    setReadingProgress(currentProgress);
   }
 
   useEffect(() => {
@@ -89,48 +87,38 @@ export function Post({ post }: PostProps) {
 
   return (
     <>
-      <Head>
-        <title>
-          {title} - {APP_NAME}
-        </title>
-      </Head>
-      <Header progressBar={userReading} currentProgress={readingProgress} />
+      <PostPresentation>
+        <PostPresentationPhoto>
+          <img src={cover.format.medium.url} alt="Foto de capa da publicação" />
+        </PostPresentationPhoto>
+        <PostPresentationData>
+          <div>
+            <PostPresentationCategory>{category.name}</PostPresentationCategory>
 
-      <MainContainer>
-        <PostPresentation>
-          <PostPresentationPhoto>
-            <img src={cover.format.medium.url} alt="Foto de capa da publicação" />
-          </PostPresentationPhoto>
-          <PostPresentationData>
-            <div>
-              <PostPresentationCategory>{category.name}</PostPresentationCategory>
+            <PostPresentationTitle>{title}</PostPresentationTitle>
+            <PostPresentationReadingTimeCounter>
+              <AiOutlineClockCircle /> {readingTime} min de leitura
+            </PostPresentationReadingTimeCounter>
+          </div>
 
-              <PostPresentationTitle>{title}</PostPresentationTitle>
-              <PostPresentationReadingTimeCounter>
-                <AiOutlineClockCircle /> {readingTime} min de leitura
-              </PostPresentationReadingTimeCounter>
-            </div>
+          <PostPresentationAuthor>
+            Escrito por <b>{author.name}</b>, {formatedCreatedAt}
+          </PostPresentationAuthor>
+        </PostPresentationData>
+      </PostPresentation>
 
-            <PostPresentationAuthor>
-              Escrito por <b>{author.name}</b>, {formatedCreatedAt}
-            </PostPresentationAuthor>
-          </PostPresentationData>
-        </PostPresentation>
+      <PostContentSentry ref={postContentSentryRef}></PostContentSentry>
 
-        <PostContentSentry ref={postContentSentryRef}></PostContentSentry>
+      <PostContentContainer id="post-content" ref={postContentRef}>
+        <PostContentGuideSidebar ref={postContentSidebarRef}>
+          <span>Conteúdo</span>
+          <BlogTableOC isVisible={userReading} contentRef={postContentRef}></BlogTableOC>
+        </PostContentGuideSidebar>
 
-        <PostContentContainer id="post-content" ref={postContentRef}>
-          <PostContentGuideSidebar ref={postContentSidebarRef}>
-            <span>Conteúdo</span>
-            <BlogTableOC isVisible={userReading} contentRef={postContentRef}></BlogTableOC>
-          </PostContentGuideSidebar>
+        <PostContent>{content}</PostContent>
+      </PostContentContainer>
 
-          <PostContent>{content}</PostContent>
-        </PostContentContainer>
-
-        <Comments title={post.title} slug={post.slug} />
-      </MainContainer>
-      <Footer />
+      <Comments title={post.title} slug={post.slug} />
     </>
   );
 }

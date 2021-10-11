@@ -113,19 +113,18 @@ export const HeaderUl = styled.ul`
   }
 `;
 
-export const HeaderLi = styled.li`
+export const HeaderLi = styled.li<{ index?: number }>`
   list-style: none;
   display: inline-block;
   margin: 0 20px;
 
   @media (max-width: 768px) {
     margin: 0;
-
     opacity: 0;
     transform: translateY(-50px);
     transition-property: opacity transform;
     transition: 0.4s ease;
-    transition-delay: 0.3s;
+    transition-delay: ${(props) => props.index} * 0.2s;
 
     &.active {
       opacity: 1;
@@ -159,7 +158,7 @@ export const MobileNav = styled.nav`
     display: flex;
 
     ${BlogHeader}.fixed & {
-      padding: 11px 25px;
+      padding: 10px 25px;
     }
   }
 `;

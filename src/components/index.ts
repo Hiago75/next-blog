@@ -24,7 +24,7 @@ import { BlogPostCard } from './BlogPostCard';
 import { BlogPostCardBox } from './BlogPostCardBox';
 import { BlogTableOC } from './BlogTableOC';
 import { BlogButton } from './BlogButton';
-import { BlogFullScreenContainer } from './BlogFullScreenContainer';
+import { BlogFullScreenContainer } from './BlogFullContainer';
 
 export {
   Header,

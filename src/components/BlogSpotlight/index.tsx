@@ -26,6 +26,9 @@ export const Spotlight = ({ posts }: SpotlightProps) => {
   const mainPostFormatedDate = formatDate(mainPost.createdAt);
   const readingTime = readingTimeCalculator(mainPost.content);
 
+  if (recentPosts.length < 1) return;
+  if (!mainPost) return;
+
   return (
     <Container>
       <Link href={{ pathname: '/post/[slug]', query: { slug: mainPost.slug } }}>
@@ -39,7 +42,7 @@ export const Spotlight = ({ posts }: SpotlightProps) => {
             </PostCategory>
             <PostTitle>{mainPost.title}</PostTitle>
             <PostAuthor>
-              {mainPost.author.name}, {mainPostFormatedDate}
+              {mainPost?.author?.name}, {mainPostFormatedDate}
             </PostAuthor>
           </PostPreviewData>
         </Post>

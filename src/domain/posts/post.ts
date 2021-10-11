@@ -12,8 +12,7 @@ export type PostAuthor = {
 export type PostCategory = {
   id: PostID;
   name: string;
-  created_at: string;
-  updated_at: string;
+  mainCategory: boolean;
 };
 
 export type PostCreatedBy = {
