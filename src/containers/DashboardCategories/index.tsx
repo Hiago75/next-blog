@@ -1,27 +1,35 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useState, useContext, useEffect } from 'react';
 import { ThemeContext } from 'styled-components';
 
-import { Container, CategoryBox, Trashcan } from './style';
+import { Container, CategoryBox, CategoriesContainer, TagsContainer, Trashcan } from './style';
 import { PanelBox, PanelButton, InputLabel, Warning } from '../../components';
 
 import createFormErrorHandler from '../../utils/createFormErrorHandler';
-import { PostCategory, PostCount } from '../../domain/posts/post';
+import { PostCategory, PostCount, PostTags } from '../../domain/posts/post';
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
-import { createNewCategory, deleteCategory, refreshUserToken } from '../../services';
+import { createNewCategory, createNewTag, deleteCategory, refreshUserToken } from '../../services';
 import { RequestContext } from '../../contexts/RequestContext';
 
 interface IDashboardCategoriesRequest {
   categories: PostCategory[];
+  tags: PostTags[];
   numberOfPosts: PostCount;
 }
 
-export const DashboardCategories = ({ categories, numberOfPosts }: IDashboardCategoriesRequest) => {
+export const DashboardCategories = ({
+  categories,
+  tags,
+  numberOfPosts,
+}: IDashboardCategoriesRequest) => {
   const theme = useContext(ThemeContext);
   const { setLoading, responseStatusFactory, refreshServerSideProps, setIsRefreshing } =
     useContext(RequestContext);
 
   const [newCategory, setNewCategory] = useState('');
   const [categoryToBeDeleted, setCategoryToBeDeleted] = useState('');
+
+  const [newTag, setNewTag] = useState('');
   const [warning, setWarning] = useState(false);
 
   const { resetInputErrors, createInputError } = createFormErrorHandler();
@@ -45,6 +53,34 @@ export const DashboardCategories = ({ categories, numberOfPosts }: IDashboardCat
   function handleCategoryInputChange(event: IOnChangeInput) {
     setNewCategory(event.target.value);
     resetInputErrors();
+  }
+
+  // Set the tag input value when the input changes
+  function handleTagInputChange(event: IOnChangeInput) {
+    setNewTag(event.target.value);
+    resetInputErrors();
+  }
+
+  async function handleTagSubmit(event: React.FormEvent) {
+    event.preventDefault();
+    await refreshUserToken();
+    resetInputErrors();
+
+    setLoading(true);
+    const { error, message } = await createNewTag(newTag);
+    setLoading(false);
+
+    //Fail
+    if (error) return createInputError('tag', message);
+
+    //Success
+    refreshServerSideProps();
+
+    responseStatusFactory(
+      true,
+      'Nova tag criada',
+      'Agora basta usar ela na sua proxima publicação',
+    );
   }
 
   // Submit the new category
@@ -115,40 +151,82 @@ export const DashboardCategories = ({ categories, numberOfPosts }: IDashboardCat
         />
       )}
 
-      <PanelBox widthPercentage={100} panelTitle="Criar nova categoria">
-        <form onSubmit={handleCategorySubmit}>
-          <InputLabel panel htmlFor="category" id="category">
-            <input
-              name="category"
-              placeholder="Categoria"
-              type="text"
-              onChange={handleCategoryInputChange}
-            />
-          </InputLabel>
-          <PanelButton type="submit">Criar categoria</PanelButton>
-        </form>
-      </PanelBox>
+      <CategoriesContainer>
+        <PanelBox widthPercentage={100} panelTitle="Criar nova categoria">
+          <p>
+            Categorias são geralmente usadas para assuntos mais abrangentes, como por exemplo
+            "Front-end" que abrange uma area inteira da programação
+          </p>
+          <form onSubmit={handleCategorySubmit}>
+            <InputLabel panel htmlFor="category" id="category">
+              <input
+                name="category"
+                placeholder="Categoria"
+                type="text"
+                onChange={handleCategoryInputChange}
+              />
+            </InputLabel>
+            <PanelButton type="submit">Criar categoria</PanelButton>
+          </form>
+        </PanelBox>
 
-      <PanelBox widthPercentage={50} panelTitle="Apagar categorias">
-        {categories.map((category) => (
-          <CategoryBox key={category.id}>
-            <p>{category.name}</p>
-            <Trashcan
-              onClick={() => handleDeleteClick(category.id)}
-              color={theme.colors.errorColor}
-            ></Trashcan>
-          </CategoryBox>
-        ))}
-      </PanelBox>
+        <PanelBox widthPercentage={100} panelTitle="Apagar categorias">
+          {!categories ? (
+            <p>Opa, parece que não tem nada aqui</p>
+          ) : (
+            categories.map((category) => (
+              <CategoryBox key={category.id}>
+                <p>{category.name}</p>
+                <Trashcan
+                  onClick={() => handleDeleteClick(category.id)}
+                  color={theme.colors.errorColor}
+                ></Trashcan>
+              </CategoryBox>
+            ))
+          )}
+        </PanelBox>
 
-      <PanelBox widthPercentage={50} panelTitle="Total de posts por categoria">
-        {categoriesData.map((category) => (
-          <CategoryBox key={category.name}>
-            <p>{category.name}</p>
-            <p>{category.posts}</p>
-          </CategoryBox>
-        ))}
-      </PanelBox>
+        <PanelBox widthPercentage={100} panelTitle="Total de posts por categoria">
+          {!categories ? (
+            <p>Opa, parece que não tem nada aqui</p>
+          ) : (
+            categoriesData.map((category) => (
+              <CategoryBox key={category.name}>
+                <p>{category.name}</p>
+                <p>{category.posts}</p>
+              </CategoryBox>
+            ))
+          )}
+        </PanelBox>
+      </CategoriesContainer>
+
+      <TagsContainer>
+        <PanelBox widthPercentage={100} panelTitle="Criar nova tag">
+          <p>
+            Tags são usadas para falar sobre algo mais especifico, como por exemplo "React.js", que
+            é uma tecnologia Front-end
+          </p>
+          <form onSubmit={handleTagSubmit}>
+            <InputLabel panel htmlFor="tag" id="tag">
+              <input name="tag" placeholder="Tag" type="text" onChange={handleTagInputChange} />
+            </InputLabel>
+            <PanelButton type="submit">Criar Tag</PanelButton>
+          </form>
+        </PanelBox>
+        TODO: delete tags
+        <PanelBox widthPercentage={100} panelTitle="Apagar tags">
+          {!tags ? (
+            <p>Opa, parece que não tem nada aqui</p>
+          ) : (
+            tags?.map((tag) => (
+              <CategoryBox key={tag.id}>
+                <p>{tag.name}</p>
+                <Trashcan onClick={() => alert(tag.id)} color={theme.colors.errorColor}></Trashcan>
+              </CategoryBox>
+            ))
+          )}
+        </PanelBox>
+      </TagsContainer>
     </Container>
   );
 };

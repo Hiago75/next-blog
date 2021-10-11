@@ -16,6 +16,8 @@ import { createNewCover } from './covers/createNewCover';
 import { deleteCategory } from './categories/deleteCategory';
 import { deletePost } from './posts/deletePost';
 import { uploadImage } from './posts/uploadImage';
+import { getAllTags } from './tags/getAllTags';
+import { createNewTag } from './tags/createNewTag';
 
 export {
   countAllPosts,
@@ -36,4 +38,6 @@ export {
   deleteCategory,
   deletePost,
   uploadImage,
+  getAllTags,
+  createNewTag,
 };

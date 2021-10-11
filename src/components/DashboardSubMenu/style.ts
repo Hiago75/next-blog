@@ -38,6 +38,7 @@ export const SidebarList = styled.li`
 export const SidebarLabel = styled.a`
   ${({ theme }) => css`
     color: ${theme.fonts.smothFont};
+    display: block;
     font-size: 17px;
     position: relative;
     bottom: 2px;

@@ -1,14 +1,8 @@
 import { externalApi } from '../../config/api-config';
 
-export async function createNewPost(
-  title: string,
-  content: string,
-  tagIds: string[],
-  categoryId: string,
-  coverId: string,
-) {
+export async function createNewTag(tagName: string) {
   return await externalApi
-    .post('/posts', { title, content, tagIds, categoryId, coverId })
+    .post('/tags', { name: tagName })
     .then((response) => {
       return { error: false, message: response.data.message };
     })

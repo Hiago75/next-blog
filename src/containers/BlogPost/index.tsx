@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import Link from 'next/link';
 
 import { useRef, useState, useEffect, SetStateAction, Dispatch } from 'react';
 import { AiOutlineClockCircle } from 'react-icons/ai';
@@ -14,9 +15,11 @@ import {
   PostPresentationAuthor,
   PostPresentationPhoto,
   PostContentContainer,
+  PostContentBox,
   PostContentGuideSidebar,
   PostContentSentry,
   PostContent,
+  PostTags,
 } from './style';
 import { getElementTop, formatDate, readingTimeCalculator } from '../../utils';
 
@@ -73,7 +76,7 @@ export function Post({ post, setReadingProgress }: PostProps) {
       root: null,
       rootMargin: '-45px',
     });
-    const throttledCalculate = _.throttle(calculateReadingProgress, 65);
+    const throttledCalculate = _.throttle(calculateReadingProgress, 80);
 
     window.addEventListener('scroll', throttledCalculate);
 
@@ -85,6 +88,8 @@ export function Post({ post, setReadingProgress }: PostProps) {
     };
   }, []);
 
+  console.log(post.tags);
+
   return (
     <>
       <PostPresentation>
@@ -93,8 +98,12 @@ export function Post({ post, setReadingProgress }: PostProps) {
         </PostPresentationPhoto>
         <PostPresentationData>
           <div>
-            <PostPresentationCategory>{category.name}</PostPresentationCategory>
-
+            <Link
+              href={{ pathname: '/posts/[category]', query: { category: category.name } }}
+              passHref
+            >
+              <PostPresentationCategory>{category.name}</PostPresentationCategory>
+            </Link>
             <PostPresentationTitle>{title}</PostPresentationTitle>
             <PostPresentationReadingTimeCounter>
               <AiOutlineClockCircle /> {readingTime} min de leitura
@@ -115,7 +124,16 @@ export function Post({ post, setReadingProgress }: PostProps) {
           <BlogTableOC isVisible={userReading} contentRef={postContentRef}></BlogTableOC>
         </PostContentGuideSidebar>
 
-        <PostContent>{content}</PostContent>
+        <PostContentBox>
+          <PostContent>{content}</PostContent>
+
+          <PostTags>
+            <p>Tópicos:</p>
+            {post.tags?.map((tag) => (
+              <span key={tag.id}>{tag.name}</span>
+            ))}
+          </PostTags>
+        </PostContentBox>
       </PostContentContainer>
 
       <Comments title={post.title} slug={post.slug} />

@@ -55,7 +55,7 @@ export const SidebarData = [
     ],
   },
   {
-    title: 'Categorias',
+    title: 'Tags/categorias',
     path: '/cboard/categories',
     outlineIcon: <AiOutlineUnorderedList />,
     filledIcon: <AiOutlineOrderedList />,

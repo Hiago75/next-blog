@@ -1,5 +1,6 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useMemo } from 'react';
 import { AiFillCamera } from 'react-icons/ai';
+import { FaPlus, FaTimes } from 'react-icons/fa';
 
 import {
   Container,
@@ -10,27 +11,43 @@ import {
   ImagePreview,
   MediaEditor,
   CoverPreview,
+  PostTagsBox,
+  PostTagsUl,
+  PostTag,
+  PostTagInput,
+  AvaliablePostTags,
+  PostTagsAdvice,
 } from './style';
 
 import createFormErrorHandler from '../../utils/createFormErrorHandler';
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
 import { PanelButton, ImageUpload, InputLabel, ErrorBox, PostEditor } from '../../components';
-import { PostCategory } from '../../domain/posts/post';
+import { PostCategory, PostTags } from '../../domain/posts/post';
 import { createNewCover, createNewPost, refreshUserToken } from '../../services';
 import { RequestContext } from '../../contexts/RequestContext';
 
 interface IDashboardNewPostRequest {
+  tags: PostTags[];
   categories: PostCategory[];
 }
 
-export const DashboardNewPost = ({ categories }: IDashboardNewPostRequest) => {
+export const DashboardNewPost = ({ categories, tags }: IDashboardNewPostRequest) => {
   const { setLoading, responseStatusFactory } = useContext(RequestContext);
 
   //Form states
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [categoryId, setCategoryId] = useState('');
+
   let coverId: string;
+
+  //Tags states
+  const [selectedTags, setSelectedTags] = useState<PostTags[]>([]);
+  const [tagsInputValue, setTagsInputValue] = useState('');
+  const suggestionTags = useMemo<PostTags[]>(
+    () => filterSuggestionTags(selectedTags),
+    [selectedTags],
+  );
 
   // Photo
   const [photo, setPhoto] = useState<File>();
@@ -41,6 +58,13 @@ export const DashboardNewPost = ({ categories }: IDashboardNewPostRequest) => {
   // Error states
   const [error, setError] = useState('');
   const { createInputError, resetInputErrors } = createFormErrorHandler();
+
+  // Filter the tags that will be suggested
+  function filterSuggestionTags(selectedTags) {
+    const notUsedTags = tags.filter((tag) => !selectedTags.includes(tag));
+
+    return notUsedTags;
+  }
 
   // Handle the change event of the title input
   function handleTitleInputChange(event: IOnChangeInput) {
@@ -101,6 +125,10 @@ export const DashboardNewPost = ({ categories }: IDashboardNewPostRequest) => {
     setTemporaryPhoto(URL.createObjectURL(photo));
   }
 
+  function getSelectedTagsIds() {
+    return selectedTags.map((tag) => tag.id);
+  }
+
   // Reset the inputs and try to submit the form, if something goes wrong displays the error
   async function handlePostFormSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -118,7 +146,9 @@ export const DashboardNewPost = ({ categories }: IDashboardNewPostRequest) => {
     await refreshUserToken();
     await uploadCover();
 
-    const post = await createNewPost(title, content, categoryId, coverId);
+    const tagsIds = getSelectedTagsIds();
+
+    const post = await createNewPost(title, content, tagsIds, categoryId, coverId);
 
     if (post.error)
       return handleSubmitResponse(false, 'Opa, acho que algo não está certo', post.message);
@@ -128,6 +158,56 @@ export const DashboardNewPost = ({ categories }: IDashboardNewPostRequest) => {
       'Publicação feita :)',
       'Em breve ela vai estar presente no blog para que todos possam ler',
     );
+  }
+
+  function handleTagInputKeyboard(event: React.KeyboardEvent<HTMLInputElement>) {
+    const specialKeys = {
+      ArrowRight() {
+        createPostTag();
+      },
+      ','() {
+        event.preventDefault();
+        createPostTag();
+      },
+    };
+
+    const keyPressed = event.key;
+
+    const specialFunction = specialKeys[keyPressed];
+    specialFunction && specialFunction();
+  }
+
+  function handleSuggestionTagClick(tag: PostTags) {
+    createPostTag(tag);
+  }
+
+  //Create a tag
+  function createPostTag(tag?: PostTags) {
+    if (tag) {
+      setSelectedTags((prevTags) => [...prevTags, tag]);
+      return setTagsInputValue('');
+    }
+
+    const formatedTag = tagsInputValue.replace(/\s+/g, ' ').replace(',', '');
+
+    const objectTag = tags.find((tag) => tag.name.toLowerCase() === formatedTag.toLowerCase());
+    if (!objectTag) return;
+
+    setSelectedTags((prevTags) => [...prevTags, objectTag]);
+    setTagsInputValue('');
+  }
+
+  //Remove a tag
+  function removePostTag(tag: PostTags) {
+    const tagIndex = selectedTags.indexOf(tag);
+    if (tagIndex === -1) return;
+
+    setSelectedTags((prevValue) => prevValue.filter((el, index) => index !== tagIndex));
+  }
+
+  //Set tag value every time post tag input changes
+  function handlePostTagInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setTagsInputValue(event.target.value);
   }
 
   return (
@@ -182,6 +262,36 @@ export const DashboardNewPost = ({ categories }: IDashboardNewPostRequest) => {
         </MediaBox>
 
         <PostEditor onChange={handleContentInputChange} />
+
+        <PostTagsBox panelTitle="Tags">
+          <PostTagsAdvice>
+            Para adicionar uma tag basta adicionar uma virgula ou a seta direita do teclado
+          </PostTagsAdvice>
+          <PostTagsUl>
+            {selectedTags?.map((tag) => (
+              <PostTag onClick={() => removePostTag(tag)} key={tag?.id}>
+                {tag?.name}
+                <FaTimes />
+              </PostTag>
+            ))}
+            <PostTagInput
+              onChange={handlePostTagInputChange}
+              value={tagsInputValue}
+              onKeyDown={handleTagInputKeyboard}
+              type="text"
+            ></PostTagInput>
+          </PostTagsUl>
+
+          <AvaliablePostTags>
+            <p>Que tal uma sugestão?</p>
+            {suggestionTags?.map((tag) => (
+              <PostTag onClick={() => handleSuggestionTagClick(tag)} className="add" key={tag.id}>
+                {tag.name}
+                <FaPlus onClick={() => removePostTag(tag)} />
+              </PostTag>
+            ))}
+          </AvaliablePostTags>
+        </PostTagsBox>
 
         <PanelButton type="submit">Salvar publicação</PanelButton>
       </FormContainer>

@@ -28,6 +28,7 @@ export const Container = styled.aside`
   position: fixed;
   overflow: hidden;
   z-index: 7;
+  padding-right: 5px;
 
   a,
   span {
@@ -71,6 +72,7 @@ export const Container = styled.aside`
 
   @media (max-width: 900px) {
     width: 0;
+    padding-right: 0;
 
     &.menu-open {
       width: 100%;

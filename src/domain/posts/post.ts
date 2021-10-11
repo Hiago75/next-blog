@@ -15,6 +15,11 @@ export type PostCategory = {
   mainCategory: boolean;
 };
 
+export type PostTags = {
+  id: PostID;
+  name: string;
+};
+
 export type PostCreatedBy = {
   id: PostID;
   firstname: string;
@@ -56,6 +61,7 @@ export type PostData = {
   id: PostID;
   title: string;
   content: string;
+  tags: PostTags[];
   slug: string;
   author: PostAuthor;
   category: PostCategory;

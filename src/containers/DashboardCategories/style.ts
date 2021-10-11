@@ -7,6 +7,23 @@ export const Container = styled.section`
   gap: 20px;
   flex-wrap: wrap;
   align-items: flex-start;
+  width: 100%;
+
+  & div {
+    margin-bottom: 20px;
+  }
+`;
+
+export const CategoriesContainer = styled.div`
+  width: calc(50% - 20px);
+  display: flex;
+  flex-flow: column wrap;
+`;
+
+export const TagsContainer = styled.div`
+  width: calc(50% - 20px);
+  display: flex;
+  flex-flow: column wrap;
 `;
 
 export const CategoryBox = styled.div`

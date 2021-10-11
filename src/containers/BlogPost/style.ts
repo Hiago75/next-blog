@@ -26,9 +26,10 @@ export const PostPresentationTitle = styled.h1`
   color: ${({ theme }) => theme.fonts.primaryFont};
   font-size: 32px;
   margin-bottom: 10px;
+  margin-top: 30px;
 `;
 
-export const PostPresentationCategory = styled.p`
+export const PostPresentationCategory = styled.a`
   color: ${({ theme }) => theme.fonts.primaryFont};
 
   text-transform: uppercase;
@@ -36,8 +37,6 @@ export const PostPresentationCategory = styled.p`
 
   font-size: 15px;
   font-weight: bold;
-
-  margin-bottom: 30px;
 `;
 
 export const PostPresentationReadingTimeCounter = styled.p`
@@ -118,11 +117,20 @@ export const PostContentSentry = styled.span`
   }
 `;
 
+export const PostContentBox = styled.div`
+  padding-left: 30px;
+  width: 80%;
+  max-width: 720px;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    padding: 0 2%;
+    max-width: 100%;
+  }
+`;
+
 export const PostContent = styled(Markdown)`
   ${({ theme }) => css`
-    padding-left: 30px;
-    width: 80%;
-    max-width: 720px;
     color: ${theme.fonts.primaryFont};
 
     img {
@@ -167,11 +175,24 @@ export const PostContent = styled(Markdown)`
         text-align: justify;
       }
     }
+  `}
+`;
 
-    @media (max-width: 1024px) {
-      width: 100%;
-      padding: 0 2%;
-      max-width: 100%;
+export const PostTags = styled.div`
+  ${({ theme }) => css`
+    margin-top: 50px;
+
+    p {
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    span {
+      background-color: ${theme.colors.contrastColor};
+      padding: 5px 10px;
+      margin: 0 5px;
+      border-radius: 20px;
+      color: ${theme.colors.contrastBackground};
     }
   `}
 `;
