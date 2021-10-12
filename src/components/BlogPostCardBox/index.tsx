@@ -22,7 +22,7 @@ interface IBlogPostCardRequest {
 export const BlogPostCardBox = ({ posts }: IBlogPostCardRequest) => {
   return (
     <CategoryPostsBox>
-      {posts.map((post, index) => {
+      {posts?.map((post, index) => {
         const formatedDate = formatDate(post.createdAt);
         const postReadingTime = readingTimeCalculator(post.content);
 

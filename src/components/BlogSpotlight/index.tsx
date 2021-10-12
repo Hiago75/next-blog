@@ -21,7 +21,7 @@ type SpotlightProps = {
 };
 
 export const Spotlight = ({ posts }: SpotlightProps) => {
-  const recentPosts = posts?.slice(1, 3);
+  const recentPosts = posts.length > 1 && posts?.slice(1, 3);
   const mainPost = posts && posts[0];
   const mainPostFormatedDate = formatDate(mainPost?.createdAt);
   const readingTime = readingTimeCalculator(mainPost?.content);

@@ -6,19 +6,27 @@ import { PostCategory, PostData } from '../../domain/posts/post';
 import { Post } from '../../containers/BlogPost';
 import Custom404 from '../404';
 import { BlogFullScreenContainer } from '../../components';
+import { IContainerRequest } from '../../interfaces/IContainerRequest';
 
-export type DynamicPostProps = {
+export interface IDynamicPostProps extends IContainerRequest {
   post: PostData;
   categories: PostCategory[];
-};
+}
 
-export default function DynamicPost({ post, categories }: DynamicPostProps) {
+export default function DynamicPost({ post, categories, theme, toggleTheme }: IDynamicPostProps) {
   const [readingProgress, setReadingProgress] = useState(0);
 
-  if (!post?.title) return <Custom404 categories={categories}></Custom404>;
+  if (!post?.title)
+    return <Custom404 theme={theme} toggleTheme={toggleTheme} categories={categories}></Custom404>;
 
   return (
-    <BlogFullScreenContainer progressBar categories={categories} readingProgress={readingProgress}>
+    <BlogFullScreenContainer
+      theme={theme}
+      toggleTheme={toggleTheme}
+      progressBar
+      categories={categories}
+      readingProgress={readingProgress}
+    >
       <Post setReadingProgress={setReadingProgress} post={post} />;
     </BlogFullScreenContainer>
   );
@@ -28,7 +36,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getAllPosts();
 
   return {
-    paths: posts.map((post) => {
+    paths: posts?.map((post) => {
       return { params: { slug: post.slug } };
     }),
     fallback: false,

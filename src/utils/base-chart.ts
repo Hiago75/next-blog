@@ -20,22 +20,5 @@ export const baseChart = (labels: string[], numbers: number[], datasetLabel?: st
     ],
   };
 
-  const options = {
-    plugins: {
-      legend: {
-        position: 'bottom',
-      },
-    },
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
-          },
-        },
-      ],
-    },
-  };
-
-  return { data, options };
+  return { data };
 };
