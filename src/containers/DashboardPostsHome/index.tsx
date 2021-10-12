@@ -78,7 +78,7 @@ export const DashboardPostsHome = ({ posts }: IDashboardPostsHomeRequest) => {
       )}
       <PanelBox panelTitle="Posts recentes">
         <PostsBox>
-          {posts.map((post) => (
+          {posts?.map((post) => (
             <PostContainer key={post.id}>
               <IconContext.Provider value={{ size: '25' }}>
                 <PostPreview>

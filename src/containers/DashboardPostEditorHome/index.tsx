@@ -29,7 +29,7 @@ export const DashboardPostEditorHome = ({ posts }: IDashboardPostsHomeRequest) =
     <Container>
       <PanelBox panelTitle="Qual post quer editar ?">
         <PostsBox>
-          {posts.map((post) => (
+          {posts?.map((post) => (
             <PostContainer onClick={() => handlePostContainerClick(post.slug)} key={post.id}>
               <PostPreview>
                 <PostImage height={64} width={70} src={post.cover.format.thumbnail.url}></PostImage>

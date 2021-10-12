@@ -7,7 +7,7 @@ import { ThemeContext } from 'styled-components';
 
 interface IUserImageProps {
   user: IUser;
-  className: string;
+  className?: string;
   imageSize: number;
   children?: React.ReactNode;
 }

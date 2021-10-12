@@ -57,11 +57,11 @@ export const DashboardHome = ({ user, numberOfPosts }: IDashboardHomePageProps) 
     <>
       <Panels>
         <PanelBox widthPercentage={64} panelTitle="Número de posts por usuário">
-          <Bar options={numOfPostsChartData.options} data={numOfPostsChartData.data} />
+          <Bar data={numOfPostsChartData.data} />
         </PanelBox>
 
         <PanelBox widthPercentage={36} panelTitle="Meus posts por categoria">
-          <Doughnut options={numOfUserPostsData.options} data={numOfUserPostsData.data}></Doughnut>
+          <Doughnut data={numOfUserPostsData.data} />
         </PanelBox>
 
         <PanelBox widthPercentage={30} className="center">

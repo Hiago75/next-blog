@@ -6,21 +6,23 @@ import { getAllCategories, getAllPosts } from '../../services';
 import { PostCategory, PostData } from '../../domain/posts/post';
 import { PaginationPage } from '../../containers';
 import { BlogFullScreenContainer, Loading } from '../../components';
+import { IContainerRequest } from '../../interfaces/IContainerRequest';
 
-export type PageProps = {
+export interface IPageProps extends IContainerRequest {
   posts: PostData[];
   categories: PostCategory[];
   categoryName?: string;
-};
+}
 
-export default function Page({ posts, categoryName, categories }: PageProps) {
+export default function Page({ posts, categoryName, categories, theme, toggleTheme }: IPageProps) {
   const router = useRouter();
 
   if (router.isFallback) return <Loading />;
-  if (!posts.length) return <Custom404 categories={categories} />;
+  if (!posts?.length)
+    return <Custom404 theme={theme} toggleTheme={toggleTheme} categories={categories} />;
 
   return (
-    <BlogFullScreenContainer categories={categories}>
+    <BlogFullScreenContainer theme={theme} toggleTheme={toggleTheme} categories={categories}>
       <PaginationPage categoryName={categoryName} posts={posts}></PaginationPage>;
     </BlogFullScreenContainer>
   );

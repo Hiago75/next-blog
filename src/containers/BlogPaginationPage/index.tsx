@@ -15,7 +15,7 @@ export const PaginationPage = ({ posts, categoryName }: PaginationProps) => {
         {categoryName ? `Posts na categoria ${categoryName}` : 'Todos os posts'}
       </BlogHeadingTitle>
       <Posts>
-        {posts.map((post) => {
+        {posts?.map((post) => {
           return <BlogPostCard key={post.slug} post={post} />;
         })}
       </Posts>
