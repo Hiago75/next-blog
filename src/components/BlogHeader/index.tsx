@@ -70,6 +70,7 @@ export const Header = ({
   useEffect(() => {
     //Add a scroll listener to know when to active the fixed style
     window.addEventListener('scroll', listenScrollEvent);
+    data.length = 5;
 
     //Remove the scroll listener when component unmounts
     return () => {
@@ -89,6 +90,11 @@ export const Header = ({
           </Link>
 
           <HeaderUl>
+            <HeaderLi>
+              <Link href="/" passHref>
+                <HeaderLink>Home</HeaderLink>
+              </Link>
+            </HeaderLi>
             {data?.map((category) => (
               <HeaderLi key={category.name}>
                 <Link href={`/posts/${category.name}`} passHref>
@@ -113,6 +119,11 @@ export const Header = ({
           </Link>
 
           <HeaderUl className={menuClassList}>
+            <HeaderLi className={menuClassList}>
+              <Link href="/" passHref>
+                <HeaderLink>Home</HeaderLink>
+              </Link>
+            </HeaderLi>
             {data?.map((category, index) => (
               <HeaderLi index={index} className={menuClassList} key={category.name}>
                 <Link href={`/posts/${category.name}`} passHref>

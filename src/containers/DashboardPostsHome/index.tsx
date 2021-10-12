@@ -104,7 +104,6 @@ export const DashboardPostsHome = ({ posts }: IDashboardPostsHomeRequest) => {
             </PostContainer>
           ))}
         </PostsBox>
-        ;
       </PanelBox>
     </Container>
   );

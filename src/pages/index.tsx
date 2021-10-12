@@ -18,7 +18,7 @@ export interface IHomeProps extends IContainerRequest {
 export default function Home({ posts, categories, theme, toggleTheme }: IHomeProps) {
   return (
     <BlogFullScreenContainer theme={theme} toggleTheme={toggleTheme} categories={categories}>
-      <HomePage categories={categories} posts={posts}></HomePage>;
+      <HomePage categories={categories} posts={posts}></HomePage>
     </BlogFullScreenContainer>
   );
 }

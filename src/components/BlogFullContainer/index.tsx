@@ -35,7 +35,7 @@ export const BlogFullScreenContainer = ({
         progressBar={progressBar}
         currentProgress={readingProgress}
       />
-      <Container>{children}</Container>;
+      <Container>{children}</Container>
       <Footer />
     </>
   );
