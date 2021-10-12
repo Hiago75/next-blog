@@ -18,6 +18,7 @@ import { deletePost } from './posts/deletePost';
 import { uploadImage } from './posts/uploadImage';
 import { getAllTags } from './tags/getAllTags';
 import { createNewTag } from './tags/createNewTag';
+import { deleteTag } from './tags/deleteTag';
 
 export {
   countAllPosts,
@@ -40,4 +41,5 @@ export {
   uploadImage,
   getAllTags,
   createNewTag,
+  deleteTag,
 };

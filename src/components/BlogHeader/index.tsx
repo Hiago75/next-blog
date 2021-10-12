@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import { useEffect, useState, useContext } from 'react';
-import { MdWbSunny } from 'react-icons/md';
+import { FaMoon, FaSun } from 'react-icons/fa';
 import { ThemeContext } from 'styled-components';
 import { PostCategory } from '../../domain/posts/post';
+import { IContainerRequest } from '../../interfaces/IContainerRequest';
 
 import {
   BlogHeader,
@@ -18,14 +19,20 @@ import {
   MobileHamburger,
 } from './styles';
 
-interface IBlogHeaderRequest {
+interface IBlogHeaderRequest extends IContainerRequest {
   data: PostCategory[];
   progressBar?: boolean;
   currentProgress?: number;
 }
 
-export const Header = ({ data, currentProgress, progressBar }: IBlogHeaderRequest) => {
-  const theme = useContext(ThemeContext);
+export const Header = ({
+  data,
+  currentProgress,
+  progressBar,
+  theme,
+  toggleTheme,
+}: IBlogHeaderRequest) => {
+  const cssTheme = useContext(ThemeContext);
 
   // Mobile menu state
   const [isOpen, setIsOpen] = useState(false);
@@ -48,7 +55,7 @@ export const Header = ({ data, currentProgress, progressBar }: IBlogHeaderReques
 
   // Toggle the theme
   function handleThemeChangeClick() {
-    alert('Tema trocado');
+    toggleTheme();
   }
 
   function listenScrollEvent() {
@@ -117,7 +124,11 @@ export const Header = ({ data, currentProgress, progressBar }: IBlogHeaderReques
         </MobileNav>
 
         <HeaderActions>
-          <MdWbSunny onClick={handleThemeChangeClick} color={theme.fonts.primaryFont} size={32} />
+          {theme === 'light' ? (
+            <FaMoon onClick={handleThemeChangeClick} color={cssTheme.fonts.primaryFont} size={32} />
+          ) : (
+            <FaSun onClick={handleThemeChangeClick} color={cssTheme.fonts.primaryFont} size={32} />
+          )}
         </HeaderActions>
       </HeaderContainer>
     </BlogHeader>

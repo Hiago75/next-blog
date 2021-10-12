@@ -7,16 +7,17 @@ import { PostCategory, PostData } from '../domain/posts/post';
 import { HomePage } from '../containers/BlogHomePage';
 import { BlogFullScreenContainer } from '../components';
 import { IHeaderProps } from '../interfaces/IHeaderProps';
+import { IContainerRequest } from '../interfaces/IContainerRequest';
 
-export type HomeProps = {
+export interface IHomeProps extends IContainerRequest {
   posts: PostData[];
   categories: PostCategory[];
   headerProps: IHeaderProps;
-};
+}
 
-export default function Home({ posts, categories }: HomeProps) {
+export default function Home({ posts, categories, theme, toggleTheme }: IHomeProps) {
   return (
-    <BlogFullScreenContainer categories={categories}>
+    <BlogFullScreenContainer theme={theme} toggleTheme={toggleTheme} categories={categories}>
       <HomePage categories={categories} posts={posts}></HomePage>;
     </BlogFullScreenContainer>
   );

@@ -8,7 +8,13 @@ import { PanelBox, PanelButton, InputLabel, Warning } from '../../components';
 import createFormErrorHandler from '../../utils/createFormErrorHandler';
 import { PostCategory, PostCount, PostTags } from '../../domain/posts/post';
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
-import { createNewCategory, createNewTag, deleteCategory, refreshUserToken } from '../../services';
+import {
+  createNewCategory,
+  createNewTag,
+  deleteCategory,
+  deleteTag,
+  refreshUserToken,
+} from '../../services';
 import { RequestContext } from '../../contexts/RequestContext';
 
 interface IDashboardCategoriesRequest {
@@ -28,9 +34,11 @@ export const DashboardCategories = ({
 
   const [newCategory, setNewCategory] = useState('');
   const [categoryToBeDeleted, setCategoryToBeDeleted] = useState('');
+  const [categoryWarning, setCategoryWarning] = useState(false);
 
   const [newTag, setNewTag] = useState('');
-  const [warning, setWarning] = useState(false);
+  const [tagToBeDeleted, setTagToBeDeleted] = useState('');
+  const [tagWarning, setTagWarning] = useState(false);
 
   const { resetInputErrors, createInputError } = createFormErrorHandler();
 
@@ -107,14 +115,19 @@ export const DashboardCategories = ({
   }
 
   //Open the warning and store the id
-  async function handleDeleteClick(categoryId: string) {
+  async function handleCategoryDeleteClick(categoryId: string) {
     setCategoryToBeDeleted(categoryId);
-    setWarning(true);
+    setCategoryWarning(true);
+  }
+
+  function handleTagDeleteClick(tagId: string) {
+    setTagToBeDeleted(tagId);
+    setTagWarning(true);
   }
 
   // Callback that will be executed when the user confirm the warning box, basically deletes the category
-  async function warningConfirmClick() {
-    setWarning(false);
+  async function categoryWarningConfirmClick() {
+    setCategoryWarning(false);
     setLoading(true);
     await refreshUserToken();
     const { error, message } = await deleteCategory(categoryToBeDeleted);
@@ -127,30 +140,44 @@ export const DashboardCategories = ({
 
     //Success
     responseStatusFactory(true, 'Categoria apagada', 'Ela partiu...');
-    setCategoryToBeDeleted('');
+    setCategoryToBeDeleted(undefined);
   }
 
   // Function that will be executed when the user cancel the warning box, just closes the box
-  function warningCancelClick() {
-    setWarning(false);
-    setCategoryToBeDeleted('');
+  function categoryWarningCancelClick() {
+    setCategoryWarning(false);
+    setCategoryToBeDeleted(undefined);
+  }
+
+  // Callback that will be executed when the user confirm the warning box, basically deletes the tag
+  async function tagWarningConfirmClick() {
+    setTagWarning(false);
+    setLoading(true);
+    await refreshUserToken();
+    const { error, message } = await deleteTag(tagToBeDeleted);
+    setLoading(false);
+
+    //Fail
+    if (error) return responseStatusFactory(false, 'Opa, algo deu errado', message);
+
+    refreshServerSideProps();
+
+    //Success
+    responseStatusFactory(true, 'Tag apagada', 'Ela partiu...');
+    setCategoryToBeDeleted(undefined);
+  }
+
+  function tagWarningCancelClick() {
+    setTagWarning(false);
+    setTagToBeDeleted(undefined);
   }
 
   useEffect(() => {
     setIsRefreshing(false);
-  }, [categories, numberOfPosts, warning]);
+  }, [categories, numberOfPosts, categoryWarning, tagWarning]);
 
   return (
     <Container>
-      {warning && (
-        <Warning
-          title="Tem certeza disso ?"
-          message="Assim que esta categoria for excluida, todos os posts nela também serão"
-          confirmCallback={warningConfirmClick}
-          cancelCallback={warningCancelClick}
-        />
-      )}
-
       <CategoriesContainer>
         <PanelBox widthPercentage={100} panelTitle="Criar nova categoria">
           <p>
@@ -168,6 +195,15 @@ export const DashboardCategories = ({
             </InputLabel>
             <PanelButton type="submit">Criar categoria</PanelButton>
           </form>
+
+          {categoryWarning && (
+            <Warning
+              title="Tem certeza disso ?"
+              message="Assim que esta categoria for excluida, todos os posts nela também serão"
+              confirmCallback={categoryWarningConfirmClick}
+              cancelCallback={categoryWarningCancelClick}
+            />
+          )}
         </PanelBox>
 
         <PanelBox widthPercentage={100} panelTitle="Apagar categorias">
@@ -178,7 +214,7 @@ export const DashboardCategories = ({
               <CategoryBox key={category.id}>
                 <p>{category.name}</p>
                 <Trashcan
-                  onClick={() => handleDeleteClick(category.id)}
+                  onClick={() => handleCategoryDeleteClick(category.id)}
                   color={theme.colors.errorColor}
                 ></Trashcan>
               </CategoryBox>
@@ -213,7 +249,7 @@ export const DashboardCategories = ({
             <PanelButton type="submit">Criar Tag</PanelButton>
           </form>
         </PanelBox>
-        TODO: delete tags
+
         <PanelBox widthPercentage={100} panelTitle="Apagar tags">
           {!tags ? (
             <p>Opa, parece que não tem nada aqui</p>
@@ -221,9 +257,21 @@ export const DashboardCategories = ({
             tags?.map((tag) => (
               <CategoryBox key={tag.id}>
                 <p>{tag.name}</p>
-                <Trashcan onClick={() => alert(tag.id)} color={theme.colors.errorColor}></Trashcan>
+                <Trashcan
+                  onClick={() => handleTagDeleteClick(tag.id)}
+                  color={theme.colors.errorColor}
+                ></Trashcan>
               </CategoryBox>
             ))
+          )}
+
+          {tagWarning && (
+            <Warning
+              title="Tem certeza disso ?"
+              message="Assim que esta tag for excluida, ela será removida de todos os posts em que está presente"
+              confirmCallback={tagWarningConfirmClick}
+              cancelCallback={tagWarningCancelClick}
+            />
           )}
         </PanelBox>
       </TagsContainer>

@@ -25,6 +25,8 @@ export const Warning = ({ title, message, confirmCallback, cancelCallback }: IWa
 
   useEffect(() => {
     setClassList('active');
+
+    return () => setClassList('');
   }, []);
 
   return (

@@ -7,15 +7,16 @@ import { ThemeContext } from 'styled-components';
 
 interface IUserImageProps {
   user: IUser;
+  className: string;
   imageSize: number;
   children?: React.ReactNode;
 }
 
-export const UserImage = ({ user, imageSize, children }: IUserImageProps) => {
+export const UserImage = ({ className, user, imageSize, children }: IUserImageProps) => {
   const theme = useContext(ThemeContext);
 
   return (
-    <Container style={{ width: `${imageSize}px`, height: `${imageSize}px` }}>
+    <Container className={className} style={{ width: `${imageSize}px`, height: `${imageSize}px` }}>
       <EditUserImage>
         <EditUserImageText>{children}</EditUserImageText>
       </EditUserImage>

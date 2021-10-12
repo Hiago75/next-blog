@@ -80,7 +80,7 @@ export const PanelHeader = ({
             <FaMoon onClick={toggleTheme}></FaMoon>
           )}
           <UserImageBox>
-            <UserImage user={user} imageSize={50}></UserImage>
+            <UserImage className="unselectable" user={user} imageSize={50}></UserImage>
           </UserImageBox>
         </IconContext.Provider>
       </UserBar>

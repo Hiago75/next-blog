@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 export const Container = styled.div`
   ${({ theme }) => css`
     color: ${theme.fonts.primaryFont};
-    width: 310px;
+    min-width: 310px;
     position: fixed;
     left: 50%;
     top: 50%;

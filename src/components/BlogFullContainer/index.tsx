@@ -5,8 +5,9 @@ import { APP_NAME } from '../../config';
 import { Container } from './style';
 
 import { PostCategory } from '../../domain/posts/post';
+import { IContainerRequest } from '../../interfaces/IContainerRequest';
 
-interface BlogFullScreenContainerRequest {
+interface BlogFullScreenContainerRequest extends IContainerRequest {
   children: React.ReactNode;
   categories: PostCategory[];
   readingProgress?: number;
@@ -18,6 +19,8 @@ export const BlogFullScreenContainer = ({
   categories,
   readingProgress,
   progressBar,
+  theme,
+  toggleTheme,
 }: BlogFullScreenContainerRequest) => {
   return (
     <>
@@ -25,7 +28,13 @@ export const BlogFullScreenContainer = ({
         <title>{`${APP_NAME}`}</title>
         <meta name="description" content="Just an simple test blog made with NextJS" />
       </Head>
-      <Header data={categories} progressBar={progressBar} currentProgress={readingProgress} />
+      <Header
+        theme={theme}
+        toggleTheme={toggleTheme}
+        data={categories}
+        progressBar={progressBar}
+        currentProgress={readingProgress}
+      />
       <Container>{children}</Container>;
       <Footer />
     </>
