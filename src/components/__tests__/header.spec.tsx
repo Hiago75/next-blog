@@ -4,8 +4,6 @@ import { Header } from '../';
 
 const element = screen.getByRole('banner');
 
-//TODO - test everything
-
 describe('<Header />', () => {
   it('should render a header', () => {
     customRender(<Header></Header>);

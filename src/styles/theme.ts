@@ -1,27 +1,42 @@
-export const theme = {
+import { DefaultTheme } from 'styled-components/native';
+
+export const darkTheme: DefaultTheme = {
   colors: {
-    primary: '#121214',
-    secondary: '#8257e5',
-    tertiary: '#030017',
-
-    borders: {
-      darkGray: '#29292e',
-    },
-
-    gradients: {
-      primary: 'linear-gradient(90deg ,#1c1529,#222226)',
-    },
+    mainBackground: '#101010',
+    alternativeBackground: '#1B1B1B',
+    contrastBackground: '#091323',
+    contrastColor: '#5A8BD6',
+    errorColor: '#aa2020',
+    successColor: '#22b479',
   },
 
-  font: {
-    colors: {
-      primary: '#dadadf',
-      secondary: '#e1e1e6',
-      tertiary: '#9e9e9e',
-    },
-    sizes: {
-      small: '17px',
-      medium: '23px',
-    },
+  fonts: {
+    primaryFont: '#F9FBFF',
+    contrastFont: '#091323',
+    smothFont: '#A0AABA',
+    lightSmothFont: '#d5dce8',
   },
+};
+
+export const lightTheme: DefaultTheme = {
+  colors: {
+    mainBackground: '#F9FBFF',
+    alternativeBackground: '#E4EAF2',
+    contrastBackground: '#E4EAF2',
+    contrastColor: '#5A8BD6',
+    errorColor: '#aa2020',
+    successColor: '#22b479',
+  },
+
+  fonts: {
+    primaryFont: '#091323',
+    contrastFont: '#F9FBFF',
+    smothFont: '#4B5971',
+    lightSmothFont: '#273040',
+  },
+};
+
+export const themes = {
+  light: lightTheme,
+  dark: darkTheme,
 };

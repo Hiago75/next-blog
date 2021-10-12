@@ -1,10 +1,10 @@
-export type PostID = number;
+export type PostID = string;
 
 export type PostAuthor = {
   id: PostID;
   name: string;
-  created_by: number;
-  updated_by: number;
+  email: string;
+  admin: false;
   created_at: string;
   updated_at: string;
 };
@@ -12,10 +12,12 @@ export type PostAuthor = {
 export type PostCategory = {
   id: PostID;
   name: string;
-  created_by: number;
-  updated_by: number;
-  created_at: string;
-  updated_at: string;
+  mainCategory: boolean;
+};
+
+export type PostTags = {
+  id: PostID;
+  name: string;
 };
 
 export type PostCreatedBy = {
@@ -26,32 +28,28 @@ export type PostCreatedBy = {
 };
 
 export type PostCoverFormat = {
-  ext: string;
+  id: PostID;
   url: string;
-  hash: string;
-  mime: string;
-  name: string;
-  path: null;
-  size: number;
   width: number;
   height: number;
-  provider_metadata: {
-    public_id: string;
-    resource_type: string;
-  };
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type PostCover = PostCoverFormat & {
   id: PostID;
-  alternativeText: string;
-  caption: string;
-  previewUrl: null;
+  name: string;
+  publicId: string;
+  width: number;
+  height: number;
+  url: string;
   provider: string;
-  created_by: number;
-  updated_by: number;
-  created_at: string;
-  updated_at: string;
-  formats: {
+  createdAt: string;
+  updatedAt: string;
+  format: {
+    id: string;
+    createdAt: string;
+    updatedAt: string;
     thumbnail: PostCoverFormat;
     small: PostCoverFormat;
     medium: PostCoverFormat;
@@ -63,12 +61,17 @@ export type PostData = {
   id: PostID;
   title: string;
   content: string;
+  tags: PostTags[];
   slug: string;
   author: PostAuthor;
   category: PostCategory;
-  created_by: PostCreatedBy;
-  updated_by: PostCreatedBy;
-  created_at: string;
-  updated_at: string;
   cover: PostCover;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type PostCount = {
+  total: number;
+  categories: { [key: string]: number };
+  authors: { name: string; posts: number; categories: { name: string; posts: number }[] }[];
 };

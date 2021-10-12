@@ -1,17 +1,25 @@
-import Head from 'next/head';
-
-import { Header, Footer } from '../components';
+import { GetStaticProps } from 'next';
+import { BlogFullScreenContainer } from '../components';
 import { Error404 } from '../containers';
+import { PostCategory } from '../domain/posts/post';
+import { getAllCategories } from '../services';
 
-export default function Custom404() {
+interface Custom404Request {
+  categories: PostCategory[];
+}
+
+export default function Custom404({ categories }: Custom404Request) {
   return (
-    <>
-      <Head>
-        <title>404 | NextBlog</title>
-      </Head>
-      <Header />
+    <BlogFullScreenContainer categories={categories}>
       <Error404></Error404>
-      <Footer />
-    </>
+    </BlogFullScreenContainer>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const categories = await getAllCategories();
+
+  return {
+    props: { categories },
+  };
+};

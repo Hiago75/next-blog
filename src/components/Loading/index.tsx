@@ -1,9 +1,14 @@
-import { Container, LoadingWheel } from './style';
+import { Container, LoadingWheel, LoadingMessage } from './style';
 
-export const Loading = () => {
+interface LoadingProps {
+  children?: React.ReactNode;
+}
+
+export const Loading = ({ children }: LoadingProps) => {
   return (
     <Container>
       <LoadingWheel></LoadingWheel>
+      <LoadingMessage>{children}</LoadingMessage>
     </Container>
   );
 };

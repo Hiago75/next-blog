@@ -1,25 +1,33 @@
 import { GetStaticProps } from 'next';
-import { getAllPosts } from '../data/posts/get-all-posts';
-import { PostData } from '../domain/posts/post';
-import { HomePage } from '../containers/HomePage';
 
-export type HomeProps = {
+import { getAllPosts } from '../services/posts/get-all-posts';
+import { getAllCategories } from '../services';
+import { PostCategory, PostData } from '../domain/posts/post';
+
+import { HomePage } from '../containers/BlogHomePage';
+import { BlogFullScreenContainer } from '../components';
+import { IHeaderProps } from '../interfaces/IHeaderProps';
+import { IContainerRequest } from '../interfaces/IContainerRequest';
+
+export interface IHomeProps extends IContainerRequest {
   posts: PostData[];
-};
+  categories: PostCategory[];
+  headerProps: IHeaderProps;
+}
 
-export default function Home({ posts }: HomeProps) {
+export default function Home({ posts, categories, theme, toggleTheme }: IHomeProps) {
   return (
-    <>
-      <HomePage posts={posts}></HomePage>
-    </>
+    <BlogFullScreenContainer theme={theme} toggleTheme={toggleTheme} categories={categories}>
+      <HomePage categories={categories} posts={posts}></HomePage>
+    </BlogFullScreenContainer>
   );
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const postsPerPage = 6;
-  const posts = await getAllPosts(`_sort=id:desc&_start=0&_limit=${postsPerPage}`);
+  const posts = await getAllPosts();
+  const categories = await getAllCategories();
 
   return {
-    props: { posts },
+    props: { posts, categories },
   };
 };

@@ -1,13 +1,29 @@
-import styled, { createGlobalStyle } from 'styled-components';
-import { theme } from './theme';
+import { createGlobalStyle } from 'styled-components';
 
-export const GlobalStyles = createGlobalStyle`
+export default createGlobalStyle`
   *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     outline: none;
+    scroll-behavior: smooth;
+    scroll-margin-top: 60px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scrollbar-width: 10px;
+    scrollbar-color: #7D7D7D;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: none;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #7D7D7D;
   }
 
   html, body{
@@ -15,28 +31,30 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body{
-    background: ${theme.colors.gradients.primary};
-    color: ${theme.font.colors.primary};
+    background: ${({ theme }) => theme.colors.mainBackground};
   }
-`;
 
-export const BallDivider = styled.span`
-  width: 5px;
-  height: 5px;
-  background-color: ${({ theme }) => theme.font.colors.primary};
-  border-radius: 50%;
-  margin: 3px 8px;
-  display: inline-block;
-`;
+  select{
+    background-color: #a0aaba;
+    color: #091323;
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+    padding: 0 15px;
 
-export const Category = styled.span`
-  background-color: ${({ theme }) => theme.colors.secondary};
-  padding: 1px 4px;
-  border-radius: 5px;
-  display: inline-block;
+    @media(max-width: 900px){
+      width: 100%;
+      margin-top: 20px;
+      padding: 15px 15px;
+    }
+  }
 
-  a {
-    color: ${({ theme }) => theme.font.colors.primary} !important;
-    font-size: 15px;
+  & .unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 `;

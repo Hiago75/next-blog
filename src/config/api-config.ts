@@ -1,3 +1,6 @@
-//TODO: Change to the new API when everything its ready
-export const API_URL = 'https://secure-citadel-30652.herokuapp.com';
+export const API_URL = process.env.API_URL;
 export const POSTS_URL = `${API_URL}/posts`;
+
+import { getExternalAPIClient } from '../services/getExternalAPIClient';
+
+export const externalApi = getExternalAPIClient();
