@@ -2,7 +2,7 @@
   "name": "next-blog",
   "version": "0.7.2",
   "private": true,
-  "license": "MPL-2.0",
+  "license": "AGPL-3.0-or-later",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

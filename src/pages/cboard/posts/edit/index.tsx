@@ -18,10 +18,10 @@ export default function DashboardPostsEditorHomePage({
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const posts = await getAllPosts();
   const { invalidUser, loggoutUser } = verifyAuthentication(ctx);
-
   if (invalidUser) return loggoutUser;
+
+  const posts = await getAllPosts();
 
   return {
     props: { posts },

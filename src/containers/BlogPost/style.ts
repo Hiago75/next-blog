@@ -32,10 +32,11 @@ export const PostPresentationTitle = styled.h1`
 export const PostPresentationCategory = styled.a`
   color: ${({ theme }) => theme.fonts.primaryFont};
 
+  text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 1px;
 
-  font-size: 15px;
+  font-size: 17px;
   font-weight: bold;
 `;
 
@@ -185,6 +186,7 @@ export const PostTags = styled.div`
     p {
       font-weight: bold;
       display: inline-block;
+      color: ${theme.fonts.primaryFont};
     }
 
     span {
@@ -192,7 +194,7 @@ export const PostTags = styled.div`
       padding: 5px 10px;
       margin: 0 5px;
       border-radius: 20px;
-      color: ${theme.colors.contrastBackground};
+      color: ${theme.fonts.contrastFont};
     }
   `}
 `;

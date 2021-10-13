@@ -18,13 +18,13 @@ export const SidebarData = [
   },
   {
     title: 'Usuários',
-    path: '/cboard/profiles/me',
+    path: '/cboard/profiles',
     outlineIcon: <RiUserLine />,
     filledIcon: <RiUserFill />,
     subNav: [
       {
         title: 'Meu perfil',
-        path: '/cboard/profiles/me',
+        path: '/cboard/profiles',
         exact: true,
       },
       {

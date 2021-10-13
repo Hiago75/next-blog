@@ -52,6 +52,7 @@ export const DashboardCategories = ({
       categoriesData.push(categoryObject);
     }
 
+    console.log(numberOfPosts);
     return { categoriesData };
   }
 

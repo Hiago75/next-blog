@@ -39,7 +39,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: posts?.map((post) => {
       return { params: { slug: post.slug } };
     }),
-    fallback: false,
+    fallback: true,
   };
 };
 

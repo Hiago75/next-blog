@@ -1,11 +1,11 @@
 import Router from 'next/router';
 
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState, useMemo } from 'react';
 
 import { ILoginRequest } from '../interfaces/ILoginRequest';
 import { IUser } from '../interfaces/IUser';
 import { fetchUserData, loginRequest, updateUserData } from '../services/';
-import { parseCookies, setCookie } from 'nookies';
+import { parseCookies } from 'nookies';
 import { logoutUser } from '../utils/logoutUser';
 
 interface IAuthProviderRequest {
@@ -32,6 +32,7 @@ export const AuthContext = createContext({} as IAuthContext);
 
 export function AuthProvider({ children }: IAuthProviderRequest) {
   const [user, setUser] = useState<IUser | null>(null);
+  const userInformation = useMemo(() => user, [login, refreshUserData]);
   const [errors, setErrors] = useState<string | null>(null);
   const [isRetrievingUserData, setIsRetrievingUserData] = useState(false);
   const { isAuthenticated } = parseCookies();
@@ -64,15 +65,6 @@ export function AuthProvider({ children }: IAuthProviderRequest) {
     const user = await fetchUserData(false);
     setUser(user);
 
-    const expireDate = new Date();
-    expireDate.setDate(expireDate.getDate() + 1);
-
-    setCookie(undefined, 'isAuthenticated', 'true', {
-      expires: expireDate,
-      sameSite: 'strict',
-      secure: true,
-    });
-
     Router.push('/cboard');
   }
 
@@ -88,7 +80,16 @@ export function AuthProvider({ children }: IAuthProviderRequest) {
 
   // If isAuthenticated token exists and have a real value try to renew user data
   useEffect(() => {
-    if (Router.asPath.startsWith('/cboard') && isAuthenticated && !user) refreshUserData(true);
+    //If necessary try to renew user data
+    if (Router.asPath.startsWith('/cboard') && isAuthenticated && !user) {
+      try {
+        refreshUserData(true);
+      } catch (error) {
+        return setErrors(error);
+      }
+    }
+
+    // Loggout not authenticated users
     if (Router.asPath.startsWith('/cboard') && !isAuthenticated) logoutUser();
   }, []);
 
@@ -97,7 +98,7 @@ export function AuthProvider({ children }: IAuthProviderRequest) {
       value={{
         isAuthenticated,
         isRetrievingUserData,
-        user,
+        user: userInformation,
         errors,
         login,
         refreshUserData,

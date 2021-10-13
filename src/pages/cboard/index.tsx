@@ -23,10 +23,11 @@ export default function DashboardHomePage({
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const numberOfPosts = await countAllPosts();
   const { invalidUser, loggoutUser } = verifyAuthentication(ctx);
 
   if (invalidUser) return loggoutUser;
+
+  const numberOfPosts = await countAllPosts();
 
   return {
     props: { numberOfPosts },

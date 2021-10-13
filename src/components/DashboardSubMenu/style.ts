@@ -39,7 +39,7 @@ export const SidebarLabel = styled.a`
   ${({ theme }) => css`
     color: ${theme.fonts.smothFont};
     display: block;
-    font-size: 17px;
+    font-size: 15px;
     position: relative;
     bottom: 2px;
 

@@ -1,4 +1,4 @@
-import { countAllPosts } from './posts/count-all-posts';
+import { countAllPosts } from './posts/countAllPosts';
 import { getAllPosts } from './posts/get-all-posts';
 import { getPost } from './posts/get-post';
 import { loginRequest } from './auth/loginRequest';

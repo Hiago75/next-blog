@@ -1,25 +1,25 @@
 import Image from 'next/image';
-import Router from 'next/router';
+import Link from 'next/link';
 
 import React, { useContext, useEffect, useState } from 'react';
 import isEmail from 'validator/lib/isEmail';
+import { BiLogOut } from 'react-icons/bi';
 
 import createFormErrorHandler from '../../utils/createFormErrorHandler';
 import { AuthContext } from '../../contexts/AuthContext';
 import { PanelPasswordInput, InputLabel, ErrorBox } from '../../components';
-import { Container, LoginForm, LoginBox } from './style';
+import { Container, LoginForm, LoginBox, ReturnToSite } from './style';
+import { ThemeContext } from 'styled-components';
 
 export const Login = () => {
-  const { login, errors, isAuthenticated, refreshUserData } = useContext(AuthContext);
+  const { login, errors } = useContext(AuthContext);
+  const theme = useContext(ThemeContext);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isFilled, setIsFilled] = useState(false);
-  const { createInputError, resetInputErrors } = createFormErrorHandler();
 
-  if (isAuthenticated) {
-    refreshUserData(true);
-    Router.push('/cboard');
-  }
+  const { createInputError, resetInputErrors } = createFormErrorHandler();
 
   //Set password value
   function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -79,7 +79,7 @@ export const Login = () => {
         {errors && <ErrorBox className="login-box" error={errors} />}
 
         <LoginForm>
-          <InputLabel htmlFor="email" id="email">
+          <InputLabel htmlFor="emReturnToSiteail" id="email">
             E-mail
             <input onChange={handleEmailChange} type="email" name="email" />
           </InputLabel>
@@ -90,6 +90,12 @@ export const Login = () => {
           </button>
         </LoginForm>
       </LoginBox>
+
+      <Link href="/" passHref>
+        <ReturnToSite>
+          <BiLogOut color={theme.colors.contrastColor} size={32}></BiLogOut>
+        </ReturnToSite>
+      </Link>
     </Container>
   );
 };

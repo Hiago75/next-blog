@@ -16,7 +16,7 @@ export const BlogTableOC = ({ isVisible, contentRef }: BlogTableOCRequest) => {
 
   function createTOC() {
     const postContent = contentRef.current;
-    const headings = postContent?.querySelectorAll('h1, h2, h3');
+    const headings = postContent?.querySelectorAll('h1');
     const headingsList = [];
 
     headings?.forEach((heading) => {

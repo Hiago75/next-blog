@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
+  position: relative;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
@@ -36,6 +37,13 @@ export const LoginBox = styled.div`
     margin: 0;
     border-radius: 0px;
   }
+`;
+
+export const ReturnToSite = styled.div`
+  position: fixed;
+  cursor: pointer;
+  bottom: 30px;
+  left: 25px;
 `;
 
 export const LoginForm = styled.form`
