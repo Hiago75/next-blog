@@ -92,6 +92,7 @@ export const DashboardEditUser = () => {
   // Handle the upload/update of the profile photo
   async function handleProfilePhoto() {
     setLoading(true);
+    await refreshUserToken();
     if (user?.profilePhoto) {
       await updateUserPhoto({ photo: profilePhoto });
     } else {

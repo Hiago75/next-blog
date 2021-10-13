@@ -1,9 +1,19 @@
 import { GetServerSideProps } from 'next';
+import Head from 'next/head';
+
 import { destroyCookie } from 'nookies';
+import { APP_NAME } from '../../config';
 import { Login } from '../../containers';
 
 export default function DashboardLoginPage() {
-  return <Login></Login>;
+  return (
+    <>
+      <Head>
+        <title>{`${APP_NAME} | Login`}</title>
+      </Head>
+      <Login></Login>;
+    </>
+  );
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
