@@ -7,7 +7,7 @@ export const Error404 = () => {
   return (
     <Container>
       <IllustrationBox>
-        <img src="/assets/lost.png" />
+        <img src="/assets/lost.svg" />
       </IllustrationBox>
 
       <Cta>
@@ -15,7 +15,9 @@ export const Error404 = () => {
         <h2>Oops! Parece que não tem nada aqui</h2>
 
         <Link href="/">
-          <BlogButton>Retornar a página principal</BlogButton>
+          <a>
+            <BlogButton>Retornar a página principal</BlogButton>
+          </a>
         </Link>
       </Cta>
     </Container>

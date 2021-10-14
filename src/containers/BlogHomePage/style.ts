@@ -5,6 +5,7 @@ export const RecentPosts = styled.section`
 `;
 
 export const SectionTitle = styled.h2`
+  color: ${({ theme }) => theme.fonts.primaryFont};
   text-align: center;
   font-size: 40px;
   padding: 30px 0;

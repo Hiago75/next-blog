@@ -70,7 +70,7 @@ export const Header = ({
   useEffect(() => {
     //Add a scroll listener to know when to active the fixed style
     window.addEventListener('scroll', listenScrollEvent);
-    data.length = 5;
+    if (data) data.length = 5;
 
     //Remove the scroll listener when component unmounts
     return () => {

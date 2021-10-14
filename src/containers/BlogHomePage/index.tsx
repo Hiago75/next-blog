@@ -9,7 +9,8 @@ export type HomePageProps = {
 };
 
 export function HomePage({ posts, categories }: HomePageProps) {
-  if (posts.length < 1) return <h1>As coisas parecem tão vazias por aqui...</h1>;
+  if (posts.length < 1)
+    return <SectionTitle>As coisas parecem tão vazias por aqui...</SectionTitle>;
 
   return (
     <>

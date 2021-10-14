@@ -6,8 +6,7 @@ export const Container = styled.section`
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    padding-top: 95px;
-    min-height: calc(100vh - 53px);
+    min-height: calc(100vh - 163px);
     color: ${theme.fonts.primaryFont};
 
     h1 {
