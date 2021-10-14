@@ -36,14 +36,20 @@ export const LoginBox = styled.div`
     max-width: 100%;
     margin: 0;
     border-radius: 0px;
+    padding: 0 10px;
   }
 `;
 
 export const ReturnToSite = styled.div`
-  position: fixed;
+  position: absolute;
   cursor: pointer;
-  bottom: 30px;
+  bottom: 10px;
   left: 25px;
+
+  @media (max-width: 900px) {
+    top: 10px;
+    left: 5px;
+  }
 `;
 
 export const LoginForm = styled.form`

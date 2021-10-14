@@ -79,7 +79,7 @@ export const Login = () => {
         {errors && <ErrorBox className="login-box" error={errors} />}
 
         <LoginForm>
-          <InputLabel htmlFor="emReturnToSiteail" id="email">
+          <InputLabel htmlFor="email" id="email">
             E-mail
             <input onChange={handleEmailChange} type="email" name="email" />
           </InputLabel>

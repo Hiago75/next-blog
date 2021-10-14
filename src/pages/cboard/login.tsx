@@ -11,7 +11,7 @@ export default function DashboardLoginPage() {
       <Head>
         <title>{`${APP_NAME} | Login`}</title>
       </Head>
-      <Login></Login>;
+      <Login></Login>
     </>
   );
 }

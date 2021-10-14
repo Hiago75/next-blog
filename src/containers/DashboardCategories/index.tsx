@@ -183,8 +183,9 @@ export const DashboardCategories = ({
         <PanelBox widthPercentage={100} panelTitle="Criar nova categoria">
           <p>
             Categorias são geralmente usadas para assuntos mais abrangentes, como por exemplo
-            "Front-end" que abrange uma area inteira da programação
+            "Front-end" que abrange uma area inteira da programação.
           </p>
+          <p>Categorias serão mostradas no header do blog e tem o limite de 5 categorias por vez</p>
           <form onSubmit={handleCategorySubmit}>
             <InputLabel panel htmlFor="category" id="category">
               <input
