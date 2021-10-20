@@ -2,7 +2,7 @@ import _ from 'lodash';
 import Link from 'next/link';
 
 import { useRef, useState, useEffect, SetStateAction, Dispatch } from 'react';
-import { AiOutlineClockCircle } from 'react-icons/ai';
+import { AiFillClockCircle } from 'react-icons/ai';
 
 import { PostData } from '../../domain/posts/post';
 import { BlogTableOC, Comments } from '../../components';
@@ -88,8 +88,6 @@ export function Post({ post, setReadingProgress }: PostProps) {
     };
   }, []);
 
-  console.log(post.tags);
-
   return (
     <>
       <PostPresentation>
@@ -97,21 +95,19 @@ export function Post({ post, setReadingProgress }: PostProps) {
           <img src={cover.format.medium.url} alt="Foto de capa da publicação" />
         </PostPresentationPhoto>
         <PostPresentationData>
-          <div>
-            <Link
-              href={{ pathname: '/posts/[category]', query: { category: category.name } }}
-              passHref
-            >
-              <PostPresentationCategory>{category.name}</PostPresentationCategory>
-            </Link>
-            <PostPresentationTitle>{title}</PostPresentationTitle>
-            <PostPresentationReadingTimeCounter>
-              <AiOutlineClockCircle /> {readingTime} min de leitura
-            </PostPresentationReadingTimeCounter>
-          </div>
+          <Link
+            href={{ pathname: '/posts/[category]', query: { category: category.name } }}
+            passHref
+          >
+            <PostPresentationCategory>{category.name}</PostPresentationCategory>
+          </Link>
+          <PostPresentationTitle>{title}</PostPresentationTitle>
+          <PostPresentationReadingTimeCounter>
+            <AiFillClockCircle /> {readingTime} minutos de leitura
+          </PostPresentationReadingTimeCounter>
 
           <PostPresentationAuthor>
-            Escrito por <b>{author.name}</b>, {formatedCreatedAt}
+            Publicado por <b>{author.name}</b>, {formatedCreatedAt}
           </PostPresentationAuthor>
         </PostPresentationData>
       </PostPresentation>
@@ -120,7 +116,6 @@ export function Post({ post, setReadingProgress }: PostProps) {
 
       <PostContentContainer id="post-content" ref={postContentRef}>
         <PostContentGuideSidebar ref={postContentSidebarRef}>
-          <span>Conteúdo</span>
           <BlogTableOC isVisible={userReading} contentRef={postContentRef}></BlogTableOC>
         </PostContentGuideSidebar>
 

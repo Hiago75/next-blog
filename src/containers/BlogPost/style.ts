@@ -8,11 +8,25 @@ export const PostPresentation = styled.section`
   }
 `;
 
+export const PostPresentationPhoto = styled.div`
+  width: 60%;
+
+  img {
+    max-width: 100%;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
 export const PostPresentationData = styled.div`
-  width: 50%;
+  width: 40%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
+  align-items: flex-start;
 
   padding: 60px 0 0 80px;
 
@@ -25,26 +39,28 @@ export const PostPresentationData = styled.div`
 export const PostPresentationTitle = styled.h1`
   color: ${({ theme }) => theme.fonts.primaryFont};
   font-size: 32px;
-  margin-bottom: 10px;
   margin-top: 30px;
 `;
 
 export const PostPresentationCategory = styled.a`
-  color: ${({ theme }) => theme.fonts.primaryFont};
+  color: ${({ theme }) => theme.fonts.contrastFont};
+  background-color: ${({ theme }) => theme.colors.contrastColor};
 
+  padding: 4px 15px;
+  border-radius: 10px;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 1px;
 
   font-size: 17px;
+  display: inline-block;
   font-weight: bold;
 `;
 
 export const PostPresentationReadingTimeCounter = styled.p`
-  color: ${({ theme }) => theme.fonts.primaryFont};
-  text-transform: uppercase;
-  margin-bottom: 10px;
-  font-size: 13px;
+  color: ${({ theme }) => theme.fonts.smothFont};
+  margin: 15px 0;
+  font-size: 16px;
 
   svg {
     position: relative;
@@ -58,19 +74,6 @@ export const PostPresentationAuthor = styled.p`
 
   @media (max-width: 768px) {
     margin-bottom: 0px;
-  }
-`;
-
-export const PostPresentationPhoto = styled.div`
-  width: 50%;
-
-  img {
-    max-width: 100%;
-    border-radius: 10px;
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
   }
 `;
 
@@ -140,7 +143,6 @@ export const PostContent = styled(Markdown)`
 
     h1 {
       font-size: 38px;
-      text-align: center;
       margin-bottom: 25px;
     }
 
