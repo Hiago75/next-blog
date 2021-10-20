@@ -7,11 +7,9 @@ export const BlogHeader = styled.header<{ currentProgress: number }>`
   border-bottom: ${({ theme }) => theme.colors.mainBackground};
   top: -1px;
   z-index: 9999;
-
-  &.fixed {
-    -webkit-box-shadow: 0px 4px 18px -1px rgb(0 0 0 / 23%);
-    box-shadow: 0px 4px 18px -1px rgb(0 0 0 / 23%);
-  }
+  transition: background-color 0.2s ease;
+  -webkit-box-shadow: 0px 4px 18px -1px rgb(0 0 0 / 23%);
+  box-shadow: 0px 4px 18px -1px rgb(0 0 0 / 23%);
 
   &.progress-bar {
     :after {

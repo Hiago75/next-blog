@@ -31,7 +31,11 @@ export default createGlobalStyle`
   }
 
   body{
-    background: ${({ theme }) => theme.colors.mainBackground};
+    background-color: ${({ theme }) => theme.colors.mainBackground} !important;
+
+    &.mounted {
+      transition: background-color 0.2s ease;
+    }
   }
 
   select{

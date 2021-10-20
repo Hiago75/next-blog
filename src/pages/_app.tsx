@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
 import { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import { AuthProvider } from '../contexts/AuthContext';
@@ -8,6 +8,8 @@ import GlobalStyles from '../styles/global-styles';
 import { themes } from '../styles/theme';
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const isMounted = useRef(false);
+
   const [preferedTheme, setPreferedTheme] = useState<string>();
   const theme = useMemo(() => preferedTheme || 'light', [preferedTheme]);
 
@@ -23,13 +25,26 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const selectedTheme = JSON.parse(localStorage.getItem('@colster-blog/theme'));
     selectedTheme && setPreferedTheme(selectedTheme);
+
+    //Change the isMounted to true, then the component can render
+    isMounted.current = true;
+
+    //Add the class that will give body a background-color transition
+    const body = document.querySelector('body');
+    body.classList.add('mounted');
+
+    return () => {
+      isMounted.current = false;
+    };
   }, []);
 
   return (
     <AuthProvider>
       <RequestProvider>
         <ThemeProvider theme={themes[theme]}>
-          <Component {...pageProps} theme={theme} toggleTheme={toggleTheme} />
+          {isMounted.current && (
+            <Component {...pageProps} theme={theme} toggleTheme={toggleTheme} />
+          )}
           <GlobalStyles theme={themes[theme]} />
         </ThemeProvider>
       </RequestProvider>

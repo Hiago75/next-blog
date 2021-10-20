@@ -10,6 +10,7 @@ export const Container = styled.footer`
     left: 0;
     bottom: 0;
     color ${theme.fonts.primaryFont};
+    transition: background-color 0.2s ease;
 
     b {
       color: red;
