@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { AiFillStar } from 'react-icons/ai';
 
 import readingTimeCalculator from '../../utils/readingTimeCalculator';
 
@@ -11,68 +12,44 @@ import {
   PostCategory,
   PostTitle,
   PostAuthor,
-  SidePosts,
   PostImageBox,
 } from './style';
 import { formatDate } from '../../utils/format-date';
+import { BlogPostBadge } from '..';
 
 type SpotlightProps = {
-  posts: PostData[];
+  post: PostData;
 };
 
-export const Spotlight = ({ posts }: SpotlightProps) => {
-  const recentPosts = posts.length > 1 && posts?.slice(1, 3);
-  const mainPost = posts && posts[0];
-  const mainPostFormatedDate = formatDate(mainPost?.createdAt);
-  const readingTime = readingTimeCalculator(mainPost?.content);
+export const Spotlight = ({ post }: SpotlightProps) => {
+  const postFormatedDate = formatDate(post?.createdAt);
+  const postReadingTime = readingTimeCalculator(post?.content);
 
-  if (!mainPost) return <h1>Parece tão vazio por aqui...</h1>;
+  if (!post) return <h1>Parece tão vazio por aqui...</h1>;
 
   return (
     <Container>
-      <Link href={{ pathname: '/post/[slug]', query: { slug: mainPost.slug } }}>
-        <Post className="main-post">
+      <Link href={{ pathname: '/post/[slug]', query: { slug: post.slug } }}>
+        <Post>
           <PostImageBox>
-            <PostImage src={mainPost.cover.format.large.url} className="main-post" />
+            <PostImage src={post.cover.format.large.url} />
           </PostImageBox>
-          <PostPreviewData className="main-post">
+
+          <PostPreviewData>
+            <BlogPostBadge>
+              <AiFillStar /> Acabou de sair do forno
+            </BlogPostBadge>
+
+            <PostTitle>{post.title}</PostTitle>
             <PostCategory>
-              <b>{mainPost.category.name}</b> | {readingTime} min de leitura
+              <b>{post.category.name}</b> | {postReadingTime} min de leitura
             </PostCategory>
-            <PostTitle>{mainPost.title}</PostTitle>
             <PostAuthor>
-              {mainPost.author.name}, {mainPostFormatedDate}
+              Publicado por <b>{post.author.name}</b>, {postFormatedDate}
             </PostAuthor>
           </PostPreviewData>
         </Post>
       </Link>
-
-      {recentPosts.length > 1 && (
-        <SidePosts>
-          {recentPosts.map((post) => {
-            const formatedDate = formatDate(post.createdAt);
-            const readingTime = readingTimeCalculator(post.content);
-            return (
-              <Link key={post.id} href={{ pathname: '/post/[slug]', query: { slug: post.slug } }}>
-                <Post className="side-post">
-                  <PostImageBox>
-                    <PostImage src={post.cover.format.medium.url} />
-                  </PostImageBox>
-                  <PostPreviewData>
-                    <PostCategory>
-                      <b>{post.category.name}</b> | {readingTime} min de leitura
-                    </PostCategory>
-                    <PostTitle>{post.title}</PostTitle>
-                    <PostAuthor>
-                      {post.author.name}, {formatedDate}
-                    </PostAuthor>
-                  </PostPreviewData>
-                </Post>
-              </Link>
-            );
-          })}
-        </SidePosts>
-      )}
     </Container>
   );
 };

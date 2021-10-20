@@ -18,7 +18,7 @@ export function Comments({ slug, title }: CommentsProps) {
       <DiscussionEmbed
         shortname="blog-colster"
         config={{
-          url: `${APP_URL}/post/${slug}`,
+          url: `/post/${slug}`,
           identifier: slug,
           title: title,
           language: 'pt_BR',

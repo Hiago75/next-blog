@@ -15,10 +15,7 @@ export function HomePage({ posts, categories }: HomePageProps) {
   return (
     <>
       <RecentPosts>
-        <BlogHeadingTitle linkHref="/posts" linkText="Ver todos os posts">
-          Posts mais recentes
-        </BlogHeadingTitle>
-        <Spotlight posts={posts} />
+        <Spotlight post={posts[0]} />
       </RecentPosts>
 
       <SectionTitle>Fique por dentro das novidades em...</SectionTitle>

@@ -106,7 +106,7 @@ export const HeaderUl = styled.ul`
     overflow-y: hidden;
 
     &.active {
-      height: calc(100vh - 67px);
+      height: calc(100vh - 65px);
     }
   }
 `;

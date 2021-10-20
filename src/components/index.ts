@@ -25,6 +25,7 @@ import { BlogPostCardBox } from './BlogPostCardBox';
 import { BlogTableOC } from './BlogTableOC';
 import { BlogButton } from './BlogButton';
 import { BlogFullScreenContainer } from './BlogFullContainer';
+import { BlogPostBadge } from './BlogPostBadge';
 
 export {
   Header,
@@ -54,4 +55,5 @@ export {
   BlogTableOC,
   BlogButton,
   BlogFullScreenContainer,
+  BlogPostBadge,
 };
