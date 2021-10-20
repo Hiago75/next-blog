@@ -7,6 +7,7 @@ import { AiFillClockCircle } from 'react-icons/ai';
 import { PostData } from '../../domain/posts/post';
 import { BlogTableOC, Comments } from '../../components';
 import {
+  PostContainer,
   PostPresentation,
   PostPresentationData,
   PostPresentationTitle,
@@ -89,7 +90,7 @@ export function Post({ post, setReadingProgress }: PostProps) {
   }, []);
 
   return (
-    <>
+    <PostContainer>
       <PostPresentation>
         <PostPresentationPhoto>
           <img src={cover.format.medium.url} alt="Foto de capa da publicação" />
@@ -132,6 +133,6 @@ export function Post({ post, setReadingProgress }: PostProps) {
       </PostContentContainer>
 
       <Comments title={post.title} slug={post.slug} />
-    </>
+    </PostContainer>
   );
 }

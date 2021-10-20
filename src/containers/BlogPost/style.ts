@@ -1,11 +1,11 @@
 import Markdown from 'markdown-to-jsx';
 import styled, { css } from 'styled-components';
 
+export const PostContainer = styled.article``;
+
 export const PostPresentation = styled.section`
   display: flex;
   flex-wrap: wrap;
-  @media (max-width: 768px) {
-  }
 `;
 
 export const PostPresentationPhoto = styled.div`
@@ -46,7 +46,7 @@ export const PostPresentationCategory = styled.a`
   color: ${({ theme }) => theme.fonts.contrastFont};
   background-color: ${({ theme }) => theme.colors.contrastColor};
 
-  padding: 4px 15px;
+  padding: 2px 15px;
   border-radius: 10px;
   text-decoration: none;
   text-transform: uppercase;
