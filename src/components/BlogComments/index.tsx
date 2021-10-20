@@ -16,7 +16,7 @@ export function Comments({ slug, title }: CommentsProps) {
   return (
     <Container>
       <DiscussionEmbed
-        shortname="nextblog-6"
+        shortname="blog-colster"
         config={{
           url: `${APP_URL}/post/${slug}`,
           identifier: slug,
