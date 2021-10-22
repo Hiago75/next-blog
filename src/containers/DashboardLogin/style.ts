@@ -6,7 +6,7 @@ export const Container = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   background-color: ${({ theme }) => theme.colors.alternativeBackground};
 
@@ -31,9 +31,7 @@ export const LoginBox = styled.div`
 
   @media (max-width: 900px) {
     width: 100%;
-    height: 100%;
-    max-height: 100%;
-    max-width: 100%;
+    min-height: 100vh;
     margin: 0;
     border-radius: 0px;
     padding: 0 10px;
