@@ -5,12 +5,14 @@ import { ITimer } from '../interfaces/ITimer';
 import { timer } from '../utils/timer';
 
 interface IRequestContext {
+  requestOnProgress: boolean;
   isLoading: boolean;
   isRefreshing: boolean;
   responseStatus: IResponseStatus;
   requestTimer: ITimer;
   transitionTime: number;
   setLoading: Dispatch<SetStateAction<boolean>>;
+  setRequestOnProgress: Dispatch<SetStateAction<boolean>>;
   setIsRefreshing: Dispatch<SetStateAction<boolean>>;
   responseStatusFactory: (successful: boolean, title: string, message: string) => void;
   refreshServerSideProps: () => void;
@@ -39,6 +41,7 @@ export function RequestProvider({ children }: IRequestProvider) {
   // Window render related states
   const [isLoading, setLoading] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [requestOnProgress, setRequestOnProgress] = useState(false);
 
   const defaultResponseStatus = {
     displayResponse: false,
@@ -52,6 +55,7 @@ export function RequestProvider({ children }: IRequestProvider) {
   const transitionTime = 2500;
   const [requestTimer, setRequestTimer] = useState<ITimer>();
 
+  //Create a new response status
   function responseStatusFactory(successful: boolean, title: string, message: string) {
     const responseStatusObj = {
       displayResponse: true,
@@ -65,33 +69,37 @@ export function RequestProvider({ children }: IRequestProvider) {
     setResponseStatus(responseStatusObj);
   }
 
+  // Refresh server side props
   function refreshServerSideProps() {
     router.replace(router.asPath);
     setIsRefreshing(true);
   }
 
+  //Reset the response status
   function handleTimerEnd() {
     setResponseStatus({ displayResponse: false, ...responseStatus });
   }
 
+  //Handle the request timer timer
   useEffect(() => {
     const requestTimer = timer(handleTimerEnd, transitionTime);
     setRequestTimer(requestTimer);
 
     if (responseStatus.displayResponse) {
       requestTimer.resume();
-      alert(responseStatus.displayResponse);
     }
   }, []);
 
   return (
     <RequestContext.Provider
       value={{
+        requestOnProgress,
         isLoading,
         isRefreshing,
         transitionTime,
         responseStatus,
         requestTimer,
+        setRequestOnProgress,
         setLoading,
         setIsRefreshing,
         responseStatusFactory,

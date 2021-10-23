@@ -5,7 +5,6 @@ import { ThemeContext } from 'styled-components';
 import { Container, CategoryBox, CategoriesContainer, TagsContainer, Trashcan } from './style';
 import { PanelBox, PanelButton, InputLabel, Warning } from '../../components';
 
-import createFormErrorHandler from '../../utils/createFormErrorHandler';
 import { PostCategory, PostCount, PostTags } from '../../domain/posts/post';
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
 import {
@@ -16,6 +15,7 @@ import {
   refreshUserToken,
 } from '../../services';
 import { RequestContext } from '../../contexts/RequestContext';
+import { useApi } from '../../hooks/useApi';
 
 interface IDashboardCategoriesRequest {
   categories: PostCategory[];
@@ -28,6 +28,7 @@ export const DashboardCategories = ({
   tags,
   numberOfPosts,
 }: IDashboardCategoriesRequest) => {
+  const { createNewRequest } = useApi();
   const theme = useContext(ThemeContext);
   const { setLoading, responseStatusFactory, refreshServerSideProps, setIsRefreshing } =
     useContext(RequestContext);
@@ -40,8 +41,6 @@ export const DashboardCategories = ({
   const [tagToBeDeleted, setTagToBeDeleted] = useState('');
   const [tagWarning, setTagWarning] = useState(false);
 
-  const { resetInputErrors, createInputError } = createFormErrorHandler();
-
   // Format the received categories into an array of objects
   function getCategoriesData() {
     const rawCategories = numberOfPosts.categories;
@@ -52,7 +51,6 @@ export const DashboardCategories = ({
       categoriesData.push(categoryObject);
     }
 
-    console.log(numberOfPosts);
     return { categoriesData };
   }
 
@@ -61,58 +59,46 @@ export const DashboardCategories = ({
   // Handle category input change
   function handleCategoryInputChange(event: IOnChangeInput) {
     setNewCategory(event.target.value);
-    resetInputErrors();
   }
 
   // Set the tag input value when the input changes
   function handleTagInputChange(event: IOnChangeInput) {
     setNewTag(event.target.value);
-    resetInputErrors();
   }
 
   async function handleTagSubmit(event: React.FormEvent) {
     event.preventDefault();
-    await refreshUserToken();
-    resetInputErrors();
 
-    setLoading(true);
-    const { error, message } = await createNewTag(newTag);
-    setLoading(false);
+    createNewRequest(async () => {
+      await refreshUserToken();
 
-    //Fail
-    if (error) return createInputError('tag', message);
+      const { error, message } = await createNewTag(newTag);
 
-    //Success
-    refreshServerSideProps();
+      //Fail
+      if (error) return { error: true, message: message };
 
-    responseStatusFactory(
-      true,
-      'Nova tag criada',
-      'Agora basta usar ela na sua proxima publicação',
-    );
+      //Success
+      refreshServerSideProps();
+      return { error: false, message: 'Nova tag criada' };
+    });
   }
 
   // Submit the new category
   async function handleCategorySubmit(event: React.FormEvent) {
     event.preventDefault();
-    await refreshUserToken();
-    resetInputErrors();
 
-    setLoading(true);
-    const { error, message } = await createNewCategory(newCategory);
-    setLoading(false);
+    createNewRequest(async () => {
+      await refreshUserToken();
 
-    //Fail
-    if (error) return createInputError('category', message);
+      const { error, message } = await createNewCategory(newCategory);
 
-    //Success
-    refreshServerSideProps();
+      //Fail
+      if (error) return { error: true, message: message };
 
-    responseStatusFactory(
-      true,
-      'Nova categoria criada',
-      'Você já pode criar publicações nesta categoria',
-    );
+      //Success
+      refreshServerSideProps();
+      return { error: false, message: 'Nova categoria criada' };
+    });
   }
 
   //Open the warning and store the id

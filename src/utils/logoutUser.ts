@@ -4,7 +4,7 @@ import { logoutRequest } from '../services/auth/logoutRequest';
 
 export async function logoutUser() {
   //TODO: Render error screen
-  logoutRequest().then(() => {
+  await logoutRequest().then(() => {
     destroyCookie(undefined, 'isAuthenticated');
     Router.push('/cboard/login');
   });

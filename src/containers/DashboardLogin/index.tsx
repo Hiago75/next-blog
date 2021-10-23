@@ -7,12 +7,12 @@ import { BiLogOut } from 'react-icons/bi';
 
 import createFormErrorHandler from '../../utils/createFormErrorHandler';
 import { AuthContext } from '../../contexts/AuthContext';
-import { PanelPasswordInput, InputLabel, ErrorBox } from '../../components';
+import { PanelPasswordInput, InputLabel, ErrorBox, LoadingWheel } from '../../components';
 import { Container, LoginForm, LoginBox, ReturnToSite } from './style';
 import { ThemeContext } from 'styled-components';
 
 export const Login = () => {
-  const { login, errors } = useContext(AuthContext);
+  const { login, errors, loginOnProgress } = useContext(AuthContext);
   const theme = useContext(ThemeContext);
 
   const [email, setEmail] = useState('');
@@ -49,15 +49,12 @@ export const Login = () => {
     return isValid;
   };
 
-  //Handle what happens when someone click on form button
+  //Send the form to the API in onder to log-in the user
   async function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     resetInputErrors();
-
     if (!isFilled) return;
-
     const isValid = formIsValid();
-
     if (isValid) await login({ email, password });
   }
 
@@ -86,7 +83,7 @@ export const Login = () => {
           <PanelPasswordInput inputName="Senha" onInputChange={handlePasswordChange} />
 
           <button onClick={handleSubmit} className={isFilled ? 'form-filled' : ''}>
-            Entrar
+            {loginOnProgress ? <LoadingWheel /> : 'Entrar'}
           </button>
         </LoginForm>
       </LoginBox>

@@ -1,10 +1,10 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useContext } from 'react';
 import Link from 'next/link';
 
 import { IconContext } from 'react-icons';
 import { BiLogOut } from 'react-icons/bi';
 
-import { MenuController, SubMenu } from '..';
+import { LoadingWheel, MenuController, SubMenu } from '..';
 import {
   Container,
   LogoBox,
@@ -16,6 +16,8 @@ import {
 } from './style';
 import { logoutUser } from '../../utils/logoutUser';
 import { SidebarData } from './sidebarData';
+import { useApi } from '../../hooks/useApi';
+import { RequestContext } from '../../contexts/RequestContext';
 
 interface SidebarRequest {
   menuOpen: boolean;
@@ -23,9 +25,12 @@ interface SidebarRequest {
 }
 
 export const Sidebar = ({ menuOpen, setMenuOpen }: SidebarRequest) => {
+  const { createSilentRequest } = useApi();
+  const { requestOnProgress } = useContext(RequestContext);
+
   //Logout the user
   function handleLogout() {
-    logoutUser();
+    createSilentRequest(logoutUser);
   }
 
   return (
@@ -67,7 +72,11 @@ export const Sidebar = ({ menuOpen, setMenuOpen }: SidebarRequest) => {
 
         <SidebarFooter>
           <Logout>
-            <BiLogOut size={32} onClick={handleLogout}></BiLogOut>
+            {requestOnProgress ? (
+              <LoadingWheel />
+            ) : (
+              <BiLogOut size={32} onClick={handleLogout}></BiLogOut>
+            )}
           </Logout>
         </SidebarFooter>
       </IconContext.Provider>

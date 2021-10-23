@@ -10,27 +10,21 @@ import {
   UserImageBox,
   PreviewName,
   PhotoInput,
-  EditPassword,
   FormWrapper,
 } from './style';
 
 import createFormErrorHandler from '../../utils/createFormErrorHandler';
 import { createUserPhoto, refreshUserToken, updateUserData, updateUserPhoto } from '../../services';
-import {
-  UserImage,
-  PanelButton,
-  PanelPasswordInput,
-  ImageUpload,
-  InputLabel,
-  ErrorBox,
-} from '../../components';
-import { AuthContext } from '../../contexts/AuthContext';
+import { UserImage, ImageUpload, InputLabel, RequestButton } from '../../components';
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
 import isEmail from 'validator/lib/isEmail';
+import { AuthContext } from '../../contexts/AuthContext';
 import { RequestContext } from '../../contexts/RequestContext';
+import { useApi } from '../../hooks/useApi';
 
 // Edit User component
 export const DashboardEditUser = () => {
+  const { createNewFormRequest } = useApi();
   const { setLoading } = useContext(RequestContext);
   const { user, refreshUserData } = useContext(AuthContext);
 
@@ -40,13 +34,6 @@ export const DashboardEditUser = () => {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-
-  //TODO: add change password system
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [editingPassword, setEditingPassword] = useState(false);
-
-  const [error, setError] = useState('');
 
   const userRole = user?.admin ? 'Desenvolvedor(a)' : 'Autor(a)';
   const { resetInputErrors, createInputError } = createFormErrorHandler();
@@ -61,18 +48,6 @@ export const DashboardEditUser = () => {
   function handleEmailChange(event: IOnChangeInput) {
     setEmail(event.target.value);
     resetInputErrors();
-  }
-
-  // Handle the password field changes
-  function handleNewPasswordChange(event: IOnChangeInput) {
-    setNewPassword(event.target.value);
-    console.log(newPassword);
-  }
-
-  // Handle the confirm password field changes
-  function handleConfirmPasswordChange(event: IOnChangeInput) {
-    setConfirmPassword(event.target.value);
-    console.log(confirmPassword);
   }
 
   // Open the preview profile photo element and set the temporary photo
@@ -103,12 +78,7 @@ export const DashboardEditUser = () => {
     await refreshUserData(true);
   }
 
-  // Toggle the form from the normal data to password
-  function togglePasswordEditor(event: React.MouseEvent<HTMLButtonElement>) {
-    event.preventDefault();
-    setEditingPassword(!editingPassword);
-  }
-
+  //Validate the fields to see if everything is in order
   function validateForm() {
     let isValid = true;
 
@@ -131,18 +101,15 @@ export const DashboardEditUser = () => {
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
 
-    const isValid = validateForm();
-    if (!isValid) return;
+    createNewFormRequest(async () => {
+      await refreshUserToken();
 
-    setLoading(true);
-    await refreshUserToken();
-    const { error, message } = await updateUserData({ name, email });
-    setLoading(false);
+      const { error, message } = await updateUserData({ name, email });
+      if (error) return { error: true, message: message };
 
-    if (error) setError(message);
-
-    //Update the stored user data
-    await refreshUserData(true);
+      await refreshUserData(true);
+      return { error: false, message: 'Dados atualizados' };
+    }, validateForm);
   }
 
   return (
@@ -157,7 +124,6 @@ export const DashboardEditUser = () => {
       ></ImageUpload>
 
       <FormWrapper>
-        {error && <ErrorBox error={error} />}
         <UserPreview>
           <UserImageBox>
             <UserImage user={user} imageSize={200}>
@@ -179,50 +145,28 @@ export const DashboardEditUser = () => {
           </UserData>
         </UserPreview>
 
-        {!editingPassword && (
-          <>
-            <UserDataContainer onSubmit={handleSubmit}>
-              <InputLabel htmlFor="name-input" id="name">
-                Nome
-                <input
-                  onChange={handleNameChange}
-                  placeholder={user?.name}
-                  value={name}
-                  type="text"
-                  name="name-input"
-                />
-              </InputLabel>
-              <InputLabel htmlFor="email-input" id="email">
-                E-mail
-                <input
-                  onChange={handleEmailChange}
-                  placeholder={user?.email}
-                  value={email}
-                  type="email"
-                  name="email-input"
-                ></input>
-              </InputLabel>
-              <InputLabel notEditable htmlFor="password-input" id="password">
-                Senha
-                <input
-                  value="loremipsumdolorsit"
-                  readOnly
-                  className="userPassword"
-                  type="password"
-                ></input>
-              </InputLabel>
-
-              <EditPassword type="button" onClick={togglePasswordEditor}>
-                Quero alterar minha senha
-              </EditPassword>
-
-              <PanelButton type="submit">Atualizar</PanelButton>
-            </UserDataContainer>
-          </>
-        )}
-
-        {editingPassword && (
-          <UserDataContainer>
+        <>
+          <UserDataContainer onSubmit={handleSubmit}>
+            <InputLabel htmlFor="name-input" id="name">
+              Nome
+              <input
+                onChange={handleNameChange}
+                placeholder={user?.name}
+                value={name}
+                type="text"
+                name="name-input"
+              />
+            </InputLabel>
+            <InputLabel htmlFor="email-input" id="email">
+              E-mail
+              <input
+                onChange={handleEmailChange}
+                placeholder={user?.email}
+                value={email}
+                type="email"
+                name="email-input"
+              ></input>
+            </InputLabel>
             <InputLabel notEditable htmlFor="password-input" id="password">
               Senha
               <input
@@ -232,24 +176,10 @@ export const DashboardEditUser = () => {
                 type="password"
               ></input>
             </InputLabel>
-            <PanelPasswordInput
-              inputName="Nova senha"
-              onInputChange={handleNewPasswordChange}
-            ></PanelPasswordInput>
-            <PanelPasswordInput
-              inputName="Confirmar senha"
-              onInputChange={handleConfirmPasswordChange}
-            ></PanelPasswordInput>
 
-            <EditPassword type="button" onClick={togglePasswordEditor}>
-              Quero alterar outros dados
-            </EditPassword>
-
-            <PanelButton type="submit" onClick={handleSubmit}>
-              Atualizar
-            </PanelButton>
+            <RequestButton type="submit">Atualizar</RequestButton>
           </UserDataContainer>
-        )}
+        </>
       </FormWrapper>
     </Container>
   );

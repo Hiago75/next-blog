@@ -12,13 +12,14 @@ import {
   MediaEditor,
   MediaInput,
 } from './style';
-import { ErrorBox, ImageUpload, InputLabel, PanelButton, PostEditor } from '../../components';
+import { ErrorBox, ImageUpload, InputLabel, PostEditor, RequestButton } from '../../components';
 
 import { PostCategory, PostData } from '../../domain/posts/post';
 import { RequestContext } from '../../contexts/RequestContext';
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
 import { createNewCover, refreshUserToken } from '../../services';
 import { updatePost } from '../../services/posts/updatePost';
+import { useApi } from '../../hooks/useApi';
 
 interface IDashboardPostEditorRequest {
   post: PostData;
@@ -27,6 +28,7 @@ interface IDashboardPostEditorRequest {
 
 export const DashboardPostEditor = ({ post, categories }: IDashboardPostEditorRequest) => {
   const router = useRouter();
+  const { createNewRequest } = useApi();
   const { setLoading, responseStatusFactory } = useContext(RequestContext);
 
   //Form states
@@ -87,28 +89,25 @@ export const DashboardPostEditor = ({ post, categories }: IDashboardPostEditorRe
   // Reset the inputs and try to submit the form, if something goes wrong displays the error
   async function handlePostFormSubmit(event: React.FormEvent) {
     event.preventDefault();
-    window.scrollTo(0, 0);
-
-    setLoading(true);
 
     // Resets the errors
     setError(undefined);
 
-    await refreshUserToken();
-    await uploadCover();
+    createNewRequest(async () => {
+      await refreshUserToken();
+      await uploadCover();
 
-    const updatedPost = await updatePost(post.id, title, content, categoryId, coverId);
+      const updatedPost = await updatePost(post.id, title, content, categoryId, coverId);
 
-    if (updatedPost.error)
-      return handleSubmitResponse(false, 'Opa, acho que algo não está certo', updatedPost.message);
+      if (updatedPost.error) return { error: true, message: updatedPost.message };
 
-    router.push('/cboard/posts/edit/');
+      router.push('/cboard/posts/edit/');
 
-    handleSubmitResponse(
-      true,
-      'Publicação alterada :)',
-      'Em breve essa alteração estará presente no blog',
-    );
+      return {
+        error: false,
+        message: 'Em breve essa alteração estará presente no blog',
+      };
+    });
   }
 
   return (
@@ -162,7 +161,7 @@ export const DashboardPostEditor = ({ post, categories }: IDashboardPostEditorRe
 
         <PostEditor defaultValue={post.content} onChange={handleContentInputChange} />
 
-        <PanelButton type="submit">Salvar publicação</PanelButton>
+        <RequestButton type="submit">Salvar publicação</RequestButton>
       </FormContainer>
     </Container>
   );

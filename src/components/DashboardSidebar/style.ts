@@ -23,6 +23,7 @@ export const Container = styled.aside`
   justify-content: space-between;
   height: 100vh;
   background-color: ${({ theme }) => theme.colors.alternativeBackground};
+  transition: background-color 0.3s ease;
   width: 90px;
   transition: width 0.2s ease-in-out;
   position: fixed;

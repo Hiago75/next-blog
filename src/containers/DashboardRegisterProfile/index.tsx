@@ -1,18 +1,18 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 
 import isEmail from 'validator/lib/isEmail';
 
 import createFormErrorHandler from '../../utils/createFormErrorHandler';
 
-import { PanelButton, InputLabel } from '../../components';
+import { InputLabel, RequestButton } from '../../components';
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
 import { Container, RegisterForm, RegisterInput, InputDiv } from './style';
 import { refreshUserToken } from '../../services';
-import { RequestContext } from '../../contexts/RequestContext';
 import { createUser } from '../../services/user/createUser';
+import { useApi } from '../../hooks/useApi';
 
 export const DashboardRegisterProfile = () => {
-  const { setLoading, responseStatusFactory } = useContext(RequestContext);
+  const { createNewFormRequest } = useApi();
 
   const [username, setUsername] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
@@ -53,29 +53,24 @@ export const DashboardRegisterProfile = () => {
     return isValid;
   }
 
-  function handleSubmitReponse(success: boolean, title: string, message: string) {
-    setLoading(false);
-    responseStatusFactory(success, title, message);
-  }
-
   async function handleFormSubmit(event: React.FormEvent) {
     event.preventDefault();
-    window.scrollTo(0, 0);
 
-    setLoading(true);
-
+    //Reset the input errors
     resetInputErrors();
 
-    const isValid = validateForm();
-    if (!isValid) return;
+    createNewFormRequest(async () => {
+      await refreshUserToken();
 
-    await refreshUserToken();
+      const user = await createUser({ name: username, email, password, admin: isAdmin });
 
-    const user = await createUser({ name: username, email, password, admin: isAdmin });
+      if (user.error) return { error: true, message: user.message };
 
-    if (user.error) return handleSubmitReponse(false, 'Opa, algo não deu certo', user.message);
-
-    handleSubmitReponse(true, 'Novo usuário registrado com sucesso', 'De as boas vindas a ele(a)');
+      return {
+        error: false,
+        message: 'Usuario registrado com sucesso',
+      };
+    }, validateForm);
   }
 
   return (
@@ -118,7 +113,7 @@ export const DashboardRegisterProfile = () => {
           </label>
         </InputDiv>
 
-        <PanelButton type="submit">Criar usuário</PanelButton>
+        <RequestButton type="submit">Criar usuário</RequestButton>
       </RegisterForm>
     </Container>
   );

@@ -10,6 +10,7 @@ export const Container = styled.header`
   align-items: center;
   width: calc(100% - 190px);
   background-color: ${({ theme }) => theme.colors.mainBackground};
+  transition: background-color 0.3s ease;
 `;
 
 // User info

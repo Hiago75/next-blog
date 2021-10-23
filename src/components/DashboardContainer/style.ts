@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   background-color: ${({ theme }) => theme.colors.mainBackground};
+  transition: background-color 0.3s ease;
 
   & header {
     margin-left: 190px;

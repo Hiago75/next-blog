@@ -15,6 +15,7 @@ interface IAuthProviderRequest {
 interface IAuthContext {
   isAuthenticated: string;
   user: IUser;
+  loginOnProgress: boolean;
   errors: string;
   isRetrievingUserData: boolean;
   login: (data: ILoginRequest) => Promise<void>;
@@ -35,6 +36,8 @@ export function AuthProvider({ children }: IAuthProviderRequest) {
   const userInformation = useMemo(() => user, [login, refreshUserData]);
   const [errors, setErrors] = useState<string | null>(null);
   const [isRetrievingUserData, setIsRetrievingUserData] = useState(false);
+  const [loginOnProgress, setLoginOnProgress] = useState(false);
+
   const { isAuthenticated } = parseCookies();
 
   //Refresh user data
@@ -55,15 +58,20 @@ export function AuthProvider({ children }: IAuthProviderRequest) {
 
   //Login user on application
   async function login({ email: username, password }: ILoginRequest) {
+    setLoginOnProgress(true);
     const isAuthorized = await loginRequest({ email: username, password });
 
     const { error, message } = isAuthorized;
-    if (error) return setErrors(message);
+    if (error) {
+      setLoginOnProgress(false);
+      return setErrors(message);
+    }
 
     setErrors(null);
 
     const user = await fetchUserData(false);
     setUser(user);
+    setLoginOnProgress(false);
 
     Router.push('/cboard');
   }
@@ -98,6 +106,7 @@ export function AuthProvider({ children }: IAuthProviderRequest) {
       value={{
         isAuthenticated,
         isRetrievingUserData,
+        loginOnProgress,
         user: userInformation,
         errors,
         login,

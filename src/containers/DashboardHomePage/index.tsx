@@ -70,7 +70,7 @@ export const DashboardHome = ({ user, numberOfPosts }: IDashboardHomePageProps) 
           <Content>
             <p>Que tal mexer nesses números ? Crie uma nova publicação!</p>
           </Content>
-          <LinkButton href="dashboard/posts">Criar post</LinkButton>
+          <LinkButton href="/cboard/posts/new">Criar post</LinkButton>
         </PanelBox>
 
         <PanelBox widthPercentage={20} className="center" panelTitle="Total de posts">

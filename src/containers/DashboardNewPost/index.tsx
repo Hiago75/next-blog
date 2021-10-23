@@ -21,10 +21,11 @@ import {
 
 import createFormErrorHandler from '../../utils/createFormErrorHandler';
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
-import { PanelButton, ImageUpload, InputLabel, ErrorBox, PostEditor } from '../../components';
+import { ImageUpload, InputLabel, ErrorBox, PostEditor, RequestButton } from '../../components';
 import { PostCategory, PostTags } from '../../domain/posts/post';
 import { createNewCover, createNewPost, refreshUserToken } from '../../services';
 import { RequestContext } from '../../contexts/RequestContext';
+import { useApi } from '../../hooks/useApi';
 
 interface IDashboardNewPostRequest {
   tags: PostTags[];
@@ -32,7 +33,8 @@ interface IDashboardNewPostRequest {
 }
 
 export const DashboardNewPost = ({ categories, tags }: IDashboardNewPostRequest) => {
-  const { setLoading, responseStatusFactory } = useContext(RequestContext);
+  const { setRequestOnProgress, responseStatusFactory } = useContext(RequestContext);
+  const { createNewFormRequest } = useApi();
 
   //Form states
   const [title, setTitle] = useState('');
@@ -117,7 +119,7 @@ export const DashboardNewPost = ({ categories, tags }: IDashboardNewPostRequest)
   }
 
   function handleSubmitResponse(success: boolean, title: string, message: string) {
-    setLoading(false);
+    setRequestOnProgress(false);
     responseStatusFactory(success, title, message);
   }
 
@@ -132,34 +134,30 @@ export const DashboardNewPost = ({ categories, tags }: IDashboardNewPostRequest)
   // Reset the inputs and try to submit the form, if something goes wrong displays the error
   async function handlePostFormSubmit(event: React.FormEvent) {
     event.preventDefault();
-    window.scrollTo(0, 0);
-
-    setLoading(true);
 
     // Resets the errors
     resetInputErrors();
     setError(undefined);
 
-    const isValid = validateForm();
-    if (!isValid) return setLoading(false);
+    //Use a useApi hook function to handle the form request
+    createNewFormRequest(async () => {
+      const tagsIds = getSelectedTagsIds();
 
-    await refreshUserToken();
-    await uploadCover();
+      await refreshUserToken();
+      await uploadCover();
 
-    const tagsIds = getSelectedTagsIds();
+      const post = await createNewPost(title, content, tagsIds, categoryId, coverId);
 
-    const post = await createNewPost(title, content, tagsIds, categoryId, coverId);
+      if (post.error) return { error: true, message: post.message };
 
-    if (post.error)
-      return handleSubmitResponse(false, 'Opa, acho que algo não está certo', post.message);
-
-    handleSubmitResponse(
-      true,
-      'Publicação feita :)',
-      'Em breve ela vai estar presente no blog para que todos possam ler',
-    );
+      return {
+        error: false,
+        message: 'Em breve ela vai estar presente no blog para que todos possam ler',
+      };
+    }, validateForm);
   }
 
+  //Know the special keys and their functions, only execute then if the keypressed is on the special keys list
   function handleTagInputKeyboard(event: React.KeyboardEvent<HTMLInputElement>) {
     const specialKeys = {
       ArrowRight() {
@@ -293,7 +291,7 @@ export const DashboardNewPost = ({ categories, tags }: IDashboardNewPostRequest)
           </AvaliablePostTags>
         </PostTagsBox>
 
-        <PanelButton type="submit">Salvar publicação</PanelButton>
+        <RequestButton type="submit">Salvar publicação</RequestButton>
       </FormContainer>
     </Container>
   );
