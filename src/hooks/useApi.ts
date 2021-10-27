@@ -2,8 +2,7 @@ import { useContext } from 'react';
 import { RequestContext } from '../contexts/RequestContext';
 
 export const useApi = () => {
-  const { requestOnProgress, setRequestOnProgress, responseStatusFactory } =
-    useContext(RequestContext);
+  const { setRequestOnProgress, responseStatusFactory } = useContext(RequestContext);
 
   function handleSubmitResponse(success: boolean, title: string, message: string) {
     setRequestOnProgress(false);

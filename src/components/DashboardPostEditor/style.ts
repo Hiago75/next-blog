@@ -21,7 +21,8 @@ export const TextEditor = styled(Editor)`
       border-radius: 20px;
       width: 100%;
       background-color: ${theme.colors.contrastBackground};
-      height: 500px;
+      height: auto;
+      min-height: 500px;
     }
 
     & p,
