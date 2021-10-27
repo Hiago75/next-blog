@@ -78,12 +78,12 @@ export const DashboardPostEditor = ({ post, categories }: IDashboardPostEditorRe
   async function uploadCover() {
     await createNewCover({ photo })
       .then(({ id }) => (coverId = id))
-      .catch(({ message }) => handleSubmitResponse(false, 'Opa, algo deu errado :(', message));
+      .catch(({ message }) => handleSubmitResponse(false, message));
   }
 
-  function handleSubmitResponse(success: boolean, title: string, message: string) {
+  function handleSubmitResponse(success: boolean, message: string) {
     setLoading(false);
-    responseStatusFactory(success, title, message);
+    responseStatusFactory(success, message);
   }
 
   // Reset the inputs and try to submit the form, if something goes wrong displays the error
@@ -105,7 +105,7 @@ export const DashboardPostEditor = ({ post, categories }: IDashboardPostEditorRe
 
       return {
         error: false,
-        message: 'Em breve essa alteração estará presente no blog',
+        message: 'Publicação alterada',
       };
     });
   }

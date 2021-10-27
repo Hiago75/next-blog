@@ -120,7 +120,7 @@ export const DashboardNewPost = ({ categories, tags }: IDashboardNewPostRequest)
 
   function handleSubmitResponse(success: boolean, title: string, message: string) {
     setRequestOnProgress(false);
-    responseStatusFactory(success, title, message);
+    responseStatusFactory(success, message);
   }
 
   function handleCoverPhoto() {
@@ -152,7 +152,7 @@ export const DashboardNewPost = ({ categories, tags }: IDashboardNewPostRequest)
 
       return {
         error: false,
-        message: 'Em breve ela vai estar presente no blog para que todos possam ler',
+        message: 'Publicação criada',
       };
     }, validateForm);
   }

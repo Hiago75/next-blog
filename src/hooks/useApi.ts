@@ -4,9 +4,9 @@ import { RequestContext } from '../contexts/RequestContext';
 export const useApi = () => {
   const { setRequestOnProgress, responseStatusFactory } = useContext(RequestContext);
 
-  function handleSubmitResponse(success: boolean, title: string, message: string) {
+  function handleSubmitResponse(success: boolean, message: string) {
     setRequestOnProgress(false);
-    responseStatusFactory(success, title, message);
+    responseStatusFactory(success, message);
   }
 
   //Handle form requests
@@ -22,12 +22,12 @@ export const useApi = () => {
     if (error) {
       window.scrollTo(0, 0);
       setRequestOnProgress(false);
-      return handleSubmitResponse(false, 'Opa, algo não está certo', message);
+      return handleSubmitResponse(false, message);
     }
 
     setRequestOnProgress(false);
     window.scrollTo(0, 0);
-    return handleSubmitResponse(true, 'Tudo certo', message);
+    return handleSubmitResponse(true, message);
   }
 
   //Handle normal requests
@@ -35,10 +35,10 @@ export const useApi = () => {
     setRequestOnProgress(true);
 
     const { error, message } = await reqCallback();
-    if (error) return handleSubmitResponse(false, 'Opa, algo não está certo', message);
+    if (error) return handleSubmitResponse(false, message);
 
     setRequestOnProgress(false);
-    return handleSubmitResponse(true, 'Tudo certo', message);
+    return handleSubmitResponse(true, message);
   }
 
   // Just set and remove the loading, don't show errors or anything like that

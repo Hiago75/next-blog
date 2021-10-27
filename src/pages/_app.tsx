@@ -1,6 +1,8 @@
 import { useEffect, useState, useMemo, useRef } from 'react';
 import { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
+import { ToastContainer } from 'react-toastify';
+
 import { AuthProvider } from '../contexts/AuthContext';
 import { RequestProvider } from '../contexts/RequestContext';
 
@@ -46,6 +48,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Component {...pageProps} theme={theme} toggleTheme={toggleTheme} />
           )}
           <GlobalStyles theme={themes[theme]} />
+          <ToastContainer autoClose={3000} />
         </ThemeProvider>
       </RequestProvider>
     </AuthProvider>

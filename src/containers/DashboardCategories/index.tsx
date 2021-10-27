@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from 'react';
 import { ThemeContext } from 'styled-components';
 
 import { Container, CategoryBox, CategoriesContainer, TagsContainer, Trashcan } from './style';
-import { PanelBox, PanelButton, InputLabel, Warning } from '../../components';
+import { PanelBox, InputLabel, Warning, RequestButton } from '../../components';
 
 import { PostCategory, PostCount, PostTags } from '../../domain/posts/post';
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
@@ -121,12 +121,12 @@ export const DashboardCategories = ({
     setLoading(false);
 
     //Fail
-    if (error) return responseStatusFactory(false, 'Opa, algo deu errado', message);
+    if (error) return responseStatusFactory(false, message);
 
     refreshServerSideProps();
 
     //Success
-    responseStatusFactory(true, 'Categoria apagada', 'Ela partiu...');
+    responseStatusFactory(true, 'Categoria apagada');
     setCategoryToBeDeleted(undefined);
   }
 
@@ -145,12 +145,12 @@ export const DashboardCategories = ({
     setLoading(false);
 
     //Fail
-    if (error) return responseStatusFactory(false, 'Opa, algo deu errado', message);
+    if (error) return responseStatusFactory(false, message);
 
     refreshServerSideProps();
 
     //Success
-    responseStatusFactory(true, 'Tag apagada', 'Ela partiu...');
+    responseStatusFactory(true, 'Tag apagada');
     setCategoryToBeDeleted(undefined);
   }
 
@@ -181,7 +181,7 @@ export const DashboardCategories = ({
                 onChange={handleCategoryInputChange}
               />
             </InputLabel>
-            <PanelButton type="submit">Criar categoria</PanelButton>
+            <RequestButton type="submit">Criar categoria</RequestButton>
           </form>
 
           {categoryWarning && (
@@ -234,7 +234,7 @@ export const DashboardCategories = ({
             <InputLabel panel htmlFor="tag" id="tag">
               <input name="tag" placeholder="Tag" type="text" onChange={handleTagInputChange} />
             </InputLabel>
-            <PanelButton type="submit">Criar Tag</PanelButton>
+            <RequestButton type="submit">Criar Tag</RequestButton>
           </form>
         </PanelBox>
 
