@@ -53,11 +53,11 @@ export const DashboardPostsHome = ({ posts }: IDashboardPostsHomeRequest) => {
     setLoading(false);
 
     //Fail
-    if (error) return responseStatusFactory(false, 'Opa, algo deu errado', message);
+    if (error) return responseStatusFactory(false, message);
 
     refreshServerSideProps();
 
-    responseStatusFactory(true, 'Post apagado', 'Ele agora se foi...');
+    responseStatusFactory(true, 'Post apagado');
     setPostToBeDeleted('');
   }
 

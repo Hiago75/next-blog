@@ -15,7 +15,6 @@ import { MenuController } from './DashboardMenuController';
 import { ImageUpload } from './DashboardImageUpload';
 import { InputLabel } from './DashboardInputLabel';
 import { ErrorBox } from './DashboardErrorBox';
-import { Status } from './BlogStatus';
 import { Warning } from './DashboardWarning';
 import { SubMenu } from './DashboardSubMenu';
 import { PostEditor } from './DashboardPostEditor';
@@ -47,7 +46,6 @@ export {
   ImageUpload,
   InputLabel,
   ErrorBox,
-  Status,
   Warning,
   SubMenu,
   PostEditor,

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useState, useContext } from 'react';
 
-import { Sidebar, Loading, PanelHeader, Status } from '..';
+import { Sidebar, Loading, PanelHeader } from '..';
 import { AuthContext } from '../../contexts/AuthContext';
 import { RequestContext } from '../../contexts/RequestContext';
 import { Container, Content } from './style';
@@ -15,7 +15,7 @@ export interface PanelProps {
 
 export const DashboardContainer = ({ headerMessage, children, theme, toggleTheme }: PanelProps) => {
   const { user, isRetrievingUserData } = useContext(AuthContext);
-  const { responseStatus, isLoading } = useContext(RequestContext);
+  const { isLoading } = useContext(RequestContext);
 
   // Mobile menu state
   const [menuOpen, setMenuOpen] = useState(false);
@@ -35,8 +35,6 @@ export const DashboardContainer = ({ headerMessage, children, theme, toggleTheme
       </Head>
 
       {isLoading && <Loading></Loading>}
-
-      {responseStatus?.displayResponse && <Status></Status>}
 
       <Sidebar setMenuOpen={setMenuOpen} menuOpen={menuOpen} />
       <PanelHeader
