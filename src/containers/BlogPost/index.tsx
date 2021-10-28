@@ -121,7 +121,7 @@ export function Post({ post, setReadingProgress }: PostProps) {
         </PostContentGuideSidebar>
 
         <PostContentBox>
-          <PostContent>{content}</PostContent>
+          <PostContent>{content.replace(/\\/gi, '')}</PostContent>
 
           <PostTags>
             <p>Tópicos:</p>
