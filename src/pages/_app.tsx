@@ -10,10 +10,10 @@ import GlobalStyles from '../styles/global-styles';
 import { themes } from '../styles/theme';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const isMounted = useRef(false);
+  const [isMounted, setIsMounted] = useState(false);
 
-  const [preferedTheme, setPreferedTheme] = useState<string>();
-  const theme = useMemo(() => preferedTheme || 'light', [preferedTheme]);
+  const [preferedTheme, setPreferedTheme] = useState<string>('light');
+  const theme = useMemo(() => preferedTheme, [preferedTheme]);
 
   // Change the theme
   function toggleTheme() {
@@ -29,14 +29,14 @@ function MyApp({ Component, pageProps }: AppProps) {
     selectedTheme && setPreferedTheme(selectedTheme);
 
     //Change the isMounted to true, then the component can render
-    isMounted.current = true;
+    setIsMounted(true);
 
     //Add the class that will give body a background-color transition
     const body = document.querySelector('body');
     body.classList.add('mounted');
 
     return () => {
-      isMounted.current = false;
+      setIsMounted(false);
     };
   }, []);
 
@@ -44,9 +44,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <AuthProvider>
       <RequestProvider>
         <ThemeProvider theme={themes[theme]}>
-          {isMounted.current && (
-            <Component {...pageProps} theme={theme} toggleTheme={toggleTheme} />
-          )}
+          {isMounted && <Component {...pageProps} theme={theme} toggleTheme={toggleTheme} />}
           <GlobalStyles theme={themes[theme]} />
           <ToastContainer autoClose={3000} />
         </ThemeProvider>
