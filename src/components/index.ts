@@ -27,6 +27,7 @@ import { BlogFullScreenContainer } from './BlogFullContainer';
 import { BlogPostBadge } from './BlogPostBadge';
 import { LoadingWheel } from './LoadingWheel';
 import { RequestButton } from './RequestButton';
+import { DropdownItem } from './DashboardDropdownItem';
 
 export {
   Header,
@@ -58,4 +59,5 @@ export {
   BlogPostBadge,
   RequestButton,
   LoadingWheel,
+  DropdownItem,
 };

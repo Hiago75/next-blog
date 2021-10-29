@@ -1,4 +1,5 @@
-interface subNav {
+export interface subNav {
+  head?: boolean;
   title: string;
   path: string;
   exact?: boolean;
