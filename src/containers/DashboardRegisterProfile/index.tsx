@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import isEmail from 'validator/lib/isEmail';
 
@@ -9,11 +9,10 @@ import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
 import { Container, RegisterForm, RegisterInput, InputDiv } from './style';
 import { refreshUserToken } from '../../services';
 import { createUser } from '../../services/user/createUser';
-import { useApi } from '../../hooks/useApi';
+import { RequestContext } from '../../contexts/RequestContext';
 
 export const DashboardRegisterProfile = () => {
-  const { createNewFormRequest } = useApi();
-
+  const { createNewFormRequest } = useContext(RequestContext);
   const [username, setUsername] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
   const [email, setEmail] = useState('');

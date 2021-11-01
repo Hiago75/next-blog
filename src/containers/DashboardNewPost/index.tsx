@@ -25,7 +25,6 @@ import { ImageUpload, InputLabel, ErrorBox, PostEditor, RequestButton } from '..
 import { PostCategory, PostTags } from '../../domain/posts/post';
 import { createNewCover, createNewPost, refreshUserToken } from '../../services';
 import { RequestContext } from '../../contexts/RequestContext';
-import { useApi } from '../../hooks/useApi';
 
 interface IDashboardNewPostRequest {
   tags: PostTags[];
@@ -33,8 +32,8 @@ interface IDashboardNewPostRequest {
 }
 
 export const DashboardNewPost = ({ categories, tags }: IDashboardNewPostRequest) => {
-  const { setRequestOnProgress, responseStatusFactory } = useContext(RequestContext);
-  const { createNewFormRequest } = useApi();
+  const { createNewFormRequest, setRequestOnProgress, responseStatusFactory } =
+    useContext(RequestContext);
 
   //Form states
   const [title, setTitle] = useState('');
@@ -139,7 +138,7 @@ export const DashboardNewPost = ({ categories, tags }: IDashboardNewPostRequest)
     resetInputErrors();
     setError(undefined);
 
-    //Use a useApi hook function to handle the form request
+    //Create a new form request
     createNewFormRequest(async () => {
       const tagsIds = getSelectedTagsIds();
 

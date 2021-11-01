@@ -20,12 +20,10 @@ import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
 import isEmail from 'validator/lib/isEmail';
 import { AuthContext } from '../../contexts/AuthContext';
 import { RequestContext } from '../../contexts/RequestContext';
-import { useApi } from '../../hooks/useApi';
 
 // Edit User component
 export const DashboardEditUser = () => {
-  const { createNewFormRequest } = useApi();
-  const { setLoading } = useContext(RequestContext);
+  const { setLoading, createNewFormRequest } = useContext(RequestContext);
   const { user, refreshUserData } = useContext(AuthContext);
 
   const [profilePhoto, setProfilePhoto] = useState<File | undefined>();

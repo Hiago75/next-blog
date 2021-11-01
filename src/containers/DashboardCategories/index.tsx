@@ -15,7 +15,6 @@ import {
   refreshUserToken,
 } from '../../services';
 import { RequestContext } from '../../contexts/RequestContext';
-import { useApi } from '../../hooks/useApi';
 
 interface IDashboardCategoriesRequest {
   categories: PostCategory[];
@@ -28,10 +27,14 @@ export const DashboardCategories = ({
   tags,
   numberOfPosts,
 }: IDashboardCategoriesRequest) => {
-  const { createNewRequest } = useApi();
   const theme = useContext(ThemeContext);
-  const { setLoading, responseStatusFactory, refreshServerSideProps, setIsRefreshing } =
-    useContext(RequestContext);
+  const {
+    setLoading,
+    responseStatusFactory,
+    refreshServerSideProps,
+    setIsRefreshing,
+    createNewRequest,
+  } = useContext(RequestContext);
 
   const [newCategory, setNewCategory] = useState('');
   const [categoryToBeDeleted, setCategoryToBeDeleted] = useState('');

@@ -19,7 +19,6 @@ import { RequestContext } from '../../contexts/RequestContext';
 import { IOnChangeInput } from '../../interfaces/IOnChangeInput';
 import { createNewCover, refreshUserToken } from '../../services';
 import { updatePost } from '../../services/posts/updatePost';
-import { useApi } from '../../hooks/useApi';
 
 interface IDashboardPostEditorRequest {
   post: PostData;
@@ -28,8 +27,7 @@ interface IDashboardPostEditorRequest {
 
 export const DashboardPostEditor = ({ post, categories }: IDashboardPostEditorRequest) => {
   const router = useRouter();
-  const { createNewRequest } = useApi();
-  const { setLoading, responseStatusFactory } = useContext(RequestContext);
+  const { createNewRequest, setLoading, responseStatusFactory } = useContext(RequestContext);
 
   //Form states
   const [title, setTitle] = useState('');

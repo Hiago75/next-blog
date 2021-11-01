@@ -16,7 +16,6 @@ import {
 } from './style';
 import { logoutUser } from '../../utils/logoutUser';
 import { SidebarData } from './sidebarData';
-import { useApi } from '../../hooks/useApi';
 import { RequestContext } from '../../contexts/RequestContext';
 
 interface SidebarRequest {
@@ -25,8 +24,7 @@ interface SidebarRequest {
 }
 
 export const Sidebar = ({ menuOpen, setMenuOpen }: SidebarRequest) => {
-  const { createSilentRequest } = useApi();
-  const { requestOnProgress } = useContext(RequestContext);
+  const { requestOnProgress, createSilentRequest } = useContext(RequestContext);
 
   //Logout the user
   function handleLogout() {
