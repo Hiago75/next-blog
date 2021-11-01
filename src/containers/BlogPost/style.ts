@@ -28,7 +28,7 @@ export const PostPresentationData = styled.div`
   justify-content: center;
   align-items: flex-start;
 
-  padding: 60px 0 0 80px;
+  padding: 60px 0 0 50px;
 
   @media (max-width: 768px) {
     width: 100%;

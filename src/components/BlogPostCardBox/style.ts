@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const CategoryPostsBox = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 export const PostCard = styled.div<{ image: string }>`
@@ -19,7 +19,7 @@ export const PostCard = styled.div<{ image: string }>`
   border-radius: 10px;
   margin-left: 10px;
   margin-bottom: 20px;
-  flex: 1 1 calc(33.3% - 10px);
+  flex: 0 1 calc(33.3% - 10px);
 
   transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
 

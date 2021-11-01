@@ -77,7 +77,7 @@ export function Post({ post, setReadingProgress }: PostProps) {
       root: null,
       rootMargin: '-45px',
     });
-    const throttledCalculate = _.throttle(calculateReadingProgress, 80);
+    const throttledCalculate = _.throttle(calculateReadingProgress, 150);
 
     window.addEventListener('scroll', throttledCalculate);
 

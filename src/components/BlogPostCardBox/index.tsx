@@ -26,7 +26,7 @@ export const BlogPostCardBox = ({ posts }: IBlogPostCardRequest) => {
         const formatedDate = formatDate(post.createdAt);
         const postReadingTime = readingTimeCalculator(post.content);
 
-        if (index >= 4) return;
+        if (index >= 3) return;
 
         return (
           <Link key={post.id} href={{ pathname: '/post/[slug]', query: { slug: post.slug } }}>
