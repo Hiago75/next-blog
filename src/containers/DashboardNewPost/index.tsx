@@ -62,7 +62,7 @@ export const DashboardNewPost = ({ categories, tags }: IDashboardNewPostRequest)
   const { createInputError, resetInputErrors } = createFormErrorHandler();
 
   // Filter the tags that will be suggested
-  function filterSuggestionTags(selectedTags) {
+  function filterSuggestionTags(selectedTags: PostTags[]) {
     const notUsedTags = tags.filter((tag) => !selectedTags.includes(tag));
 
     return notUsedTags;
@@ -157,24 +157,6 @@ export const DashboardNewPost = ({ categories, tags }: IDashboardNewPostRequest)
     }, validateForm);
   }
 
-  //Know the special keys and their functions, only execute then if the keypressed is on the special keys list
-  function handleTagInputKeyboard(event: React.KeyboardEvent<HTMLInputElement>) {
-    const specialKeys = {
-      ArrowRight() {
-        createPostTag();
-      },
-      ','() {
-        event.preventDefault();
-        createPostTag();
-      },
-    };
-
-    const keyPressed = event.key;
-
-    const specialFunction = specialKeys[keyPressed];
-    specialFunction && specialFunction();
-  }
-
   function handleSuggestionTagClick(tag: PostTags) {
     createPostTag(tag);
   }
@@ -263,7 +245,8 @@ export const DashboardNewPost = ({ categories, tags }: IDashboardNewPostRequest)
 
         <PostTagsBox panelTitle="Tags">
           <PostTagsAdvice>
-            Para adicionar uma tag basta adicionar uma virgula ou a seta direita do teclado
+            Para adicionar uma tag basta clicar nela, caso não esteja encontrando a tag que deseja,
+            você pode pesquisar na caixa abaixo
           </PostTagsAdvice>
           <PostTagsUl>
             {selectedTags?.map((tag) => (
@@ -274,20 +257,28 @@ export const DashboardNewPost = ({ categories, tags }: IDashboardNewPostRequest)
             ))}
             <PostTagInput
               onChange={handlePostTagInputChange}
+              placeholder="Procurar uma tag"
               value={tagsInputValue}
-              onKeyDown={handleTagInputKeyboard}
               type="text"
             ></PostTagInput>
           </PostTagsUl>
 
           <AvaliablePostTags>
             <p>Que tal uma sugestão?</p>
-            {suggestionTags?.map((tag) => (
-              <PostTag onClick={() => handleSuggestionTagClick(tag)} className="add" key={tag.id}>
-                {tag.name}
-                <FaPlus onClick={() => removePostTag(tag)} />
-              </PostTag>
-            ))}
+            {suggestionTags
+              ?.filter((tag) => {
+                //If there is no search term, return all the tags
+                if (tagsInputValue === '') return tag;
+
+                //If there is a search term, try to match this one with one tag
+                if (tag.name.toLowerCase().includes(tagsInputValue.toLowerCase())) return tag;
+              })
+              .map((tag) => (
+                <PostTag onClick={() => handleSuggestionTagClick(tag)} className="add" key={tag.id}>
+                  {tag.name}
+                  <FaPlus onClick={() => removePostTag(tag)} />
+                </PostTag>
+              ))}
           </AvaliablePostTags>
         </PostTagsBox>
 

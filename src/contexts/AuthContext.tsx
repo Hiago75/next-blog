@@ -71,9 +71,9 @@ export function AuthProvider({ children }: IAuthProviderRequest) {
 
     const user = await fetchUserData(false);
     setUser(user);
-    setLoginOnProgress(false);
 
     Router.push('/cboard');
+    setLoginOnProgress(false);
   }
 
   //Update user data on DB

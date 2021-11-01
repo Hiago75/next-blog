@@ -7,6 +7,6 @@ export const logoutRequest = async () => {
       return response;
     })
     .catch((e) => {
-      return e.response.data.error;
+      return e.response?.data.error;
     });
 };
