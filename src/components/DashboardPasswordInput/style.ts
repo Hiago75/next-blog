@@ -15,14 +15,12 @@ export const IconInput = styled.label`
 
     svg {
       position: absolute;
-      left: 15px;
-      top: 39px;
+      left: -35px;
     }
 
     a {
       position: absolute;
-      right: 50px;
-      top: 0px;
+      top: 40px;
       cursor: pointer;
     }
 
