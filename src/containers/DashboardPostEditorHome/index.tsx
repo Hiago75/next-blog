@@ -32,7 +32,11 @@ export const DashboardPostEditorHome = ({ posts }: IDashboardPostsHomeRequest) =
           {posts?.map((post) => (
             <PostContainer onClick={() => handlePostContainerClick(post.slug)} key={post.id}>
               <PostPreview>
-                <PostImage height={64} width={70} src={post.cover.format.thumbnail.url}></PostImage>
+                <PostImage
+                  height={64}
+                  width={70}
+                  src={post.externalPhotoUrl || post.cover.format.thumbnail.url}
+                ></PostImage>
               </PostPreview>
 
               <PostText>

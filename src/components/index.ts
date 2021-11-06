@@ -12,7 +12,7 @@ import { PanelButton } from './DashboardButton';
 import { PanelPasswordInput } from './DashboardPasswordInput';
 import { PanelBox } from './DashboardPanelBox';
 import { MenuController } from './DashboardMenuController';
-import { ImageUpload } from './DashboardImageUpload';
+import { ImageUpload } from './DashboardImageSelector';
 import { InputLabel } from './DashboardInputLabel';
 import { ErrorBox } from './DashboardErrorBox';
 import { Warning } from './DashboardWarning';
@@ -28,6 +28,9 @@ import { BlogPostBadge } from './BlogPostBadge';
 import { LoadingWheel } from './LoadingWheel';
 import { RequestButton } from './RequestButton';
 import { DropdownItem } from './DashboardDropdownItem';
+import { DashboardGallery } from './DashboardGallery';
+import DashboardGalleryPhoto from './DashboardGalleryPhoto';
+import { GalleryPhotoDetails } from './DashboardGalleryPhotoDetails';
 
 export {
   Header,
@@ -60,4 +63,7 @@ export {
   RequestButton,
   LoadingWheel,
   DropdownItem,
+  DashboardGallery,
+  DashboardGalleryPhoto,
+  GalleryPhotoDetails,
 };

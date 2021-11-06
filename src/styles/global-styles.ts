@@ -9,7 +9,7 @@ export default createGlobalStyle`
     outline: none;
     scroll-behavior: smooth;
     scroll-margin-top: 60px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Geneva, Verdana;
     scrollbar-width: 10px;
     scrollbar-color: #7D7D7D;
   }

@@ -30,7 +30,7 @@ export const BlogPostCardBox = ({ posts }: IBlogPostCardRequest) => {
 
         return (
           <Link key={post.id} href={{ pathname: '/post/[slug]', query: { slug: post.slug } }}>
-            <PostCard image={post.cover.format.medium.url}>
+            <PostCard image={post.externalPhotoUrl || post.cover.format.medium.url}>
               <PostCardOverlay />
               <PostCardData>
                 <div>

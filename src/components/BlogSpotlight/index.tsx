@@ -32,7 +32,7 @@ export const Spotlight = ({ post }: SpotlightProps) => {
       <Link href={{ pathname: '/post/[slug]', query: { slug: post.slug } }}>
         <Post>
           <PostImageBox>
-            <PostImage src={post.cover.format.large.url} />
+            <PostImage src={post.externalPhotoUrl || post.cover.format.large.url} />
           </PostImageBox>
 
           <PostPreviewData>

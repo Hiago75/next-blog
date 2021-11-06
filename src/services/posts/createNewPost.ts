@@ -1,14 +1,24 @@
 import { externalApi } from '../../config/api-config';
 
-export async function createNewPost(
-  title: string,
-  content: string,
-  tagIds: string[],
-  categoryId: string,
-  coverId: string,
-) {
+interface ICreateNewPost {
+  title: string;
+  content: string;
+  tagIds: string[];
+  categoryId: string;
+  coverId?: string;
+  photoUrl?: string;
+}
+
+export async function createNewPost({
+  title,
+  content,
+  tagIds,
+  categoryId,
+  coverId,
+  photoUrl,
+}: ICreateNewPost) {
   return await externalApi
-    .post('/posts', { title, content, tagIds, categoryId, coverId })
+    .post('/posts', { title, content, tagIds, categoryId, coverId, photoUrl })
     .then((response) => {
       return { error: false, message: response.data.message };
     })

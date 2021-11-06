@@ -62,10 +62,11 @@ export type PostData = {
   title: string;
   content: string;
   tags: PostTags[];
+  externalPhotoUrl?: string;
   slug: string;
   author: PostAuthor;
   category: PostCategory;
-  cover: PostCover;
+  cover?: PostCover;
   createdAt: string;
   updatedAt: string;
 };

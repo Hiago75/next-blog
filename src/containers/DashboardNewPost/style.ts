@@ -62,7 +62,7 @@ export const CoverPreview = styled.div``;
 export const ImagePreview = styled.img`
   width: auto;
   height: auto;
-  max-height: 450px;
+  max-height: 350px;
   border-radius: 20px;
   margin-top: 20px;
   filter: grayscale(0);
@@ -85,6 +85,9 @@ export const MediaEditor = styled.div`
 
     ${CoverPreview}:hover & {
       display: flex;
+      z-index: 99;
+      height: 100%;
+      align-items: center;
     }
   }
 `;

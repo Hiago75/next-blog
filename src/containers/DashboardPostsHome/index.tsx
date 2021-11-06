@@ -85,7 +85,7 @@ export const DashboardPostsHome = ({ posts }: IDashboardPostsHomeRequest) => {
                   <PostImage
                     height={64}
                     width={70}
-                    src={post.cover.format.thumbnail.url}
+                    src={post.externalPhotoUrl || post.cover.format.thumbnail.url}
                   ></PostImage>
                 </PostPreview>
 

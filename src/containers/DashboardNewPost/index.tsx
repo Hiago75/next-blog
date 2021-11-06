@@ -1,11 +1,10 @@
-import { useState, useContext, useMemo } from 'react';
+import { useState, useContext, useMemo, useEffect } from 'react';
 import { AiFillCamera } from 'react-icons/ai';
 import { FaPlus, FaTimes } from 'react-icons/fa';
 
 import {
   Container,
   MediaBox,
-  MediaInput,
   FormContainer,
   SelectInput,
   ImagePreview,
@@ -52,8 +51,9 @@ export const DashboardNewPost = ({ categories, tags }: IDashboardNewPostRequest)
 
   // Photo
   const [photo, setPhoto] = useState<File>();
-  const [temporaryPhoto, setTemporaryPhoto] = useState('');
+  const [photoUrl, setPhotoUrl] = useState<string>('');
   const [previewPhoto, setPreviewPhoto] = useState('');
+  const [photoChoosed, setPhotoChoosed] = useState(false);
   const [editingCover, setEditingCover] = useState(false);
 
   // Error states
@@ -79,12 +79,9 @@ export const DashboardNewPost = ({ categories, tags }: IDashboardNewPostRequest)
   }
 
   // Open the image upload element and set the photo/temporary photo
-  function handleCoverInputChange(event: IOnChangeInput) {
-    const sentPhoto = event.target.files[0];
-
+  function handleCoverInputChange() {
     setEditingCover(true);
-    setPhoto(sentPhoto);
-    setPreviewPhoto(URL.createObjectURL(sentPhoto));
+    console.log(editingCover);
   }
 
   // set the content state as the value sent on the text editor
@@ -102,7 +99,7 @@ export const DashboardNewPost = ({ categories, tags }: IDashboardNewPostRequest)
     }
 
     if (!categoryId) return setError('É necessário selecionar uma categoria');
-    if (!photo) return setError('É necessário enviar uma foto de capa');
+    if (!photo && !photoUrl) return setError('É necessário enviar uma foto de capa');
     if (!content) return setError('É necessário enviar algum conteúdo para ser postado');
 
     if (error) isValid = false;
@@ -122,12 +119,23 @@ export const DashboardNewPost = ({ categories, tags }: IDashboardNewPostRequest)
     responseStatusFactory(success, message);
   }
 
-  function handleCoverPhoto() {
-    setTemporaryPhoto(URL.createObjectURL(photo));
-  }
-
   function getSelectedTagsIds() {
     return selectedTags.map((tag) => tag.id);
+  }
+
+  //Format post properties
+  async function postFactory() {
+    const tagIds = getSelectedTagsIds();
+
+    if (photoUrl) {
+      const postProperties = { title, content, tagIds, categoryId, photoUrl };
+      return postProperties;
+    }
+
+    await uploadCover();
+    const postProperties = { title, content, tagIds, categoryId, coverId };
+
+    return postProperties;
   }
 
   // Reset the inputs and try to submit the form, if something goes wrong displays the error
@@ -138,14 +146,12 @@ export const DashboardNewPost = ({ categories, tags }: IDashboardNewPostRequest)
     resetInputErrors();
     setError(undefined);
 
-    //Create a new form request
+    //Create a new form request to create a post
     createNewFormRequest(async () => {
-      const tagsIds = getSelectedTagsIds();
-
       await refreshUserToken();
-      await uploadCover();
+      const postProperties = await postFactory();
 
-      const post = await createNewPost(title, content, tagsIds, categoryId, coverId);
+      const post = await createNewPost(postProperties);
 
       if (post.error) return { error: true, message: post.message };
 
@@ -189,17 +195,21 @@ export const DashboardNewPost = ({ categories, tags }: IDashboardNewPostRequest)
     setTagsInputValue(event.target.value);
   }
 
+  useEffect(() => {
+    if (photoUrl || photo) setPhotoChoosed(true);
+    else setPhotoChoosed(false);
+  }, [photoUrl, photo]);
+
   return (
     <Container>
       {error && <ErrorBox error={error} />}
       <ImageUpload
         cover
-        headerText="Foto de capa da publicação"
-        confirmText="Deseja realmente usar essa foto como foto de capa ?"
         isOpen={editingCover}
         setIsOpen={setEditingCover}
-        previewPhoto={previewPhoto}
-        uploadMethod={handleCoverPhoto}
+        setPhoto={setPhoto}
+        setPhotoUrl={setPhotoUrl}
+        setPreviewPhoto={setPreviewPhoto}
       ></ImageUpload>
 
       <FormContainer onSubmit={handlePostFormSubmit}>
@@ -221,22 +231,19 @@ export const DashboardNewPost = ({ categories, tags }: IDashboardNewPostRequest)
             </option>
           ))}
         </SelectInput>
-        <MediaBox className={temporaryPhoto ? 'image-cover' : ''}>
+        <MediaBox className={photoChoosed ? 'image-cover' : ''}>
           <CoverPreview>
-            {temporaryPhoto && <ImagePreview src={temporaryPhoto}></ImagePreview>}
-
-            <MediaEditor className={temporaryPhoto ? 'image-cover' : ''}>
+            <MediaEditor
+              onClick={handleCoverInputChange}
+              className={photoChoosed ? 'image-cover' : ''}
+            >
               <div>
                 <AiFillCamera size={44} />
                 Alterar foto de capa
               </div>
-
-              <MediaInput
-                onChange={handleCoverInputChange}
-                type="file"
-                accept="image/png, image/gif, image/jpeg"
-              />
             </MediaEditor>
+
+            <ImagePreview src={photoUrl || previewPhoto}></ImagePreview>
           </CoverPreview>
         </MediaBox>
 
