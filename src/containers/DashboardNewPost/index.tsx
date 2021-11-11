@@ -81,7 +81,6 @@ export const DashboardNewPost = ({ categories, tags }: IDashboardNewPostRequest)
   // Open the image upload element and set the photo/temporary photo
   function handleCoverInputChange() {
     setEditingCover(true);
-    console.log(editingCover);
   }
 
   // set the content state as the value sent on the text editor

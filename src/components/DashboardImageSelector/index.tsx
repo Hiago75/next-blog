@@ -44,7 +44,7 @@ export const ImageUpload = ({
   const [onGallery, setOnGallery] = useState(false);
   const [galleryPhotos, setGalleryPhotos] = useState<IGalleryPhoto[]>();
   const [photoBlob, setPhotoBlob] = useState<string>();
-  const [searchQuery, setSearchQuery] = useState<string>();
+  const [previousSearchQuery, setPreviousSearchQuery] = useState('random');
   const [temporaryPhoto, setTemporaryPhoto] = useState<File>();
 
   //Handle the click on "X" button
@@ -92,12 +92,24 @@ export const ImageUpload = ({
   }
 
   async function getUnsplashNewPhotos(searchQuery: string, page?: number) {
-    const photos = await UNSPLASH_API.search.getPhotos({
-      query: searchQuery || 'random',
-      orientation: 'landscape',
-      page: page || 1,
-    });
-    setGalleryPhotos((prevPhotos) => [...prevPhotos, ...photos.response.results]);
+    const query = searchQuery || 'random';
+
+    const photos = await UNSPLASH_API.search
+      .getPhotos({
+        query: query,
+        orientation: 'landscape',
+        page: page || 1,
+      })
+      .then((response) => {
+        setPreviousSearchQuery(query);
+        return response;
+      });
+
+    setGalleryPhotos((prevPhotos) =>
+      query !== previousSearchQuery
+        ? [...photos.response.results]
+        : [...prevPhotos, ...photos.response.results],
+    );
   }
 
   //Set the photo

@@ -69,8 +69,6 @@ export const DashboardGallery = ({ photos, setPhotoUrl, searchNewPhotos }: IDash
     searchNewPhotos(searchQuery, currentPage + 1);
   }
 
-  console.log(photos);
-
   // Return the photo details if necessary
   if (onPhotoDetails)
     return (

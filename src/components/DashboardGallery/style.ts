@@ -19,7 +19,7 @@ export const PhotoDetailsHeader = styled.header`
 
 export const Container = styled.section`
   height: 90%;
-  overflow-y: auto;
+  overflow-y: scroll;
   position: relative;
   width: 100%;
 
@@ -29,8 +29,6 @@ export const Container = styled.section`
 `;
 
 export const GalleryHeader = styled.header`
-  position: fixed;
-  z-index: 15;
   width: 100%;
   top: 10%;
   margin-left: 0 !important;
@@ -76,8 +74,9 @@ export const PhotosContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  overflow-y: hidden;
   align-items: center;
-  margin-top: 110px;
+  margin-top: 20px;
   gap: 10px;
   padding: 0 20px;
 `;
@@ -90,6 +89,7 @@ export const LoadMoreButton = styled.button`
     border: 0;
     padding: 10px 25px;
     margin: 40px 0;
+    cursor: pointer;
   `}
 `;
 
