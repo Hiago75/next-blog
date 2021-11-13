@@ -72,7 +72,7 @@ export const PostCategory = styled.p`
 export const PostTitle = styled.h1`
   color: ${({ theme }) => theme.fonts.primaryFont};
   font-weight: bold;
-  font-size: 23px;
+  font-size: 32px;
   margin-top: 25px;
   position: relative;
   display: inline-block;
