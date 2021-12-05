@@ -82,6 +82,9 @@ export const MediaEditor = styled.div`
 
     ${CoverPreview}:hover & {
       display: flex;
+      z-index: 99;
+      height: 100%;
+      align-items: center;
     }
   }
 `;

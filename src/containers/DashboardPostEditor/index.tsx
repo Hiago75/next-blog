@@ -10,7 +10,6 @@ import {
   ImagePreview,
   MediaBox,
   MediaEditor,
-  MediaInput,
 } from './style';
 import { ErrorBox, ImageUpload, InputLabel, PostEditor, RequestButton } from '../../components';
 
@@ -26,7 +25,6 @@ interface IDashboardPostEditorRequest {
 }
 
 export const DashboardPostEditor = ({ post, categories }: IDashboardPostEditorRequest) => {
-  const router = useRouter();
   const { createNewRequest, setLoading, responseStatusFactory } = useContext(RequestContext);
 
   //Form states
@@ -37,8 +35,11 @@ export const DashboardPostEditor = ({ post, categories }: IDashboardPostEditorRe
 
   // Photo
   const [photo, setPhoto] = useState<File>();
-  const [temporaryPhoto, setTemporaryPhoto] = useState(post.cover.url);
+  const [photoUrl, setPhotoUrl] = useState<string>(post.externalPhotoUrl || post.cover.url);
   const [previewPhoto, setPreviewPhoto] = useState('');
+  const [photoChoosed, setPhotoChoosed] = useState(
+    post.externalPhotoUrl || post.cover.url ? true : false,
+  );
   const [editingCover, setEditingCover] = useState(false);
 
   // Error states
@@ -55,16 +56,8 @@ export const DashboardPostEditor = ({ post, categories }: IDashboardPostEditorRe
   }
 
   // Open the image upload element and set the photo/temporary photo
-  function handleCoverInputChange(event: IOnChangeInput) {
-    const sentPhoto = event.target.files[0];
-
+  function handleCoverInputChange() {
     setEditingCover(true);
-    setPhoto(sentPhoto);
-    setPreviewPhoto(URL.createObjectURL(sentPhoto));
-  }
-
-  function handleCoverPhoto() {
-    setTemporaryPhoto(URL.createObjectURL(photo));
   }
 
   // set the content state as the value sent on the text editor
@@ -84,6 +77,20 @@ export const DashboardPostEditor = ({ post, categories }: IDashboardPostEditorRe
     responseStatusFactory(success, message);
   }
 
+  //Format post properties
+  async function postFactory() {
+    const postId = post.id;
+    const basePost = { postId, title, content, categoryId };
+
+    if (photoUrl) {
+      return { ...basePost, photoUrl };
+    }
+
+    await uploadCover();
+
+    return { ...basePost, photoUrl };
+  }
+
   // Reset the inputs and try to submit the form, if something goes wrong displays the error
   async function handlePostFormSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -93,17 +100,15 @@ export const DashboardPostEditor = ({ post, categories }: IDashboardPostEditorRe
 
     createNewRequest(async () => {
       await refreshUserToken();
-      await uploadCover();
+      const postProperties = await postFactory();
 
-      const updatedPost = await updatePost(post.id, title, content, categoryId, coverId);
+      const post = await updatePost(postProperties);
 
-      if (updatedPost.error) return { error: true, message: updatedPost.message };
-
-      router.push('/cboard/posts/edit/');
+      if (post.error) return { error: true, message: post.message };
 
       return {
         error: false,
-        message: 'Publicação alterada',
+        message: 'Publicação criada',
       };
     });
   }
@@ -113,12 +118,11 @@ export const DashboardPostEditor = ({ post, categories }: IDashboardPostEditorRe
       {error && <ErrorBox error={error} />}
       <ImageUpload
         cover
-        headerText="Foto de capa da publicação"
-        confirmText="Deseja realmente usar essa foto como foto de capa ?"
         isOpen={editingCover}
         setIsOpen={setEditingCover}
-        previewPhoto={previewPhoto}
-        uploadMethod={handleCoverPhoto}
+        setPhoto={setPhoto}
+        setPhotoUrl={setPhotoUrl}
+        setPreviewPhoto={setPreviewPhoto}
       ></ImageUpload>
 
       <FormContainer onSubmit={handlePostFormSubmit}>
@@ -138,22 +142,19 @@ export const DashboardPostEditor = ({ post, categories }: IDashboardPostEditorRe
             </option>
           ))}
         </SelectInput>
-        <MediaBox className={temporaryPhoto ? 'image-cover' : ''}>
+        <MediaBox className={photoChoosed ? 'image-cover' : ''}>
           <CoverPreview>
-            {temporaryPhoto && <ImagePreview src={temporaryPhoto}></ImagePreview>}
-
-            <MediaEditor className={temporaryPhoto ? 'image-cover' : ''}>
+            <MediaEditor
+              onClick={handleCoverInputChange}
+              className={photoChoosed ? 'image-cover' : ''}
+            >
               <div>
                 <AiFillCamera size={44} />
                 Alterar foto de capa
               </div>
-
-              <MediaInput
-                onChange={handleCoverInputChange}
-                type="file"
-                accept="image/png, image/gif, image/jpeg"
-              />
             </MediaEditor>
+
+            <ImagePreview src={photoUrl || previewPhoto}></ImagePreview>
           </CoverPreview>
         </MediaBox>
 

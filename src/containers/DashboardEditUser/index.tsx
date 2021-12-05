@@ -23,7 +23,7 @@ import { RequestContext } from '../../contexts/RequestContext';
 
 // Edit User component
 export const DashboardEditUser = () => {
-  const { setLoading, createNewFormRequest } = useContext(RequestContext);
+  const { createNewFormRequest } = useContext(RequestContext);
   const { user, refreshUserData } = useContext(AuthContext);
 
   const [profilePhoto, setProfilePhoto] = useState<File | undefined>();
@@ -49,12 +49,8 @@ export const DashboardEditUser = () => {
   }
 
   // Open the preview profile photo element and set the temporary photo
-  function handlePhotoInputChange(event: IOnChangeInput) {
-    const photo = event.target.files[0];
-
+  function handlePhotoInputChange() {
     setEditingProfilePhoto(true);
-    setProfilePhoto(photo);
-    setTemporaryPhoto(URL.createObjectURL(photo));
   }
 
   // Clear the profile photo values;
@@ -64,16 +60,10 @@ export const DashboardEditUser = () => {
 
   // Handle the upload/update of the profile photo
   async function handleProfilePhoto() {
-    setLoading(true);
     await refreshUserToken();
-    if (user?.profilePhoto) {
-      await updateUserPhoto({ photo: profilePhoto });
-    } else {
-      await createUserPhoto({ photo: profilePhoto });
-    }
-    setLoading(false);
 
-    await refreshUserData(true);
+    if (user?.profilePhoto) await updateUserPhoto({ photo: profilePhoto });
+    else await createUserPhoto({ photo: profilePhoto });
   }
 
   //Validate the fields to see if everything is in order
@@ -101,6 +91,7 @@ export const DashboardEditUser = () => {
 
     createNewFormRequest(async () => {
       await refreshUserToken();
+      profilePhoto && (await handleProfilePhoto());
 
       const { error, message } = await updateUserData({ name, email });
       if (error) return { error: true, message: message };
@@ -113,27 +104,19 @@ export const DashboardEditUser = () => {
   return (
     <Container>
       <ImageUpload
+        noGallery={true}
         isOpen={editingProfilePhoto}
         setIsOpen={setEditingProfilePhoto}
-        headerText="Foto de perfil"
-        confirmText="Deseja realmente usar essa foto como foto de perfil ?"
-        previewPhoto={temporaryProfilePhoto}
-        uploadMethod={handleProfilePhoto}
+        setPhoto={setProfilePhoto}
+        setPreviewPhoto={setTemporaryPhoto}
       ></ImageUpload>
 
       <FormWrapper>
         <UserPreview>
-          <UserImageBox>
-            <UserImage user={user} imageSize={200}>
+          <UserImageBox onClick={handlePhotoInputChange}>
+            <UserImage previewPhoto={temporaryProfilePhoto} user={user} imageSize={200}>
               <AiFillCamera size={32} />
               <p>Alterar foto de perfil</p>
-              <PhotoInput
-                onChange={handlePhotoInputChange}
-                onClick={handlePhotoInputClick}
-                type="file"
-                id="photo"
-                accept="image/png, image/jpeg, image/jpg"
-              />
             </UserImage>
           </UserImageBox>
           <UserData>

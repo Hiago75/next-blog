@@ -10,9 +10,16 @@ interface IUserImageProps {
   className?: string;
   imageSize: number;
   children?: React.ReactNode;
+  previewPhoto?: string;
 }
 
-export const UserImage = ({ className, user, imageSize, children }: IUserImageProps) => {
+export const UserImage = ({
+  className,
+  user,
+  imageSize,
+  children,
+  previewPhoto,
+}: IUserImageProps) => {
   const theme = useContext(ThemeContext);
 
   return (
@@ -23,7 +30,7 @@ export const UserImage = ({ className, user, imageSize, children }: IUserImagePr
 
       {/* If the user has image then display the image, otherwise displays the default "image" */}
       {user?.profilePhoto?.url ? (
-        <img width={imageSize} src={user.profilePhoto.url}></img>
+        <img width={imageSize} src={previewPhoto || user.profilePhoto.url}></img>
       ) : (
         <FaUserAlt className="icon-image" color={theme.fonts.primaryFont} size={imageSize} />
       )}

@@ -9,6 +9,6 @@ module.exports = {
     UNSPLASH_ACCESS_KEY: process.env.UNSPLASH_ACCESS_KEY,
   },
   images: {
-    domains: ['res.cloudinary.com'],
+    domains: ['res.cloudinary.com', 'images.unsplash.com'],
   },
 };

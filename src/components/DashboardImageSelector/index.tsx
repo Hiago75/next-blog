@@ -25,8 +25,9 @@ interface ImageUploadRequest {
   cover?: boolean;
   isOpen: boolean;
   setPhoto: Dispatch<SetStateAction<File>>;
-  setPhotoUrl: Dispatch<SetStateAction<string>>;
+  setPhotoUrl?: Dispatch<SetStateAction<string>>;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  noGallery?: boolean;
   setPreviewPhoto?: Dispatch<SetStateAction<string>>;
   photoHandler?: () => Promise<void> | void;
 }
@@ -38,6 +39,7 @@ export const ImageUpload = ({
   setPhoto,
   setPhotoUrl,
   setPreviewPhoto,
+  noGallery,
 }: ImageUploadRequest) => {
   const theme = useContext(ThemeContext);
 
@@ -62,7 +64,7 @@ export const ImageUpload = ({
 
   //Define the photo file
   function setPhotoHandler() {
-    setPhotoUrl(undefined);
+    !noGallery && setPhotoUrl(undefined);
     setPhoto(temporaryPhoto);
     setPreviewPhoto(URL.createObjectURL(temporaryPhoto));
 
@@ -135,7 +137,7 @@ export const ImageUpload = ({
       <Header>
         <HeaderSection>
           <HeaderItem onClick={handleNewPhotoClick}>Nova foto</HeaderItem>
-          <HeaderItem onClick={handleGalleryClick}>Galeria</HeaderItem>
+          {!noGallery && <HeaderItem onClick={handleGalleryClick}>Galeria</HeaderItem>}
         </HeaderSection>
         <AiOutlineClose
           onClick={handleClosePreviewClick}
@@ -175,7 +177,7 @@ export const ImageUpload = ({
                     <AiFillCamera size={44} />
                     Alterar foto de capa
                   </MediaOverlay>
-                  <Image className="cover" src={photoBlob}></Image>
+                  <Image className={noGallery ? '' : 'cover'} src={photoBlob}></Image>
                 </Preview>
               )}
             </MediaLabel>

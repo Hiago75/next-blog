@@ -43,7 +43,7 @@
     "styled-components": "^5.3.0",
     "trim": "^0.0.3",
     "unsplash-js": "^7.0.15",
-    "validator": "^13.6.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",

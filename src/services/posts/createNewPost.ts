@@ -17,7 +17,7 @@ export async function createNewPost({
   coverId,
   photoUrl,
 }: ICreateNewPost) {
-  return await externalApi
+  return externalApi
     .post('/posts', { title, content, tagIds, categoryId, coverId, photoUrl })
     .then((response) => {
       return { error: false, message: response.data.message };
